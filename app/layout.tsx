@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import 'react-toastify/dist/ReactToastify.css'
+
 import { ThemeProvider } from "@/components/theme-provider";
 import PrelineScript from "@/components/PrelineScript";
 

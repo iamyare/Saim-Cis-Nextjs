@@ -1,61 +1,109 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { cn } from "@/lib/utils";
+import { Icons } from "@/components/icons";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { ToastContainer, toast } from "react-toastify";
+import { useTransition } from "react";
+import { signInWithEmailAndPassword } from "../actions";
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+const validationSchema = z.object({
+  email: z
+    .string()
+    .min(1, { message: "El correo electrónico es obligatorio" })
+    .email({
+      message: "Debe ser un correo electrónico válido",
+    }),
+  password: z
+    .string()
+    .min(6, { message: "La contraseña debe tener al menos 6 caracteres" }),
+  // .regex(
+  //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+  //   "La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y tener al menos 6 caracteres"
+  // ),
+});
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault()
-    setIsLoading(true)
+type ValidationSchema = z.infer<typeof validationSchema>;
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+
+export function UserAuthForm() {
+  const [isPending, startTransition] = useTransition();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ValidationSchema>({
+    resolver: zodResolver(validationSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  function onSubmit(data: z.infer<typeof validationSchema>) {
+    startTransition(async () => {
+      const result = await signInWithEmailAndPassword(data);
+      const { error } = JSON.parse(result);
+      if (error.message) {
+        toast.error(error.message);
+      }
+    });
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={onSubmit}>
+
+        <div className="grid gap-6">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
           <div className="grid gap-1">
             <Label className="" htmlFor="email">
               Correo electrónico
             </Label>
             <Input
-              id="email"
               placeholder="name@example.com"
               type="email"
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={isPending}
+              {...register("email")}
             />
+            {errors.email && (
+              <p className="text-xs italic text-red-500 mt-2">
+                {errors.email?.message}
+              </p>
+            )}
           </div>
           <div className="grid gap-1">
             <Label className="" htmlFor="password">
-                Contraseña
+              Contraseña
             </Label>
             <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
+              placeholder="Contraseña"
+              type="password"
               autoCapitalize="none"
-              autoComplete="email"
+              autoComplete="password"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={isPending}
+              {...register("password")}
             />
+            {errors.password && (
+              <p className="text-xs italic text-red-500 mt-2">
+                {errors.password?.message}
+              </p>
+            )}
           </div>
-          <Button disabled={isLoading}>
-            {isLoading && (
+          <Button disabled={isPending}>
+            {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             Iniciar sesión
@@ -72,14 +120,28 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        {isLoading ? (
+      <Button variant="outline" type="button" disabled={isPending}>
+        {isPending ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Icons.gitHub className="mr-2 h-4 w-4" />
         )}{" "}
         GitHub
       </Button>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
-  )
+
+
+  );
 }
