@@ -169,9 +169,9 @@ export default function NavbarIndex() {
             <div className="flex items-center gap-x-2 sm:ms-auto">
       <ModeToggle />
 
-              <a
+              <Link
                 className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500"
-                href="#"
+                href="/login"
               >
                 <svg
                   className="flex-shrink-0 w-4 h-4"
@@ -185,8 +185,8 @@ export default function NavbarIndex() {
                   <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
-                Log in
-              </a>
+                Iniciar Sesion
+              </Link>
             </div>
           </div>
         </div>
