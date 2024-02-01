@@ -8,3 +8,10 @@ export async function readUserSession () {
   const supabase = await createSupabaseServerClient()
   return await supabase.auth.getSession()
 }
+
+//logout
+export async function logoutUser () {
+  noStore()
+  const supabase = await createSupabaseServerClient()
+  return await supabase.auth.signOut()
+}

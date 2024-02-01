@@ -5,10 +5,12 @@ import Link  from "next/link";
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { logoutUser } from "@/lib/actions";
+
 
 const navigation = [
   { name: 'Inicio', href: '#', current: true },
-  { name: 'Servicios', href: '#', current: false },
+  { name: 'Servicios', href: '#servicios', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
 ]
@@ -20,14 +22,13 @@ function classNames(...classes: any[]) {
 
 export default function NavbarIndexClient({user} : {user: Users | null}) {
 
-  console.log(user)
   
   return (
 
     <Disclosure as="nav" >
     {({ open }) => (
       <>
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* Mobile menu button*/}
@@ -56,7 +57,7 @@ export default function NavbarIndexClient({user} : {user: Users | null}) {
                       key={item.name}
                       href={item.href}
                       className={classNames(
-                        item.current ? 'bg-gray-100 dark:bg-gray-900 text-black dark:text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        item.current ? 'bg-gray-100 dark:bg-gray-900 text-black dark:text-white' : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900  hover:text-black dark:hover:text-white',
                         'rounded-md px-3 py-2 text-sm font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -90,7 +91,7 @@ export default function NavbarIndexClient({user} : {user: Users | null}) {
                                                       {user?.primer_nombre?.charAt(0).toUpperCase() + user?.primer_apellido?.charAt(0).toUpperCase()}
                                                     </span>
                                                     )}
-                                                      <span>{user?.primer_nombre}</span>
+
 
                               </Menu.Button>
                             </div>
@@ -103,12 +104,24 @@ export default function NavbarIndexClient({user} : {user: Users | null}) {
                               leaveFrom="transform opacity-100 scale-100"
                               leaveTo="transform opacity-0 scale-95"
                             >
-                              <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-slate-900 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <Menu.Item>
+                                                    <div className="flex flex-col gap-1 p-4">
+                                                    <span className="text-sm text-gray-900 dark:text-gray-100 font-semibold">Iniciaste con:</span>
+                                                    <span className="text-sm text-gray-900 dark:text-gray-100">{user.correo}</span>
+
+                                                    </div>
+
+                                </Menu.Item>
+                                <hr />
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
-                                      href="#"
-                                      className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                      href={
+                                        // user?.rol === "ADMIN" ? "/admin" : "/profile"
+                                        '#'
+                                      }
+                                      className={classNames(active ? 'bg-gray-100 dark:bg-gray-800' : '', 'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100')}
                                     >
                                       Tu perfil
                                     </Link>
@@ -116,12 +129,14 @@ export default function NavbarIndexClient({user} : {user: Users | null}) {
                                 </Menu.Item>
                                 <Menu.Item>
                                   {({ active }) => (
-                                    <Link
-                                      href="#"
-                                      className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                    <button
+                                      onClick={async () => {
+                                        await logoutUser(); 
+                                      }}
+                                      className={classNames(active ? 'bg-gray-100 dark:bg-gray-800' : '', 'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start')}
                                     >
                                       Cerrar sesión
-                                    </Link>
+                                    </button>
                                   )}
                                 </Menu.Item>
                               </Menu.Items>
@@ -129,7 +144,7 @@ export default function NavbarIndexClient({user} : {user: Users | null}) {
                           </Menu>
                           ) : (
                             <Link href="/login">
-Login
+                              Iniciar sesión
                             </Link>
                           )
                         }
@@ -145,7 +160,7 @@ Login
                 as="a"
                 href={item.href}
                 className={classNames(
-                  item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  item.current ? 'bg-gray-200 text-white' : 'text-gray-300 hover:bg-gray-200 hover:text-white',
                   'block rounded-md px-3 py-2 text-base font-medium'
                 )}
                 aria-current={item.current ? 'page' : undefined}
