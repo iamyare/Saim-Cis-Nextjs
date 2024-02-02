@@ -66,14 +66,14 @@ export interface Database {
             foreignKeyName: "citas_id_doctor_fkey"
             columns: ["id_doctor"]
             isOneToOne: false
-            referencedRelation: "usuarios"
+            referencedRelation: "personas"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "citas_id_paciente_fkey"
             columns: ["id_paciente"]
             isOneToOne: false
-            referencedRelation: "usuarios"
+            referencedRelation: "personas"
             referencedColumns: ["id"]
           }
         ]
@@ -162,7 +162,7 @@ export interface Database {
             foreignKeyName: "contratos_id_usuario_fkey"
             columns: ["id_usuario"]
             isOneToOne: false
-            referencedRelation: "usuarios"
+            referencedRelation: "personas"
             referencedColumns: ["id"]
           }
         ]
@@ -204,7 +204,7 @@ export interface Database {
             foreignKeyName: "diagnosticos_id_diagnosticador_fkey"
             columns: ["id_diagnosticador"]
             isOneToOne: false
-            referencedRelation: "usuarios"
+            referencedRelation: "personas"
             referencedColumns: ["id"]
           }
         ]
@@ -325,6 +325,75 @@ export interface Database {
           }
         ]
       }
+      personas: {
+        Row: {
+          avatar: string | null
+          correo: string | null
+          creado: string
+          direccion: string | null
+          dni: string
+          fecha_nacimiento: string
+          genero: string
+          id: string
+          id_expediente: string
+          primer_apellido: string
+          primer_nombre: string
+          segundo_apellido: string | null
+          segundo_nombre: string | null
+          telefono: string | null
+          tipo_usuario: string | null
+        }
+        Insert: {
+          avatar?: string | null
+          correo?: string | null
+          creado?: string
+          direccion?: string | null
+          dni: string
+          fecha_nacimiento: string
+          genero: string
+          id?: string
+          id_expediente: string
+          primer_apellido: string
+          primer_nombre: string
+          segundo_apellido?: string | null
+          segundo_nombre?: string | null
+          telefono?: string | null
+          tipo_usuario?: string | null
+        }
+        Update: {
+          avatar?: string | null
+          correo?: string | null
+          creado?: string
+          direccion?: string | null
+          dni?: string
+          fecha_nacimiento?: string
+          genero?: string
+          id?: string
+          id_expediente?: string
+          primer_apellido?: string
+          primer_nombre?: string
+          segundo_apellido?: string | null
+          segundo_nombre?: string | null
+          telefono?: string | null
+          tipo_usuario?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "personas_id_expediente_fkey"
+            columns: ["id_expediente"]
+            isOneToOne: false
+            referencedRelation: "expedientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "personas_tipo_usuario_fkey"
+            columns: ["tipo_usuario"]
+            isOneToOne: false
+            referencedRelation: "tipo_usuarios"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -392,75 +461,6 @@ export interface Database {
           nombre?: string
         }
         Relationships: []
-      }
-      usuarios: {
-        Row: {
-          avatar: string | null
-          correo: string | null
-          creado: string
-          direccion: string | null
-          dni: string
-          fecha_nacimiento: string
-          genero: string
-          id: string
-          id_expediente: string
-          primer_apellido: string
-          primer_nombre: string
-          segundo_apellido: string | null
-          segundo_nombre: string | null
-          telefono: string | null
-          tipo_usuario: string | null
-        }
-        Insert: {
-          avatar?: string | null
-          correo?: string | null
-          creado?: string
-          direccion?: string | null
-          dni: string
-          fecha_nacimiento: string
-          genero: string
-          id?: string
-          id_expediente: string
-          primer_apellido: string
-          primer_nombre: string
-          segundo_apellido?: string | null
-          segundo_nombre?: string | null
-          telefono?: string | null
-          tipo_usuario?: string | null
-        }
-        Update: {
-          avatar?: string | null
-          correo?: string | null
-          creado?: string
-          direccion?: string | null
-          dni?: string
-          fecha_nacimiento?: string
-          genero?: string
-          id?: string
-          id_expediente?: string
-          primer_apellido?: string
-          primer_nombre?: string
-          segundo_apellido?: string | null
-          segundo_nombre?: string | null
-          telefono?: string | null
-          tipo_usuario?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "usuarios_id_expediente_fkey"
-            columns: ["id_expediente"]
-            isOneToOne: false
-            referencedRelation: "expedientes"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "usuarios_tipo_usuario_fkey"
-            columns: ["tipo_usuario"]
-            isOneToOne: false
-            referencedRelation: "tipo_usuarios"
-            referencedColumns: ["id"]
-          }
-        ]
       }
     }
     Views: {

@@ -20,9 +20,9 @@ function classNames(...classes: any[]) {
 }
 
 
-export default function NavbarIndexClient({user} : {user: Users | null}) {
+export default function NavbarIndexClient({user} : {user: Personas | null}) {
 
-  
+
   return (
 
     <Disclosure as="nav" >
@@ -118,8 +118,8 @@ export default function NavbarIndexClient({user} : {user: Users | null}) {
                                   {({ active }) => (
                                     <Link
                                       href={
-                                        // user?.rol === "ADMIN" ? "/admin" : "/profile"
-                                        '#'
+                                        user?.rol === "ADMIN" ? "/admin" : "/profile"
+                                        // '#'
                                       }
                                       className={classNames(active ? 'bg-gray-100 dark:bg-gray-800' : '', 'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100')}
                                     >

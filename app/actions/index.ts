@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 export async function getUser ({id}: {id: string}) {
     const { data: usuario, error: errorUsuario } =
         await supabase
-            .from('usuarios')
+            .from('personas')
             .select('*')
             .eq('id', id)
             .single()
@@ -29,7 +29,7 @@ export async function getExpedienteByUser ({id} : {id: string}) {
   export async function getAllInfoUser ({id}: {id: string}) {
     const { data: usuarios, error: errorUsuarios } =
         await supabase
-            .from('usuarios')
+            .from('personas')
             .select('*, expedientes(*)')
             .eq('id', id)
             .single()

@@ -1,8 +1,8 @@
 
 import { readUserSession } from "@/lib/actions"
 import NavbarIndexClient from "./navbar-index-client";
-import { supabase } from "@/lib/supabase";
 import { getUser } from "@/app/actions";
+
 
 
 export default async function NavbarIndex() {
