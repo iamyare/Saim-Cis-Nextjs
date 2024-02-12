@@ -13,8 +13,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastContainer, toast } from "react-toastify";
 import { useTransition } from "react";
-import { loginWithGithub, signInWithEmailAndPassword } from "../actions";
-import { supabase } from "@/lib/supabase";
+import { signInWithEmailAndPassword } from "../actions";
 
 const validationSchema = z.object({
   email: z
@@ -62,7 +61,7 @@ export function UserAuthForm() {
 
   return (
 
-    <div className="grid gap-6">
+        <div className="grid gap-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
           <div className="grid gap-1">
@@ -111,7 +110,7 @@ export function UserAuthForm() {
           </Button>
         </div>
       </form>
-      <div className="relative">
+      {/* <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
@@ -121,14 +120,14 @@ export function UserAuthForm() {
           </span>
         </div>
       </div>
-      <Button onClick={loginWithGithub} variant="outline" type="button" disabled={isPending}>
+      <Button variant="outline" type="button" disabled={isPending}>
         {isPending ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Icons.gitHub className="mr-2 h-4 w-4" />
         )}{" "}
         GitHub
-      </Button>
+      </Button> */}
       <ToastContainer
         position="top-right"
         autoClose={3000}
