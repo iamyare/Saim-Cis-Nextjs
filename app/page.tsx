@@ -8,12 +8,12 @@ export default function Home() {
   return (
     <>
       <NavbarIndex />
-      {/* <Carousel />
+      <Carousel />
       <ServicesSection />
-      <DoctorsSection /> */}
-      <div className="grid place-items-center h-screen">
+      <DoctorsSection />
+      {/* <div className="grid place-items-center h-screen">
       <h2 className="text-2xl">Landing Page 🚀</h2>
-      </div>
+      </div> */}
     </>
   );
 }

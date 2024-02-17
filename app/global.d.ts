@@ -6,5 +6,13 @@ declare global {
   type Expedientes = DB['public']['Tables']['expedientes']['Row']
   type Consultas = DB['public']['Tables']['consultas']['Row']
   type Diagnosticos = DB['public']['Tables']['diagnosticos']['Row']
+  type PersonasXUsuarios = DB['public']['Tables']['personas_x_usuarios']['Row']
+  type UserType=
+  |(Personas & {usuario: PersonasXUsuarios} & {
+    role: {
+      role: string;
+      especialidad: string
+    }[];
+  })| null;
 
 }
