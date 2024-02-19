@@ -10,9 +10,10 @@ import { logoutUser } from "@/lib/actions";
 
 const navigation = [
   { name: 'Inicio', href: '#', current: true },
+  { name: 'Nosotros', href: '#', current: false },
   { name: 'Servicios', href: '#servicios', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Doctores', href: '/terms', current: false },
+  { name: 'Contacto', href: '#', current: false },
 ]
 
 function classNames(...classes: any[]) {
