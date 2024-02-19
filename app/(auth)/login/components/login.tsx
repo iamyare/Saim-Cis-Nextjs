@@ -12,13 +12,13 @@ export default function LoginAuth() {
       href="/signup"
       className={cn(
         buttonVariants({ variant: "ghost" }),
-        "absolute right-4 top-4 md:right-8 md:top-8"
+        "absolute right-4 top-4 md:right-8 md:top-8 text-cyan-500"
       )}
     >
       Crear cuenta
     </Link>
     <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
-      <div className="absolute inset-0 bg-zinc-900" />
+      <div className="absolute inset-0 bg-cyan-700" />
       <Link className="relative z-20 flex items-center text-lg font-medium" href='/'>
       <LogoSaimCis/>
 
