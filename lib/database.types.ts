@@ -342,6 +342,7 @@ export interface Database {
           segundo_nombre: string | null
           telefono: string | null
           tipo_usuario: string | null
+          rol: string 
         }
         Insert: {
           avatar?: string | null
@@ -359,6 +360,7 @@ export interface Database {
           segundo_nombre?: string | null
           telefono?: string | null
           tipo_usuario?: string | null
+          rol: string 
         }
         Update: {
           avatar?: string | null
@@ -376,6 +378,7 @@ export interface Database {
           segundo_nombre?: string | null
           telefono?: string | null
           tipo_usuario?: string | null
+          rol: string 
         }
         Relationships: [
           {
@@ -462,6 +465,41 @@ export interface Database {
         }
         Relationships: []
       }
+      personas_x_usuarios: {
+        Row: {
+          id_usuario: string
+          id_personas: string
+          create_at: string
+          correo: string
+          avatar_url: string
+          descrpcion: string
+        }
+        Insert: {
+          id_usuario: string
+          id_personas?: string
+          create_at: string
+          correo: string
+          avatar_url: string
+          descrpcion: string
+        }
+        Update: {
+          id_usuario?: string
+          id_personas?: string
+          create_at: string
+          correo?: string
+          avatar_url: string
+          descrpcion: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_personas_x_usuario_id_persona_fkey"
+            columns: ["id_persona"]
+            isOneToOne: false
+            referencedRelation: "id_persona"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -476,6 +514,7 @@ export interface Database {
       [_ in never]: never
     }
   }
+  
 }
 
 export type Tables<

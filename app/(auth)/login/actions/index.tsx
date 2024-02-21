@@ -21,6 +21,7 @@ export async function signInWithEmailAndPassword (data: {
 }) {
   const supabase = await createSupabaseServerClient()
   const result = await supabase.auth.signInWithPassword(data)
+
   return JSON.stringify(result)
 }
 
@@ -30,7 +31,7 @@ export async function loginWithGithub () {
   supabase.auth.signInWithOAuth({
     provider: 'github',
     options: {
-      redirectTo: `${location.origin}/auth/callback`
+      redirectTo: `http://localhost:3005/auth/callback`
     }
   })
 }

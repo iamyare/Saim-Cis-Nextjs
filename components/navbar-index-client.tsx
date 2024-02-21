@@ -6,13 +6,15 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { logoutUser } from "@/lib/actions";
+import  LogoSaimCis  from './logo-saim-cis'
 
 
 const navigation = [
   { name: 'Inicio', href: '#', current: true },
+  { name: 'Nosotros', href: '#', current: false },
   { name: 'Servicios', href: '#servicios', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Doctores', href: '/terms', current: false },
+  { name: 'Contacto', href: '#', current: false },
 ]
 
 function classNames(...classes: any[]) {
@@ -44,11 +46,7 @@ export default function NavbarIndexClient({user} : {user: Personas | null}) {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  alt="Your Company"
-                />
+                <LogoSaimCis className="text-cyan-600 dark:text-cyan-500"/>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">

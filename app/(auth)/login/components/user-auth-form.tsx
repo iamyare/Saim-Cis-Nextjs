@@ -102,7 +102,7 @@ export function UserAuthForm() {
               </p>
             )}
           </div>
-          <Button disabled={isPending}>
+          <Button className="bg-cyan-600 hover:bg-cyan-500 text-white hover:text-slate-900" disabled={isPending}>
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
@@ -110,7 +110,7 @@ export function UserAuthForm() {
           </Button>
         </div>
       </form>
-      <div className="relative">
+      {/* <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
@@ -127,7 +127,7 @@ export function UserAuthForm() {
           <Icons.gitHub className="mr-2 h-4 w-4" />
         )}{" "}
         GitHub
-      </Button>
+      </Button> */}
       <ToastContainer
         position="top-right"
         autoClose={3000}

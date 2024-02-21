@@ -1,3 +1,4 @@
+import { readUserSession } from '@/lib/actions'
 import { supabase } from '@/lib/supabase'
 
 
@@ -50,3 +51,23 @@ export async function getExpedienteByUser ({id} : {id: string}) {
     
         return { expediente, errorExpediente }
     }
+
+
+    export async function getInfoPersona () {
+      const { data: {session} } = await readUserSession();
+      if (!session) {
+        return { permissions: false, message: 'No hay sesión activa', errorCode: 401 };
+      }
+    
+      const { usuario, errorUsuario } = await getUser({ id: session.user.id });
+    
+      if (errorUsuario) {
+        return { permissions: false, message: 'Error al obtener el usuario', errorCode: 500 };
+      }
+    
+      if (!usuario) {
+        return { permissions: false, message: 'No se encontró el usuario', errorCode: 404 };
+      }
+    
+      return { usuario, errorUsuario };
+    } 
