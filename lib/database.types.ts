@@ -469,26 +469,26 @@ export interface Database {
         Row: {
           id_usuario: string
           id_personas: string
-          create_at: string
+          created_at: string
           correo: string
           avatar_url: string
-          descrpcion: string
+          descripcion: string
         }
         Insert: {
           id_usuario: string
           id_personas?: string
-          create_at: string
+          created_at: string
           correo: string
           avatar_url: string
-          descrpcion: string
+          descripcion: string
         }
         Update: {
           id_usuario?: string
           id_personas?: string
-          create_at: string
+          created_at: string
           correo?: string
           avatar_url: string
-          descrpcion: string
+          descripcion: string
         }
         Relationships: [
           {

@@ -3,28 +3,28 @@ const people = [
       name: 'Leslie Alexander',
       role: 'Doctor / Cardiologo',
       imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        'https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Doctores/25e53ed6-6d82-4d4c-89d9-72cf8e8165a2.webp',
     },
     {
         name: 'Este es otro nombre',
         role: 'Doctor / Cardiologo',
         imageUrl:
-          'https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2019/12/9-Best-Online-Avatars-and-How-to-Make-Your-Own-for-Free-image21.jpg',
+          'https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Doctores/6c69eb30-a0b3-4d38-b670-fed0d4aafb46.webp',
       },    {
         name: 'Leslie Alexander',
         role: 'Doctor / Cardiologo',
         imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+          'https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Doctores/6e6fa6d3-69e4-4a9f-9a81-376894a4a372.webp',
       },    {
         name: 'Leslie Alexander',
         role: 'Doctor / Cardiologo',
         imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+          'https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Doctores/77677e7e-aac8-436c-ab25-42366dc99722.webp',
       },    {
         name: 'Leslie Alexander',
         role: 'Doctor / Cardiologo',
         imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+          'https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Doctores/a0b0b06f-43eb-4fdb-9db4-593895d90062.webp',
       },
   ]
   

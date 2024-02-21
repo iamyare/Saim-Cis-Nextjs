@@ -13,7 +13,7 @@ data-hs-carousel='{
           <div className="hs-carousel-slide">
             <div className="flex justify-center h-full bg-gray-100 p-6">
               <span className="self-center text-4xl transition duration-700">
-                First slide
+                <img src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/6e6fa6d3-69e4-4a9f-9a81-376894a4a372.webp" alt="" />
               </span>
             </div>
           </div>

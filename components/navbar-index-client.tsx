@@ -26,7 +26,7 @@ export default function NavbarIndexClient({user} : {user: Personas | null}) {
 
   return (
 
-    <Disclosure as="nav" >
+    <Disclosure className="bg-cyan-500 dark:bg-gray-900" as="nav" >
     {({ open }) => (
       <>
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
@@ -58,7 +58,7 @@ export default function NavbarIndexClient({user} : {user: Personas | null}) {
                       key={item.name}
                       href={item.href}
                       className={classNames(
-                        item.current ? 'bg-gray-100 dark:bg-gray-900 text-black dark:text-white' : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900  hover:text-black dark:hover:text-white',
+                        item.current ? 'bg-cyan-500 dark:bg-gray-900 text-black dark:text-white' : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900  hover:text-black dark:hover:text-white',
                         'rounded-md px-3 py-2 text-sm font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -153,7 +153,7 @@ export default function NavbarIndexClient({user} : {user: Personas | null}) {
           </div>
         </div>
 
-        <Disclosure.Panel className="sm:hidden">
+        <Disclosure.Panel className="sm:hidden bg-cyan-500 dark:bg-gray-900 ">
           <div className="space-y-1 px-2 pb-3 pt-2">
             {navigation.map((item) => (
               <Disclosure.Button
@@ -161,7 +161,7 @@ export default function NavbarIndexClient({user} : {user: Personas | null}) {
                 as="a"
                 href={item.href}
                 className={classNames(
-                  item.current ? 'bg-gray-200 text-white' : 'text-gray-300 hover:bg-gray-200 hover:text-white',
+                  item.current ? 'dark:bg-gray-600 bg-cyan-800 text-gray-900 dark:text-gray-100' : 'text-gray-900 dark:text-gray-100 hover:bg-cyan-600 hover:text-white dark:hover:text-white  dark:hover:bg-gray-500',
                   'block rounded-md px-3 py-2 text-base font-medium'
                 )}
                 aria-current={item.current ? 'page' : undefined}
