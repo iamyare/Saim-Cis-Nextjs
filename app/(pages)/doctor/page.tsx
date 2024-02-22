@@ -2,7 +2,12 @@ import { getInfoPersona } from "@/app/actions";
 
 import HeaderProfile from "./components/header-profile";
 import PersonalInfo from "./components/personal-info";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Doctor",
+  description: "Pagina de doctor",
+};
 
 export default async function DoctorPage() {
   const { usuario, errorUsuario } = await getInfoPersona();
