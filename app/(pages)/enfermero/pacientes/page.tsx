@@ -8,7 +8,7 @@ export const meta: Metadata = {
   description: "Pacientes de enfermería",
 };
 export default async function EnfermeroPacientePage() {
-  const { usuario, errorUsuario } = await getUsersByRol({ rol: "Paciente" });
+  const { usuario, errorUsuario } = await getUsersByRol({ role: "paciente" });
 
   if (errorUsuario) {
     return <span>Error al obtener los pacientes</span>;
@@ -17,8 +17,6 @@ export default async function EnfermeroPacientePage() {
   if (!usuario) {
     return <span>No hay pacientes</span>;
   }
-
-  console.log(usuario);
 
   return (
     <div className="w-full px-8 py-2">
@@ -29,10 +27,10 @@ export default async function EnfermeroPacientePage() {
         <AgregarPaciente />
       </div>
       <Suspense fallback={<span>Cargando...</span>}>
-        <div className="mt-4">
-          <div className="flex flex-col gap-4">
+        <div className="mt-8">
+          <ul className="flex flex-col gap-4 divide-y">
             {usuario.map((user, index) => (
-              <div key={index} className="flex items-center gap-4">
+              <li key={index} className="flex items-center gap-4 py-2">
                 <div className="flex items-center gap-2">
                   <div className="h-8 w-8 rounded-full flex justify-center items-center bg-blue-500 text-white">
                     {user.nombre.charAt(0).toUpperCase() +
@@ -50,9 +48,9 @@ export default async function EnfermeroPacientePage() {
                     Ver
                   </button>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </Suspense>
     </div>
