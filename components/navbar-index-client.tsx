@@ -1,12 +1,13 @@
 "use client";
-import { ModeToggle } from "./theme-toggle";
-import Link from "next/link";
-
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { ModeToggle } from "@/components/theme-toggle";
 import { logoutUser } from "@/lib/actions";
-import LogoSaimCis from "./logo-saim-cis";
+
+import { usePathname } from "next/navigation";
+import LogoSaimCis from "@/components/logo-saim-cis";
 
 const navigation = [
   { name: "Inicio", href: "#", current: true },
@@ -18,9 +19,10 @@ const navigation = [
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
+  ``;
 }
 
-export default function NavbarIndexClient({ user }: { user: Personas | null }) {
+export default function NavbarIndexClient({ user }: { user: UserType }) {
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -41,7 +43,7 @@ export default function NavbarIndexClient({ user }: { user: Personas | null }) {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <LogoSaimCis className="text-cyan-600 dark:text-cyan-500" />
+                  <LogoSaimCis />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -50,12 +52,12 @@ export default function NavbarIndexClient({ user }: { user: Personas | null }) {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
+                          item.href
                             ? "bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
                             : "text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900  hover:text-black dark:hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                        aria-current={item.href ? "page" : undefined}
                       >
                         {item.name}
                       </Link>
@@ -73,11 +75,11 @@ export default function NavbarIndexClient({ user }: { user: Personas | null }) {
                       <Menu.Button className="relative flex rounded-full bg-neutral-200 dark:bg-neutral-800 text-sm focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-300 dark:focus:ring-offset-gray-700">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
-                        {user?.avatar ? (
+                        {user?.usuario.avatar_url ? (
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={user?.avatar}
-                            alt=""
+                            src={user?.usuario.avatar_url}
+                            alt={`Foto de perfil de ${user?.nombre}`}
                           />
                         ) : (
                           <span className="h-8 w-8 rounded-full flex justify-center items-center ">
@@ -103,27 +105,35 @@ export default function NavbarIndexClient({ user }: { user: Personas | null }) {
                               Iniciaste con:
                             </span>
                             <span className="text-sm text-gray-900 dark:text-gray-100">
-                              {user.correo}
+                              {user.usuario.correo}
                             </span>
                           </div>
                         </Menu.Item>
                         <hr />
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href={
-                                user?.rol === "ADMIN" ? "/admin" : "/profile"
-                                // '#'
-                              }
-                              className={classNames(
-                                active ? "bg-gray-100 dark:bg-gray-800" : "",
-                                "block px-4 py-2 text-sm text-gray-900 dark:text-gray-100"
-                              )}
-                            >
-                              Tu perfil
-                            </Link>
-                          )}
-                        </Menu.Item>
+                        {user.role.length > 1 ? (
+                          <Menu.Item>
+                            <div className="flex flex-col gap-1 pt-2 px-4">
+                              <span className="text-sm text-gray-900 dark:text-gray-100 font-semibold">
+                                Ver por:
+                              </span>
+                            </div>
+                          </Menu.Item>
+                        ) : null}
+                        {user.role.map((rol, index) => (
+                          <Menu.Item key={index}>
+                            {({ active }) => (
+                              <Link
+                                href={`/${rol.rol.toLowerCase()}`}
+                                className={classNames(
+                                  active ? "bg-gray-100 dark:bg-gray-800" : "",
+                                  "block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start"
+                                )}
+                              >
+                                Perfil de {rol.rol}
+                              </Link>
+                            )}
+                          </Menu.Item>
+                        ))}
                         <Menu.Item>
                           {({ active }) => (
                             <button
