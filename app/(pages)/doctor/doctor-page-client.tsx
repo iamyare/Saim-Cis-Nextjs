@@ -1,16 +1,14 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 
-export default function DoctorPageClient({ user}: { user: UserType}) {
-
-
-
-
+export default function DoctorPageClient({ user }: { user: UserType }) {
   return (
     <div className="grid place-items-center h-screen">
       <div className="flex flex-col justify-center items-center gap-4">
-        <h2 className="text-2xl">Bienvenido Dr. {user?.primer_nombre} {user?.primer_apellido}</h2>
+        <h2 className="text-2xl">
+          Bienvenido Dr. {user?.nombre} {user?.apellido}
+        </h2>
         <p>{JSON.stringify(user)}</p>
         <Link
           href="/"

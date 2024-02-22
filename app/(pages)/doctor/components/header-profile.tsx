@@ -2,7 +2,6 @@
 import { CheckBadgeIcon } from "@heroicons/react/20/solid";
 
 export default function HeaderProfile({ usuario }: { usuario: UserType }) {
-  
   return (
     <section className=" rounded-lg shadow-xl pb-8">
       <div className="w-full h-[250px]">
@@ -18,7 +17,7 @@ export default function HeaderProfile({ usuario }: { usuario: UserType }) {
         />
         <div className="flex items-center space-x-1 mt-2">
           <p className="text-2xl">
-            {usuario?.primer_nombre} {usuario?.primer_apellido}
+            {usuario?.nombre} {usuario?.apellido}
           </p>
           <CheckBadgeIcon className="h-6 w-6  text-blue-500" />
         </div>

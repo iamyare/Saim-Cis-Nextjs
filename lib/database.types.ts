@@ -6,56 +6,35 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
-      centro_medico: {
-        Row: {
-          creado: string
-          direccion: string | null
-          id: string
-          img: string | null
-          nombre: string
-          rtn: string
-        }
-        Insert: {
-          creado?: string
-          direccion?: string | null
-          id?: string
-          img?: string | null
-          nombre: string
-          rtn: string
-        }
-        Update: {
-          creado?: string
-          direccion?: string | null
-          id?: string
-          img?: string | null
-          nombre?: string
-          rtn?: string
-        }
-        Relationships: []
-      }
       citas: {
         Row: {
+          descripcion: string | null
           estado: string
           fecha_final: string
+          fecha_inicio: string
           fecha_registro: string
           id: string
           id_doctor: string
           id_paciente: string
         }
         Insert: {
+          descripcion?: string | null
           estado: string
           fecha_final: string
+          fecha_inicio: string
           fecha_registro?: string
           id?: string
           id_doctor: string
           id_paciente: string
         }
         Update: {
+          descripcion?: string | null
           estado?: string
           fecha_final?: string
+          fecha_inicio?: string
           fecha_registro?: string
           id?: string
           id_doctor?: string
@@ -132,139 +111,61 @@ export interface Database {
           }
         ]
       }
-      contratos: {
+      especializacion_x_personas: {
         Row: {
-          fecha_final: string | null
-          fecha_inicio: string | null
-          id: string
-          id_usuario: string | null
-          jornada: string | null
-          sueldo: number | null
+          id_especializacion: string
+          id_persona: string
         }
         Insert: {
-          fecha_final?: string | null
-          fecha_inicio?: string | null
-          id?: string
-          id_usuario?: string | null
-          jornada?: string | null
-          sueldo?: number | null
+          id_especializacion: string
+          id_persona: string
         }
         Update: {
-          fecha_final?: string | null
-          fecha_inicio?: string | null
-          id?: string
-          id_usuario?: string | null
-          jornada?: string | null
-          sueldo?: number | null
+          id_especializacion?: string
+          id_persona?: string
         }
         Relationships: [
           {
-            foreignKeyName: "contratos_id_usuario_fkey"
-            columns: ["id_usuario"]
+            foreignKeyName: "especializacion_x_personas_id_especializacion_fkey"
+            columns: ["id_especializacion"]
+            isOneToOne: false
+            referencedRelation: "especializaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "especializacion_x_personas_id_persona_fkey"
+            columns: ["id_persona"]
             isOneToOne: false
             referencedRelation: "personas"
             referencedColumns: ["id"]
           }
         ]
       }
-      diagnosticos: {
+      especializaciones: {
         Row: {
-          estado: string | null
-          fecha_diagnostico: string
           id: string
-          id_consulta: string | null
-          id_diagnosticador: string
-          observacion: string | null
-        }
-        Insert: {
-          estado?: string | null
-          fecha_diagnostico?: string
-          id?: string
-          id_consulta?: string | null
-          id_diagnosticador: string
-          observacion?: string | null
-        }
-        Update: {
-          estado?: string | null
-          fecha_diagnostico?: string
-          id?: string
-          id_consulta?: string | null
-          id_diagnosticador?: string
-          observacion?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "diagnosticos_id_consulta_fkey"
-            columns: ["id_consulta"]
-            isOneToOne: false
-            referencedRelation: "consultas"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "diagnosticos_id_diagnosticador_fkey"
-            columns: ["id_diagnosticador"]
-            isOneToOne: false
-            referencedRelation: "personas"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      diagnosticos_x_enfermedades: {
-        Row: {
-          fecha_diagnostico: string
-          id_diagnostico: string
-          id_enfermedades: string
-          observacion: string | null
-        }
-        Insert: {
-          fecha_diagnostico?: string
-          id_diagnostico: string
-          id_enfermedades: string
-          observacion?: string | null
-        }
-        Update: {
-          fecha_diagnostico?: string
-          id_diagnostico?: string
-          id_enfermedades?: string
-          observacion?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "diagnosticos_x_enfermedades_id_diagnostico_fkey"
-            columns: ["id_diagnostico"]
-            isOneToOne: false
-            referencedRelation: "diagnosticos"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "diagnosticos_x_enfermedades_id_enfermedades_fkey"
-            columns: ["id_enfermedades"]
-            isOneToOne: false
-            referencedRelation: "enfermedades"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      enfermedades: {
-        Row: {
-          created_at: string
-          id: string
+          id_rol: string
           nombre: string
-          observacion: string | null
         }
         Insert: {
-          created_at?: string
           id?: string
+          id_rol: string
           nombre: string
-          observacion?: string | null
         }
         Update: {
-          created_at?: string
           id?: string
+          id_rol?: string
           nombre?: string
-          observacion?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "especializaciones_id_rol_fkey"
+            columns: ["id_rol"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       expedientes: {
         Row: {
@@ -281,53 +182,9 @@ export interface Database {
         }
         Relationships: []
       }
-      jornadas: {
-        Row: {
-          hora_final: string | null
-          hora_inicial: string | null
-          id: string
-          nombre: string
-        }
-        Insert: {
-          hora_final?: string | null
-          hora_inicial?: string | null
-          id?: string
-          nombre: string
-        }
-        Update: {
-          hora_final?: string | null
-          hora_inicial?: string | null
-          id?: string
-          nombre?: string
-        }
-        Relationships: []
-      }
-      permisos_tipo_usuarios: {
-        Row: {
-          id: string
-          nombre: string
-        }
-        Insert: {
-          id: string
-          nombre: string
-        }
-        Update: {
-          id?: string
-          nombre?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "permisos_tipo_usuarios_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "tipo_usuarios"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       personas: {
         Row: {
-          avatar: string | null
+          apellido: string
           correo: string | null
           creado: string
           direccion: string | null
@@ -335,17 +192,13 @@ export interface Database {
           fecha_nacimiento: string
           genero: string
           id: string
-          id_expediente: string
-          primer_apellido: string
-          primer_nombre: string
-          segundo_apellido: string | null
-          segundo_nombre: string | null
+          id_expediente: string | null
+          nombre: string
+          rol: string | null
           telefono: string | null
-          tipo_usuario: string | null
-          rol: string 
         }
         Insert: {
-          avatar?: string | null
+          apellido: string
           correo?: string | null
           creado?: string
           direccion?: string | null
@@ -353,17 +206,13 @@ export interface Database {
           fecha_nacimiento: string
           genero: string
           id?: string
-          id_expediente: string
-          primer_apellido: string
-          primer_nombre: string
-          segundo_apellido?: string | null
-          segundo_nombre?: string | null
+          id_expediente?: string | null
+          nombre: string
+          rol?: string | null
           telefono?: string | null
-          tipo_usuario?: string | null
-          rol: string 
         }
         Update: {
-          avatar?: string | null
+          apellido?: string
           correo?: string | null
           creado?: string
           direccion?: string | null
@@ -371,14 +220,10 @@ export interface Database {
           fecha_nacimiento?: string
           genero?: string
           id?: string
-          id_expediente?: string
-          primer_apellido?: string
-          primer_nombre?: string
-          segundo_apellido?: string | null
-          segundo_nombre?: string | null
+          id_expediente?: string | null
+          nombre?: string
+          rol?: string | null
           telefono?: string | null
-          tipo_usuario?: string | null
-          rol: string 
         }
         Relationships: [
           {
@@ -387,118 +232,71 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "expedientes"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "personas_tipo_usuario_fkey"
-            columns: ["tipo_usuario"]
-            isOneToOne: false
-            referencedRelation: "tipo_usuarios"
-            referencedColumns: ["id"]
           }
         ]
       }
-      profiles: {
+      personas_x_usuarios: {
         Row: {
+          avatar_url: string | null
+          correo: string
           created_at: string
-          email: string | null
-          full_name: string
-          id: string
+          descripcion: string | null
+          estado: string | null
+          id_persona: string
+          id_usuario: string
+          pass_temp: string | null
         }
         Insert: {
+          avatar_url?: string | null
+          correo: string
           created_at?: string
-          email?: string | null
-          full_name: string
-          id?: string
+          descripcion?: string | null
+          estado?: string | null
+          id_persona: string
+          id_usuario: string
+          pass_temp?: string | null
         }
         Update: {
+          avatar_url?: string | null
+          correo?: string
           created_at?: string
-          email?: string | null
-          full_name?: string
-          id?: string
-        }
-        Relationships: []
-      }
-      telefonos_sucursales: {
-        Row: {
-          centro_medico: string
-          creado: string
-          id: number
-          numero: string
-        }
-        Insert: {
-          centro_medico: string
-          creado?: string
-          id?: number
-          numero: string
-        }
-        Update: {
-          centro_medico?: string
-          creado?: string
-          id?: number
-          numero?: string
+          descripcion?: string | null
+          estado?: string | null
+          id_persona?: string
+          id_usuario?: string
+          pass_temp?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "telefonos_sucursales_centro_medico_fkey"
-            columns: ["centro_medico"]
+            foreignKeyName: "personas_x_usuarios_id_persona_fkey"
+            columns: ["id_persona"]
             isOneToOne: false
-            referencedRelation: "centro_medico"
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "personas_x_usuarios_id_usuario_fkey"
+            columns: ["id_usuario"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
       }
-      tipo_usuarios: {
+      roles: {
         Row: {
-          created_at: string
           id: string
           nombre: string
         }
         Insert: {
-          created_at?: string
           id?: string
           nombre: string
         }
         Update: {
-          created_at?: string
           id?: string
           nombre?: string
         }
         Relationships: []
-      }
-      personas_x_usuarios: {
-        Row: {
-          id_usuario: string
-          id_personas: string
-          create_at: string
-          correo: string
-          avatar_url: string
-          descrpcion: string
-        }
-        Insert: {
-          id_usuario: string
-          id_personas?: string
-          create_at: string
-          correo: string
-          avatar_url: string
-          descrpcion: string
-        }
-        Update: {
-          id_usuario?: string
-          id_personas?: string
-          create_at: string
-          correo?: string
-          avatar_url: string
-          descrpcion: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "public_personas_x_usuario_id_persona_fkey"
-            columns: ["id_persona"]
-            isOneToOne: false
-            referencedRelation: "id_persona"
-            referencedColumns: ["id"]
-          }
-        ]
       }
     }
     Views: {
@@ -514,7 +312,6 @@ export interface Database {
       [_ in never]: never
     }
   }
-  
 }
 
 export type Tables<
