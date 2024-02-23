@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastContainer, toast } from "react-toastify";
 import { useTransition } from "react";
+import { verificarExistenciaCorreo, verificarExistenciaDNI, insertaPersona } from "../actions";
 
 const validationSchema = z.object({
   correo: z
@@ -76,17 +77,45 @@ export function EnfermeroPacienteForm() {
       )}-${data.dni.slice(8, 13)}`;
     }
 
+    
     startTransition(async () => {
-      //Comprobacion
-      //   if (dataUser) {
-      //     toast.error("El usuario ya está registrado en el sistema.");
-      //     return;
-      //   }
-      //Crear persona
-      //   if (userCreate) {
-      //     toast.success("Usuario creado exitosamente");
-      //   }
+      try {
+        // Verificar si el DNI ya está registrado
+        const existeDNI = await verificarExistenciaDNI(data.dni);
+        if (existeDNI) {
+          toast.error('El DNI ya está registrado');
+          return; // Termina la ejecución de la función si hay un error
+        }
+      
+        // Verificar si el correo ya está registrado
+        const existeCorreo = await verificarExistenciaCorreo(data.correo);
+        if (existeCorreo) {
+          toast.error('El correo ya está registrado');
+          return; // Termina la ejecución de la función si hay un error
+        }
+      
+        // Si tanto el DNI como el correo no están registrados, procede con la inserción de datos
+        const result = await insertaPersona({ data });
+        toast.success("La persona fue insertada correctamente");
+      } catch (error) {
+        console.error("Ocurrió un error al insertar la persona:", error);
+      }
+      
+      
+      // const data3 = {
+      //   correo: data.correo,
+      //   contrasenia: '123456'
+      // }
+
+      // try {
+      //   const result = await signUpWithEmailAndPassword({data3});
+      //   console.log("El usuario fue insertado correctamente:", result);
+      // } catch (error) {
+      //   console.error("Ocurrió un error al insertar la persona:", error);
+      // }
+
     });
+    
   }
 
   return (

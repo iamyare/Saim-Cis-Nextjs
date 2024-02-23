@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastContainer, toast } from "react-toastify";
 import { useTransition } from "react";
-import { checkPersonAndUser, getUserbyDNI, signUpWithEmailAndPassword } from "../actions";
+import { signUpWithEmailAndPassword } from "../actions";
 
 const validationSchema = z
   .object({
@@ -82,38 +82,9 @@ export function UserAuthForm() {
 
     
     startTransition(async () => {
-      const {data: dataUser, error: errorUser } = await getUserbyDNI({ dni: data.dni });
 
 
-      if (!dataUser) {
-        toast.error("El DNI no se encuentra registrado en el sistema.");
-        return;
-      }
-      if (errorUser) {
-        toast.error(errorUser.message);
-        return;
-      }
-
-      const id_persona = dataUser.id;
-
-      const {userData, userError} = await checkPersonAndUser({ id: id_persona });
-
-      if (userData) {
-        toast.error("El DNI ya se encuentra registrado en el sistema.");
-        return;
-      }
-      if (userError) {
-        toast.error(userError.message);
-        return;
-      }
-
-
-      const result = await signUpWithEmailAndPassword({data, id_persona});
-      const { error } = JSON.parse(result);
-      if (error.message) {
-        toast.error(error.message);
-        return;
-      }
+      const result = await signUpWithEmailAndPassword({data});
 
     });
   }

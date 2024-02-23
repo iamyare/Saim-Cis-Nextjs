@@ -12,9 +12,9 @@ export default function Home() {
       {/* <Skeleton />
       <Skeleton count={5} /> */}
       <NavbarIndex />
-      {/* <Carousel />
+      <Carousel />
       <ServicesSection />
-      <DoctorsSection /> */}
+      <DoctorsSection />
       <Footer />
       {/* <div className="grid place-items-center h-screen">
       <h2 className="text-2xl">Landing Page 🚀</h2>
