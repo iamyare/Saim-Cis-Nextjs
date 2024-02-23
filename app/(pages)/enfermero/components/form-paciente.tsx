@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastContainer, toast } from "react-toastify";
 import { useTransition } from "react";
+import { insertaPersona } from "../actions";
 
 const validationSchema = z.object({
   correo: z
@@ -76,17 +77,29 @@ export function EnfermeroPacienteForm() {
       )}-${data.dni.slice(8, 13)}`;
     }
 
+    
     startTransition(async () => {
-      //Comprobacion
-      //   if (dataUser) {
-      //     toast.error("El usuario ya está registrado en el sistema.");
-      //     return;
-      //   }
-      //Crear persona
-      //   if (userCreate) {
-      //     toast.success("Usuario creado exitosamente");
-      //   }
+      try {
+        const result = await insertaPersona({ data });
+        console.log("La persona fue insertada correctamente:", result);
+      } catch (error) {
+        console.error("Ocurrió un error al insertar la persona:", error);
+      }
+      
+      const data3 = {
+        correo: data.correo,
+        contrasenia: '123456'
+      }
+
+      // try {
+      //   const result = await signUpWithEmailAndPassword({data3});
+      //   console.log("El usuario fue insertado correctamente:", result);
+      // } catch (error) {
+      //   console.error("Ocurrió un error al insertar la persona:", error);
+      // }
+
     });
+    
   }
 
   return (
