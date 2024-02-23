@@ -11,13 +11,56 @@ export async function getUsersByRol({ role }: { role: string }) {
   return { usuario, errorUsuario };
 }
 
-export async function getPersonasByDNI({ dni }: { dni: string }) {
-  const { data: persona, error: errorPersona } = await supabase
-    .from("personas")
-    .select("*")
-    .eq("dni", dni);
-  return { persona, errorPersona };
+// Funcion para verificar si el dni ya existe en supabase
+export async function verificarExistenciaDNI( dni: string ) {
+  try {
+    const supabase = await createSupabaseServerClient();
+    
+    // Verificar si el DNI ya existe en la base de datos
+    const { data: dniExistente, error: errorDni } = await supabase
+      .from('personas')
+      .select('id')
+      .eq('dni', dni)
+      .single();
+
+    // Si el DNI existe, retornar verdadero
+    if (dniExistente) {
+      return true;
+    }
+
+    // Si no existe, retornar falso
+    return false;
+  } catch (error) {
+    console.error('Error al verificar la existencia del DNI:', error);
+    throw error;
+  }
 }
+
+// Funcion para verificar si el correo ya existe en la base de datos
+export async function verificarExistenciaCorreo(correo: string) {
+  try {
+    const supabase = await createSupabaseServerClient();
+    
+    // Verificar si el correo ya existe en la base de datos
+    const { data: correoExistente, error: errorCorreo } = await supabase
+      .from('personas')
+      .select('id')
+      .eq('correo', correo)
+      .single();
+
+    // Si el correo existe, retornar verdadero
+    if (correoExistente) {
+      return true;
+    }
+
+    // Si no existe, retornar falso
+    return false;
+  } catch (error) {
+    console.error('Error al verificar la existencia del correo:', error);
+    throw error;
+  }
+}
+
 
 export async function insertaPersona ({data}: {
   data: {
@@ -33,19 +76,22 @@ export async function insertaPersona ({data}: {
 }) {
   try {
     const supabase = await createSupabaseServerClient();
+    
+    // Verificar si el correo ya existe en la base de datos
+    const { data: correoExistente, error: errorCorreo } = await supabase
+      .from('personas')
+      .select('id')
+      .eq('correo', data.correo)
+      .single();
+
+    if (correoExistente) {
+      throw new Error('El correo ya está registrado');
+    }
+
+    //Insertar los datos del paciente en la tabla personas
     const { data: personaData, error } = await supabase
       .from('personas')
-      .insert({
-        nombre: data.nombre,
-        apellido: data.apellido,
-        correo: data.correo,
-        direccion: data.direccion,
-        dni: data.dni,
-        fecha_nacimiento: data.fecha_nacimiento,
-        genero: data.genero,
-        telefono: data.telefono
-      } 
-      );
+      .insert([]);
 
     if (error) {
       throw new Error(`Error al insertar persona: ${error.message}`);
