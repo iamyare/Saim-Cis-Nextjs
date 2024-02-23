@@ -18,7 +18,7 @@ export default function Terminos() {
               {" "}
               Frequently Asked Questions{" "}
             </h1>
-            <p className="block antialiased font-sans relative my-5 mx-auto text-center text-lg font-normal leading-relaxed tracking-normal text-gray-600 md:text-xl lg:max-w-4xl">
+            <p className="block antialiased font-sans relative my-5 mx-auto text-center text-lg font-normal leading-relaxed tracking-normal text-gray-600 dark:text-gray-400 md:text-xl lg:max-w-4xl">
               {" "}
               Check out what other people are usually interested in!{" "}
             </p>
@@ -29,7 +29,7 @@ export default function Terminos() {
                 {" "}
                 What is David UI Angular?{" "}
               </h5>
-              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-white-800">
+              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
                 {" "}
                 David UI Angular is the components library based on Tailwind CSS
                 and Angular frontend frameworks that is designed to help
@@ -57,7 +57,7 @@ export default function Terminos() {
                 {" "}
                 What is Tailwind CSS in Angular?{" "}
               </h5>
-              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600">
+              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
                 {" "}
                 Tailwind CSS in Angular refers to the integration of the
                 Tailwind CSS framework into Angular applications. It allows
@@ -69,7 +69,7 @@ export default function Terminos() {
                 {" "}
                 Is Tailwind CSS faster than CSS?{" "}
               </h5>
-              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600">
+              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
                 {" "}
                 Tailwind CSS and traditional CSS serve different purposes.
                 Tailwind CSS is not inherently faster or slower than CSS;
@@ -83,7 +83,7 @@ export default function Terminos() {
                 {" "}
                 Is Tailwind CSS good to use?{" "}
               </h5>
-              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600">
+              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
                 {" "}
                 Yes, Tailwind CSS is considered a valuable tool in web
                 development, and  becoming more and more popular nowadays.
@@ -96,7 +96,7 @@ export default function Terminos() {
                 {" "}
                 Is Tailwind CSS good for Angular?{" "}
               </h5>
-              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600">
+              <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
                 {" "}
                 Tailwind CSS can be a great choice for styling Angular
                 applications. Its utility classNamees can help maintain
