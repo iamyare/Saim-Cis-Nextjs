@@ -13,21 +13,21 @@ data-hs-carousel='{
           <div className="hs-carousel-slide">
             <div className="flex justify-center h-full bg-gray-100 p-6">
               <span className="self-center text-4xl transition duration-700">
-                First slide
+                <img className="bg-cover bg-center bg-no-repeat w-full h-full" src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/Landing%204.webp" alt="" />
               </span>
             </div>
           </div>
           <div className="hs-carousel-slide">
             <div className="flex justify-center h-full bg-gray-200 p-6">
               <span className="self-center text-4xl transition duration-700">
-                Second slide
+                <img src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/Landing%203.webp" alt="" />
               </span>
             </div>
           </div>
           <div className="hs-carousel-slide">
             <div className="flex justify-center h-full bg-gray-300 p-6">
               <span className="self-center text-4xl transition duration-700">
-                Third slide
+                <img src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/landing%202.webp" alt="" />
               </span>
             </div>
           </div>
@@ -74,9 +74,9 @@ data-hs-carousel='{
       </button>
 
       <div className="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
-        <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
-        <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
-        <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
+        <span className="hs-carousel-active:bg-cyan-500 hs-carousel-active:border-cyan-500 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
+        <span className="hs-carousel-active:bg-cyan-500 hs-carousel-active:border-cyan-500 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
+        <span className="hs-carousel-active:bg-cyan-500 hs-carousel-active:border-cyan-500 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
       </div>
     </div>
   </div>

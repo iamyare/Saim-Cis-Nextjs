@@ -10,11 +10,11 @@ import { usePathname } from "next/navigation";
 import LogoSaimCis from "@/components/logo-saim-cis";
 
 const navigation = [
-  { name: "Inicio", href: "#", current: true },
+  { name: "Inicio", href: "/", current: true },
   { name: "Nosotros", href: "#", current: false },
   { name: "Servicios", href: "#servicios", current: false },
-  { name: "Doctores", href: "/terms", current: false },
-  { name: "Contacto", href: "#", current: false },
+  { name: "Doctores", href: "#doctores", current: false },
+  { name: "Contacto", href: "#contacto", current: false },
 ];
 
 function classNames(...classes: any[]) {
@@ -153,7 +153,7 @@ export default function NavbarIndexClient({ user }: { user: UserType }) {
                     </Transition>
                   </Menu>
                 ) : (
-                  <Link href="/login">Iniciar sesión</Link>
+                  <Link className="hover:text-cyan-600" href="/login">Iniciar sesión</Link>
                 )}
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function NavbarIndexClient({ user }: { user: UserType }) {
                   className={classNames(
                     item.current
                       ? "bg-gray-200 dark:bg-slate-800  text-gray-900 dark:text-gray-100"
-                      : "text-gray-900 dark:text-gray-100  hover:bg-gray-200 hover:text-white dark:hover:bg-slate-800",
+                      : "text-gray-900 dark:text-gray-100  hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-800",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}
