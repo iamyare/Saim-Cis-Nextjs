@@ -8,24 +8,24 @@ data-hs-carousel='{
 }'
       className="relative"
     >
-      <div className="hs-carousel relative overflow-hidden w-full min-h-[350px] bg-white rounded-lg">
+      <div className="hs-carousel relative overflow-hidden w-full min-h-[400px] bg-white rounded-lg">
         <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
           <div className="hs-carousel-slide">
-            <div className="flex justify-center h-full bg-gray-100 p-6">
+            <div className="flex justify-center h-full p-6">
               <span className="self-center text-4xl transition duration-700">
-                <img className="bg-cover bg-center bg-no-repeat w-full h-full" src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/Landing%204.webp" alt="" />
+                <img className="bg-cover bg-center bg-no-repeat w-full h-full" src="https://images.pexels.com/photos/4033148/pexels-photo-4033148.jpeg" alt="" />
               </span>
             </div>
           </div>
           <div className="hs-carousel-slide">
-            <div className="flex justify-center h-full bg-gray-200 p-6">
+            <div className="flex justify-center h-full p-6">
               <span className="self-center text-4xl transition duration-700">
                 <img src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/Landing%203.webp" alt="" />
               </span>
             </div>
           </div>
           <div className="hs-carousel-slide">
-            <div className="flex justify-center h-full bg-gray-300 p-6">
+            <div className="flex justify-center h-full p-6">
               <span className="self-center text-4xl transition duration-700">
                 <img src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/landing%202.webp" alt="" />
               </span>

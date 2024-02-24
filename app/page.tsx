@@ -5,14 +5,18 @@ import Carousel from "./components/carousel";
 import Footer from "./components/footer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Nosotros from "./components/nosotros";
+import { ModalCitas } from "./(pages)/doctor/components/modal-citas";
 
 export default function Home() {
   return (
     <>
       {/* <Skeleton />
       <Skeleton count={5} /> */}
+      {/* <ModalCitas/> */}
       <NavbarIndex />
       <Carousel />
+      <Nosotros/>
       <ServicesSection />
       <DoctorsSection />
       <Footer />

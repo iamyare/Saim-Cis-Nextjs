@@ -1,4 +1,3 @@
-import React from "react";
 import LogoSaimCis from "@/components/logo-saim-cis";
 
 export default function Footer() {
@@ -34,19 +33,19 @@ export default function Footer() {
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <a
                   href="#nosotros"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
                 >
                   Nosotros
                 </a>
                 <a
                   href="#doctores"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
                 >
                   Doctores
                 </a>
                 <a
                   href="#servicios"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
                 >
                   Servicios
                 </a>
@@ -60,17 +59,17 @@ export default function Footer() {
 
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
                 >
                   Teléfono: +504-9999-9999
                 </p>
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
                 >
                   Correo: saimcis@gmail.com
                 </p>
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
                 >
                   Dirección: Col Miraflores
                 </p>

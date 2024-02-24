@@ -11,7 +11,7 @@ import LogoSaimCis from "@/components/logo-saim-cis";
 
 const navigation = [
   { name: "Inicio", href: "/", current: true },
-  { name: "Nosotros", href: "#", current: false },
+  { name: "Nosotros", href: "#nosotros", current: false },
   { name: "Servicios", href: "#servicios", current: false },
   { name: "Doctores", href: "#doctores", current: false },
   { name: "Contacto", href: "#contacto", current: false },

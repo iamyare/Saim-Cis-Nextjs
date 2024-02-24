@@ -1,6 +1,5 @@
 import NavbarIndex from "@/components/navbar-index";
 //import NavbarIndexClient from "@/components/navbar-index-client";
-//import { Sidebar } from '@/components/sidebar';
 import React from "react";
 
 export default function Terminos() {
