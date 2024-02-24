@@ -27,18 +27,17 @@ const validationSchema = z.object({
       if (isNaN(parsedValue)) return false;
       const decimalPart = value.split('.')[1];
       return decimalPart ? decimalPart.length <= 2 : true;
-    }, { message: "El peso debe ser un número válido y tener hasta dos decimales" }),
+    }, { message: "La estatura debe ser un número válido y tener hasta dos decimales" }),
   temperatura: z.string()
     .refine((value) => {
       const parsedValue = parseFloat(value);
-      return !isNaN(parsedValue) && parsedValue >= 20 && parsedValue <= 50;
-    }, { message: "La temperatura debe ser un número válido entre 20 y 50" }),
+      return !isNaN(parsedValue) && parsedValue >= 25 && parsedValue <= 45;
+    }, { message: "La temperatura debe ser un número válido entre 25 y 45" }),
   presion: z
     .string()
     .regex(/\d+\/\d+/, {
       message: "La presion debe tener el formato sistólica/diastólica",
     }),
-
 });
 
 type ValidationSchema = z.infer<typeof validationSchema>;
@@ -93,8 +92,8 @@ export function FormPreclinica() {
     <div className="grid gap-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="grid gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 row-start-1">
+            <div className="grid gap-2 ">
               <Label className="" htmlFor="Peso">
                 Peso (kg)
               </Label>
@@ -200,7 +199,7 @@ export function FormPreclinica() {
               </Label>
               <Input
                 placeholder="dd"
-                type="text"
+                type="number"
                 autoCapitalize="none"
                 autoComplete="Saturacion"
                 autoCorrect="off"
