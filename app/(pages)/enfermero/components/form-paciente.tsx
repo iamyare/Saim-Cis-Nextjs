@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastContainer, toast } from "react-toastify";
 import { useTransition } from "react";
-import { verificarExistenciaCorreo, verificarExistenciaDNI, insertaPersona } from "../actions";
+import { verificarExistenciaCorreo, verificarExistenciaDNI, insertaPersona, signUpWithEmailAndPassword } from "../actions";
 
 const validationSchema = z.object({
   correo: z
@@ -112,17 +112,17 @@ export function EnfermeroPacienteForm() {
       }
       
       
-      // const data3 = {
-      //   correo: data.correo,
-      //   contrasenia: '123456'
-      // }
+      const data3 = {
+        correo: data.correo,
+        contrasenia: '123456'
+      }
 
-      // try {
-      //   const result = await signUpWithEmailAndPassword({data3});
-      //   console.log("El usuario fue insertado correctamente:", result);
-      // } catch (error) {
-      //   console.error("Ocurrió un error al insertar la persona:", error);
-      // }
+      try {
+        const result = await signUpWithEmailAndPassword({data3});
+        console.log("El usuario fue insertado correctamente:", result);
+      } catch (error) {
+        console.error("Ocurrió un error al insertar la persona:", error);
+      }
 
     });
     

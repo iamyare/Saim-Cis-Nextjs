@@ -13,9 +13,6 @@ export async function getUsersByRol({ role }: { role: string }) {
 
 // Funcion para verificar si el dni ya existe en supabase
 export async function verificarExistenciaDNI( dni: string ) {
-  try {
-    const supabase = await createSupabaseServerClient();
-    
     // Verificar si el DNI ya existe en la base de datos
     const { data: dniExistente, error: errorDni } = await supabase
       .from('personas')
@@ -30,15 +27,10 @@ export async function verificarExistenciaDNI( dni: string ) {
 
     // Si no existe, retornar falso
     return false;
-  } catch (error) {
-    console.error('Error al verificar la existencia del DNI:', error);
-    throw error;
-  }
 }
 
 // Funcion para verificar si el correo ya existe en la base de datos
 export async function verificarExistenciaCorreo(correo: string) {
-  try {
     const supabase = await createSupabaseServerClient();
     
     // Verificar si el correo ya existe en la base de datos
@@ -55,11 +47,7 @@ export async function verificarExistenciaCorreo(correo: string) {
 
     // Si no existe, retornar falso
     return false;
-  } catch (error) {
-    console.error('Error al verificar la existencia del correo:', error);
-    throw error;
   }
-}
 
 
 export async function insertaPersona ({data}: {
@@ -91,7 +79,7 @@ export async function insertaPersona ({data}: {
     //Insertar los datos del paciente en la tabla personas
     const { data: personaData, error } = await supabase
       .from('personas')
-      .insert([]);
+      .insert([data]);
 
     if (error) {
       throw new Error(`Error al insertar persona: ${error.message}`);
@@ -104,20 +92,18 @@ export async function insertaPersona ({data}: {
   }
 }
 
-// export async function signUpWithEmailAndPassword ({data3}: {
-//   data3: {
-//     correo: string
-//     contrasenia: string
-//   }
-// }
-
-// ) {
-//   const supabase = await createSupabaseServerClient()
-//   const result = await supabase.auth.signUp({
-//     email: data3.correo,
-//     password: '123456',
-//   })
-
-//   return JSON.stringify(result)
-// }
+export async function signUpWithEmailAndPassword ({data3}: {
+  data3: {
+    correo: string
+    contrasenia: string
+  }
+}
+) {
+  const supabase = await createSupabaseServerClient()
+  const result = await supabase.auth.signUp({
+    email: data3.correo,
+    password: '123456',
+  })
+  return JSON.stringify(result)
+}
 
