@@ -1,9 +1,10 @@
 import React from "react";
+import LogoSaimCis from "@/components/logo-saim-cis";
 
 export default function Footer() {
   return (
     <>
-      <footer className="bg-slate-100 dark:bg-gray-900">
+      <footer className="bg-slate-100 dark:bg-gray-900" id="contacto">
         <div className="container px-6 py-12 mx-auto">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
             <div className="sm:col-span-2">
@@ -32,19 +33,19 @@ export default function Footer() {
 
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <a
-                  href="#"
+                  href="#nosotros"
                   className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
                 >
                   Nosotros
                 </a>
                 <a
-                  href="#"
+                  href="#doctores"
                   className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
                 >
                   Doctores
                 </a>
                 <a
-                  href="#"
+                  href="#servicios"
                   className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
                 >
                   Servicios
@@ -58,24 +59,21 @@ export default function Footer() {
               </p>
 
               <div className="flex flex-col items-start mt-5 space-y-2">
-                <a
-                  href="#"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                <p
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"
                 >
                   Teléfono: +504-9999-9999
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </p>
+                <p
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"
                 >
                   Correo: saimcis@gmail.com
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </p>
+                <p
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:text-blue-500"
                 >
                   Dirección: Col Miraflores
-                </a>
+                </p>
               </div>
             </div>
           </div>
@@ -83,13 +81,7 @@ export default function Footer() {
           <hr className="my-6 border-gray-200 md:my-8 dark:border-gray-700" />
 
           <div className="flex items-center justify-between">
-            <a href="#">
-              <img
-                className="w-auto h-7"
-                src="https://merakiui.com/images/full-logo.svg"
-                alt=""
-              />
-            </a>
+            <LogoSaimCis className="hover:fill-cyan-400 dark:hover:fill-cyan-600 cursor-pointer"/>
 
             <div className="flex -mx-2">
               <a
