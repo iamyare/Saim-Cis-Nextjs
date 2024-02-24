@@ -97,6 +97,16 @@ export function EnfermeroPacienteForm() {
         // Si tanto el DNI como el correo no están registrados, procede con la inserción de datos
         const result = await insertaPersona({ data });
         toast.success("La persona fue insertada correctamente");
+        const res = await fetch('/api/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: data.nombre,
+            email: data.correo
+          })
+        })
       } catch (error) {
         console.error("Ocurrió un error al insertar la persona:", error);
       }
