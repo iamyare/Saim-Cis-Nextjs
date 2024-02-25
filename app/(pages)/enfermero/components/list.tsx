@@ -1,10 +1,12 @@
 "use client";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { FormPreclinica } from "./form-preclinica";
 
 export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
   const [personaSeleccionada, setPersonaSeleccionada] =
     useState<Personas | null>(null);
+
   return (
     <>
       {usuario.map((user, index) => (
@@ -45,11 +47,16 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
                   Agregar Signos Vitales del Paciente
                 </h2>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  Ingrese los datos del paciente con id:{" "}
-                  {personaSeleccionada?.id}
+                  Ingrese los datos del paciente{" "}
+                  <strong>
+                    {personaSeleccionada?.nombre}{" "}
+                    {personaSeleccionada?.apellido}
+                  </strong>
                 </p>
               </div>
-              <div className="mt-5">{/* <FormPreclinica /> */}</div>
+              <div className="mt-5">
+                <FormPreclinica />
+              </div>
             </div>
           </div>
         </div>

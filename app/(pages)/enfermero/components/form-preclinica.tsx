@@ -14,30 +14,44 @@ import { ToastContainer, toast } from "react-toastify";
 import { useTransition } from "react";
 
 const validationSchema = z.object({
-  peso: z.string()
-    .refine((value) => {
+  peso: z.string().refine(
+    (value) => {
       const parsedValue = parseFloat(value);
       if (isNaN(parsedValue)) return false;
-      const decimalPart = value.split('.')[1];
+      const decimalPart = value.split(".")[1];
       return decimalPart ? decimalPart.length <= 2 : true;
-    }, { message: "El peso debe ser un número válido y tener hasta dos decimales" }),
-  estatura: z.string()
-  .refine((value) => {
+    },
+    { message: "El peso debe ser un número válido y tener hasta dos decimales" }
+  ),
+  estatura: z.string().refine(
+    (value) => {
       const parsedValue = parseFloat(value);
       if (isNaN(parsedValue)) return false;
-      const decimalPart = value.split('.')[1];
+      const decimalPart = value.split(".")[1];
       return decimalPart ? decimalPart.length <= 2 : true;
-    }, { message: "La estatura debe ser un número válido y tener hasta dos decimales" }),
-  temperatura: z.string()
-    .refine((value) => {
+    },
+    {
+      message:
+        "La estatura debe ser un número válido y tener hasta dos decimales",
+    }
+  ),
+  temperatura: z.string().refine(
+    (value) => {
       const parsedValue = parseFloat(value);
       return !isNaN(parsedValue) && parsedValue >= 25 && parsedValue <= 45;
-    }, { message: "La temperatura debe ser un número válido entre 25 y 45" }),
-  presion: z
-    .string()
-    .regex(/\d+\/\d+/, {
-      message: "La presion debe tener el formato sistólica/diastólica",
-    }),
+    },
+    { message: "La temperatura debe ser un número válido entre 25 y 45" }
+  ),
+  presion: z.string().regex(/\d+\/\d+/, {
+    message: "La presion debe tener el formato sistólica/diastólica",
+  }),
+  saturacion: z.string().refine(
+    (value) => {
+      const parsedValue = parseFloat(value);
+      return !isNaN(parsedValue) && parsedValue >= 0 && parsedValue <= 100;
+    },
+    { message: "La saturación debe ser un número válido entre 0 y 100" }
+  ),
 });
 
 type ValidationSchema = z.infer<typeof validationSchema>;
@@ -52,39 +66,17 @@ export function FormPreclinica() {
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      /* peso: "",
+      peso: "",
       estatura: "",
-      temperatura: "", */
+      temperatura: "",
       presion: "",
-      /* fecha_nacimiento: "",
-      direccion: "",
-      telefono: "", */
+      saturacion: "",
     },
   });
 
   function onSubmit(data: z.infer<typeof validationSchema>) {
-    // identificar si dni contiene guiones, si es así, quitarlos
-    // luego si no tiene agrega guiones dddd-dddd-ddddd
-    /* if (data.dni.includes("-")) {
-      data.dni = data.dni.replace(/-/g, "");
-    }
-    if (data.dni.length === 13) {
-      data.dni = `${data.dni.slice(0, 4)}-${data.dni.slice(
-        4,
-        8
-      )}-${data.dni.slice(8, 13)}`;
-    } */
-
     startTransition(async () => {
-      //Comprobacion
-      //   if (dataUser) {
-      //     toast.error("El usuario ya está registrado en el sistema.");
-      //     return;
-      //   }
-      //Crear persona
-      //   if (userCreate) {
-      //     toast.success("Usuario creado exitosamente");
-      //   }
+      //Aqui va el insert
     });
   }
 
@@ -92,7 +84,7 @@ export function FormPreclinica() {
     <div className="grid gap-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 row-start-1">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="grid gap-2 ">
               <Label className="" htmlFor="Peso">
                 Peso (kg)
@@ -167,8 +159,7 @@ export function FormPreclinica() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-2">
             <div className="grid gap-2">
               <Label className="" htmlFor="Presion">
                 Presión Arterial (mmHg)
@@ -185,7 +176,7 @@ export function FormPreclinica() {
                     ? "border-red-500  !placeholder-red-500 text-red-500"
                     : ""
                 }
-                {...register("presion")} 
+                {...register("presion")}
               />
               {errors.presion && (
                 <p className="text-xs italic text-red-500 mt-0">
@@ -194,35 +185,32 @@ export function FormPreclinica() {
               )}
             </div>
             <div className="grid gap-2">
-              <Label className="" htmlFor="Saturacion">
-                Saturación Oxígeno (SaO2/SvO2)
+              <Label className="" htmlFor="saturacion">
+                Saturación Oxígeno (%)
               </Label>
               <Input
                 placeholder="dd"
                 type="number"
                 autoCapitalize="none"
-                autoComplete="Saturacion"
+                autoComplete="saturacion"
                 autoCorrect="off"
                 disabled={isPending}
-                /* className={
-                  errors.nombre
+                className={
+                  errors.saturacion
                     ? "border-red-500  !placeholder-red-500 text-red-500"
                     : ""
                 }
-                {...register("nombre")} */
+                {...register("saturacion")}
               />
-              {/* {errors.nombre && (
+              {errors.saturacion && (
                 <p className="text-xs italic text-red-500 mt-0">
-                  {errors.nombre?.message}
+                  {errors.saturacion?.message}
                 </p>
-              )} */}
+              )}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
-            
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
 
           <Button
             disabled={isPending}
