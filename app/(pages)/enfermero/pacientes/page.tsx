@@ -1,6 +1,8 @@
 import { Key, Suspense } from "react";
 import { getUsersByRol } from "../actions";
 import { AgregarPaciente } from "../components/agregar-paciente";
+import { PlusIcon } from "@heroicons/react/20/solid";
+import ListaPacientes from "../components/list";
 
 export default async function EnfermeroPacientePage() {
   const { usuario, errorUsuario } = await getUsersByRol({ role: "paciente" });
@@ -24,27 +26,7 @@ export default async function EnfermeroPacientePage() {
       <Suspense fallback={<span>Cargando...</span>}>
         <div className="mt-8">
           <ul className="flex flex-col gap-4 divide-y">
-            {usuario.map((user, index) => (
-              <li key={index} className="flex items-center gap-4 py-2">
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full flex justify-center items-center bg-blue-500 text-white">
-                    {user.nombre.charAt(0).toUpperCase() +
-                      user.apellido.charAt(0).toUpperCase()}
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold">
-                      {user.nombre} {user.apellido}
-                    </p>
-                    <p className="text-gray-500">{user.correo}</p>
-                  </div>
-                </div>
-                <div>
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-                    Ver
-                  </button>
-                </div>
-              </li>
-            ))}
+            <ListaPacientes usuario={usuario} />
           </ul>
         </div>
       </Suspense>
