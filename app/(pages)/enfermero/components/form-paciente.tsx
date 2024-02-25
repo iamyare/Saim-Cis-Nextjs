@@ -12,7 +12,14 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastContainer, toast } from "react-toastify";
 import { useTransition } from "react";
-import { verificarExistenciaCorreo, verificarExistenciaDNI, insertaPersona, signUpWithEmailAndPassword } from "../actions";
+import {
+  getUserByDNI,
+  getUserByCorreo,
+  createPersona,
+  setRolePacienteUser,
+  signUpWithEmailAndTempPass,
+  sendMailSingup,
+} from "../actions";
 
 const validationSchema = z.object({
   correo: z
@@ -77,55 +84,90 @@ export function EnfermeroPacienteForm() {
       )}-${data.dni.slice(8, 13)}`;
     }
 
-    
     startTransition(async () => {
-      try {
-        // Verificar si el DNI ya está registrado
-        const existeDNI = await verificarExistenciaDNI(data.dni);
-        if (existeDNI) {
-          toast.error('El DNI ya está registrado');
-          return; // Termina la ejecución de la función si hay un error
-        }
-      
-        // Verificar si el correo ya está registrado
-        const existeCorreo = await verificarExistenciaCorreo(data.correo);
-        if (existeCorreo) {
-          toast.error('El correo ya está registrado');
-          return; // Termina la ejecución de la función si hay un error
-        }
-      
-        // Si tanto el DNI como el correo no están registrados, procede con la inserción de datos
-        const result = await insertaPersona({ data });
-        toast.success("La persona fue insertada correctamente");
-        const res = await fetch('/api/send', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: data.nombre,
-            email: data.correo
-          })
-        })
-      } catch (error) {
-        console.error("Ocurrió un error al insertar la persona:", error);
+      const { dataDni } = await getUserByDNI({
+        dni: data.dni,
+      });
+
+      if (dataDni && dataDni?.length > 0) {
+        toast.error("El usuario ya está registrado en el sistema.");
+        return;
       }
-      
-      
-      const data3 = {
+
+      const { dataCorreo } = await getUserByCorreo({
         correo: data.correo,
-        contrasenia: '123456'
+      });
+
+      if (dataCorreo && dataCorreo?.length > 0) {
+        toast.error("El usuario ya está registrado en el sistema.");
+        return;
       }
 
-      try {
-        const result = await signUpWithEmailAndPassword({data3});
-        console.log("El usuario fue insertado correctamente:", result);
-      } catch (error) {
-        console.error("Ocurrió un error al insertar la persona:", error);
+      //Crear persona
+      const { persona, errorPersona } = await createPersona({ data });
+      if (errorPersona) {
+        toast.error(errorPersona.message);
+        return;
       }
 
+      if (!persona) {
+        toast.error("Error al crear la persona");
+        return;
+      }
+
+      const { data: setRole, error: errorSetRole } = await setRolePacienteUser({
+        id: persona.id,
+        rol: "paciente",
+      });
+
+      if (errorSetRole) {
+        if (typeof errorSetRole === "string") {
+          toast.error(errorSetRole);
+        } else {
+          toast.error(errorSetRole.message);
+        }
+        return;
+      }
+
+      if (!setRole) {
+        toast.error("Error al asignar el rol de paciente");
+        return;
+      }
+
+      //Crear un codigo de 6 digitos y letras como contraseña temporal
+      const randomCode = Math.random()
+        .toString(36)
+        .substring(2, 8)
+        .toUpperCase();
+
+      const { userCreate, errorUserCreate } = await signUpWithEmailAndTempPass({
+        email: data.correo,
+        id_persona: persona.id,
+        passwordTemp: randomCode,
+      });
+      if (errorUserCreate) {
+        toast.error(errorUserCreate.message);
+        return;
+      }
+
+      if (userCreate) {
+        toast.success("Usuario creado exitosamente");
+      }
+
+      const emailResponse = await sendMailSingup({
+        email: persona.correo ?? "",
+        passwordTemp: randomCode,
+        persona: persona,
+      });
+
+      if (emailResponse.accepted.includes(persona.correo ?? "")) {
+        // Email was sent successfully
+        toast.success("Correo electrónico enviado exitosamente");
+      } else {
+        // Email was not sent successfully
+        toast.error("Error al enviar el correo electrónico");
+      }
     });
-    
   }
 
   return (

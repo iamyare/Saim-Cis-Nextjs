@@ -1,6 +1,113 @@
 "use server";
+import TemplateEmailPassTemp from "@/components/html-email";
 import { supabase } from "@/lib/supabase";
-import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { adminAuthClient } from "@/lib/supabase/auth-admin";
+import nodemailer from "nodemailer";
+
+type CreatePersona = {
+  correo: string;
+  nombre: string;
+  apellido: string;
+  dni: string;
+  fecha_nacimiento: string;
+  direccion: string;
+  telefono: string;
+  genero: string;
+};
+
+export async function createPersona({ data }: { data: CreatePersona }) {
+  const { data: persona, error: errorPersona } = await supabase
+    .from("personas")
+    .insert({ ...data, rol: "Paciente" })
+    .select("*")
+    .single();
+  return { persona, errorPersona };
+}
+
+export async function setRolePacienteUser({
+  id,
+  rol,
+}: {
+  id: string;
+  rol: string;
+}) {
+  //Obtener el id de la especializacion por el nombre del rol
+  const { data: especializacion, error: especializacionError } = await supabase
+    .from("especializaciones")
+    .select("id")
+    .eq("nombre", rol)
+    .single();
+
+  if (especializacionError) {
+    return { data: null, error: especializacionError };
+  }
+  if (!especializacion) {
+    return { data: null, error: "No se encontro la especializacion" };
+  }
+
+  const { data, error } = await supabase
+    .from("especializacion_x_personas")
+    .insert({ id_persona: id, id_especializacion: especializacion.id })
+    .select("*")
+    .single();
+
+  return { data, error };
+}
+
+export async function sendMailSingup({
+  email,
+  passwordTemp,
+  persona,
+}: {
+  email: string;
+  passwordTemp: string;
+  persona: Personas;
+}) {
+  const transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.NEXT_PUBLIC_EMAIL,
+      pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: `SAIM CIS ${process.env.NEXT_PUBLIC_EMAIL}`,
+    to: email,
+    subject: `Bienvenido a SAIM CIS ${persona.nombre}! 🎉`,
+    text: `Su contraseña temporal es: ${passwordTemp}`,
+    html: TemplateEmailPassTemp({
+      nombre: persona.nombre,
+      temp_pass: passwordTemp,
+    }),
+  };
+
+  const emailResponse = await transporter.sendMail(mailOptions);
+
+  return emailResponse;
+}
+
+export async function signUpWithEmailAndTempPass({
+  email,
+  passwordTemp,
+  id_persona,
+}: {
+  email: string;
+  passwordTemp: string;
+  id_persona: string;
+}) {
+  const { data: userCreate, error: errorUserCreate } =
+    await adminAuthClient.createUser({
+      email: email,
+      password: passwordTemp,
+      user_metadata: { id_persona: id_persona, passwordTemp: passwordTemp },
+      email_confirm: true,
+    });
+
+  return { userCreate, errorUserCreate };
+}
 
 export async function getUsersByRol({ role }: { role: string }) {
   const { data: usuario, error: errorUsuario } = await supabase
@@ -11,99 +118,20 @@ export async function getUsersByRol({ role }: { role: string }) {
   return { usuario, errorUsuario };
 }
 
-// Funcion para verificar si el dni ya existe en supabase
-export async function verificarExistenciaDNI( dni: string ) {
-    // Verificar si el DNI ya existe en la base de datos
-    const { data: dniExistente, error: errorDni } = await supabase
-      .from('personas')
-      .select('id')
-      .eq('dni', dni)
-      .single();
+export async function getUserByDNI({ dni }: { dni: string }) {
+  const { data: dataDni, error: errorDni } = await supabase
+    .from("personas")
+    .select("*")
+    .eq("dni", dni);
 
-    // Si el DNI existe, retornar verdadero
-    if (dniExistente) {
-      return true;
-    }
-
-    // Si no existe, retornar falso
-    return false;
+  return { dataDni, errorDni };
 }
 
-// Funcion para verificar si el correo ya existe en la base de datos
-export async function verificarExistenciaCorreo(correo: string) {
-    const supabase = await createSupabaseServerClient();
-    
-    // Verificar si el correo ya existe en la base de datos
-    const { data: correoExistente, error: errorCorreo } = await supabase
-      .from('personas')
-      .select('id')
-      .eq('correo', correo)
-      .single();
+export async function getUserByCorreo({ correo }: { correo: string }) {
+  const { data: dataCorreo, error: errorCorreo } = await supabase
+    .from("personas")
+    .select("*")
+    .eq("correo", correo);
 
-    // Si el correo existe, retornar verdadero
-    if (correoExistente) {
-      return true;
-    }
-
-    // Si no existe, retornar falso
-    return false;
-  }
-
-
-export async function insertaPersona ({data}: {
-  data: {
-    nombre: string
-    apellido: string
-    correo: string
-    direccion: string
-    dni: string
-    fecha_nacimiento: string
-    genero: string
-    telefono: string
-  }
-}) {
-  try {
-    const supabase = await createSupabaseServerClient();
-    
-    // Verificar si el correo ya existe en la base de datos
-    const { data: correoExistente, error: errorCorreo } = await supabase
-      .from('personas')
-      .select('id')
-      .eq('correo', data.correo)
-      .single();
-
-    if (correoExistente) {
-      throw new Error('El correo ya está registrado');
-    }
-
-    //Insertar los datos del paciente en la tabla personas
-    const { data: personaData, error } = await supabase
-      .from('personas')
-      .insert([data]);
-
-    if (error) {
-      throw new Error(`Error al insertar persona: ${error.message}`);
-    }
-
-    return personaData;
-  } catch (error) {
-    console.error('Error al insertar persona:', error);
-    throw error;
-  }
+  return { dataCorreo, errorCorreo };
 }
-
-export async function signUpWithEmailAndPassword ({data3}: {
-  data3: {
-    correo: string
-    contrasenia: string
-  }
-}
-) {
-  const supabase = await createSupabaseServerClient()
-  const result = await supabase.auth.signUp({
-    email: data3.correo,
-    password: '123456',
-  })
-  return JSON.stringify(result)
-}
-

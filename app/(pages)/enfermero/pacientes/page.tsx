@@ -1,12 +1,7 @@
-import { Metadata } from "next";
 import { Key, Suspense } from "react";
 import { getUsersByRol } from "../actions";
 import { AgregarPaciente } from "../components/agregar-paciente";
 
-export const meta: Metadata = {
-  title: "Pacientes",
-  description: "Pacientes de enfermería",
-};
 export default async function EnfermeroPacientePage() {
   const { usuario, errorUsuario } = await getUsersByRol({ role: "paciente" });
 
