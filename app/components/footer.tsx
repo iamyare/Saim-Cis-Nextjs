@@ -1,3 +1,5 @@
+"use client";
+
 import LogoSaimCis from "@/components/logo-saim-cis";
 
 export default function Footer() {
@@ -66,12 +68,12 @@ export default function Footer() {
                 <p
                   className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
                 >
-                  Correo: saimcis@gmail.com
+                  Correo: saimcishon@gmail.com
                 </p>
                 <p
                   className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
                 >
-                  Dirección: Col Miraflores
+                  Dirección: Boulevard Suyapa, UNAH
                 </p>
               </div>
             </div>
