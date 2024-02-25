@@ -1,3 +1,5 @@
+"use client";
+
 const people = [
     {
       name: 'Miriam Velazquez',
