@@ -59,39 +59,39 @@ export type Database = {
       }
       consultas: {
         Row: {
-          creado: string
           estatura: number | null
+          fecha_consulta: string
           id: string
-          id_cita: string
+          id_cita: string | null
           id_expediente: string
           peso: number | null
           presion_arterial: string | null
           saturacion_oxigeno: string | null
-          sintomas: string
+          sintomas: string | null
           temperatura: number | null
         }
         Insert: {
-          creado?: string
           estatura?: number | null
+          fecha_consulta?: string
           id?: string
-          id_cita: string
+          id_cita?: string | null
           id_expediente: string
           peso?: number | null
           presion_arterial?: string | null
           saturacion_oxigeno?: string | null
-          sintomas: string
+          sintomas?: string | null
           temperatura?: number | null
         }
         Update: {
-          creado?: string
           estatura?: number | null
+          fecha_consulta?: string
           id?: string
-          id_cita?: string
+          id_cita?: string | null
           id_expediente?: string
           peso?: number | null
           presion_arterial?: string | null
           saturacion_oxigeno?: string | null
-          sintomas?: string
+          sintomas?: string | null
           temperatura?: number | null
         }
         Relationships: [
@@ -171,16 +171,27 @@ export type Database = {
         Row: {
           fecha_apertura: string
           id: string
+          id_persona: string
         }
         Insert: {
           fecha_apertura?: string
           id?: string
+          id_persona: string
         }
         Update: {
           fecha_apertura?: string
           id?: string
+          id_persona?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "public_expedientes_id_persona_fkey"
+            columns: ["id_persona"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       personas: {
         Row: {
@@ -192,7 +203,6 @@ export type Database = {
           fecha_nacimiento: string
           genero: string
           id: string
-          id_expediente: string | null
           nombre: string
           rol: string | null
           telefono: string | null
@@ -206,7 +216,6 @@ export type Database = {
           fecha_nacimiento: string
           genero: string
           id?: string
-          id_expediente?: string | null
           nombre: string
           rol?: string | null
           telefono?: string | null
@@ -220,20 +229,11 @@ export type Database = {
           fecha_nacimiento?: string
           genero?: string
           id?: string
-          id_expediente?: string | null
           nombre?: string
           rol?: string | null
           telefono?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "personas_id_expediente_fkey"
-            columns: ["id_expediente"]
-            isOneToOne: false
-            referencedRelation: "expedientes"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
       personas_x_usuarios: {
         Row: {
