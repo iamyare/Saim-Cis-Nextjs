@@ -45,12 +45,10 @@ export async function createConsulta({
     .insert({ 
       id_expediente: id, 
       peso: data.peso, 
-      estatura: data.estatura,  
+      estatura: data.estatura, 
       temperatura: data.temperatura, 
       presion_arterial: data.presion, 
       saturacion_oxigeno: data.saturacion})
-    .select("*")
-    .single();
   return {consulta, errorConsulta}
 }
 
@@ -63,9 +61,6 @@ export async function getExpedienteByIDPaciente({ id }: {id: string}){
   if (errorID) {
     return ""
   }
-  /* if (!dataID) {
-    return { data: null, error: "No se encontro el expediente" };
-  } */
     return dataID
 
 }

@@ -117,7 +117,7 @@ export function EnfermeroPacienteForm() {
 
       const { data: setRole, error: errorSetRole } = await setRolePacienteUser({
         id: persona.id,
-        rol: "paciente",
+        rol: "Paciente",
       });
 
       if (errorSetRole) {

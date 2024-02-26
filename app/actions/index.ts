@@ -42,14 +42,6 @@ export async function getUser({ id }: { id: string }) {
   return { usuario: usuarioModificado, errorUsuario };
 }
 
-export async function getExpedienteByUser({ id }: { id: string }) {
-  const { data: expedientes, error: errorExpedientes } = await supabase
-    .from("expedientes")
-    .select("*")
-    .eq("id_paciente", id);
-
-  return { expedientes, errorExpedientes };
-}
 
 export async function getAllInfoUser({ id }: { id: string }) {
   const { data: usuarios, error: errorUsuarios } = await supabase

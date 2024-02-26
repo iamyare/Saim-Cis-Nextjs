@@ -4,7 +4,7 @@ export default function Politicas() {
   return (
     <>
       <NavbarIndex />
-      <div className="p-6">
+      <div className="p-6 text-justify">
         <div className="bg-white dark:bg-transparent rounded-lg shadow-xl py-8 mt-12">
           <h4 className="text-4xl font-bold text-gray-800 dark:text-white tracking-widest uppercase text-center">
             Política de privacidad de SAIM CIS
