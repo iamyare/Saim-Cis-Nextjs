@@ -32,7 +32,7 @@ export default function HeaderProfile({ usuario }: { usuario: UserType }) {
             <div key={index} className="flex gap-2">
               {rol.especialidad.map((especialidad, i) => (
                 <span
-                  className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-md py-1 px-2 text-sm select-none"
+                  className="capitalize bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-md py-1 px-2 text-sm select-none"
                   key={i}
                 >
                   {especialidad}

@@ -27,7 +27,7 @@ export function ModalPreclinica() {
                 </p>
               </div>
               <div className="mt-5">
-                <FormPreclinica />
+                {/* <FormPreclinica /> */}
               </div>
             </div>
           </div>

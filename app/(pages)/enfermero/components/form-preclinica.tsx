@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastContainer, toast } from "react-toastify";
 import { useTransition } from "react";
+import { createConsulta, getExpedienteByIDPaciente } from "../actions";
 
 const validationSchema = z.object({
   peso: z.string().refine(
@@ -56,7 +57,7 @@ const validationSchema = z.object({
 
 type ValidationSchema = z.infer<typeof validationSchema>;
 
-export function FormPreclinica() {
+export function FormPreclinica({id}: {id: string}) {
   const [isPending, startTransition] = useTransition();
 
   const {
@@ -74,9 +75,25 @@ export function FormPreclinica() {
     },
   });
 
+  
+
   function onSubmit(data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
-      //Aqui va el insert
+      const idExpedienteResult = await getExpedienteByIDPaciente( {id} )
+      
+        
+      if (typeof idExpedienteResult === "string") {
+        const { consulta, errorConsulta } = await createConsulta({ data, id: idExpedienteResult });
+        if (errorConsulta) {
+          toast.error("Ha ocurrido un error, Los datos no han sido guardados");
+          return;
+        } else{
+          toast.success("Los Datos han sido guardados Exitosamente!")
+        }
+      } else {
+        toast.error("La persona que usted intenta atender no posee un expediente creado");
+        return;
+      }
     });
   }
 
@@ -85,8 +102,8 @@ export function FormPreclinica() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="grid gap-2 ">
-              <Label className="" htmlFor="Peso">
+            <div className="flex flex-col ">
+              <Label className="mb-2" htmlFor="Peso">
                 Peso (kg)
               </Label>
               <Input
@@ -109,8 +126,8 @@ export function FormPreclinica() {
                 </p>
               )}
             </div>
-            <div className="grid gap-2">
-              <Label className="" htmlFor="Estatura">
+            <div className="flex flex-col">
+              <Label className="mb-2" htmlFor="Estatura">
                 Estatura (m)
               </Label>
               <Input
@@ -133,8 +150,8 @@ export function FormPreclinica() {
                 </p>
               )}
             </div>
-            <div className="grid gap-2">
-              <Label className="" htmlFor="Temperatura">
+            <div className="flex flex-col">
+              <Label className="mb-2" htmlFor="Temperatura">
                 Temperatura (°C)
               </Label>
               <Input
@@ -160,8 +177,8 @@ export function FormPreclinica() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-2">
-            <div className="grid gap-2">
-              <Label className="" htmlFor="Presion">
+            <div className="flex flex-col">
+              <Label className="mb-2" htmlFor="Presion">
                 Presión Arterial (mmHg)
               </Label>
               <Input
@@ -184,8 +201,8 @@ export function FormPreclinica() {
                 </p>
               )}
             </div>
-            <div className="grid gap-2">
-              <Label className="" htmlFor="saturacion">
+            <div className="flex flex-col">
+              <Label className="mb-2" htmlFor="saturacion">
                 Saturación Oxígeno (%)
               </Label>
               <Input

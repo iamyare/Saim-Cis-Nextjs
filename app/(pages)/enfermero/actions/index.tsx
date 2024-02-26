@@ -15,6 +15,14 @@ type CreatePersona = {
   genero: string;
 };
 
+type CreateConsultaPreclinica = {
+  peso: number;
+  estatura: number;
+  temperatura: number;
+  presion: string;
+  saturacion: string;
+};
+
 export async function createPersona({ data }: { data: CreatePersona }) {
   const { data: persona, error: errorPersona } = await supabase
     .from("personas")
@@ -22,6 +30,45 @@ export async function createPersona({ data }: { data: CreatePersona }) {
     .select("*")
     .single();
   return { persona, errorPersona };
+}
+
+//creando una consulta nueva (enfermero)
+export async function createConsulta({ 
+  data, 
+  id 
+}: { 
+    data: CreateConsultaPreclinica; 
+    id: string 
+  }) {
+  const {data: consulta, error: errorConsulta} = await supabase
+    .from("consultas")
+    .insert({ 
+      id_expediente: id, 
+      peso: data.peso, 
+      estatura: data.estatura,  
+      temperatura: data.temperatura, 
+      presion_arterial: data.presion, 
+      saturacion_oxigeno: data.saturacion})
+    .select("*")
+    .single();
+  return {consulta, errorConsulta}
+}
+
+export async function getExpedienteByIDPaciente({ id }: {id: string}){
+  const { data: dataID, error: errorID } = await supabase
+    .from("expedientes")
+    .select("id")
+    .eq("id_persona", id)
+    .single();
+  if (errorID) {
+    return null
+  }
+  if (!dataID) {
+    return { data: null, error: "No se encontro el expediente" };
+  }
+  
+  return dataID
+
 }
 
 export async function setRolePacienteUser({
@@ -135,3 +182,4 @@ export async function getUserByCorreo({ correo }: { correo: string }) {
 
   return { dataCorreo, errorCorreo };
 }
+
