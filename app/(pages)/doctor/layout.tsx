@@ -1,11 +1,22 @@
-"use client";
-import { SidebarNavigation } from "@/components/sidebar-navigation";
-import React from "react";
+import { Metadata } from "next";
+import NavbarDoctorClient from "./components/navbar-doctor-client";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export const meta: Metadata = {
+  title: "Doctor",
+  description: "Pagina del doctor",
+};
+
+export default async function DoctorLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const usuario = null; //await getInfoPersona();
+
   return (
     <>
-      <SidebarNavigation />
+      <NavbarDoctorClient user={usuario ?? null} />
+      {children}
     </>
   );
 }

@@ -10,11 +10,11 @@ export default function Nosotros() {
             <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">
               Sobre Nosotros
             </h2>
-            <p className="my-2 text-md">Somos un centro medico que</p>
+            <p className="my-2 text-md">Somos un centro medico que busca darle una buena atencion a nuestros pacientes con los mejores especialistas y con un equipo medico de ultima generación.</p>
           </div>
           <div className="relative flex flex-col justify-center overflow-hidden bg-gray-50 dark:bg-transparent py-6 sm:py-12">
             <div className="w-full items-center mx-auto max-w-screen-lg">
-              <div className="group grid w-full lg:grid-cols-2 sm:grid-cols-1">
+              <div className="group grid w-full lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 sm:col-end-1">
                 <div>
                   <div className="pr-6">
                     <p className="peer mb-6 text-gray-800 dark:text-white">
@@ -43,7 +43,7 @@ export default function Nosotros() {
           </div>
           <div className="relative flex flex-col justify-center overflow-hidden bg-gray-50 dark:bg-transparent py-6 sm:py-12">
             <div className="w-full items-center mx-auto max-w-screen-lg">
-              <div className="group grid w-full lg:grid-cols-2 sm:grid-cols-1">
+              <div className="group grid w-full lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
                 <div className="pl-16 relative flex items-end flex-col before:block before:absolute before:h-1/6 before:w-4 before:bg-cyan-700/[.50] before:bottom-0 before:left-0 before:rounded-lg  before:transition-all group-hover:before:bg-cyan-300 overflow-hidden">
                   <div className="absolute top-0 left-0 bg-cyan-500/[.50] w-4/6 px-12 py-14 flex flex-col justify-center rounded-xl group-hover:bg-cyan-600/[.50] transition-all ">
                     <h2 className="text-white font-bold text-3xl text-center">

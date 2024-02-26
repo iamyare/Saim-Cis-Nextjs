@@ -1,20 +1,26 @@
-import Link from "next/link";
+import { getInfoPersona } from "@/app/actions";
+import HeaderProfile from "../doctor/components/header-profile";
+import PersonalInfo from "../doctor/components/personal-info";
 
+export default async function PacientePage() {
+  const { usuario, errorUsuario, message } = await getInfoPersona();
 
-export default function HomePage() {
-  return (
-    <div className="grid place-items-center h-screen">
-      <div className="flex flex-col justify-center items-center gap-4">
-        <h2 className="text-2xl">
-          Bienvenido a la página de Paciente 💃🏻
-        </h2>
-        <Link
-          href="/"
-          className="inline-flex w-fit justify-center rounded-md border border-transparent bg-blue-100 dark:bg-blue-900 px-4 py-2 text-sm font-medium text-blue-900 dark:text-blue-100 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-        >
-          Ir a la página principal
-        </Link>
+  if (errorUsuario) {
+    return (
+      <div>
+        <span>Error al obtener los datos del usuario</span>
       </div>
-    </div>
-  )
+    );
+  }
+
+  return (
+    <main className="px-8 py-2">
+      <HeaderProfile usuario={usuario ?? null} />
+      <aside className="flex flex-col md:flex-row w-full md:space-x-4 ">
+        <section className="my-4 flex-col  space-y-4 w-full ">
+          <PersonalInfo usuario={usuario ?? null} />
+        </section>
+      </aside>
+    </main>
+  );
 }
