@@ -80,18 +80,19 @@ export function FormPreclinica({id}: {id: string}) {
   function onSubmit(data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
       const idExpedienteResult = await getExpedienteByIDPaciente( {id} )
+      const idExpediente = typeof idExpedienteResult === "string" ? idExpedienteResult : idExpedienteResult.id;
       
-        
-      if (typeof idExpedienteResult === "string") {
-        const { consulta, errorConsulta } = await createConsulta({ data, id: idExpedienteResult });
-        if (errorConsulta) {
-          toast.error("Ha ocurrido un error, Los datos no han sido guardados");
-          return;
-        } else{
-          toast.success("Los Datos han sido guardados Exitosamente!")
-        }
-      } else {
-        toast.error("La persona que usted intenta atender no posee un expediente creado");
+      console.log(idExpediente)
+      const { consulta, errorConsulta } = await createConsulta({ data, id: idExpediente });
+      if (errorConsulta) {
+        toast.error("La persona que intentas atender no posee un expediente");
+        return;
+      } else{
+        toast.success("Los Datos han sido guardados Exitosamente!")
+      }
+
+      if (!consulta) {
+        toast.error("Error al crear la consulta");
         return;
       }
     });

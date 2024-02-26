@@ -26,7 +26,7 @@ type CreateConsultaPreclinica = {
 export async function createPersona({ data }: { data: CreatePersona }) {
   const { data: persona, error: errorPersona } = await supabase
     .from("personas")
-    .insert({ ...data, rol: "paciente" })
+    .insert({ ...data, rol: "Paciente" })
     .select("*")
     .single();
   return { persona, errorPersona };
@@ -61,13 +61,12 @@ export async function getExpedienteByIDPaciente({ id }: {id: string}){
     .eq("id_persona", id)
     .single();
   if (errorID) {
-    return null
+    return ""
   }
-  if (!dataID) {
+  /* if (!dataID) {
     return { data: null, error: "No se encontro el expediente" };
-  }
-  
-  return dataID
+  } */
+    return dataID
 
 }
 
