@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastContainer, toast } from "react-toastify";
-import { useTransition } from "react";
+import { useTransition, useState } from "react";
 import { createConsulta, getExpedienteByIDPaciente } from "../actions";
 
 const validationSchema = z.object({
@@ -64,6 +64,7 @@ export function FormPreclinica({id}: {id: string}) {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
@@ -75,20 +76,19 @@ export function FormPreclinica({id}: {id: string}) {
     },
   });
 
-  
 
   function onSubmit(data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
       const idExpedienteResult = await getExpedienteByIDPaciente( {id} )
       const idExpediente = typeof idExpedienteResult === "string" ? idExpedienteResult : idExpedienteResult.id;
       
-      console.log(idExpediente)
       const { consulta, errorConsulta } = await createConsulta({ data, id: idExpediente });
       if (errorConsulta) {
         toast.error("La persona que intentas atender no posee un expediente");
         return;
       } else{
         toast.success("Los Datos han sido guardados Exitosamente!")
+        reset();
       }
 
       if (!consulta) {
