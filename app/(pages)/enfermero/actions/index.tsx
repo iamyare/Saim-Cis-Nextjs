@@ -18,7 +18,7 @@ type CreatePersona = {
 export async function createPersona({ data }: { data: CreatePersona }) {
   const { data: persona, error: errorPersona } = await supabase
     .from("personas")
-    .insert({ ...data, rol: "Paciente" })
+    .insert({ ...data, rol: "paciente" })
     .select("*")
     .single();
   return { persona, errorPersona };
