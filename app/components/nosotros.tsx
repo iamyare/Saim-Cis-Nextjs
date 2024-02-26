@@ -5,7 +5,7 @@ export default function Nosotros() {
   return (
     <>
       <section className="container mx-auto py-6" id="nosotros">
-        <div className="mx-auto grid max-w-7xl gap-x-8 px-6 lg:px-8 xl:grid-cols-3">
+        <div className="mx-auto grid max-w-7xl gap-x-8 px-6 lg:px-8">
           <div className="max-w-2xl text-center md:text-left">
             <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">
               Sobre Nosotros
