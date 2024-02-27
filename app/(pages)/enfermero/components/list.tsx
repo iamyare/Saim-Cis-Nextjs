@@ -15,7 +15,7 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
           className="flex justify-between gap-4 py-2 w-full max-w-2xl "
         >
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-full flex justify-center items-center bg-blue-500 text-white">
+            <div className="h-8 w-8 rounded-full flex justify-center items-center bg-cyan-400 dark:bg-cyan-500 text-white">
               {user.nombre.charAt(0).toUpperCase() +
                 user.apellido.charAt(0).toUpperCase()}
             </div>
@@ -29,7 +29,7 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
           <div className="flex gap-2">
             <button
               data-hs-overlay="#hs-modal-preclinica"
-              className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              className="flex h-10 items-center w-full !mx-0 duration-700  md:w-auto md:mx-4 bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500 px-4 text-sm font-medium text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               onClick={() => setPersonaSeleccionada(user)}
             >
               <span className="hidden md:block">Nueva Consulta</span>{" "}

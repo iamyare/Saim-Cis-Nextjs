@@ -6,10 +6,10 @@ export default function Politicas() {
       <NavbarIndex />
       <div className="p-6 text-justify">
         <div className="bg-white dark:bg-transparent rounded-lg shadow-xl py-8 mt-12 md:mx-32 lg:mx-60">
-          <h4 className="text-4xl font-bold text-gray-800 dark:text-white tracking-widest uppercase text-center">
+          <h4 className="text-4xl font-bold text-gray-800 dark:text-gray-300 tracking-widest uppercase text-center">
             Política de privacidad de SAIM CIS
           </h4>
-          <h4 className="text-gray-500 dark:text-gray-300 mt-2 mx-4 text-center">
+          <h4 className="text-gray-500 !dark:text-gray-300 mt-2 mx-4 text-center">
             Esta Política de privacidad describe cómo se recopila, utiliza y
             comparte su información personal cuando visita o hace una compra en
             saimcis.hn (denominado en lo sucesivo el “Sitio”).
@@ -18,12 +18,12 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center h-16">
-                  <span className="text-lg text-black dark:text-white font-bold">
+                  <span className="text-lg text-black dark:text-gray-300 font-bold">
                     INFORMACIÓN PERSONAL QUE RECOPILAMOS
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Cuando visita el Sitio, recopilamos automáticamente cierta
                     información sobre su dispositivo, incluida información sobre
                     su navegador web, dirección IP, zona horaria y algunas de
@@ -43,7 +43,7 @@ export default function Politicas() {
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     - Los “Archivos de registro” rastrean las acciones que
                     ocurren en el Sitio y recopilan datos, incluyendo su
                     dirección IP, tipo de navegador, proveedor de servicio de
@@ -54,7 +54,7 @@ export default function Politicas() {
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Además, cuando hace una compra o intenta hacer una compra a
                     través del Sitio, recopilamos cierta información de usted,
                     entre la que se incluye su nombre, dirección de facturación,
@@ -65,7 +65,7 @@ export default function Politicas() {
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Cuando hablamos de “Información personal” en la presente
                     Política de privacidad, nos referimos tanto a la Información
                     del dispositivo como a la Información del pedido.
@@ -77,12 +77,12 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center h-16">
-                  <span className="text-lg text-black dark:text-white font-bold">
+                  <span className="text-lg text-black dark:text-gray-300 font-bold">
                     ¿CÓMO UTILIZAMOS SU INFORMACIÓN PERSONAL?
                   </span>
                 </div>
                 <div className="flex items-center justify-center py-2">
-                  <span className=" pr-6 text-gray-500 dark:text-gray-300">
+                  <span className=" pr-6 text-gray-500 !dark:text-gray-300">
                     Usamos la Información del pedido que recopilamos en general
                     para preparar los pedidos realizados a través del Sitio
                     (incluido el procesamiento de su información de pago, la
@@ -108,12 +108,12 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center h-16">
-                  <span className="text-lg text-black dark:text-white font-bold">
+                  <span className="text-lg text-black dark:text-gray-300 font-bold">
                     COMPARTIR SU INFORMACIÓN PERSONAL
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Compartimos su Información personal con terceros para que
                     nos ayuden a utilizar su Información personal, tal como se
                     describió anteriormente. Por ejemplo, utilizamos la
@@ -131,12 +131,12 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center h-16">
-                  <span className="text-lg text-black dark:text-white font-bold">
+                  <span className="text-lg text-black dark:text-gray-300 font-bold">
                     PUBLICIDAD ORIENTADA POR EL COMPORTAMIENTO
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Como se describió anteriormente, utilizamos su Información
                     personal para proporcionarle anuncios publicitarios
                     dirigidos o comunicaciones de marketing que creemos que
@@ -147,7 +147,7 @@ export default function Politicas() {
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Puede darse de baja de la publicidad dirigida mediante los
                     siguientes enlaces: FACEBOOK: www.facebook.com/settings
                     GOOGLE: adssettings.google.com Además, puede darse de baja
@@ -162,12 +162,12 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center h-16">
-                  <span className="text-lg text-black dark:text-white font-bold">
+                  <span className="text-lg text-black dark:text-gray-300 font-bold">
                     NO RASTREAR
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Tenga en cuenta que no alteramos las prácticas de
                     recopilación y uso de datos de nuestro Sitio cuando vemos
                     una señal de No rastrear desde su navegador.
@@ -179,12 +179,12 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center h-16">
-                  <span className="text-lg text-black dark:text-white font-bold">
+                  <span className="text-lg text-black dark:text-gray-300 font-bold">
                     RETENCIÓN DE DATOS
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Cuando realiza un pedido a través del Sitio, mantendremos su
                     Información del pedido para nuestros registros a menos que y
                     hasta que nos pida que eliminemos esta información.
@@ -196,10 +196,10 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center h-16">
-                  <span className="text-lg text-black dark:text-white font-bold">CAMBIOS</span>
+                  <span className="text-lg text-black dark:text-gray-300 font-bold">CAMBIOS</span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Podemos actualizar esta política de privacidad
                     periódicamente para reflejar, por ejemplo, cambios en
                     nuestras prácticas o por otros motivos operativos, legales o
@@ -212,12 +212,12 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center h-16">
-                  <span className="text-lg text-black dark:text-white font-bold">
+                  <span className="text-lg text-black dark:text-gray-300 font-bold">
                     CONTÁCTENOS
                   </span>
                 </div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Para obtener más información sobre nuestras prácticas de
                     privacidad, si tiene alguna pregunta o si desea presentar
                     una queja, contáctenos por correo electrónico a
@@ -231,7 +231,7 @@ export default function Politicas() {
             <div className="mt-4 flex">
               <div>
                 <div className="flex items-center py-2">
-                  <span className="text-gray-500 dark:text-gray-300">
+                  <span className="text-gray-500 !dark:text-gray-300">
                     Boulevard Suyapa, UNAH, Tegucigalpa, Francisco Morazan,
                     11101, Honduras
                   </span>

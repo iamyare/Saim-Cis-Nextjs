@@ -386,7 +386,7 @@ export function EnfermeroPacienteForm() {
 
           <Button
             disabled={isPending}
-            className="bg-blue-500 hover:bg-blue-600 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-700"
+            className="w-full !mx-0 text-white transition-colors duration-700  md:w-auto md:mx-4 focus:outline-none bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500 focus:ring focus:ring-gray-3000 focus:ring-opacity-80"
           >
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />

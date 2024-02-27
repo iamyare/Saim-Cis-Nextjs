@@ -102,7 +102,7 @@ export function UserAuthForm() {
               </p>
             )}
           </div>
-          <Button className="bg-cyan-600 hover:bg-cyan-500 text-white hover:text-slate-900" disabled={isPending}>
+          <Button className="bg-cyan-600 hover:bg-cyan-500 text-white transition-colors duration-700" disabled={isPending}>
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}

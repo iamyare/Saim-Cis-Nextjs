@@ -245,7 +245,7 @@ export function FormPreclinica({ id }: { id: string }) {
 
           <div className="flex flex-col">
             <Label className="mb-2" htmlFor="Sintomas">
-              Síntomas (mmHg)
+              Síntomas
             </Label>
             <Input
               placeholder="Ingrese los síntomas del paciente"
@@ -265,7 +265,7 @@ export function FormPreclinica({ id }: { id: string }) {
 
           <Button
             disabled={isPending}
-            className="bg-blue-500 hover:bg-blue-600 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-700"
+            className="w-full !mx-0 text-white transition-colors duration-700  md:w-auto md:mx-4 bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500"
           >
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
