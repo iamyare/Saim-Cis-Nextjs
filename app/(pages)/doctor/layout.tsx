@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getInfoPersona } from "@/app/actions";
 import NavbarDoctorClient from "./components/navbar-doctor-client";
-import NavbarIndexClient from "@/components/navbar-index-client";
 
 export const meta: Metadata = {
   title: "Doctor",
@@ -17,7 +16,7 @@ export default async function DoctorLayout({
 
   return (
     <>
-      <NavbarIndexClient user={doctor ?? null} />
+      <NavbarDoctorClient user={doctor ?? null} />
       {children}
     </>
   );
