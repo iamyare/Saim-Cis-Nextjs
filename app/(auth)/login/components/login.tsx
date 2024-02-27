@@ -18,7 +18,7 @@ export default function LoginAuth() {
       <div className="relative z-20 mt-auto">
         <blockquote className="space-y-2">
 
-          <p className="text-lg">
+          <p className="text-lg text-justify">
             En Saim CIS, nos dedicamos a brindar atención médica de alta calidad y accesible a todos los habitantes de Honduras. Nuestra misión es mejorar la salud y el bienestar de nuestra comunidad a través de servicios médicos integrales, educación para la salud y programas de prevención. Creemos en un enfoque holístico para el cuidado de la salud, donde cada individuo reciba la atención personalizada que merece. Trabajamos incansablemente para asegurar que todos tengan acceso a los servicios médicos necesarios para una vida plena y saludable. ¡Únete a nosotros en nuestro compromiso de construir un futuro más saludable para todos!
           </p>
           <footer className="text-sm">SAIM CIS</footer>
