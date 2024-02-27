@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCitasByDoctor } from "../actions";
 import { ClockIcon, CalendarDaysIcon } from "@heroicons/react/24/outline";
+import CitasListInfo from "./citas-list-info";
 
 export default async function CitasInfo({ usuario }: { usuario: UserType }) {
   if (!usuario) return null;
@@ -43,37 +44,7 @@ export default async function CitasInfo({ usuario }: { usuario: UserType }) {
                 })}
               </h5>
             </div>
-            {citasPorFecha.map((cita, index) => (
-              <li
-                key={index}
-                className="flex flex-col px-2 py-3 gap-1 border-b"
-              >
-                <span className="flex  justify-center items-center gap-1 bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 px-2 py-1 rounded-md w-fit text-sm">
-                  <ClockIcon className="h-4 w-4 " />
-                  {new Date(cita.fecha_inicio).toLocaleTimeString("es-HN", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                  {" - "}
-                  {new Date(cita.fecha_final).toLocaleTimeString("es-HN", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </span>
-                <Link
-                  className="flex flex-col"
-                  href={`/doctor/citas/${cita.id}`}
-                  scroll={false}
-                >
-                  <h5 className="font-semibold">
-                    {cita.paciente?.nombre} {cita.paciente?.apellido}
-                  </h5>
-                </Link>
-                <span className="text-sm">
-                  {cita.descripcion ?? "Sin descripcion"}
-                </span>
-              </li>
-            ))}
+            <CitasListInfo citasPorFecha={citasPorFecha} />
           </ul>
         ))
       ) : (

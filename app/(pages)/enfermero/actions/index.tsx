@@ -49,7 +49,9 @@ export async function createConsulta({
       temperatura: data.temperatura,
       presion_arterial: data.presion,
       saturacion_oxigeno: data.saturacion,
-    });
+    })
+    .select("*")
+    .single();
   return { consulta, errorConsulta };
 }
 
@@ -59,10 +61,8 @@ export async function getExpedienteByIDPaciente({ id }: { id: string }) {
     .select("id")
     .eq("id_persona", id)
     .single();
-  if (errorID) {
-    return "";
-  }
-  return dataID;
+
+  return { dataID, errorID };
 }
 
 export async function setRolePacienteUser({

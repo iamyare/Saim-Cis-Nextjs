@@ -1,5 +1,5 @@
 "use client";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { FormPreclinica } from "./form-preclinica";
 
@@ -10,7 +10,10 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
   return (
     <>
       {usuario.map((user, index) => (
-        <li key={index} className="flex items-center gap-4 py-2">
+        <li
+          key={index}
+          className="flex justify-between gap-4 py-2 w-full max-w-2xl "
+        >
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-full flex justify-center items-center bg-blue-500 text-white">
               {user.nombre.charAt(0).toUpperCase() +
@@ -23,7 +26,7 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
               <p className="text-gray-500">{user.correo}</p>
             </div>
           </div>
-          <div>
+          <div className="flex gap-2">
             <button
               data-hs-overlay="#hs-modal-preclinica"
               className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -32,6 +35,15 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
               <span className="hidden md:block">Nueva Consulta</span>{" "}
               <PlusIcon className="h-5 md:ml-4" />
             </button>
+            {/* 
+            <button
+              data-hs-overlay="#hs-modal-show-preclinica"
+              className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              onClick={() => setPersonaSeleccionada(user)}
+            >
+              <span className="hidden md:block">Ver Consulta</span>{" "}
+              <EyeIcon className="h-5 md:ml-4" />
+            </button> */}
           </div>
         </li>
       ))}
@@ -43,9 +55,24 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
           <div className="bg-white border border-gray-200 rounded-xl pointer-events-auto shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <div className="p-4 sm:p-7">
               <div className="text-center flex justify-end">
-                <button type="button" className="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#hs-modal-preclinica">
+                <button
+                  type="button"
+                  className="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  data-hs-overlay="#hs-modal-preclinica"
+                >
                   <span className="sr-only">Close</span>
-                  <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                  <svg
+                    className="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                  </svg>
                 </button>
               </div>
               <div className="text-center">

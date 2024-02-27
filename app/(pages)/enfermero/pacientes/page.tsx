@@ -25,7 +25,8 @@ export default async function EnfermeroPacientePage() {
       </div>
       <Suspense fallback={<span>Cargando...</span>}>
         <div className="mt-8">
-          <ul className="flex flex-col gap-4 divide-y">
+          <span>{`Total de pacientes: ${usuario?.length}`}</span>
+          <ul className="flex flex-col gap-4 divide-y  items-center">
             <ListaPacientes usuario={usuario} />
           </ul>
         </div>

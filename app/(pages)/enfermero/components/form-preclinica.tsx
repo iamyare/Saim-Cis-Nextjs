@@ -57,14 +57,14 @@ const validationSchema = z.object({
 
 type ValidationSchema = z.infer<typeof validationSchema>;
 
-export function FormPreclinica({id}: {id: string}) {
+export function FormPreclinica({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
@@ -76,18 +76,31 @@ export function FormPreclinica({id}: {id: string}) {
     },
   });
 
-
   function onSubmit(data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
-      const idExpedienteResult = await getExpedienteByIDPaciente( {id} )
-      const idExpediente = typeof idExpedienteResult === "string" ? idExpedienteResult : idExpedienteResult.id;
-      
-      const { consulta, errorConsulta } = await createConsulta({ data, id: idExpediente });
+      const { dataID, errorID } = await getExpedienteByIDPaciente({ id });
+      if (errorID) {
+        toast.error("La persona que intentas atender no posee un expediente");
+        return;
+      }
+
+      if (!dataID) {
+        toast.error("La persona que intentas atender no posee un expediente");
+        return;
+      }
+
+      const idExpediente = dataID.id;
+
+      const { consulta, errorConsulta } = await createConsulta({
+        data,
+        id: idExpediente,
+      });
+
       if (errorConsulta) {
         toast.error("La persona que intentas atender no posee un expediente");
         return;
-      } else{
-        toast.success("Los Datos han sido guardados Exitosamente!")
+      } else {
+        toast.success("Los Datos han sido guardados Exitosamente!");
         reset();
       }
 

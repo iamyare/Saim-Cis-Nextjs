@@ -16,7 +16,7 @@ export default function Nosotros() {
               medico de ultima generación.
             </p>
           </div>
-          <div className="relative flex flex-col justify-center overflow-hidden bg-gray-50 dark:bg-transparent py-6 sm:py-12">
+          <div className="relative flex flex-col justify-center overflow-hidden  dark:bg-transparent py-6 sm:py-12">
             <div className="w-full items-center mx-auto max-w-screen-lg">
               <div className="group grid w-full lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
                 <div className="order-last sm:order-first">
@@ -45,7 +45,7 @@ export default function Nosotros() {
               </div>
             </div>
           </div>
-          <div className="relative flex flex-col justify-center overflow-hidden bg-gray-50 dark:bg-transparent py-6 sm:py-12">
+          <div className="relative flex flex-col justify-center overflow-hidden dark:bg-transparent py-6 sm:py-12">
             <div className="w-full items-center mx-auto max-w-screen-lg">
               <div className="group grid w-full lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
                 <div className="pl-16 relative flex items-end flex-col before:block before:absolute before:h-1/6 before:w-4 before:bg-cyan-700/[.50] before:bottom-0 before:left-0 before:rounded-lg  before:transition-all group-hover:before:bg-cyan-300 overflow-hidden">

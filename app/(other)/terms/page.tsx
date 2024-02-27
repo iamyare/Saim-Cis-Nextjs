@@ -8,7 +8,7 @@ export default function Terminos() {
       <NavbarIndex />
       <div className="flex min-h-screen items-center justify-center text-justify md:mx-32 lg:mx-60">
         <section className="flex flex-col px-12">
-          <div className="mb-12 text-center">
+          <div className="my-2 md:mt-12 md:mb-6 text-center">
             <h1 className="block antialiased font-sans relative my-5 text-center text-4xl font-bold leading-tight tracking-normal text-black dark:text-white md:text-5xl">
               {" "}
               Terminos y Condiciones{" "}
@@ -16,7 +16,7 @@ export default function Terminos() {
           </div>
           <div className="grid grid-cols-12 ">
             <div className="col-span-12">
-              <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
+              <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit md:mt-6 mb-1 font-semibold text-black dark:text-white">
                 {" "}
                 GENERALIDADES{" "}
               </h5>
