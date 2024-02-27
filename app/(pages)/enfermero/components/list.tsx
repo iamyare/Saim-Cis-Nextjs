@@ -61,7 +61,13 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
                 </p>
               </div>
               <div className="mt-5">
-                <FormPreclinica id={personaSeleccionada?.id != null ? personaSeleccionada.id : ''}/>
+                <FormPreclinica
+                  id={
+                    personaSeleccionada?.id != null
+                      ? personaSeleccionada.id
+                      : ""
+                  }
+                />
               </div>
             </div>
           </div>
