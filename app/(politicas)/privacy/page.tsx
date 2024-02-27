@@ -5,11 +5,11 @@ export default function Politicas() {
     <>
       <NavbarIndex />
       <div className="p-6 text-justify">
-        <div className="bg-white dark:bg-transparent rounded-lg shadow-xl py-8 mt-12">
+        <div className="bg-white dark:bg-transparent rounded-lg shadow-xl py-8 mt-12 md:mx-32 lg:mx-60">
           <h4 className="text-4xl font-bold text-gray-800 dark:text-white tracking-widest uppercase text-center">
             Política de privacidad de SAIM CIS
           </h4>
-          <h4 className="text-gray-500 dark:text-gray-300 mt-2 mx-4">
+          <h4 className="text-gray-500 dark:text-gray-300 mt-2 mx-4 text-center">
             Esta Política de privacidad describe cómo se recopila, utiliza y
             comparte su información personal cuando visita o hace una compra en
             saimcis.hn (denominado en lo sucesivo el “Sitio”).
