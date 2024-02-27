@@ -12,6 +12,15 @@ export const metadata: Metadata = {
 export default async function DoctorPage() {
   const { usuario, errorUsuario } = await getInfoPersona();
 
+  if (errorUsuario) {
+    return (
+      <div>
+        <span>Error al obtener los datos del usuario</span>
+      </div>
+    );
+  }
+
+
   return (
     <main className="px-8 py-2">
       <HeaderProfile usuario={usuario ?? null} />

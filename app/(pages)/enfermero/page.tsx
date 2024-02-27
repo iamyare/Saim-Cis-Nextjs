@@ -22,5 +22,8 @@ export default async function EnfermeroPage() {
         </section>
       </aside>
     </main>
+
   );
 }
+
+

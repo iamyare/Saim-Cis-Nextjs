@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { getInfoPersona } from "@/app/actions";
 import NavbarPacienteClient from "./components/navbar-paciente-client";
 
 export const meta: Metadata = {
@@ -11,11 +12,11 @@ export default async function PacienteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const usuario = null; //await getInfoPersona();
+  const { usuario: paciente  } = await getInfoPersona();
 
   return (
     <>
-      <NavbarPacienteClient user={usuario ?? null} />
+      <NavbarPacienteClient user={paciente ?? null} />
       {children}
     </>
   );

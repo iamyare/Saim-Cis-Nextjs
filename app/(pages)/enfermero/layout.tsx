@@ -1,4 +1,5 @@
 import NavbarEnfermeroClient from "./components/navbar-enfermero-client";
+import { getInfoPersona } from "@/app/actions";
 import { Metadata } from "next";
 
 export const meta: Metadata = {
@@ -11,11 +12,12 @@ export default async function EnfermeroLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const usuario = null; //await getInfoPersona();
+  const { usuario: enfermero } = await getInfoPersona();
+
 
   return (
     <>
-      <NavbarEnfermeroClient user={usuario ?? null} />
+      <NavbarEnfermeroClient user={enfermero ?? null}/>
       {children}
     </>
   );
