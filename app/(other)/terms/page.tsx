@@ -6,7 +6,7 @@ export default function Terminos() {
   return (
     <>
       <NavbarIndex />
-      <div className="flex min-h-screen items-center justify-center text-justify">
+      <div className="flex min-h-screen items-center justify-center text-justify md:mx-32 lg:mx-60">
         <section className="flex flex-col px-12">
           <div className="mb-12 text-center">
             <h1 className="block antialiased font-sans relative my-5 text-center text-4xl font-bold leading-tight tracking-normal text-black dark:text-white md:text-5xl">
