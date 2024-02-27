@@ -53,6 +53,7 @@ const validationSchema = z.object({
     },
     { message: "La saturación debe ser un número válido entre 0 y 100" }
   ),
+  sintomas: z.string()
 });
 
 type ValidationSchema = z.infer<typeof validationSchema>;
@@ -73,6 +74,7 @@ export function FormPreclinica({ id }: { id: string }) {
       temperatura: "",
       presion: "",
       saturacion: "",
+      sintomas: "",
     },
   });
 
@@ -221,7 +223,7 @@ export function FormPreclinica({ id }: { id: string }) {
               </Label>
               <Input
                 placeholder="dd"
-                type="number"
+                type="text"
                 autoCapitalize="none"
                 autoComplete="saturacion"
                 autoCorrect="off"
@@ -241,7 +243,25 @@ export function FormPreclinica({ id }: { id: string }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+          <div className="flex flex-col">
+            <Label className="mb-2" htmlFor="Sintomas">
+              Síntomas (mmHg)
+            </Label>
+            <Input
+              placeholder="Ingrese los síntomas del paciente"
+              type="textarea"
+              autoCapitalize="none"
+              autoComplete="Sintomas"
+              autoCorrect="off"
+              disabled={isPending}
+              className={
+                errors.sintomas
+                  ? "border-red-500  !placeholder-red-500 text-red-500"
+                  : ""
+              }
+              {...register("sintomas")}
+            />
+        </div>
 
           <Button
             disabled={isPending}

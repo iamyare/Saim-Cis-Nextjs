@@ -21,6 +21,7 @@ type CreateConsultaPreclinica = {
   temperatura: number;
   presion: string;
   saturacion: string;
+  sintomas: string
 };
 
 export async function createPersona({ data }: { data: CreatePersona }) {
@@ -49,6 +50,7 @@ export async function createConsulta({
       temperatura: data.temperatura,
       presion_arterial: data.presion,
       saturacion_oxigeno: data.saturacion,
+      sintomas: data.sintomas,
     })
     .select("*")
     .single();
