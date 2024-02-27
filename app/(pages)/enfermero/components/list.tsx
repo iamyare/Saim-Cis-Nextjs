@@ -42,20 +42,29 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
         <div className="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
           <div className="bg-white border border-gray-200 rounded-xl pointer-events-auto shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <div className="p-4 sm:p-7">
-              <div className="text-center">
-                <h2 className="block text-2xl font-bold text-gray-800 dark:text-gray-200">
-                  Agregar Signos Vitales del Paciente
-                </h2>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  Ingrese los datos del paciente{" "}
-                  <strong>
-                    {personaSeleccionada?.nombre}{" "}
-                    {personaSeleccionada?.apellido}
-                  </strong>
-                </p>
+              <div></div>
+              <div>
+                <div className="text-center">
+                  <h2 className="block text-2xl font-bold text-gray-800 dark:text-gray-200">
+                    Agregar Signos Vitales del Paciente
+                  </h2>
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    Ingrese los datos del paciente{" "}
+                    <strong>
+                      {personaSeleccionada?.nombre}{" "}
+                      {personaSeleccionada?.apellido}
+                    </strong>
+                  </p>
+                </div>
               </div>
               <div className="mt-5">
-                <FormPreclinica id={personaSeleccionada?.id != null ? personaSeleccionada.id : ''}/>
+                <FormPreclinica
+                  id={
+                    personaSeleccionada?.id != null
+                      ? personaSeleccionada.id
+                      : ""
+                  }
+                />
               </div>
             </div>
           </div>
