@@ -1,23 +1,23 @@
-import { getInfoPersona } from "@/app/actions";
-import CitasInfo from "./components/citas-info";
-import HeaderProfile from "./components/header-profile";
-import PersonalInfo from "./components/personal-info";
-import { Metadata } from "next";
+import { getInfoPersona } from '@/app/actions'
+import CitasInfo from './components/citas-info'
+import HeaderProfile from './components/header-profile'
+import PersonalInfo from './components/personal-info'
+import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Doctor",
-  description: "Pagina de doctor",
-};
+  title: 'Doctor',
+  description: 'Pagina de doctor'
+}
 
-export default async function DoctorPage() {
-  const { usuario, errorUsuario } = await getInfoPersona();
+export default async function DoctorPage () {
+  const { usuario, errorUsuario } = await getInfoPersona()
 
   if (errorUsuario) {
     return (
       <div>
         <span>Error al obtener los datos del usuario</span>
       </div>
-    );
+    )
   }
 
   return (
@@ -32,5 +32,5 @@ export default async function DoctorPage() {
         </section>
       </aside>
     </main>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-export default function Carousel() {
+export default function Carousel () {
   return (
     <div className="container mx-auto mt-5">
       <div
@@ -92,5 +92,5 @@ export default function Carousel() {
         </div>
       </div>
     </div>
-  );
+  )
 }

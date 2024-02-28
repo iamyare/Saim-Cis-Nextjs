@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import LogoSaimCis from "@/components/logo-saim-cis";
+import LogoSaimCis from '@/components/logo-saim-cis'
 
-export default function Footer() {
+export default function Footer () {
   return (
     <>
       <footer className="bg-slate-100 dark:bg-gray-900" id="contacto">
@@ -134,5 +134,5 @@ export default function Footer() {
         </div>
       </footer>
     </>
-  );
+  )
 }

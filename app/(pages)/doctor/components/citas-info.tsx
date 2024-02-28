@@ -1,30 +1,28 @@
-import Link from "next/link";
-import { getCitasByDoctor } from "../actions";
-import { ClockIcon, CalendarDaysIcon } from "@heroicons/react/24/outline";
-import CitasListInfo from "./citas-list-info";
+import Link from 'next/link'
+import { getCitasByDoctor } from '../actions'
+import { ClockIcon, CalendarDaysIcon } from '@heroicons/react/24/outline'
+import CitasListInfo from './citas-list-info'
 
-export default async function CitasInfo({ usuario }: { usuario: UserType }) {
-  if (!usuario) return null;
+export default async function CitasInfo ({ usuario }: { usuario: UserType }) {
+  if (!usuario) return null
   const { citas, errorCitas } = await getCitasByDoctor({
-    id_doctor: usuario.id,
-  });
+    id_doctor: usuario.id
+  })
 
-  const citasAgrupadas = citas?.reduce<{
-    [key: string]: (Citas & { paciente: Personas })[];
-  }>((acc, cita) => {
-    const fechaInicio = new Date(cita.fecha_inicio).toLocaleDateString("en-US");
+  const citasAgrupadas = citas?.reduce<Record<string, Array<Citas & { paciente: Personas }>>>((acc, cita) => {
+    const fechaInicio = new Date(cita.fecha_inicio).toLocaleDateString('en-US')
     if (!acc[fechaInicio]) {
-      acc[fechaInicio] = [];
+      acc[fechaInicio] = []
     }
     if (cita.paciente) {
-      acc[fechaInicio].push({ ...cita, paciente: cita.paciente });
+      acc[fechaInicio].push({ ...cita, paciente: cita.paciente })
     }
-    return acc;
-  }, {});
+    return acc
+  }, {})
 
   const citasFuturas = Object.entries(citasAgrupadas || {}).filter(
     ([fecha, citasPorFecha]) => new Date(fecha) >= new Date()
-  );
+  )
 
   return (
     <div className=" w-full bg-white dark:bg-slate-900 rounded-lg shadow-xl p-8">
@@ -37,10 +35,10 @@ export default async function CitasInfo({ usuario }: { usuario: UserType }) {
             <div className=" flex justify-center items-center gap-2 w-fit text-gray-700 dark:text-gray-300 mt-4">
               <CalendarDaysIcon className="h-4 w-4 " />
               <h5 className="text-sm">
-                {new Date(fecha).toLocaleDateString("es-HN", {
-                  weekday: "long",
-                  day: "numeric",
-                  month: "long",
+                {new Date(fecha).toLocaleDateString('es-HN', {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'long'
                 })}
               </h5>
             </div>
@@ -57,5 +55,5 @@ export default async function CitasInfo({ usuario }: { usuario: UserType }) {
         </div>
       )}
     </div>
-  );
+  )
 }

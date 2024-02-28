@@ -1,7 +1,6 @@
-"use client";
-import AboutPage from "./about-page";
+'use client'
 
-export default function Nosotros() {
+export default function Nosotros () {
   return (
     <>
       <section className="container mx-auto py-6 text-justify" id="nosotros">
@@ -80,5 +79,5 @@ export default function Nosotros() {
         </div>
       </section>
     </>
-  );
+  )
 }
