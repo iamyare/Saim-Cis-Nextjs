@@ -8,6 +8,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Nosotros from './components/nosotros'
 
 export default function Home () {
+export default function Home () {
   return (
     <>
 
@@ -19,5 +20,6 @@ export default function Home () {
       <Footer />
 
     </>
+  )
   )
 }
