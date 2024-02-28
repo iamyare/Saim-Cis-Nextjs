@@ -31,7 +31,7 @@ export async function loginWithGithub () {
   supabase.auth.signInWithOAuth({
     provider: 'github',
     options: {
-      redirectTo: `http://localhost:3005/auth/callback`
+      redirectTo: 'http://localhost:3005/auth/callback'
     }
   })
 }

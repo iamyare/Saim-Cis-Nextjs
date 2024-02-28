@@ -1,7 +1,7 @@
-"use client";
-import { CheckBadgeIcon } from "@heroicons/react/20/solid";
+'use client'
+import { CheckBadgeIcon } from '@heroicons/react/20/solid'
 
-export default function HeaderProfile({ usuario }: { usuario: UserType }) {
+export default function HeaderProfile ({ usuario }: { usuario: UserType }) {
   return (
     <section className=" rounded-lg shadow-xl pb-8">
       <div className="w-full h-[250px]">
@@ -11,7 +11,7 @@ export default function HeaderProfile({ usuario }: { usuario: UserType }) {
         <img
           src={
             usuario?.usuario.avatar_url ??
-            "https://leplanb.lesmontagne.net/wp-content/uploads/sites/5/2017/06/default_avatar.png"
+            'https://leplanb.lesmontagne.net/wp-content/uploads/sites/5/2017/06/default_avatar.png'
           }
           className="w-40 border-4 border-white dark:border-slate-900 rounded-full bg-blue-500"
         />
@@ -22,7 +22,7 @@ export default function HeaderProfile({ usuario }: { usuario: UserType }) {
           <CheckBadgeIcon className="h-6 w-6  text-blue-500" />
         </div>
         <p className="text-gray-700 dark:text-gray-300">
-          {usuario?.usuario.descripcion ?? "Sin descripción"}
+          {usuario?.usuario.descripcion ?? 'Sin descripción'}
         </p>
         <p className="text-sm text-gray-500">
           {usuario?.direccion ?? usuario?.usuario.correo}
@@ -43,5 +43,5 @@ export default function HeaderProfile({ usuario }: { usuario: UserType }) {
         </div>
       </div>
     </section>
-  );
+  )
 }

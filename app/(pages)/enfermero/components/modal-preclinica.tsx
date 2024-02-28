@@ -1,14 +1,13 @@
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { FormPreclinica } from "./form-preclinica";
+import { PlusIcon } from '@heroicons/react/24/outline'
 
-export function ModalPreclinica() {
+export function ModalPreclinica () {
   return (
     <>
       <button
         data-hs-overlay="#hs-modal-preclinica"
         className="flex h-10 items-center  w-full !mx-0  duration-700  md:w-auto md:mx-4 bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500 px-4 text-sm font-medium text-white transition-colors  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
       >
-        <span className="hidden md:block">Abrir Modal</span>{" "}
+        <span className="hidden md:block">Abrir Modal</span>{' '}
         <PlusIcon className="h-5 md:ml-4" />
       </button>
       <div
@@ -34,5 +33,5 @@ export function ModalPreclinica() {
         </div>
       </div>
     </>
-  );
+  )
 }

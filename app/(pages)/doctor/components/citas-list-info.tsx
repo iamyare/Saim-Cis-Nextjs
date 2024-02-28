@@ -1,15 +1,15 @@
-"use client";
-import { ClockIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+'use client'
+import { ClockIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
 
-export default function CitasListInfo({
-  citasPorFecha,
+export default function CitasListInfo ({
+  citasPorFecha
 }: {
-  citasPorFecha: (Citas & { paciente: Personas })[];
+  citasPorFecha: Array<Citas & { paciente: Personas }>
 }) {
   const [citaSelected, setCitaSelected] = useState<
-    (Citas & { paciente: Personas }) | null
-  >(null);
+  (Citas & { paciente: Personas }) | null
+  >(null)
 
   return (
     <>
@@ -17,19 +17,19 @@ export default function CitasListInfo({
         <li key={index} className="flex flex-col px-2 py-3 gap-1 border-b">
           <span className="flex  justify-center items-center gap-1 bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 px-2 py-1 rounded-md w-fit text-sm">
             <ClockIcon className="h-4 w-4 " />
-            {new Date(cita.fecha_inicio).toLocaleTimeString("es-HN", {
-              hour: "2-digit",
-              minute: "2-digit",
+            {new Date(cita.fecha_inicio).toLocaleTimeString('es-HN', {
+              hour: '2-digit',
+              minute: '2-digit'
             })}
-            {" - "}
-            {new Date(cita.fecha_final).toLocaleTimeString("es-HN", {
-              hour: "2-digit",
-              minute: "2-digit",
+            {' - '}
+            {new Date(cita.fecha_final).toLocaleTimeString('es-HN', {
+              hour: '2-digit',
+              minute: '2-digit'
             })}
           </span>
           <button
             className="flex flex-col"
-            onClick={() => setCitaSelected(cita)}
+            onClick={() => { setCitaSelected(cita) }}
             data-hs-overlay="#hs-modal-cita"
           >
             <h5 className="font-semibold">
@@ -37,7 +37,7 @@ export default function CitasListInfo({
             </h5>
           </button>
           <span className="text-sm">
-            {cita.descripcion ?? "Sin descripcion"}
+            {cita.descripcion ?? 'Sin descripcion'}
           </span>
         </li>
       ))}
@@ -84,7 +84,7 @@ export default function CitasListInfo({
                     <div className="flex flex-col gap-1">
                       <span className="text-sm font-semibold">Paciente</span>
                       <span className="text-sm">
-                        {citaSelected?.paciente?.nombre}{" "}
+                        {citaSelected?.paciente?.nombre}{' '}
                         {citaSelected?.paciente?.apellido}
                       </span>
                     </div>
@@ -92,11 +92,11 @@ export default function CitasListInfo({
                       <span className="text-sm font-semibold">Fecha</span>
                       <span className="text-sm">
                         {new Date(
-                          citaSelected?.fecha_inicio ?? ""
-                        ).toLocaleDateString("es-HN", {
-                          weekday: "long",
-                          day: "numeric",
-                          month: "long",
+                          citaSelected?.fecha_inicio ?? ''
+                        ).toLocaleDateString('es-HN', {
+                          weekday: 'long',
+                          day: 'numeric',
+                          month: 'long'
                         })}
                       </span>
                     </div>
@@ -106,24 +106,24 @@ export default function CitasListInfo({
                       <span className="text-sm font-semibold">Hora</span>
                       <span className="text-sm">
                         {new Date(
-                          citaSelected?.fecha_inicio ?? ""
-                        ).toLocaleTimeString("es-HN", {
-                          hour: "2-digit",
-                          minute: "2-digit",
+                          citaSelected?.fecha_inicio ?? ''
+                        ).toLocaleTimeString('es-HN', {
+                          hour: '2-digit',
+                          minute: '2-digit'
                         })}
-                        {" - "}
+                        {' - '}
                         {new Date(
-                          citaSelected?.fecha_final ?? ""
-                        ).toLocaleTimeString("es-HN", {
-                          hour: "2-digit",
-                          minute: "2-digit",
+                          citaSelected?.fecha_final ?? ''
+                        ).toLocaleTimeString('es-HN', {
+                          hour: '2-digit',
+                          minute: '2-digit'
                         })}
                       </span>
                     </div>
                     <div className="flex flex-col gap-1">
                       <span className="text-sm font-semibold">Descripcion</span>
                       <span className="text-sm">
-                        {citaSelected?.descripcion ?? "Sin descripcion"}
+                        {citaSelected?.descripcion ?? 'Sin descripcion'}
                       </span>
                     </div>
                   </div>
@@ -134,5 +134,5 @@ export default function CitasListInfo({
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,116 +1,115 @@
-"use client";
+'use client'
 
-import * as React from "react";
+import * as React from 'react'
 
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Icons } from '@/components/icons'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { ToastContainer, toast } from "react-toastify";
-import { useTransition, useState } from "react";
-import { createConsulta, getExpedienteByIDPaciente } from "../actions";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { ToastContainer, toast } from 'react-toastify'
+import { useTransition } from 'react'
+import { createConsulta, getExpedienteByIDPaciente } from '../actions'
 
 const validationSchema = z.object({
   peso: z.string().refine(
     (value) => {
-      const parsedValue = parseFloat(value);
-      if (isNaN(parsedValue)) return false;
-      const decimalPart = value.split(".")[1];
-      return decimalPart ? decimalPart.length <= 2 : true;
+      const parsedValue = parseFloat(value)
+      if (isNaN(parsedValue)) return false
+      const decimalPart = value.split('.')[1]
+      return decimalPart ? decimalPart.length <= 2 : true
     },
-    { message: "El peso debe ser un número válido y tener hasta dos decimales" }
+    { message: 'El peso debe ser un número válido y tener hasta dos decimales' }
   ),
   estatura: z.string().refine(
     (value) => {
-      const parsedValue = parseFloat(value);
-      if (isNaN(parsedValue)) return false;
-      const decimalPart = value.split(".")[1];
-      return decimalPart ? decimalPart.length <= 2 : true;
+      const parsedValue = parseFloat(value)
+      if (isNaN(parsedValue)) return false
+      const decimalPart = value.split('.')[1]
+      return decimalPart ? decimalPart.length <= 2 : true
     },
     {
       message:
-        "La estatura debe ser un número válido y tener hasta dos decimales",
+        'La estatura debe ser un número válido y tener hasta dos decimales'
     }
   ),
   temperatura: z.string().refine(
     (value) => {
-      const parsedValue = parseFloat(value);
-      return !isNaN(parsedValue) && parsedValue >= 25 && parsedValue <= 45;
+      const parsedValue = parseFloat(value)
+      return !isNaN(parsedValue) && parsedValue >= 25 && parsedValue <= 45
     },
-    { message: "La temperatura debe ser un número válido entre 25 y 45" }
+    { message: 'La temperatura debe ser un número válido entre 25 y 45' }
   ),
   presion: z.string().regex(/\d+\/\d+/, {
-    message: "La presion debe tener el formato sistólica/diastólica",
+    message: 'La presion debe tener el formato sistólica/diastólica'
   }),
   saturacion: z.string().refine(
     (value) => {
-      const parsedValue = parseFloat(value);
-      return !isNaN(parsedValue) && parsedValue >= 0 && parsedValue <= 100;
+      const parsedValue = parseFloat(value)
+      return !isNaN(parsedValue) && parsedValue >= 0 && parsedValue <= 100
     },
-    { message: "La saturación debe ser un número válido entre 0 y 100" }
+    { message: 'La saturación debe ser un número válido entre 0 y 100' }
   ),
   sintomas: z.string()
-});
+})
 
-type ValidationSchema = z.infer<typeof validationSchema>;
+type ValidationSchema = z.infer<typeof validationSchema>
 
-export function FormPreclinica({ id }: { id: string }) {
-  const [isPending, startTransition] = useTransition();
+export function FormPreclinica ({ id }: { id: string }) {
+  const [isPending, startTransition] = useTransition()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    reset
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      peso: "",
-      estatura: "",
-      temperatura: "",
-      presion: "",
-      saturacion: "",
-      sintomas: "",
-    },
-  });
+      peso: '',
+      estatura: '',
+      temperatura: '',
+      presion: '',
+      saturacion: '',
+      sintomas: ''
+    }
+  })
 
-  function onSubmit(data: z.infer<typeof validationSchema>) {
+  function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
-      const { dataID, errorID } = await getExpedienteByIDPaciente({ id });
+      const { dataID, errorID } = await getExpedienteByIDPaciente({ id })
       if (errorID) {
-        toast.error("La persona que intentas atender no posee un expediente");
-        return;
+        toast.error('La persona que intentas atender no posee un expediente')
+        return
       }
 
       if (!dataID) {
-        toast.error("La persona que intentas atender no posee un expediente");
-        return;
+        toast.error('La persona que intentas atender no posee un expediente')
+        return
       }
 
-      const idExpediente = dataID.id;
+      const idExpediente = dataID.id
 
       const { consulta, errorConsulta } = await createConsulta({
         data,
-        id: idExpediente,
-      });
+        id: idExpediente
+      })
 
       if (errorConsulta) {
-        toast.error("La persona que intentas atender no posee un expediente");
-        return;
+        toast.error('La persona que intentas atender no posee un expediente')
+        return
       } else {
-        toast.success("Los Datos han sido guardados Exitosamente!");
-        reset();
+        toast.success('Los Datos han sido guardados Exitosamente!')
+        reset()
       }
 
       if (!consulta) {
-        toast.error("Error al crear la consulta");
-        return;
+        toast.error('Error al crear la consulta')
       }
-    });
+    })
   }
 
   return (
@@ -131,10 +130,10 @@ export function FormPreclinica({ id }: { id: string }) {
                 disabled={isPending}
                 className={
                   errors.peso
-                    ? "border-red-500  !placeholder-red-500 text-red-500"
-                    : ""
+                    ? 'border-red-500  !placeholder-red-500 text-red-500'
+                    : ''
                 }
-                {...register("peso")}
+                {...register('peso')}
               />
               {errors.peso && (
                 <p className="text-xs italic text-red-500 mt-0">
@@ -155,10 +154,10 @@ export function FormPreclinica({ id }: { id: string }) {
                 disabled={isPending}
                 className={
                   errors.estatura
-                    ? "border-red-500  !placeholder-red-500 text-red-500"
-                    : ""
+                    ? 'border-red-500  !placeholder-red-500 text-red-500'
+                    : ''
                 }
-                {...register("estatura")}
+                {...register('estatura')}
               />
               {errors.estatura && (
                 <p className="text-xs italic text-red-500 mt-0">
@@ -179,10 +178,10 @@ export function FormPreclinica({ id }: { id: string }) {
                 disabled={isPending}
                 className={
                   errors.temperatura
-                    ? "border-red-500  !placeholder-red-500 text-red-500"
-                    : ""
+                    ? 'border-red-500  !placeholder-red-500 text-red-500'
+                    : ''
                 }
-                {...register("temperatura")}
+                {...register('temperatura')}
               />
               {errors.temperatura && (
                 <p className="text-xs italic text-red-500 mt-0">
@@ -206,10 +205,10 @@ export function FormPreclinica({ id }: { id: string }) {
                 disabled={isPending}
                 className={
                   errors.presion
-                    ? "border-red-500  !placeholder-red-500 text-red-500"
-                    : ""
+                    ? 'border-red-500  !placeholder-red-500 text-red-500'
+                    : ''
                 }
-                {...register("presion")}
+                {...register('presion')}
               />
               {errors.presion && (
                 <p className="text-xs italic text-red-500 mt-0">
@@ -230,10 +229,10 @@ export function FormPreclinica({ id }: { id: string }) {
                 disabled={isPending}
                 className={
                   errors.saturacion
-                    ? "border-red-500  !placeholder-red-500 text-red-500"
-                    : ""
+                    ? 'border-red-500  !placeholder-red-500 text-red-500'
+                    : ''
                 }
-                {...register("saturacion")}
+                {...register('saturacion')}
               />
               {errors.saturacion && (
                 <p className="text-xs italic text-red-500 mt-0">
@@ -256,10 +255,10 @@ export function FormPreclinica({ id }: { id: string }) {
               disabled={isPending}
               className={
                 errors.sintomas
-                  ? "border-red-500  !placeholder-red-500 text-red-500"
-                  : ""
+                  ? 'border-red-500  !placeholder-red-500 text-red-500'
+                  : ''
               }
-              {...register("sintomas")}
+              {...register('sintomas')}
             />
         </div>
 
@@ -288,5 +287,5 @@ export function FormPreclinica({ id }: { id: string }) {
         theme="light"
       />
     </div>
-  );
+  )
 }

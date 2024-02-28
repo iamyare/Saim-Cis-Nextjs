@@ -1,11 +1,10 @@
-import Link from 'next/link'
 import { getCitasByDoctor } from '../actions'
-import { ClockIcon, CalendarDaysIcon } from '@heroicons/react/24/outline'
+import { CalendarDaysIcon } from '@heroicons/react/24/outline'
 import CitasListInfo from './citas-list-info'
 
 export default async function CitasInfo ({ usuario }: { usuario: UserType }) {
   if (!usuario) return null
-  const { citas, errorCitas } = await getCitasByDoctor({
+  const { citas } = await getCitasByDoctor({
     id_doctor: usuario.id
   })
 
@@ -20,7 +19,7 @@ export default async function CitasInfo ({ usuario }: { usuario: UserType }) {
     return acc
   }, {})
 
-  const citasFuturas = Object.entries(citasAgrupadas || {}).filter(
+  const citasFuturas = Object.entries(citasAgrupadas ?? {}).filter(
     ([fecha, citasPorFecha]) => new Date(fecha) >= new Date()
   )
 

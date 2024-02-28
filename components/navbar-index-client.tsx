@@ -17,7 +17,8 @@ const navigation = [
 ]
 
 function classNames (...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
+  ``
 }
 
 export default function NavbarIndexClient ({ user }: { user: UserType }) {

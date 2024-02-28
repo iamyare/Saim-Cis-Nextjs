@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { redirect } from "next/navigation";
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import * as React from 'react'
+import { redirect } from 'next/navigation'
+import { Icons } from '@/components/icons'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { ToastContainer, toast } from "react-toastify";
-import { useTransition } from "react";
-import { resetpass, updateEstadoUser } from "../actions";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { ToastContainer, toast } from 'react-toastify'
+import { useTransition } from 'react'
+import { resetpass, updateEstadoUser } from '../actions'
 // import { signInWithEmailAndPassword } from "../actions";
 
 const validationSchema = z
@@ -22,57 +22,57 @@ const validationSchema = z
       // .min(6, { message: "La contraseña debe tener al menos 6 caracteres" }),
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
-        "La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y tener al menos 6 caracteres"
+        'La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y tener al menos 6 caracteres'
       ),
     confirmPassword: z
       .string()
-      .min(1, { message: "La confirmación de la contraseña es obligatoria" }),
+      .min(1, { message: 'La confirmación de la contraseña es obligatoria' })
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Las contraseñas no coinciden",
-    path: ["confirmPassword"],
-  });
+    message: 'Las contraseñas no coinciden',
+    path: ['confirmPassword']
+  })
 
-type ValidationSchema = z.infer<typeof validationSchema>;
+type ValidationSchema = z.infer<typeof validationSchema>
 
-export function ResetPassForm() {
-  const [isPending, startTransition] = useTransition();
+export function ResetPassForm () {
+  const [isPending, startTransition] = useTransition()
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      password: "",
-      confirmPassword: "",
-    },
-  });
+      password: '',
+      confirmPassword: ''
+    }
+  })
 
-  function onSubmit(data: z.infer<typeof validationSchema>) {
+  function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
       const { data: dataReset, error: errorReset } = await resetpass({
-        passwordReset: data.password,
-      });
+        passwordReset: data.password
+      })
 
       if (errorReset) {
-        toast.error(errorReset.message);
-        return;
+        toast.error(errorReset.message)
+        return
       }
       if (dataReset) {
-        toast.success("Contraseña restablecida con éxito");
+        toast.success('Contraseña restablecida con éxito')
         const { error } = await updateEstadoUser({
-          estado: "activo",
-          id: dataReset.user?.id as string,
-        });
+          estado: 'activo',
+          id: dataReset.user?.id!
+        })
         if (error) {
-          toast.error(error.message);
-          return;
+          toast.error(error.message)
+          return
         }
-        redirect("/welcome");
+        redirect('/welcome')
       }
-    });
+    })
   }
 
   return (
@@ -90,7 +90,7 @@ export function ResetPassForm() {
               autoComplete="password"
               autoCorrect="off"
               disabled={isPending}
-              {...register("password")}
+              {...register('password')}
             />
             {errors.password && (
               <p className="text-xs italic text-red-500 mt-2">
@@ -110,7 +110,7 @@ export function ResetPassForm() {
               autoComplete="password"
               autoCorrect="off"
               disabled={isPending}
-              {...register("confirmPassword")}
+              {...register('confirmPassword')}
             />
             {errors.confirmPassword && (
               <p className="text-xs italic text-red-500 mt-2">
@@ -158,5 +158,5 @@ export function ResetPassForm() {
         theme="light"
       />
     </div>
-  );
+  )
 }

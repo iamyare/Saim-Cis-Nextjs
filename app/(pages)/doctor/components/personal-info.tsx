@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-export default function PersonalInfo({ usuario }: { usuario: UserType }) {
-  const currentDate = new Date();
-  const createdAtDate = new Date(usuario?.usuario.created_at ?? currentDate);
-  let antiguedad = "N/A";
+export default function PersonalInfo ({ usuario }: { usuario: UserType }) {
+  const currentDate = new Date()
+  const createdAtDate = new Date(usuario?.usuario.created_at ?? currentDate)
+  let antiguedad = 'N/A'
 
   if (usuario?.usuario.created_at) {
-    const diffYears = currentDate.getFullYear() - createdAtDate.getFullYear();
-    const diffMonths = currentDate.getMonth() - createdAtDate.getMonth();
+    const diffYears = currentDate.getFullYear() - createdAtDate.getFullYear()
+    const diffMonths = currentDate.getMonth() - createdAtDate.getMonth()
     const diffDays = Math.floor(
       (currentDate.getTime() - createdAtDate.getTime()) / (1000 * 60 * 60 * 24)
-    );
+    )
 
     if (diffYears > 0) {
-      antiguedad = `${diffYears} año${diffYears > 1 ? "s" : ""}`;
+      antiguedad = `${diffYears} año${diffYears > 1 ? 's' : ''}`
     } else if (diffMonths > 0) {
-      antiguedad = `${diffMonths} mes${diffMonths > 1 ? "es" : ""}`;
+      antiguedad = `${diffMonths} mes${diffMonths > 1 ? 'es' : ''}`
     } else {
-      antiguedad = `${diffDays} día${diffDays > 1 ? "s" : ""}`;
+      antiguedad = `${diffDays} día${diffDays > 1 ? 's' : ''}`
     }
   }
 
@@ -30,19 +30,19 @@ export default function PersonalInfo({ usuario }: { usuario: UserType }) {
         <li className="flex py-2 gap-2">
           <span className="font-bold w-fit max-w-2/5">Nombre Completo:</span>
           <span className="text-gray-500 truncate w-full md:w-fit ">
-            {usuario?.nombre} {usuario?.apellido}{" "}
+            {usuario?.nombre} {usuario?.apellido}{' '}
           </span>
         </li>
         <li className="flex py-2 gap-2">
           <span className="font-bold w-fit max-w-2/5">Fecha Nacimiento:</span>
           <span className="text-gray-500 truncate w-full md:w-fit">
             {usuario?.fecha_nacimiento
-              ? new Date(usuario.fecha_nacimiento).toLocaleDateString("es-HN", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-              : "N/A"}
+              ? new Date(usuario.fecha_nacimiento).toLocaleDateString('es-HN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })
+              : 'N/A'}
           </span>
         </li>
         <li className="flex py-2 gap-2">
@@ -50,36 +50,36 @@ export default function PersonalInfo({ usuario }: { usuario: UserType }) {
           <span className="text-gray-500 truncate w-full md:w-fit">
             {usuario?.usuario.created_at
               ? new Date(usuario.usuario.created_at).toLocaleDateString(
-                  "es-HN",
-                  {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  }
-                )
-              : "N/A"}{" "}
+                'es-HN',
+                {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                }
+              )
+              : 'N/A'}{' '}
             ({<span>{antiguedad}</span>})
           </span>
         </li>
         <li className="flex py-2 gap-2">
           <span className="font-bold w-fit max-w-2/5">Telefono:</span>
           <span className="text-gray-500 truncate w-full md:w-fit">
-            {usuario?.telefono ?? "N/A"}
+            {usuario?.telefono ?? 'N/A'}
           </span>
         </li>
         <li className="flex py-2 gap-2">
           <span className="font-bold w-fit max-w-2/5 ">Correo contacto:</span>
           <span className="text-gray-500 truncate w-full md:w-fit ">
-            {usuario?.correo ?? "N/A"}
+            {usuario?.correo ?? 'N/A'}
           </span>
         </li>
         <li className="flex py-2 gap-2">
           <span className="font-bold w-fit max-w-2/5">Direccion:</span>
           <span className="text-gray-500 truncate w-full md:w-fit">
-            {usuario?.direccion ?? "N/A"}
+            {usuario?.direccion ?? 'N/A'}
           </span>
         </li>
       </ul>
     </div>
-  );
+  )
 }

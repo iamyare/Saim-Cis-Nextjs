@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function Login () {
   // const { data } = await readUserSession()
-  const { usuario, errorUsuario } = await getInfoPersona()
+  const { usuario } = await getInfoPersona()
 
   if (usuario) {
     usuario.usuario.estado === 'pendiente'
