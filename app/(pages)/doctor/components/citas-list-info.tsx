@@ -64,9 +64,6 @@ export default function CitasListInfo({
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
                   >
                     <path d="M18 6 6 18" />
                     <path d="m6 6 12 12" />
@@ -81,7 +78,7 @@ export default function CitasListInfo({
                   Informacion detallada de la cita
                 </p>
               </div>
-              <div className="mt-5">
+              <div className="my-5">
                 <div className="flex flex-col gap-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 text-justify">
                     <div className="flex flex-col gap-1">

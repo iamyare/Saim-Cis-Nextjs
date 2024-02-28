@@ -1,5 +1,6 @@
 "use client";
 import { Fragment, useEffect } from "react";
+
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -8,6 +9,7 @@ import { logoutUser } from "@/lib/actions";
 
 import { usePathname } from "next/navigation";
 import LogoSaimCis from "@/components/logo-saim-cis";
+import { useRouter } from "next/navigation";
 
 const navigation = [
   { name: "Perfil", href: "/doctor", current: true },
@@ -20,6 +22,7 @@ function classNames(...classes: string[]) {
 
 export default function NavbarDoctorClient({ user }: { user: UserType }) {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <Disclosure as="nav">
@@ -139,6 +142,7 @@ export default function NavbarDoctorClient({ user }: { user: UserType }) {
                             <button
                               onClick={async () => {
                                 await logoutUser();
+                                router.push("/");
                               }}
                               className={classNames(
                                 active ? "bg-gray-100 dark:bg-gray-800" : "",

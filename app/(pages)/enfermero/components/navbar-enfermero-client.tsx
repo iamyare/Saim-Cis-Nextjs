@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { ModeToggle } from "@/components/theme-toggle";
 import { logoutUser } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 
 import { usePathname } from "next/navigation";
 import LogoSaimCis from "@/components/logo-saim-cis";
@@ -20,6 +21,7 @@ function classNames(...classes: string[]) {
 
 export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <Disclosure as="nav">
@@ -139,6 +141,7 @@ export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
                             <button
                               onClick={async () => {
                                 await logoutUser();
+                                router.push("/");
                               }}
                               className={classNames(
                                 active ? "bg-gray-100 dark:bg-gray-800" : "",

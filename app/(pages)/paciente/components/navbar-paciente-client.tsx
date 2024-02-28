@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ModeToggle } from "@/components/theme-toggle";
 import { logoutUser } from "@/lib/actions";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import LogoSaimCis from "@/components/logo-saim-cis";
 
 const navigation = [
@@ -20,6 +20,7 @@ function classNames(...classes: string[]) {
 
 export default function NavbarPacienteClient({ user }: { user: UserType }) {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <Disclosure as="nav">
@@ -139,6 +140,7 @@ export default function NavbarPacienteClient({ user }: { user: UserType }) {
                             <button
                               onClick={async () => {
                                 await logoutUser();
+                                router.push("/");
                               }}
                               className={classNames(
                                 active ? "bg-gray-100 dark:bg-gray-800" : "",
