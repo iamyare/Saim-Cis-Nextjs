@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
+import type { Metadata } from 'next'
+import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 
-import { ThemeProvider } from "@/components/theme-provider";
-import PrelineScript from "@/components/PrelineScript";
+import { ThemeProvider } from '@/components/theme-provider'
+import PrelineScript from '@/components/PrelineScript'
 
 export const metadata: Metadata = {
-  title: "Saim Cis",
-  description: "Saim Cis",
-};
+  title: 'Saim Cis',
+  description: 'Saim Cis'
+}
 
-export default function RootLayout({
-  children,
+export default function RootLayout ({
+  children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <>
@@ -32,5 +32,5 @@ export default function RootLayout({
         <PrelineScript />
       </html>
     </>
-  );
+  )
 }
