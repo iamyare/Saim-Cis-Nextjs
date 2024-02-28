@@ -8,7 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Nosotros from "./components/nosotros";
 import { ModalCitas } from "./(pages)/doctor/components/modal-citas";
 
-export default function Home() {
+export default function Home () {
   return (
     <>
       {/* <Skeleton />
@@ -24,5 +24,5 @@ export default function Home() {
       <h2 className="text-2xl">Landing Page 🚀</h2>
       </div> */}
     </>
-  );
+  )
 }
