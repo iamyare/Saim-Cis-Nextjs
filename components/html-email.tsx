@@ -1,5 +1,4 @@
-
-export default function TemplateEmailPassTemp({nombre, temp_pass}:{nombre:string, temp_pass:string}) {
+export default function TemplateEmailPassTemp ({ nombre, temp_pass }: { nombre: string, temp_pass: string }) {
   return (
     `
     <!DOCTYPE html>

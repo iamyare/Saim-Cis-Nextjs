@@ -1,28 +1,26 @@
-"use client";
-import { Fragment, useEffect } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { ModeToggle } from "@/components/theme-toggle";
-import { logoutUser } from "@/lib/actions";
+'use client'
+import { Fragment } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
+import { ModeToggle } from '@/components/theme-toggle'
+import { logoutUser } from '@/lib/actions'
 
-import { usePathname } from "next/navigation";
-import LogoSaimCis from "@/components/logo-saim-cis";
+import LogoSaimCis from '@/components/logo-saim-cis'
 
 const navigation = [
-  { name: "Inicio", href: "/", current: true },
-  { name: "Nosotros", href: "#nosotros", current: false },
-  { name: "Servicios", href: "#servicios", current: false },
-  { name: "Doctores", href: "#doctores", current: false },
-  { name: "Contacto", href: "#contacto", current: false },
-];
+  { name: 'Inicio', href: '/', current: true },
+  { name: 'Nosotros', href: '#nosotros', current: false },
+  { name: 'Servicios', href: '#servicios', current: false },
+  { name: 'Doctores', href: '#doctores', current: false },
+  { name: 'Contacto', href: '#contacto', current: false }
+]
 
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(" ");
-  ``;
+function classNames (...classes: any[]) {
+  return classes.filter(Boolean).join(' ')
 }
 
-export default function NavbarIndexClient({ user }: { user: UserType }) {
+export default function NavbarIndexClient ({ user }: { user: UserType }) {
   return (
     <Disclosure className="bg-slate-100 dark:bg-gray-900" as="nav">
       {({ open }) => (
@@ -30,7 +28,7 @@ export default function NavbarIndexClient({ user }: { user: UserType }) {
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
+                {/* Mobile menu button */}
                 <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-900 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-900 hover:text-black dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Abrir el menu</span>
@@ -53,11 +51,11 @@ export default function NavbarIndexClient({ user }: { user: UserType }) {
                         href={item.href}
                         className={classNames(
                           item.href
-                            ? " dark:bg-gray-900 text-black dark:text-white dark:hover:bg-slate-700 hover:bg-slate-200"
-                            : "text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900  hover:text-black dark:hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                            ? ' dark:bg-gray-900 text-black dark:text-white dark:hover:bg-slate-700 hover:bg-slate-200'
+                            : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900  hover:text-black dark:hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium'
                         )}
-                        aria-current={item.href ? "page" : undefined}
+                        aria-current={item.href ? 'page' : undefined}
                       >
                         {item.name}
                       </Link>
@@ -125,8 +123,8 @@ export default function NavbarIndexClient({ user }: { user: UserType }) {
                               <Link
                                 href={`/${rol.rol.toLowerCase()}`}
                                 className={classNames(
-                                  active ? "bg-gray-100 dark:bg-gray-800" : "",
-                                  "block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start"
+                                  active ? 'bg-gray-100 dark:bg-gray-800' : '',
+                                  'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
                                 )}
                               >
                                 Perfil de {rol.rol}
@@ -138,11 +136,11 @@ export default function NavbarIndexClient({ user }: { user: UserType }) {
                           {({ active }) => (
                             <button
                               onClick={async () => {
-                                await logoutUser();
+                                await logoutUser()
                               }}
                               className={classNames(
-                                active ? "bg-gray-100 dark:bg-gray-800" : "",
-                                "block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start"
+                                active ? 'bg-gray-100 dark:bg-gray-800' : '',
+                                'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
                               )}
                             >
                               Cerrar sesión
@@ -168,11 +166,11 @@ export default function NavbarIndexClient({ user }: { user: UserType }) {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? "bg-gray-200 dark:bg-slate-800  text-gray-900 dark:text-gray-100"
-                      : "text-gray-900 dark:text-gray-100  hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-800",
-                    "block rounded-md px-3 py-2 text-base font-medium"
+                      ? 'bg-gray-200 dark:bg-slate-800  text-gray-900 dark:text-gray-100'
+                      : 'text-gray-900 dark:text-gray-100  hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-slate-800',
+                    'block rounded-md px-3 py-2 text-base font-medium'
                   )}
-                  aria-current={item.current ? "page" : undefined}
+                  aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -182,5 +180,5 @@ export default function NavbarIndexClient({ user }: { user: UserType }) {
         </>
       )}
     </Disclosure>
-  );
+  )
 }

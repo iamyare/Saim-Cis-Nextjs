@@ -1,8 +1,8 @@
-import LogoSaimCis from "@/components/logo-saim-cis";
-import React, { useState } from "react";
+import LogoSaimCis from '@/components/logo-saim-cis'
+import React, { useState } from 'react'
 
-export function SidebarNavigation() {
-  const [isHovered, setIsHovered] = useState(false);
+export function SidebarNavigation () {
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <>
@@ -15,16 +15,16 @@ export function SidebarNavigation() {
       </style>
       <div className="min-h-screen ">
         <div
-          className={`sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 bg-white dark:bg-slate-900 hover:shadow-lg`}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          className={'sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 bg-white dark:bg-slate-900 hover:shadow-lg'}
+          onMouseEnter={() => { setIsHovered(true) }}
+          onMouseLeave={() => { setIsHovered(false) }}
         >
           <div className="flex h-screen flex-col justify-between pt-2 pb-6">
             <div>
               <div className="w-max p-2.5">
                 <LogoSaimCis
                   className={`${
-                    isHovered ? "text-black dark:text-white" : " text-cyan-500"
+                    isHovered ? 'text-black dark:text-white' : ' text-cyan-500'
                   } transition-colors duration-500`}
                 />
                 {/* <span className="-mr-1 font-medium text-white">Saim Sis</span> */}
@@ -193,5 +193,5 @@ export function SidebarNavigation() {
         </div>
       </div>
     </>
-  );
+  )
 }
