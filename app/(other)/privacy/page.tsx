@@ -1,6 +1,6 @@
-import NavbarIndex from "@/components/navbar-index";
+import NavbarIndex from '@/components/navbar-index'
 
-export default function Politicas() {
+export default function Politicas () {
   return (
     <>
       <NavbarIndex />
@@ -242,5 +242,5 @@ export default function Politicas() {
         </div>
       </div>
     </>
-  );
+  )
 }
