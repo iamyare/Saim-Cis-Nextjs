@@ -17,4 +17,6 @@ declare global {
       }>
     })
     | null
+
+    type RolesPermissons = 'doctor' | 'paciente' | 'admin' | 'enfermero'
 }

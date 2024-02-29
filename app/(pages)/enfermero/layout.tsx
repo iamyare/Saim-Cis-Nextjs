@@ -1,10 +1,11 @@
-import NavbarEnfermeroClient from './components/navbar-enfermero-client'
-import { getInfoPersona } from '@/app/actions'
 import { type Metadata } from 'next'
+import NavbarEnfermeroClient from './components/navbar-enfermero-client'
+import { getPermissionsAndUser } from '@/app/actions'
+import Permissions from '@/components/permissions'
 
 export const meta: Metadata = {
-  title: 'Pacientes',
-  description: 'Pacientes de enfermería'
+  title: 'Enfermero',
+  description: 'Enfermero layout'
 }
 
 export default async function EnfermeroLayout ({
@@ -12,11 +13,18 @@ export default async function EnfermeroLayout ({
 }: {
   children: React.ReactNode
 }) {
-  const { usuario: enfermero } = await getInfoPersona()
+  const { permissions, message, errorCode, usuario } =
+    await getPermissionsAndUser({
+      rolNecesario: 'enfermero'
+    })
+
+  if (!permissions) {
+    return <Permissions message={message} errorCode={errorCode} />
+  }
 
   return (
     <>
-      <NavbarEnfermeroClient user={enfermero ?? null}/>
+      <NavbarEnfermeroClient user={usuario ?? null}/>
       {children}
     </>
   )

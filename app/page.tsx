@@ -15,9 +15,6 @@ export default function Home () {
       <ServicesSection />
       <DoctorsSection />
       <Footer />
-      {/* <div className="grid place-items-center h-screen">
-      <h2 className="text-2xl">Landing Page 🚀</h2>
-      </div> */}
     </>
   )
 }

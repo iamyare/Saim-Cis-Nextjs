@@ -94,3 +94,64 @@ export async function getInfoPersona () {
 
   return { usuario, errorUsuario }
 }
+
+export async function getPermissionsAndUser ({
+  rolNecesario
+}: {
+  rolNecesario: RolesPermissons
+}) {
+  // Comprobar si hay una sesión activa
+  const {
+    data: { session }
+  } = await readUserSession()
+  if (!session) {
+    return {
+      permissions: false,
+      message: 'No hay sesión activa',
+      errorCode: 401
+    }
+  }
+
+  const { usuario, errorUsuario } = await getUser({ id: session.user.id })
+
+  if (errorUsuario) {
+    return {
+      permissions: false,
+      message: 'Error al obtener el usuario',
+      errorCode: 500
+    }
+  }
+
+  if (!usuario) {
+    return {
+      permissions: false,
+      message: 'No se encontró el usuario',
+      errorCode: 404
+    }
+  }
+
+  let permiso = false
+
+  usuario.role.map((rol) => {
+    if (rol.rol === rolNecesario) {
+      permiso = true
+    }
+    return null
+  })
+
+  if (!permiso) {
+    return {
+      permissions: false,
+      message: 'No tienes permisos para acceder a esta página',
+      errorCode: 403
+    }
+  }
+
+  // Si todo está bien, devolvemos el usuario
+  return {
+    permissions: true,
+    message: 'Cuenta con los permisos',
+    errorCode: 200,
+    usuario
+  }
+}
