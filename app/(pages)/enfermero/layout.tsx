@@ -3,11 +3,10 @@ import NavbarEnfermeroClient from './components/navbar-enfermero-client'
 import { getPermissionsAndUser } from '@/app/actions'
 import Permissions from '@/components/permissions'
 
-export const meta: Metadata = {
+export const metadata: Metadata = {
   title: 'Enfermero',
-  description: 'Enfermero layout'
+  description: 'Pagina principal del enfermero'
 }
-
 export default async function EnfermeroLayout ({
   children
 }: {

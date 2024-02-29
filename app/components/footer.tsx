@@ -1,6 +1,7 @@
 'use client'
 
 import LogoSaimCis from '@/components/logo-saim-cis'
+import Link from 'next/link'
 
 export default function Footer () {
   return (
@@ -82,7 +83,9 @@ export default function Footer () {
           <hr className="my-6 border-gray-200 md:my-8 dark:border-gray-700" />
 
           <div className="flex items-center justify-between">
-            <LogoSaimCis className="hover:fill-cyan-400 dark:hover:fill-cyan-600 cursor-pointer"/>
+            <Link href='/'>
+            <LogoSaimCis className=" cursor-pointer h-6 w-6"/>
+            </Link>
 
             <div className="flex -mx-2">
               <a
