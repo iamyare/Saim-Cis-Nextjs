@@ -10,10 +10,12 @@ export default function Home () {
     <>
 
       <NavbarIndex />
+
       <Carousel />
       <Nosotros/>
       <ServicesSection />
       <DoctorsSection />
+
       <Footer />
     </>
   )

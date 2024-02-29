@@ -158,7 +158,7 @@ export default function NavbarEnfermeroClient ({ user }: { user: UserType }) {
                     </Transition>
                   </Menu>
                 ) : (
-                  <Link className="hover:text-cyan-600" href="/login">Iniciar sesión</Link>
+                  <Link className="hover:text-blue-500" href="/login">Iniciar sesión</Link>
                 )}
               </div>
             </div>
