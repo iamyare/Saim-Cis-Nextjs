@@ -145,7 +145,7 @@ export async function signUpWithEmailAndTempPass ({
     await adminAuthClient.createUser({
       email,
       password: passwordTemp,
-      user_metadata: { idPersona, passwordTemp },
+      user_metadata: { id_persona: idPersona, passwordTemp },
       email_confirm: true
     })
 

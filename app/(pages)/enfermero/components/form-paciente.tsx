@@ -100,7 +100,6 @@ export function EnfermeroPacienteForm () {
 
       if (dataCorreo && dataCorreo?.length > 0) {
         toast.error('El usuario ya está registrado en el sistema.')
-        return
       }
 
       // Crear persona
@@ -142,7 +141,7 @@ export function EnfermeroPacienteForm () {
 
       const { userCreate, errorUserCreate } = await signUpWithEmailAndTempPass({
         email: data.correo,
-        id_persona: persona.id,
+        idPersona: persona.id,
         passwordTemp: randomCode
       })
       if (errorUserCreate) {
@@ -163,6 +162,7 @@ export function EnfermeroPacienteForm () {
       if (emailResponse.accepted.includes(persona.correo ?? '')) {
         // Email was sent successfully
         toast.success('Correo electrónico enviado exitosamente')
+        window.location.reload()
       } else {
         // Email was not sent successfully
         toast.error('Error al enviar el correo electrónico')
@@ -386,7 +386,8 @@ export function EnfermeroPacienteForm () {
 
           <Button
             disabled={isPending}
-            className="w-full !mx-0 text-white transition-colors duration-700  md:w-auto md:mx-4 focus:outline-none bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500 focus:ring focus:ring-gray-3000 focus:ring-opacity-80"
+            className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+
           >
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
