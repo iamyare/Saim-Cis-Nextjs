@@ -123,7 +123,7 @@ export async function sendMailSingup ({
     text: `Su contraseña temporal es: ${passwordTemp}`,
     html: TemplateEmailPassTemp({
       nombre: persona.nombre,
-      temp_pass: passwordTemp
+      tempPass: passwordTemp
     })
   }
 
@@ -135,17 +135,17 @@ export async function sendMailSingup ({
 export async function signUpWithEmailAndTempPass ({
   email,
   passwordTemp,
-  id_persona
+  idPersona
 }: {
   email: string
   passwordTemp: string
-  id_persona: string
+  idPersona: string
 }) {
   const { data: userCreate, error: errorUserCreate } =
     await adminAuthClient.createUser({
       email,
       password: passwordTemp,
-      user_metadata: { id_persona, passwordTemp },
+      user_metadata: { idPersona, passwordTemp },
       email_confirm: true
     })
 

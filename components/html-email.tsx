@@ -1,9 +1,8 @@
-export default function TemplateEmailPassTemp ({ nombre, temp_pass }: { nombre: string, temp_pass: string }) {
+export default function TemplateEmailPassTemp ({ nombre, tempPass }: { nombre: string, tempPass: string }) {
   return (
     `
     <!DOCTYPE html>
     <html
-      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:v="urn:schemas-microsoft-com:vml"
       xmlns:o="urn:schemas-microsoft-com:office:office"
     >
@@ -172,7 +171,7 @@ export default function TemplateEmailPassTemp ({ nombre, temp_pass }: { nombre: 
                     line-height: 1.75;
                   "
                 >
-                  ${temp_pass}
+                  ${tempPass}
                 </h2>
               </div>
               <span
