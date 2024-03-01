@@ -64,7 +64,7 @@ export function ResetPassForm () {
         toast.success('Contraseña restablecida con éxito')
         const { error } = await updateEstadoUser({
           estado: 'activo',
-          id: dataReset.user?.id!
+          id: dataReset.user?.id ?? ''
         })
         if (error) {
           toast.error(error.message)

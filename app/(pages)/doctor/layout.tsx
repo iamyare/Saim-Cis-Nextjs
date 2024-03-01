@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { getInfoPersona } from '@/app/actions'
 import NavbarDoctorClient from './components/navbar-doctor-client'
 
-export const meta: Metadata = {
+export const metadata: Metadata = {
   title: 'Doctor',
   description: 'Pagina del doctor'
 }
