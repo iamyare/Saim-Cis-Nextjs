@@ -1,17 +1,32 @@
 import { Suspense } from 'react'
-import { getUsersByRol } from '../actions'
 import { AgregarPaciente } from '../components/agregar-paciente'
-import ListaPacientes from '../components/list'
+import { getTotalPagesByRoleAndQuery } from '@/app/actions'
+import ToastServer from '@/components/toast-server'
+import DataTable from '@/components/data-table'
+import Search from '@/components/search-query'
 
-export default async function EnfermeroPacientePage () {
-  const { usuario, errorUsuario } = await getUsersByRol({ role: 'paciente' })
-
-  if (errorUsuario) {
-    return <span>Error al obtener los pacientes</span>
+export default async function EnfermeroPacientePage ({
+  searchParams
+}: {
+  searchParams?: {
+    query?: string
+    page?: string
   }
+}) {
+  const query = searchParams?.query ?? ''
+  // const currentPage = Number(searchParams?.page) || 1
 
-  if (!usuario) {
-    return <span>No hay pacientes</span>
+  // obtenemos el total de paginas por el rol y el query
+  const totalPages = await getTotalPagesByRoleAndQuery({
+    role: 'paciente',
+    query
+  })
+
+  if (totalPages === null) {
+    return (
+      <ToastServer message='Error al obtener el total de páginas por el rol y el query'/>
+
+    )
   }
 
   return (
@@ -20,15 +35,13 @@ export default async function EnfermeroPacientePage () {
         <h1 className={'text-2xl'}>Pacientes</h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+        <Search placeholder="Buscar pacientes..." debounce={200}/>
         <AgregarPaciente />
       </div>
       <Suspense fallback={<span>Cargando...</span>}>
-        <div className="mt-8">
-          <span>{`Total de pacientes: ${usuario?.length}`}</span>
-          <ul className="flex flex-col gap-4 divide-y  items-center">
-            <ListaPacientes usuario={usuario} />
-          </ul>
-        </div>
+
+    <DataTable query={query} currentPage={1} rol="paciente" />
+
       </Suspense>
     </div>
   )

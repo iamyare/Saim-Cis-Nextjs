@@ -19,4 +19,20 @@ declare global {
     | null
 
     type RolesPermissons = 'doctor' | 'paciente' | 'admin' | 'enfermero'
+    type PersonasAndUsuarios = Array<{
+      id: string
+      nombre: string
+      apellido: string
+      fecha_nacimiento: string
+      dni: string
+      direccion: string
+      genero: string
+      telefono: string
+      correo: string
+      id_expediente: string | null
+      rol: string
+      nombre_rol: string
+      creado: string
+      usuario?: PersonasXUsuarios
+    }>
 }

@@ -155,3 +155,46 @@ export async function getPermissionsAndUser ({
     usuario
   }
 }
+
+export async function getTotalPagesByRoleAndQuery ({
+  role,
+  query
+}: {
+  role: RolesPermissons
+  query: string
+}) {
+  const { data: totalPages } = await supabase.rpc(
+    'get_personas_count_by_rol_and_filter',
+    {
+      rol_param: role,
+      filtro_param: query
+    }
+  )
+  return totalPages
+}
+
+export async function getUsersByRoleAndQuery ({
+  rol,
+  query = '',
+  offset,
+  perPage,
+  currentPage
+}: {
+  rol: RolesPermissons
+  query: string
+  offset: number
+  perPage: number
+  currentPage: number
+}) {
+  const { data: users, error } = await supabase.rpc(
+    'get_personas_by_rol_and_filter_pagination',
+    {
+      rol_param: rol,
+      filtro_param: query,
+      offset_param: offset,
+      limit_param: currentPage * perPage - 1
+    }
+  )
+
+  return { users: users as PersonasAndUsuarios, error }
+}

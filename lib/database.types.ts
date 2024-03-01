@@ -133,7 +133,7 @@ export interface Database {
             referencedColumns: ['id']
           },
           {
-            foreignKeyName: 'especializacion_x_personas_id_persona_fkey'
+            foreignKeyName: 'public_especializacion_x_personas_id_persona_fkey'
             columns: ['id_persona']
             isOneToOne: false
             referencedRelation: 'personas'
@@ -303,7 +303,36 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_personas_by_rol_and_filter_pagination: {
+        Args: {
+          rol_param: string
+          filtro_param: string
+          offset_param: number
+          limit_param: number
+        }
+        Returns: Array<{
+          id: string
+          creado: string
+          nombre: string
+          apellido: string
+          fecha_nacimiento: string
+          dni: string
+          direccion: string
+          genero: string
+          telefono: string
+          correo: string
+          rol: string
+          nombre_rol: string
+          usuario: Json
+        }>
+      }
+      get_personas_count_by_rol_and_filter: {
+        Args: {
+          rol_param: string
+          filtro_param: string
+        }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never
