@@ -8,7 +8,7 @@ export default function ServicesSection () {
   ]
 
   return (
-    <section className="container mx-auto py-4 text-justify" id="servicios">
+    <section className="container mx-auto py-4 text-justify animate-scroll-fade-up" id="servicios">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
       <div className="max-w-2xl text-center md:text-left py-5">
             <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">

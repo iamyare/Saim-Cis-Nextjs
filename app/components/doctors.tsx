@@ -35,7 +35,7 @@ const people = [
 
 export default function DoctorsSection () {
   return (
-    <section className="container mx-auto py-12" id="doctores">
+    <section className="container mx-auto py-12 animate-scroll-fade-up" id="doctores">
       <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
         <div className="max-w-2xl text-center md:text-left">
           <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">
