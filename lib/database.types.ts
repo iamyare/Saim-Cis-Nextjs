@@ -63,6 +63,7 @@ export interface Database {
           fecha_consulta: string
           id: string
           id_cita: string | null
+          id_estado_consulta: string
           id_expediente: string
           peso: number | null
           presion_arterial: string | null
@@ -75,6 +76,7 @@ export interface Database {
           fecha_consulta?: string
           id?: string
           id_cita?: string | null
+          id_estado_consulta: string
           id_expediente: string
           peso?: number | null
           presion_arterial?: string | null
@@ -87,6 +89,7 @@ export interface Database {
           fecha_consulta?: string
           id?: string
           id_cita?: string | null
+          id_estado_consulta?: string
           id_expediente?: string
           peso?: number | null
           presion_arterial?: string | null
@@ -107,6 +110,13 @@ export interface Database {
             columns: ['id_expediente']
             isOneToOne: false
             referencedRelation: 'expedientes'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'public_consultas_id_estado_consulta_fkey'
+            columns: ['id_estado_consulta']
+            isOneToOne: false
+            referencedRelation: 'estado_consultas'
             referencedColumns: ['id']
           }
         ]
@@ -166,6 +176,21 @@ export interface Database {
             referencedColumns: ['id']
           }
         ]
+      }
+      estado_consultas: {
+        Row: {
+          estado: string
+          id: string
+        }
+        Insert: {
+          estado: string
+          id?: string
+        }
+        Update: {
+          estado?: string
+          id?: string
+        }
+        Relationships: []
       }
       expedientes: {
         Row: {

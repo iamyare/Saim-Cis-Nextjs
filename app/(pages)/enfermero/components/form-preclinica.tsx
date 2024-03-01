@@ -54,7 +54,8 @@ const validationSchema = z.object({
     { message: 'La saturación debe ser un número válido entre 0 y 100' }
   ),
   sintomas: z.string().min(1, { message: 'Los síntomas son requeridos' }),
-  id_expediente: z.string()
+  id_expediente: z.string(),
+  id_estado_consulta: z.string()
 })
 
 type ValidationSchema = z.infer<typeof validationSchema>
