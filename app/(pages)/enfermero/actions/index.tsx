@@ -15,15 +15,6 @@ interface CreatePersona {
   genero: string
 }
 
-interface CreateConsultaPreclinica {
-  peso: number
-  estatura: number
-  temperatura: number
-  presion: string
-  saturacion: string
-  sintomas: string
-}
-
 export async function createPersona ({ data }: { data: CreatePersona }) {
   const { data: persona, error: errorPersona } = await supabase
     .from('personas')
@@ -35,23 +26,13 @@ export async function createPersona ({ data }: { data: CreatePersona }) {
 
 // creando una consulta nueva (enfermero)
 export async function createConsulta ({
-  data,
-  id
+  data
 }: {
-  data: CreateConsultaPreclinica
-  id: string
+  data: ConsultasInsert
 }) {
   const { data: consulta, error: errorConsulta } = await supabase
     .from('consultas')
-    .insert({
-      id_expediente: id,
-      peso: data.peso,
-      estatura: data.estatura,
-      temperatura: data.temperatura,
-      presion_arterial: data.presion,
-      saturacion_oxigeno: data.saturacion,
-      sintomas: data.sintomas
-    })
+    .insert({ ...data })
     .select('*')
     .single()
   return { consulta, errorConsulta }

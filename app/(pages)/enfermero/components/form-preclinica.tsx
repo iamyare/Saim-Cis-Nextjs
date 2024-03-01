@@ -23,7 +23,7 @@ const validationSchema = z.object({
       return decimalPart ? decimalPart.length <= 2 : true
     },
     { message: 'El peso debe ser un número válido y tener hasta dos decimales' }
-  ),
+  ).transform(parseFloat),
   estatura: z.string().refine(
     (value) => {
       const parsedValue = parseFloat(value)
@@ -35,25 +35,26 @@ const validationSchema = z.object({
       message:
         'La estatura debe ser un número válido y tener hasta dos decimales'
     }
-  ),
+  ).transform(parseFloat),
   temperatura: z.string().refine(
     (value) => {
       const parsedValue = parseFloat(value)
       return !isNaN(parsedValue) && parsedValue >= 25 && parsedValue <= 45
     },
     { message: 'La temperatura debe ser un número válido entre 25 y 45' }
-  ),
-  presion: z.string().regex(/\d+\/\d+/, {
-    message: 'La presion debe tener el formato sistólica/diastólica'
+  ).transform(parseFloat),
+  presion_arterial: z.string().regex(/\d+\/\d+/, {
+    message: 'La presion_arterial debe tener el formato sistólica/diastólica'
   }),
-  saturacion: z.string().refine(
+  saturacion_oxigeno: z.string().refine(
     (value) => {
       const parsedValue = parseFloat(value)
       return !isNaN(parsedValue) && parsedValue >= 0 && parsedValue <= 100
     },
     { message: 'La saturación debe ser un número válido entre 0 y 100' }
   ),
-  sintomas: z.string()
+  sintomas: z.string().min(1, { message: 'Los síntomas son requeridos' }),
+  id_expediente: z.string()
 })
 
 type ValidationSchema = z.infer<typeof validationSchema>
@@ -69,12 +70,13 @@ export function FormPreclinica ({ id }: { id: string }) {
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      peso: '',
-      estatura: '',
-      temperatura: '',
-      presion: '',
-      saturacion: '',
-      sintomas: ''
+      presion_arterial: '',
+      saturacion_oxigeno: '',
+      sintomas: '',
+      id_expediente: '',
+      peso: 0,
+      estatura: 0,
+      temperatura: 0
     }
   })
 
@@ -91,11 +93,11 @@ export function FormPreclinica ({ id }: { id: string }) {
         return
       }
 
-      const idExpediente = dataID.id
+      // añadir a data el id del expediente
+      data.id_expediente = dataID.id
 
       const { consulta, errorConsulta } = await createConsulta({
-        data,
-        id: idExpediente
+        data
       })
 
       if (errorConsulta) {
@@ -123,7 +125,7 @@ export function FormPreclinica ({ id }: { id: string }) {
               </Label>
               <Input
                 placeholder="kg.gg"
-                type="text"
+                type="number"
                 autoCapitalize="none"
                 autoComplete="Peso"
                 autoCorrect="off"
@@ -147,7 +149,7 @@ export function FormPreclinica ({ id }: { id: string }) {
               </Label>
               <Input
                 placeholder="Estatura"
-                type="text"
+                type="number"
                 autoCapitalize="none"
                 autoComplete="Estatura"
                 autoCorrect="off"
@@ -171,7 +173,7 @@ export function FormPreclinica ({ id }: { id: string }) {
               </Label>
               <Input
                 placeholder="00"
-                type="text"
+                type="number"
                 autoCapitalize="none"
                 autoComplete="Temperatura"
                 autoCorrect="off"
@@ -204,39 +206,39 @@ export function FormPreclinica ({ id }: { id: string }) {
                 autoCorrect="off"
                 disabled={isPending}
                 className={
-                  errors.presion
+                  errors.presion_arterial
                     ? 'border-red-500  !placeholder-red-500 text-red-500'
                     : ''
                 }
-                {...register('presion')}
+                {...register('presion_arterial')}
               />
-              {errors.presion && (
+              {errors.presion_arterial && (
                 <p className="text-xs italic text-red-500 mt-0">
-                  {errors.presion?.message}
+                  {errors.presion_arterial?.message}
                 </p>
               )}
             </div>
             <div className="flex flex-col">
-              <Label className="mb-2" htmlFor="saturacion">
+              <Label className="mb-2" htmlFor="saturacion_oxigeno">
                 Saturación Oxígeno (%)
               </Label>
               <Input
                 placeholder="dd"
                 type="text"
                 autoCapitalize="none"
-                autoComplete="saturacion"
+                autoComplete="saturacion_oxigeno"
                 autoCorrect="off"
                 disabled={isPending}
                 className={
-                  errors.saturacion
+                  errors.saturacion_oxigeno
                     ? 'border-red-500  !placeholder-red-500 text-red-500'
                     : ''
                 }
-                {...register('saturacion')}
+                {...register('saturacion_oxigeno')}
               />
-              {errors.saturacion && (
+              {errors.saturacion_oxigeno && (
                 <p className="text-xs italic text-red-500 mt-0">
-                  {errors.saturacion?.message}
+                  {errors.saturacion_oxigeno?.message}
                 </p>
               )}
             </div>
@@ -260,11 +262,16 @@ export function FormPreclinica ({ id }: { id: string }) {
               }
               {...register('sintomas')}
             />
+            {errors.sintomas && (
+              <p className="text-xs italic text-red-500 mt-0">
+                {errors.sintomas?.message}
+              </p>
+            )}
         </div>
 
           <Button
             disabled={isPending}
-            className="w-full !mx-0 text-white transition-colors duration-700  md:w-auto md:mx-4 bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500"
+            className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           >
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
