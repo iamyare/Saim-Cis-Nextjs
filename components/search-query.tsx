@@ -24,12 +24,12 @@ export default function Search ({ placeholder, debounce }: { placeholder: string
   }, debounce ?? 500)
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
+    <div className="relative flex flex-shrink-0 ">
       <label htmlFor="search" className="sr-only">
         Buscar
       </label>
       <Input
-        className="peer block w-full max-w-sm  py-[9px] pl-10  "
+        className="peer block w-full  py-[9px] pl-10 "
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value)
