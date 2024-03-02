@@ -9,6 +9,7 @@ declare global {
   type Diagnosticos = DB['public']['Tables']['diagnosticos']['Row']
   type PersonasXUsuarios = DB['public']['Tables']['personas_x_usuarios']['Row']
   type Citas = DB['public']['Tables']['citas']['Row']
+  type EstadoConsultas = DB['public']['Tables']['estado_consultas']['Row']
 
   type UserType =
     | (Personas & { usuario: PersonasXUsuarios } & {
@@ -20,6 +21,7 @@ declare global {
     | null
 
     type RolesPermissons = 'doctor' | 'paciente' | 'admin' | 'enfermero'
+    type EstadosConsultas = 'preclinica' | 'diagnostico' | 'completa'
     type PersonasAndUsuarios = Array<{
       id: string
       nombre: string

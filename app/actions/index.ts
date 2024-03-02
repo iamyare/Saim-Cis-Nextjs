@@ -198,3 +198,22 @@ export async function getUsersByRoleAndQuery ({
 
   return { users: users as PersonasAndUsuarios, error }
 }
+
+// obteniendo el id del estado de la consulta
+export async function getIDEstadoConsultaByEstado ({ estado }: { estado: EstadosConsultas }) {
+  const { data: dataIDEstado, error: errorIDEstado } = await supabase
+    .from('estado_consultas')
+    .select('id')
+    .eq('estado', estado)
+    .single()
+
+  if (errorIDEstado) {
+    return { data: null, error: errorIDEstado }
+  }
+
+  if (!dataIDEstado) {
+    return { data: null, error: 'No se encontro el estado' }
+  }
+
+  return { dataIDEstado, errorIDEstado }
+}

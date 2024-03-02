@@ -13,6 +13,7 @@ import * as z from 'zod'
 import { ToastContainer, toast } from 'react-toastify'
 import { useTransition } from 'react'
 import { createConsulta, getExpedienteByIDPaciente } from '../actions'
+import { getIDEstadoConsultaByEstado } from '@/app/actions'
 
 const validationSchema = z.object({
   peso: z.string().refine(
@@ -75,6 +76,7 @@ export function FormPreclinica ({ id }: { id: string }) {
       saturacion_oxigeno: '',
       sintomas: '',
       id_expediente: '',
+      id_estado_consulta: '',
       peso: 0,
       estatura: 0,
       temperatura: 0
@@ -84,6 +86,9 @@ export function FormPreclinica ({ id }: { id: string }) {
   function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
       const { dataID, errorID } = await getExpedienteByIDPaciente({ id })
+
+      const estado: EstadosConsultas = 'preclinica'
+      const { dataIDEstado, errorIDEstado } = await getIDEstadoConsultaByEstado({ estado })
       if (errorID) {
         toast.error('La persona que intentas atender no posee un expediente')
         return
@@ -94,8 +99,21 @@ export function FormPreclinica ({ id }: { id: string }) {
         return
       }
 
+      if (errorIDEstado) {
+        toast.error('Error al crear consulta')
+        return
+      }
+
+      if (!dataIDEstado) {
+        toast.error('Error al crear consulta')
+        return
+      }
+
       // añadir a data el id del expediente
       data.id_expediente = dataID.id
+
+      // añadir a data el id del estado predefinido (preclinica)
+      data.id_estado_consulta = dataIDEstado.id
 
       const { consulta, errorConsulta } = await createConsulta({
         data
@@ -126,7 +144,7 @@ export function FormPreclinica ({ id }: { id: string }) {
               </Label>
               <Input
                 placeholder="kg.gg"
-                type="number"
+                type="text"
                 autoCapitalize="none"
                 autoComplete="Peso"
                 autoCorrect="off"
@@ -150,7 +168,7 @@ export function FormPreclinica ({ id }: { id: string }) {
               </Label>
               <Input
                 placeholder="Estatura"
-                type="number"
+                type="text"
                 autoCapitalize="none"
                 autoComplete="Estatura"
                 autoCorrect="off"
@@ -174,7 +192,7 @@ export function FormPreclinica ({ id }: { id: string }) {
               </Label>
               <Input
                 placeholder="00"
-                type="number"
+                type="text"
                 autoCapitalize="none"
                 autoComplete="Temperatura"
                 autoCorrect="off"
