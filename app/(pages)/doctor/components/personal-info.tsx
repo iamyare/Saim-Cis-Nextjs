@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 export default function PersonalInfo ({ usuario }: { usuario: UserType }) {
   const currentDate = new Date()
   const createdAtDate = new Date(usuario?.usuario.created_at ?? currentDate)
@@ -80,6 +82,14 @@ export default function PersonalInfo ({ usuario }: { usuario: UserType }) {
           </span>
         </li>
       </ul>
+      <div>
+      <Link
+      href="/paciente/perfil"
+      className="underline underline-offset-4 hover:text-primary"
+      >
+      Actualizar Perfil
+      </Link>
+      </div>
     </div>
   )
 }
