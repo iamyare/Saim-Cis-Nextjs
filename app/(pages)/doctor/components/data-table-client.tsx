@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 // import { useState } from 'react'
 
-export default function DataTableClient ({ consultas }: { consultas: InfoConsultas }) {
+export default function DataTableClient ({ consultas }: { consultas: InfoConsultas[] }) {
   /* const [consultaSeleccionada, setConsultaSeleccionada] =
     useState<Consultas | null>(null) */
   console.log(consultas)
