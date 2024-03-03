@@ -328,6 +328,30 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      get_consultas_by_estado_and_filter_pagination: {
+        Args: {
+          estado_param: string
+          filtro_param: string
+          offset_param: number
+          limit_param: number
+        }
+        Returns: {
+          id_consulta: string
+          numero_expediente: string
+          nombre: string
+          apellido: string
+          dni: string
+          fecha_consulta: string
+          estado_consulta: string
+        }
+      }
+      get_consultas_count_by_estado_and_filter: {
+        Args: {
+          estado_param: string
+          filtro_param: string
+        }
+        Returns: number
+      }
       get_personas_by_rol_and_filter_pagination: {
         Args: {
           rol_param: string

@@ -199,6 +199,49 @@ export async function getUsersByRoleAndQuery ({
   return { users: users as PersonasAndUsuarios, error }
 }
 
+export async function getTotalPagesByEstadoAndQuery ({
+  estado,
+  query
+}: {
+  estado: EstadosConsultas
+  query: string
+}) {
+  const { data: totalPages } = await supabase.rpc(
+    'get_consultas_count_by_estado_and_filter',
+    {
+      estado_param: estado,
+      filtro_param: query
+    }
+  )
+  return totalPages
+}
+
+export async function getConsultasByEstadoAndQuery ({
+  estado,
+  query = '',
+  offset,
+  perPage,
+  currentPage
+}: {
+  estado: EstadosConsultas
+  query: string
+  offset: number
+  perPage: number
+  currentPage: number
+}) {
+  const { data: consultas, error } = await supabase.rpc(
+    'get_consultas_by_estado_and_filter_pagination',
+    {
+      estado_param: estado,
+      filtro_param: query,
+      offset_param: offset,
+      limit_param: currentPage * perPage - 1
+    }
+  )
+
+  return { consultas, error }
+}
+
 // obteniendo el id del estado de la consulta
 export async function getIDEstadoConsultaByEstado ({ estado }: { estado: EstadosConsultas }) {
   const { data: dataIDEstado, error: errorIDEstado } = await supabase

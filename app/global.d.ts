@@ -10,6 +10,7 @@ declare global {
   type PersonasXUsuarios = DB['public']['Tables']['personas_x_usuarios']['Row']
   type Citas = DB['public']['Tables']['citas']['Row']
   type EstadoConsultas = DB['public']['Tables']['estado_consultas']['Row']
+  type InfoConsultas = DB['public']['Functions']['get_consultas_by_estado_and_filter_pagination']['Returns']
 
   type UserType =
     | (Personas & { usuario: PersonasXUsuarios } & {
@@ -38,4 +39,5 @@ declare global {
       creado: string
       usuario?: PersonasXUsuarios
     }>
+
 }
