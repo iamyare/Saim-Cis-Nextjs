@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { updatePersona } from '@/app/(pages)/enfermero/actions'
+import { toast } from 'react-toastify'
 
 const TAM_MAX = 10000000
 const TIPOS_ACEPTADOS_IMAGEN = ['jpeg', 'jpg', 'png', 'webp']
@@ -38,14 +39,23 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<ValidationSchema>({
-    resolver: zodResolver(validationSchema)})
+  } = useForm<ValidationSchema>({ resolver: zodResolver(validationSchema) })
 
   function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
-      const { persona, errorPersona } = await updatePersona({
-        id: usuario?.id,
-      })
+      if (!usuario || !usuario.id) {
+        toast.error('Error: ID de usuario no disponible')
+        return
+      }
+      const { personaUpdate, errorPersonaUpdate } = await updatePersona({ id: usuario?.id, data })
+      if (errorPersonaUpdate) {
+        toast.error(errorPersonaUpdate.message)
+        return
+      }
+
+      if (!personaUpdate) {
+        toast.error('Error al actualizar la persona')
+      }
     })
   }
 

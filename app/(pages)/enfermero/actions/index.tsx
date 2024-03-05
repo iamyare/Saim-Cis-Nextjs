@@ -16,13 +16,13 @@ interface CreatePersona {
 }
 
 export async function updatePersona ({ id, data }: { id: string, data: PersonasUpdate }) {
-  const { data: persona, error: errorPersona } = await supabase
+  const { data: personaUpdate, error: errorPersonaUpdate } = await supabase
     .from('personas')
     .update({ telefono: data.telefono, direccion: data.direccion })
     .eq('id', id)
     .select('*')
     .single()
-  return { persona, errorPersona }
+  return { personaUpdate, errorPersonaUpdate }
 }
 
 export async function createPersona ({ data }: { data: CreatePersona }) {
