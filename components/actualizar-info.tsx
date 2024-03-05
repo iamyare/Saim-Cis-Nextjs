@@ -8,15 +8,10 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { updatePersona } from '@/app/(pages)/enfermero/actions'
 
-const TAM_MAX = 50000000
+const TAM_MAX = 10000000
 const TIPOS_ACEPTADOS_IMAGEN = ['jpeg', 'jpg', 'png', 'webp']
 
 const validationSchema = z.object({
-  nombre: z.string().min(1, { message: 'El nombre es obligatorio' }),
-  apellido: z.string().min(1, { message: 'El apellido es obligatorio' }),
-  fecha_nacimiento: z
-    .string()
-    .min(1, { message: 'La fecha de nacimiento es obligatoria' }),
   direccion: z.string().min(1, { message: 'La dirección es obligatoria' }),
   telefono: z
     .string()
@@ -27,7 +22,7 @@ const validationSchema = z.object({
   descripcion: z.string().min(1, { message: 'Agrega una descripcion' }),
   imagen: z
     .any()
-    .refine((file) => file?.size <= TAM_MAX, 'Tamaño maximo de imagenes: 50MB.')
+    .refine((file) => file?.size <= TAM_MAX, 'Tamaño maximo de imagenes: 10MB.')
     .refine(
       (file) => TIPOS_ACEPTADOS_IMAGEN.includes(file?.type),
       'Solo se aceptan archivos .jpg, .jpeg, .png y .webp'
@@ -36,18 +31,21 @@ const validationSchema = z.object({
 
 type ValidationSchema = z.infer<typeof validationSchema>
 
-export default function ActualizarPerfil({ usuario }: { usuario: UserType }) {
+export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   const [isPending, startTransition] = useTransition()
 
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<ValidationSchema>({ resolver: zodResolver(validationSchema) })
+  } = useForm<ValidationSchema>({
+    resolver: zodResolver(validationSchema)})
 
-  function onSubmit(data: z.infer<typeof validationSchema>) {
+  function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
-      updatePersona({ data })
+      const { persona, errorPersona } = await updatePersona({
+        id: usuario?.id,
+      })
     })
   }
 
@@ -180,8 +178,7 @@ export default function ActualizarPerfil({ usuario }: { usuario: UserType }) {
                     autoComplete="given-name"
                     className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     defaultValue={usuario?.nombre}
-                    disabled={isPending}
-                    {...register('nombre')}
+                    disabled
                   />
                 </div>
               </div>
@@ -199,9 +196,7 @@ export default function ActualizarPerfil({ usuario }: { usuario: UserType }) {
                     autoComplete="family-name"
                     className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     defaultValue={usuario?.apellido}
-                    disabled={isPending}
-                    {...register('apellido')}
-
+                    disabled
                   />
                 </div>
               </div>
@@ -259,8 +254,7 @@ export default function ActualizarPerfil({ usuario }: { usuario: UserType }) {
                     autoComplete="birthdate"
                     className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     defaultValue={usuario?.fecha_nacimiento}
-                    {...register('fecha_nacimiento')}
-                    disabled={isPending}
+                    disabled
                   />
                 </div>
               </div>
@@ -292,7 +286,6 @@ export default function ActualizarPerfil({ usuario }: { usuario: UserType }) {
                     defaultValue={usuario?.telefono ?? 'N/A'}
                     disabled={isPending}
                     {...register('telefono')}
-
                   />
                 </div>
               </div>
@@ -312,7 +305,6 @@ export default function ActualizarPerfil({ usuario }: { usuario: UserType }) {
                     defaultValue={usuario?.direccion ?? 'N/A'}
                     disabled={isPending}
                     {...register('direccion')}
-
                   />
                 </div>
               </div>

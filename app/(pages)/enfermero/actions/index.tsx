@@ -15,18 +15,14 @@ interface CreatePersona {
   genero: string
 }
 
-interface UpdatePersona {
-  nombre: string
-  apellido: string
-  fecha_nacimiento: string
-  direccion: string
-  telefono: string
-  descripcion: string
-  imagen?: File
-}
-
-export async function updatePersona ({ data }: { data: UpdatePersona }) {
-  console.log(data)
+export async function updatePersona ({ id, data }: { id: string, data: PersonasUpdate }) {
+  const { data: persona, error: errorPersona } = await supabase
+    .from('personas')
+    .update({ telefono: data.telefono, direccion: data.direccion })
+    .eq('id', id)
+    .select('*')
+    .single()
+  return { persona, errorPersona }
 }
 
 export async function createPersona ({ data }: { data: CreatePersona }) {
