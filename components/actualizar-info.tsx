@@ -76,45 +76,19 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   }
 
   return (
-    <div className="mx-8 dark:bg-gray-800">
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl mx-auto py-6">
+    <div className="sm:mx-2 md:mx-8 dark:bg-gray-800 bg-gray-100 rounded-sm">
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl mx-auto py-6 grid sm:grid-cols-1">
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white">
+            <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white px-4">
               Perfil
             </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-white">
+            <p className="mt-1 text-sm leading-6 px-4 text-gray-600 dark:text-white">
               Buen Dia
             </p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-4">
-                <Label
-                  htmlFor="username"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
-                >
-                  Usuario
-                </Label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <span className="flex select-none items-center pl-3 text-gray-500 dark:text-white sm:text-sm">
-                      saimcis.com/
-                    </span>
-                    <Input
-                      type="text"
-                      name="username"
-                      id="username"
-                      autoComplete="username"
-                      className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 dark:text-white placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="yare"
-                      defaultValue={usuario?.usuario.id_usuario}
-                      disabled
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-span-full">
+              <div className="col-span-full px-4">
                 <Label
                   htmlFor="about"
                   className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
@@ -138,7 +112,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 </p>
               </div>
 
-              <div className="col-span-full">
+              <div className="col-span-full px-4">
                 <Label
                   htmlFor="cover-photo"
                   className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
@@ -165,15 +139,15 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
           </div>
 
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 dark:text-white text-gray-900">
+            <h2 className="text-base font-semibold leading-7 dark:text-white text-gray-900 px-4">
               Informacion Personal
             </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
+            <p className="mt-1 text-sm leading-6 text-gray-600 px-4">
               Utilice una dirección permanente donde pueda recibir correo.
             </p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
+              <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="first-name"
                   className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
@@ -191,7 +165,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="last-name"
                   className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
@@ -209,7 +183,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="dni"
                   className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
@@ -229,7 +203,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 </div>
               </div>
 
-              <div className="sm:col-span-4">
+              <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="email"
                   className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
@@ -249,7 +223,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="birthdate"
                   className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
@@ -267,7 +241,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              <div className="sm:col-span-3 px-4">
                 <Label htmlFor="country" className="block text-sm font-medium leading-6 dark:text-white text-gray-900">Genero</Label>
                 <div className="mt-2">
                   <select id="genero" name="genero" autoComplete="genero-name"
@@ -279,7 +253,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="phone"
                   className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
@@ -298,7 +272,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 </div>
               </div>
 
-              <div className="col-span-full">
+              <div className="col-span-full px-4">
                 <Label
                   htmlFor="street-address"
                   className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
@@ -329,7 +303,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
             </a>
             <button
               type="submit"
-              className="rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold dark:text-white text-black shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+              className="rounded-md bg-sky-400 px-3 py-2 text-sm font-semibold dark:text-white text-black shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
             >
               Guardar
             </button>
