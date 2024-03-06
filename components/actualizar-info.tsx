@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { updatePersona } from '@/app/(pages)/enfermero/actions'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import { type DropzoneState, useDropzone } from 'react-dropzone'
 import { uploadingImage } from '@/app/actions'
 import { Button } from './ui/button'
@@ -29,7 +29,8 @@ const validationSchema = z.object({
     .regex(/^\d{4}-?\d{4}$/, {
       message: 'El telefono debe tener el formato dddd-dddd'
     }),
-  descripcion: z.string().min(1, { message: 'Agrega una descripcion' })
+  descripcion: z.string().min(1, { message: 'Agrega una descripcion' }),
+  id: z.string().min(1, { message: 'ID no disponible' })
 })
 
 type ValidationSchema = z.infer<typeof validationSchema>
@@ -80,7 +81,8 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
     defaultValues: {
       descripcion: usuario?.usuario.descripcion ?? 'No hay descripcion',
       telefono: usuario?.telefono ?? 'No hay telefono',
-      direccion: usuario?.direccion ?? 'No hay direccion'
+      direccion: usuario?.direccion ?? 'No hay direccion',
+      id: usuario?.id
     }
   })
 
@@ -103,8 +105,8 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
         toast.error('Error: ID de usuario no disponible')
         return
       }
+
       const { personaUpdate, errorPersonaUpdate } = await updatePersona({
-        id: usuario?.id,
         data
       })
       if (errorPersonaUpdate) {
@@ -115,6 +117,8 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
       if (!personaUpdate) {
         toast.error('Error al actualizar la persona')
       }
+
+      toast.success('Perfil actualizado correctamente')
     })
   }
 
@@ -195,7 +199,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                           {isDragAccept && <p>Suelta la imagen</p>}
                           {isDragReject && <p>Solo se permiten imagenes</p>}
                           {!isDragActive && (
-                            <p>
+                            <p className='text-center'>
                               Arrastra y suelta una imagen aqui o haz click para
                               seleccionar una imagen
                             </p>
@@ -420,6 +424,18 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
           </div>
         </div>
       </form>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   )
 }
