@@ -9,6 +9,25 @@ import * as z from 'zod'
 import { updatePersona } from '@/app/(pages)/enfermero/actions'
 import { toast } from 'react-toastify'
 import { type DropzoneState, useDropzone } from 'react-dropzone'
+import { v2 as cloudinary } from 'cloudinary'
+
+cloudinary.config({
+  cloud_name: 'ddnxbx2t2',
+  api_key: '857483761792718',
+  api_secret: '***************************'
+})
+
+const subirImagen = async (file: File) => {
+  const uploadResult = await cloudinary.uploader.upload(file.name, {
+    width: 500,
+    height: 500,
+    crop: 'fill',
+    quality: 'auto',
+    fetch_format: 'auto'
+  })
+
+  return uploadResult
+}
 
 const TAM_MAX = 10000000
 const TIPOS_ACEPTADOS_IMAGEN = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
@@ -37,8 +56,19 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   const [isPending, startTransition] = useTransition()
 
   // Funcion que se ejecuta cuando se suelta el archivo en la dropzone
-  const onDrop = (acceptedFiles: File[]) => {
-    console.log('Archivo seleccionado:', acceptedFiles[0])
+  const onDrop = async (acceptedFiles: File[]) => {
+    // Verifica que se haya seleccionado al menos un archivo
+    if (acceptedFiles.length === 0) {
+      console.error('No se seleccionó ningún archivo')
+      return
+    }
+
+    // Optimiza la imagen con Cloudinary
+    const file = acceptedFiles[0]
+    const uploadResult = await subirImagen(file)
+
+    // Muestra la URL segura de la imagen optimizada
+    console.log('URL segura de la imagen optimizada:', uploadResult.secure_url)
   }
 
   // Configuracion de la dropzone como manejar los eventos de arrastrar y soltar asi como la configuracion de los tipos de imagen que acepta
