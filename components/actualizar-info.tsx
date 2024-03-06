@@ -9,9 +9,10 @@ import * as z from 'zod'
 import { updatePersona } from '@/app/(pages)/enfermero/actions'
 import { toast } from 'react-toastify'
 import { type DropzoneState, useDropzone } from 'react-dropzone'
-
-const TAM_MAX = 10000000
-const TIPOS_ACEPTADOS_IMAGEN = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+import { uploadingImage } from '@/app/actions'
+import { Button } from './ui/button'
+import { Icons } from './icons'
+import Link from 'next/link'
 
 const validationSchema = z.object({
   direccion: z.string().min(1, { message: 'La dirección es obligatoria' }),
@@ -21,14 +22,8 @@ const validationSchema = z.object({
     .regex(/^\d{4}-?\d{4}$/, {
       message: 'El telefono debe tener el formato dddd-dddd'
     }),
-  descripcion: z.string().min(1, { message: 'Agrega una descripcion' }),
-  imagen: z
-    .any()
-    .refine((file) => file?.size <= TAM_MAX, 'Tamaño maximo de imagenes: 10MB.')
-    .refine(
-      (file) => TIPOS_ACEPTADOS_IMAGEN.includes(file?.type),
-      'Solo se aceptan archivos .jpg, .jpeg, .png y .webp'
-    )
+  descripcion: z.string().min(1, { message: 'Agrega una descripcion' })
+
 })
 
 type ValidationSchema = z.infer<typeof validationSchema>
@@ -55,10 +50,27 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<ValidationSchema>({ resolver: zodResolver(validationSchema) })
+  } = useForm<ValidationSchema>({
+    resolver: zodResolver(validationSchema),
+    defaultValues: {
+      descripcion: usuario?.usuario.descripcion ?? 'No hay descripcion',
+      telefono: usuario?.telefono ?? 'No hay telefono',
+      direccion: usuario?.direccion ?? 'No hay direccion'
+
+    }
+  })
 
   function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
+      if (acceptedFiles.length > 0) {
+        const { data, error } = await uploadingImage({ file: acceptedFiles[0] })
+        if (error) {
+          toast.error('Error al subir la imagen')
+          console.error('Error al subir la imagen:', error)
+          return
+        }
+        console.log('Imagen subida:', data)
+      }
       if (!usuario || !usuario.id) {
         toast.error('Error: ID de usuario no disponible')
         return
@@ -98,7 +110,6 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 <div className="mt-2">
                   <Input
                     className={errors.descripcion ? 'border-red-500  !placeholder-red-500 text-red-500' : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'}
-                    defaultValue={usuario?.usuario.descripcion ?? 'N/A'}
                     {...register('descripcion')}
                   />
                   {errors.descripcion && (
@@ -264,11 +275,15 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                   <Input
                     type="text"
                     autoComplete="phone"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={usuario?.telefono ?? 'N/A'}
+                    className={errors.telefono ? 'border-red-500  !placeholder-red-500 text-red-500' : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'}
                     disabled={isPending}
                     {...register('telefono')}
                   />
+                  {errors.telefono && (
+                    <p className="text-xs italic text-red-500 mt-0">
+                      {errors.telefono?.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -283,30 +298,38 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                   <Input
                     type="text"
                     autoComplete="street-address"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={usuario?.direccion ?? 'N/A'}
+                    className={errors.direccion ? 'border-red-500  !placeholder-red-500 text-red-500' : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'}
                     disabled={isPending}
                     {...register('direccion')}
                   />
+                  {errors.direccion && (
+                    <p className="text-xs italic text-red-500 mt-0">
+                      {errors.direccion?.message}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
           </div>
 
           <div className="mt-6 flex items-center justify-end gap-x-6">
-            <a
+            <Link
               type="button"
               className="text-sm font-semibold leading-6 dark:text-white text-gray-900"
               href={`/${usuario?.rol}`}
             >
               Cancelar
-            </a>
-            <button
-              type="submit"
-              className="rounded-md bg-sky-400 px-3 py-2 text-sm font-semibold dark:text-white text-black shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-            >
-              Guardar
-            </button>
+            </Link>
+            <Button
+            disabled={isPending}
+            className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+
+          >
+            {isPending && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
+            )}
+            Actualizar
+          </Button>
           </div>
         </div>
       </form>
