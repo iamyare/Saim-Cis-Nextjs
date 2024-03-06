@@ -169,3 +169,15 @@ export async function getUserByCorreo ({ correo }: { correo: string }) {
 
   return { dataCorreo, errorCorreo }
 }
+
+export async function subirImagen ({ file }: { file: File }) {
+  const uploadResult = await cloudinary.uploader.upload(file.name, {
+    width: 500,
+    height: 500,
+    crop: 'fill',
+    quality: 'auto',
+    fetch_format: 'auto'
+  })
+
+  return { uploadResult }
+}

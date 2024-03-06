@@ -18,20 +18,8 @@ import { v2 as cloudinary } from 'cloudinary'
 cloudinary.config({
   cloud_name: 'ddnxbx2t2',
   api_key: '857483761792718',
-  api_secret: '***************************'
+  api_secret: 'Q-50-N8zwuUzj0VnIb-QYrwkj-0'
 })
-
-const subirImagen = async (file: File) => {
-  const uploadResult = await cloudinary.uploader.upload(file.name, {
-    width: 500,
-    height: 500,
-    crop: 'fill',
-    quality: 'auto',
-    fetch_format: 'auto'
-  })
-
-  return uploadResult
-}
 
 const validationSchema = z.object({
   direccion: z.string().min(1, { message: 'La dirección es obligatoria' }),
@@ -52,7 +40,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   // Funcion que se ejecuta cuando se suelta el archivo en la dropzone
   const onDrop = async (acceptedFiles: File[]) => {
     // Verifica que se haya seleccionado al menos un archivo
-    if (acceptedFiles.length === 0) {
+    if (acceptedFiles.length > 0) {
       console.error('No se seleccionó ningún archivo')
       return
     }
