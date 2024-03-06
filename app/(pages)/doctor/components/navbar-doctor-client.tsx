@@ -11,6 +11,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import LogoSaimCis from '@/components/logo-saim-cis'
 
 const navigation = [
+  { name: 'Consultas', href: '/doctor/consultas', current: false },
   { name: 'Perfil', href: '/doctor', current: true },
   { name: 'Inicio', href: '/', current: false }
 ]
