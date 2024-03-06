@@ -26,3 +26,13 @@ export async function getCita ({ id_cita }: { id_cita: string }) {
 
   return { cita: citasModifica, errorCita }
 }
+
+export async function getConsultasById ({ id_consulta }: { id_consulta: string }) {
+  const { data: consulta, error: errorConsulta } = await supabase
+    .from('consultas')
+    .select('*, estado:estado_consultas(*), expedientes(*, personas(*))')
+    .eq('id', id_consulta)
+    .single()
+
+  return { consulta, errorConsulta }
+}
