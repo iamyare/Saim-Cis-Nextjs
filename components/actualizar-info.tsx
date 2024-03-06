@@ -13,13 +13,6 @@ import { uploadingImage } from '@/app/actions'
 import { Button } from './ui/button'
 import { Icons } from './icons'
 import Link from 'next/link'
-import { v2 as cloudinary } from 'cloudinary'
-
-cloudinary.config({
-  cloud_name: 'ddnxbx2t2',
-  api_key: '857483761792718',
-  api_secret: 'Q-50-N8zwuUzj0VnIb-QYrwkj-0'
-})
 
 const validationSchema = z.object({
   direccion: z.string().min(1, { message: 'La dirección es obligatoria' }),
@@ -38,24 +31,9 @@ type ValidationSchema = z.infer<typeof validationSchema>
 export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   const [isPending, startTransition] = useTransition()
 
-  // Funcion que se ejecuta cuando se suelta el archivo en la dropzone
-  const onDrop = async (acceptedFiles: File[]) => {
-    // Verifica que se haya seleccionado al menos un archivo
-    if (acceptedFiles.length > 0) {
-      console.error('No se seleccionó ningún archivo')
-      return
-    }
-
-    // Optimiza la imagen con Cloudinary
-    const file = acceptedFiles[0]
-    const uploadResult = await subirImagen(file)
-
-    // Muestra la URL segura de la imagen optimizada
-    console.log('URL segura de la imagen optimizada:', uploadResult.secure_url)
+  const onDrop = (acceptedFiles: File[]) => {
+    console.log('Archivo seleccionado:', acceptedFiles[0])
   }
-
-  // Configuracion de la dropzone como manejar los eventos de arrastrar y soltar asi como la configuracion de los tipos de imagen que acepta
-  // y si pueden arrastrarse mas de un archivo a la vez
   const {
     getRootProps,
     getInputProps,
@@ -89,17 +67,11 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
       if (acceptedFiles.length > 0) {
-        const { data, error } = await uploadingImage({
+        const { uploadResult } = await uploadingImage({
           file: acceptedFiles[0]
         })
-        if (error) {
-          toast.error('Error al subir la imagen')
-          console.error('Error al subir la imagen:', error)
-          return
-        }
-        if (data) {
-          toast.success('Imagen subida correctamente')
-        }
+
+        console.log('Resultado de la subida:', uploadResult)
       }
       if (!usuario || !usuario.id) {
         toast.error('Error: ID de usuario no disponible')

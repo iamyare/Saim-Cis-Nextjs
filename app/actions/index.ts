@@ -1,4 +1,5 @@
 import { readUserSession } from '@/lib/actions'
+
 import { supabase } from '@/lib/supabase'
 
 export async function getUser ({ id }: { id: string }) {
@@ -219,13 +220,7 @@ export async function getIDEstadoConsultaByEstado ({ estado }: { estado: Estados
 }
 
 export async function uploadingImage ({ file }: { file: File }) {
-  const { data, error } = await supabase.storage
-    .from('avatars')
-    .upload(`${file.name}`, file, {
-      cacheControl: '3600',
-      upsert: false,
-      contentType: 'image/png, image/jpeg, image/jpg, image/webp, image/bmp, image/heic, image/heif'
-    })
+  const uploadResult = 'No aqui'
 
-  return { data, error }
+  return { uploadResult }
 }
