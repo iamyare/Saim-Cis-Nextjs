@@ -90,7 +90,7 @@ const config = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate'), require('preline/plugin'), require('tailwindcss-animated')]
+  plugins: [require('tailwindcss-animate'), require('preline/plugin')]
 } satisfies Config
 
 export default config
