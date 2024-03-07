@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss'
 
+import colors from 'tailwindcss/colors'
+
 const config = {
   darkMode: ['class'],
   content: [
@@ -7,7 +9,8 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-    './node_modules/preline/preline.js'
+    './node_modules/preline/preline.js',
+    './node_modules/flowbite-react/lib/**/*.js'
   ],
   prefix: '',
   theme: {
@@ -20,6 +23,8 @@ const config = {
     },
     extend: {
       colors: {
+        secundario: colors.blue[500],
+        secundariovariant: colors.blue,
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

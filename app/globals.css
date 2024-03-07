@@ -63,6 +63,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
   }
 }
  
@@ -99,3 +100,5 @@
   animation-range: entry 25% cover 50%;
   animation-fill-mode: both;
 }
+
+
