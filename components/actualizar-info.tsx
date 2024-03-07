@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { updatePersona } from '@/app/(pages)/enfermero/actions'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import { type DropzoneState, useDropzone } from 'react-dropzone'
 import { uploadingImage } from '@/app/actions'
 import { Button } from './ui/button'
@@ -153,7 +153,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
             <h2 className=" font-medium text-2xl text-gray-900 dark:text-white px-4">
               Perfil
             </h2>
-            <p className="mt-1 leading-6 px-4 text-gray-600 dark:text-white">
+            <p className="mt-1 px-4 text-gray-600 dark:text-white">
               ¡Hola <strong>{usuario?.nombre}</strong>! 🥵 Actualiza tu perfil para que los demas usuarios puedan conocerte mejor.
             </p>
 
@@ -161,7 +161,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="col-span-full px-4">
                 <Label
                   htmlFor="about"
-                  className="block text-base  font-medium  text-gray-900 dark:text-white"
+                  className="block font-medium text-gray-900 dark:text-white"
                 >
                   Descripcion
                 </Label>
@@ -171,13 +171,13 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                   placeholder='Escribe algunas frases sobre ti...'
                     className={
                       errors.descripcion
-                        ? 'border-red-500  !placeholder-red-500 text-red-500'
-                        : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                        ? 'border-red-500 !placeholder-red-500 text-red-500'
+                        : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm'
                     }
                     {...register('descripcion')}
                   />
                   {errors.descripcion && (
-                    <p className="text-xs italic text-red-500 mt-0">
+                    <p className="italic text-red-500 mt-0">
                       {errors.descripcion?.message}
                     </p>
                   )}
@@ -188,7 +188,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="col-span-full px-4">
                 <Label
                   htmlFor="cover-photo"
-                  className="block  font-medium leading-6 dark:text-white text-gray-900"
+                  className="block font-medium dark:text-white text-gray-900"
                 >
                   Fotografia de portada
                 </Label>
@@ -196,7 +196,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 {/* Dropzone necesario para realizar el Drag and drop */}
                 <div
                   {...getRootProps()}
-                  className={`mt-4 flex  leading-6 dark:text-gray-400 text-gray-600 flex-col justify-center items-center rounded-lg border-2 border-dashed border-gray-900/25 dark:border-gray-100/25 px-6 py-10 transition-colors duration-500 ${getClassName()}`}
+                  className={`mt-4 flex dark:text-gray-400 text-gray-600 flex-col justify-center items-center rounded-lg border-2 border-dashed border-gray-900/25 dark:border-gray-100/25 px-6 py-10 transition-colors duration-500 ${getClassName()}`}
                 >
                   <input {...getInputProps()} />
                     {
@@ -222,7 +222,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                       <img
                         src={URL.createObjectURL(acceptedFiles[0])}
                         alt={`Imagen de ${usuario?.nombre}`}
-                        className="h-40 w-40 mt-2 mx-auto rounded-full aspect-square  object-cover border-4 border-blue-500/50"
+                        className="h-40 w-40 mt-2 mx-auto rounded-full aspect-square object-cover border-4 border-blue-500/50"
                       />
                     </div>
                   )}
@@ -232,10 +232,10 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
           </div>
 
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 className=" text-lg font-semibold dark:text-white text-gray-900 px-4">
+            <h2 className="font-semibold dark:text-white text-gray-900 px-4">
               Informacion Personal
             </h2>
-            <p className="mt-1  text-gray-600 px-4">
+            <p className="mt-1 text-gray-600 px-4">
               Utilice una dirección permanente donde pueda recibir correo.
             </p>
 
@@ -243,7 +243,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="first-name"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
+                  className="block  font-medium dark:text-white text-gray-900"
                 >
                   Nombre
                 </Label>
@@ -251,7 +251,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                   <Input
                     type="text"
                     autoComplete="given-name"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                     defaultValue={usuario?.nombre}
                     disabled
                   />
@@ -261,7 +261,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="last-name"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
+                  className="block font-medium dark:text-white text-gray-900"
                 >
                   Apellido
                 </Label>
@@ -269,7 +269,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                   <Input
                     type="text"
                     autoComplete="family-name"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                     defaultValue={usuario?.apellido}
                     disabled
                   />
@@ -279,7 +279,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="dni"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
+                  className="block font-medium dark:text-white text-gray-900"
                 >
                   DNI
                 </Label>
@@ -289,7 +289,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                     name="dni"
                     id="dni"
                     autoComplete="dni"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                     value={usuario?.dni}
                     disabled
                   />
@@ -299,7 +299,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="email"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
+                  className="block font-medium dark:text-white text-gray-900"
                 >
                   Correo Electronico
                 </Label>
@@ -309,7 +309,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                     name="email"
                     type="email"
                     autoComplete="email"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                     value={usuario?.correo ?? 'N/A'}
                     disabled
                   />
@@ -319,7 +319,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="birthdate"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
+                  className="block font-medium dark:text-white text-gray-900"
                 >
                   Fecha Nacimiento
                 </Label>
@@ -327,7 +327,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                   <Input
                     type="text"
                     autoComplete="birthdate"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                     defaultValue={usuario?.fecha_nacimiento}
                     disabled
                   />
@@ -337,7 +337,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="country"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
+                  className="block font-medium dark:text-white text-gray-900"
                 >
                   Genero
                 </Label>
@@ -346,7 +346,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                     id="genero"
                     name="genero"
                     autoComplete="genero-name"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs"
                     value={usuario?.genero}
                     disabled
                   >
@@ -359,7 +359,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="sm:col-span-3 px-4">
                 <Label
                   htmlFor="phone"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
+                  className="block font-medium dark:text-white text-gray-900"
                 >
                   Telefono
                 </Label>
@@ -370,13 +370,13 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                     className={
                       errors.telefono
                         ? 'border-red-500  !placeholder-red-500 text-red-500'
-                        : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                        : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600'
                     }
                     disabled={isPending}
                     {...register('telefono')}
                   />
                   {errors.telefono && (
-                    <p className="text-xs italic text-red-500 mt-0">
+                    <p className="italic text-red-500 mt-0">
                       {errors.telefono?.message}
                     </p>
                   )}
@@ -386,7 +386,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
               <div className="col-span-full px-4">
                 <Label
                   htmlFor="street-address"
-                  className="block text-sm font-medium leading-6 dark:text-white text-gray-900"
+                  className="block font-medium dark:text-white text-gray-900"
                 >
                   Dirrecion
                 </Label>
@@ -397,13 +397,13 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                     className={
                       errors.direccion
                         ? 'border-red-500  !placeholder-red-500 text-red-500'
-                        : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                        : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm'
                     }
                     disabled={isPending}
                     {...register('direccion')}
                   />
                   {errors.direccion && (
-                    <p className="text-xs italic text-red-500 mt-0">
+                    <p className=" italic text-red-500 mt-0">
                       {errors.direccion?.message}
                     </p>
                   )}
@@ -425,7 +425,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
             </Button>
             <Button
               disabled={isPending}
-              className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+              className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
             >
               {isPending && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
@@ -435,6 +435,18 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
           </div>
         </div>
       </form>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   )
 }

@@ -22,7 +22,7 @@ export default function Footer () {
                   placeholder="Email Address"
                 />
 
-                <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-700  md:w-auto md:mx-4 focus:outline-none bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+                <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-gray-800 dark:text-white transition-colors duration-700  md:w-auto md:mx-4 focus:outline-none bg-sky-400 rounded-lg hover:bg-sky-500 dark:bg-sky-600 hover:dark:bg-sky-500 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
                   Suscribirse
                 </button>
               </div>
@@ -36,19 +36,19 @@ export default function Footer () {
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <a
                   href="#nosotros"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:underline hover:text-sky-500"
                 >
                   Nosotros
                 </a>
                 <a
                   href="#doctores"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:underline hover:text-sky-500"
                 >
                   Doctores
                 </a>
                 <a
                   href="#servicios"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:underline hover:text-sky-500"
                 >
                   Servicios
                 </a>
@@ -62,17 +62,17 @@ export default function Footer () {
 
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:text-sky-500 cursor-default"
                 >
                   Teléfono: +504-9999-9999
                 </p>
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:text-sky-500 cursor-default"
                 >
                   Correo: saimcishon@gmail.com
                 </p>
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:text-sky-500 cursor-default"
                 >
                   Dirección: Boulevard Suyapa, UNAH
                 </p>
@@ -120,7 +120,7 @@ export default function Footer () {
 
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sky-600 dark:hover:text-blue-400"
                 aria-label="Github"
               >
                 <svg
