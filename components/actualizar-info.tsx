@@ -12,8 +12,8 @@ import { type DropzoneState, useDropzone } from 'react-dropzone'
 import { uploadingImage } from '@/app/actions'
 import { Button } from './ui/button'
 import { Icons } from './icons'
-import Link from 'next/link'
 import { v2 as cloudinary } from 'cloudinary'
+import { useRouter } from 'next/router'
 
 cloudinary.config({
   cloud_name: 'ddnxbx2t2',
@@ -413,13 +413,16 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
           </div>
 
           <div className="mt-6 flex items-center justify-end gap-x-6">
-            <Link
+            <Button
               type="button"
               className="text-sm font-semibold leading-6 dark:text-white text-gray-900"
-              href={`/${usuario?.rol}`}
+              onClick={() => {
+                const router = useRouter()
+                router.back()
+              }}
             >
               Cancelar
-            </Link>
+            </Button>
             <Button
               disabled={isPending}
               className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
