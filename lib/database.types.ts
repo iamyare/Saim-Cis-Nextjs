@@ -121,6 +121,54 @@ export interface Database {
           }
         ]
       }
+      diagnosticos: {
+        Row: {
+          diferencial: boolean
+          enfermedades: string
+          fecha_diagnostico: string
+          id: string
+          id_consulta: string | null
+          id_expediente: string
+          interno: boolean
+          observacion: string | null
+        }
+        Insert: {
+          diferencial: boolean
+          enfermedades: string
+          fecha_diagnostico?: string
+          id?: string
+          id_consulta?: string | null
+          id_expediente?: string
+          interno: boolean
+          observacion?: string | null
+        }
+        Update: {
+          diferencial?: boolean
+          enfermedades?: string
+          fecha_diagnostico?: string
+          id?: string
+          id_consulta?: string | null
+          id_expediente?: string
+          interno?: boolean
+          observacion?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'public_diagnosticos_id_consulta_fkey'
+            columns: ['id_consulta']
+            isOneToOne: false
+            referencedRelation: 'consultas'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'public_diagnosticos_id_expediente_fkey'
+            columns: ['id_expediente']
+            isOneToOne: false
+            referencedRelation: 'expedientes'
+            referencedColumns: ['id']
+          }
+        ]
+      }
       especializacion_x_personas: {
         Row: {
           id_especializacion: string
@@ -335,7 +383,7 @@ export interface Database {
           offset_param: number
           limit_param: number
         }
-        Returns: {
+        Returns: Array<{
           id_consulta: string
           numero_expediente: string
           nombre: string
@@ -343,7 +391,7 @@ export interface Database {
           dni: string
           fecha_consulta: string
           estado_consulta: string
-        }
+        }>
       }
       get_consultas_count_by_estado_and_filter: {
         Args: {
@@ -359,7 +407,7 @@ export interface Database {
           offset_param: number
           limit_param: number
         }
-        Returns: Array<{
+        Returns: Array <{
           id: string
           creado: string
           nombre: string
