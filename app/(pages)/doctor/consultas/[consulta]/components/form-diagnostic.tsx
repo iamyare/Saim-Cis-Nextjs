@@ -6,6 +6,7 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { CheckBox } from '@/components/ui/checkbox'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -14,6 +15,13 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useTransition } from 'react'
 
 const validationSchema = z.object({
+  enfermedades: z.string().min(1, { message: 'Las enfermedades son requeridas' }),
+  observacion: z.string().min(1, { message: 'Las observaciones son requeridas' }),
+  id_expediente: z.string(),
+  id_consulta: z.string(),
+  interno: z.boolean(),
+  diferencial: z.boolean(),
+  fecha_diagnostico: z.string().min(1, { message: 'La fecha del diagnostico es requerida' })
 })
 
 type ValidationSchema = z.infer<typeof validationSchema>
@@ -24,17 +32,49 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-
+      enfermedades: '',
+      observacion: '',
+      id_expediente: '',
+      id_consulta: '',
+      interno: true,
+      diferencial: false,
+      fecha_diagnostico: ''
     }
   })
 
   function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
+      // Añadir dato del expediente
+      data.id_expediente = consulta.id_expediente
 
+      // Añadir dato de la consulta
+      data.id_consulta = consulta.id
+
+      // Generar fecha del diagnostico
+      data.fecha_diagnostico = new Date().toISOString()
+
+      /*
+      const { diagnostico, errorDiagnostico } = await createDiagnostico({
+        data
+      })
+
+      if (errorDiagnostico) {
+        toast.error('Error al guardar el diagnostico')
+        return
+      } else {
+        toast.success('Los Datos han sido guardados Exitosamente!')
+        reset()
+      }
+
+      if (!diagnostico) {
+        toast.error('Error al crear el diagnostico')
+      }
+      */
     })
   }
 
@@ -43,27 +83,73 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
 
-          <div className="grid gap-1">
+          <div className="grid gap-1 my-5">
             <Label className="" htmlFor="address">
-              Direccion
+              Enfermedades
             </Label>
             <Input
               type="text"
-              autoComplete="address"
-              placeholder="Tegucigalpa, Francisco Morazán, Honduras"
+              autoComplete=""
+              placeholder=""
               disabled={isPending}
               className={
-                errors.direccion
+                errors.enfermedades
                   ? 'border-red-500  !placeholder-red-500 text-red-500'
                   : ''
               }
-              {...register('direccion')}
+              {...register('enfermedades')}
             />
-            {errors.direccion && (
+            {errors.enfermedades && (
               <p className="text-xs italic text-red-500 mt-0">
-                {errors.direccion?.message}
+                {errors.enfermedades?.message}
               </p>
             )}
+          </div>
+
+          <div className="grid gap-1 my-5">
+            <Label className="" htmlFor="address">
+              Observaciones
+            </Label>
+            <Input
+              type="text"
+              autoComplete=""
+              placeholder=""
+              disabled={isPending}
+              className={
+                errors.observacion
+                  ? 'border-red-500  !placeholder-red-500 text-red-500'
+                  : ''
+              }
+              {...register('observacion')}
+            />
+            {errors.observacion && (
+              <p className="text-xs italic text-red-500 mt-0">
+                {errors.observacion?.message}
+              </p>
+            )}
+          </div>
+
+          <div className="flex items-center justify-center gap-1 my-5 ">
+            <CheckBox
+              type="checkbox"
+              autoComplete=""
+              placeholder=""
+              disabled={isPending}
+              className={
+                errors.diferencial
+                  ? 'border-red-500  !placeholder-red-500 text-red-500'
+                  : ''
+              }
+              {...register('diferencial')}
+            />
+            {errors.diferencial && (
+              <p className="text-xs italic text-red-500 mt-0">
+                {errors.diferencial?.message}
+              </p>
+            )}
+            <Label className="mx-1" htmlFor="address">
+              Más de una enfermedad
+            </Label>
           </div>
 
           <Button
@@ -74,7 +160,7 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
             )}
-            Registrar paciente
+            Agregar Diagnostico
           </Button>
         </div>
       </form>

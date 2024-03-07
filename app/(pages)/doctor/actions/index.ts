@@ -36,3 +36,15 @@ export async function getConsultasById ({ id_consulta }: { id_consulta: string }
 
   return { consulta, errorConsulta }
 }
+
+/*
+export async function createDiagnostico ({ data }: { data: DiagnosticoInsert }) {
+  const { data: diagnostico, error: errorDiagnostico } = await supabase
+    .from('diagnosticos')
+    .insert({ ...data })
+    .select('*')
+    .single()
+
+  return { diagnostico, errorDiagnostico }
+}
+*/

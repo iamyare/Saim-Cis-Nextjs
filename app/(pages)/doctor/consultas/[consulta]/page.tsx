@@ -21,24 +21,22 @@ export default async function page ({
   return (
     <main className=" container">
 
-    <aside className='flex flex-col md:flex-row border-b my-2'>
-    <div className='w-full'>
-      <h2 className="text-2xl font-medium my-2">Paciente</h2>
+    <aside className='flex flex-col md:flex-row border-b my-10'>
+    <div className='w-full text-center'>
+      <h2 className="text-2xl font-medium my-2">Detalles del Paciente</h2>
       <div>
-        <h1>Detalles del paciente</h1>
-
-        <div className="flex flex-col gap-4">
-          <div>
-            <h2>Nombre</h2>
-            <p>{consulta.expedientes?.personas?.nombre}</p>
+        <div className="flex flex-col gap-4 mt-5 mb-10">
+          <div className=''>
+            <span className='font-semibold'>DNI: </span>
+            <span>{consulta.expedientes?.personas?.dni}</span>
+          </div>
+          <div className=''>
+            <span className='font-semibold'>Nombre: </span>
+            <span>{consulta.expedientes?.personas?.nombre} {consulta.expedientes?.personas?.apellido}</span>
           </div>
           <div>
-            <h2>Apellido</h2>
-            <p>{consulta.expedientes?.personas?.apellido}</p>
-          </div>
-          <div>
-            <h2>Fecha de nacimiento</h2>
-            <p>
+            <span className='font-semibold'>Fecha de nacimiento: </span>
+            <span>
               {consulta.expedientes?.personas?.fecha_nacimiento
                 ? new Date(consulta.expedientes?.personas?.fecha_nacimiento).toLocaleDateString(
                   'es-ES',
@@ -49,53 +47,46 @@ export default async function page ({
                   }
                 )
                 : 'No disponible'}
-            </p>
-          </div>
-          <div>
-            <h2>DNI</h2>
-            <p>{consulta.expedientes?.personas?.dni}</p>
-          </div>
-        </div>
-        </div>
-
-      </div>
-
-      <div className='w-full'>
-      <h2 className="text-2xl font-medium my-2">Consulta</h2>
-      <div>
-        <h1>Detalles de la consulta {consulta?.id}</h1>
-
-        <div className="flex flex-col gap-4">
-          <div>
-            <h2>Fecha de la consulta</h2>
-            <p>
-              {consulta.fecha_consulta
-                ? new Date(consulta?.fecha_consulta).toLocaleDateString(
-                  'es-ES',
-                  {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
-                  }
-                )
-                : 'No disponible'}
-            </p>
-          </div>
-          <div>
-            <h2>Estado</h2>
-            <p>{consulta.estado?.estado}</p>
-          </div>
-          <div>
-            <h2>Sintomas</h2>
-            <p>{consulta.sintomas}</p>
+            </span>
           </div>
         </div>
       </div>
+    </div>
+
+    <div className='w-full text-center'>
+    <h2 className="text-2xl font-medium my-2">Detalles de la Consulta</h2>
+    <div>
+      <div className="flex flex-col gap-4 mt-5 mb-10">
+        <div>
+          <span className='font-semibold'>Fecha de la consulta: </span>
+          <span>
+            {consulta.fecha_consulta
+              ? new Date(consulta?.fecha_consulta).toLocaleDateString(
+                'es-ES',
+                {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                }
+              )
+              : 'No disponible'}
+          </span>
+        </div>
+        <div>
+          <span className='font-semibold'>Estado: </span>
+          <span>{consulta.estado?.estado}</span>
+        </div>
+        <div>
+          <span className='font-semibold'>Sintomas: </span>
+          <span>{consulta.sintomas}</span>
+        </div>
       </div>
+    </div>
+    </div>
     </aside>
 
-      <aside>
-        <h2 className="text-2xl font-medium my-2">Diagnostico</h2>
+      <aside className=''>
+        <h2 className="text-2xl font-medium my-2 text-center">Diagnostico</h2>
 
         <FormDiagnostic consulta={consulta} />
       </aside>
