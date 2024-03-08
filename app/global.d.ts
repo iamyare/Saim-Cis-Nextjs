@@ -11,6 +11,7 @@ declare global {
   type Citas = DB['public']['Tables']['citas']['Row']
   type EstadoConsultas = DB['public']['Tables']['estado_consultas']['Row']
   type PersonasUpdate = DB['public']['Tables']['personas']['Update']
+  type PersonasXUsuariosUpdate = DB['public']['Tables']['personas_x_usuarios']['Update']
 
   type UserType =
     | (Personas & { usuario: PersonasXUsuarios } & {

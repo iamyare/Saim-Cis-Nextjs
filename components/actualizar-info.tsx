@@ -9,7 +9,7 @@ import * as z from 'zod'
 import { updatePersona } from '@/app/(pages)/enfermero/actions'
 import { ToastContainer, toast } from 'react-toastify'
 import { type DropzoneState, useDropzone } from 'react-dropzone'
-import { uploadingImage } from '@/app/actions'
+// import { uploadingImage } from '@/app/actions'
 import { Button } from './ui/button'
 import { Icons } from './icons'
 import { useRouter } from 'next/navigation'
@@ -75,17 +75,29 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
       if (acceptedFiles.length > 0) {
-        const { data, error } = await uploadingImage({
-          file: acceptedFiles[0]
+        const formData = new FormData()
+        formData.append('file', acceptedFiles[0])
+        formData.append('upload_preset', 'saim-cis')
+
+        // URL de la API de Cloudinary para la carga de archivos
+        const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dxewyuyas/upload'
+
+        // Realizar la solicitud HTTP utilizando fetch
+        fetch(cloudinaryUploadUrl, {
+          method: 'POST',
+          body: formData
         })
-        if (error) {
-          toast.error('Error al subir la imagen')
-          console.error('Error al subir la imagen:', error)
-          return
-        }
-        if (data) {
-          toast.success('Imagen subida correctamente')
-        }
+          .then(async response => await response.json())
+          .then(data => {
+            // Manejar la respuesta de Cloudinary
+            console.log('Respuesta de Cloudinary:', data)
+            toast.success('Imagen subida correctamente')
+          })
+          .catch(error => {
+            // Manejar errores
+            toast.error('Error al subir la imagen')
+            console.error('Error al subir la imagen:', error)
+          })
       }
       if (!usuario || !usuario.id) {
         toast.error('Error: ID de usuario no disponible')
@@ -174,7 +186,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                   {...getRootProps()}
                   className={`mt-4 flex dark:text-gray-400 text-gray-600 flex-col justify-center items-center rounded-lg border-2 border-dashed border-gray-900/25 dark:border-gray-100/25 px-6 py-10 transition-colors duration-500 ${getClassName()}`}
                 >
-                  <input {...getInputProps()} />
+                  <input name='file' {...getInputProps()} />
                   {
                     acceptedFiles.length > 0 ? (
                       <p>Imagen seleccionada: {acceptedFiles[0].name}</p>

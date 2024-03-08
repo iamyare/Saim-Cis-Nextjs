@@ -217,15 +217,3 @@ export async function getIDEstadoConsultaByEstado ({ estado }: { estado: Estados
 
   return { dataIDEstado, errorIDEstado }
 }
-
-export async function uploadingImage ({ file }: { file: File }) {
-  const { data, error } = await supabase.storage
-    .from('avatars')
-    .upload(`${file.name}`, file, {
-      cacheControl: '3600',
-      upsert: false,
-      contentType: 'image/png, image/jpeg, image/jpg, image/webp, image/bmp, image/heic, image/heif'
-    })
-
-  return { data, error }
-}

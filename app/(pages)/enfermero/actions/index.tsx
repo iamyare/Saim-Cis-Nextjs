@@ -22,6 +22,7 @@ export async function updatePersona ({ id, data }: { id: string, data: PersonasU
     .eq('id', id)
     .select('*')
     .single()
+
   return { personaUpdate, errorPersonaUpdate }
 }
 
