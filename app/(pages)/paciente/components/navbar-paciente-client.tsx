@@ -23,7 +23,7 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
   const router = useRouter()
 
   return (
-    <Disclosure as="nav">
+    <Disclosure className="bg-white dark:bg-gray-900 border-b border-slate-100 dark:border-gray-800" as="nav">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
@@ -52,8 +52,8 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                         href={item.href}
                         className={classNames(
                           pathname === item.href
-                            ? 'bg-gray-100 dark:bg-gray-900 text-black dark:text-white'
-                            : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900  hover:text-black dark:hover:text-white',
+                            ? 'bg-gray-100 dark:bg-gray-800 text-black dark:text-white'
+                            : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-black dark:hover:text-white hover:transition-colors hover:duration-200',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={
@@ -105,7 +105,7 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                             <span className="text-sm text-gray-900 dark:text-gray-100 font-semibold">
                               Iniciaste con:
                             </span>
-                            <span className="text-sm text-gray-900 dark:text-gray-100">
+                            <span className="text-sm text-gray-900 dark:text-gray-100 truncate">
                               {user.usuario.correo}
                             </span>
                           </div>
@@ -126,8 +126,8 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                               <Link
                                 href={`/${rol.rol.toLowerCase()}`}
                                 className={classNames(
-                                  active ? 'bg-gray-100 dark:bg-gray-800' : '',
-                                  'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
+                                  active ? 'bg-gray-100 dark:bg-gray-800 pointer-events-none' : '',
+                                  'block px-4 py-2 text-gray-900 dark:text-gray-100 w-full text-start hover:bg-neutral-100 dark:hover:bg-gray-800'
                                 )}
                               >
                                 Perfil de {rol.rol}
@@ -161,7 +161,7 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="sm:hidden bg-white dark:bg-gray-900">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Disclosure.Button
@@ -170,8 +170,8 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? 'bg-gray-200 text-white'
-                      : 'text-gray-300 hover:bg-gray-200 hover:text-white',
+                      ? 'bg-gray-100 dark:bg-slate-800  text-gray-900 dark:text-gray-100'
+                      : 'text-gray-900 dark:text-gray-100  hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-slate-800',
                     'block rounded-md px-3 py-2 text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}

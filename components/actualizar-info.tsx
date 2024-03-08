@@ -148,7 +148,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                     className={
                       errors.descripcion
                         ? 'border-red-500 !placeholder-red-500 text-red-500'
-                        : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm'
+                        : 'block w-full rounded-md border-0 py-1.5 dark:text-white dark:bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600'
                     }
                     {...register('descripcion')}
                   />
@@ -218,35 +218,17 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3 px-4">
                 <Label
-                  htmlFor="first-name"
-                  className="block  font-medium dark:text-white text-gray-900"
-                >
-                  Nombre
-                </Label>
-                <div className="mt-2">
-                  <Input
-                    type="text"
-                    autoComplete="given-name"
-                    className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                    defaultValue={usuario?.nombre}
-                    disabled
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3 px-4">
-                <Label
-                  htmlFor="last-name"
+                  htmlFor="full-name"
                   className="block font-medium dark:text-white text-gray-900"
                 >
-                  Apellido
+                  Nombre Completo
                 </Label>
                 <div className="mt-2">
                   <Input
                     type="text"
-                    autoComplete="family-name"
+                    autoComplete="name"
                     className="block w-full rounded-md border-0 py-1.5 dark:bg-transparent dark:text-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                    defaultValue={usuario?.apellido}
+                    defaultValue={`${usuario?.nombre} ${usuario?.apellido}`}
                     disabled
                   />
                 </div>
@@ -391,14 +373,14 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
           <div className="mt-6 flex items-center justify-end gap-x-6">
             <Button
               type="button"
-              className="text-sm font-semibold leading-6 dark:text-white text-gray-900"
+              className="text-sm font-semibold leading-6 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white text-gray-900"
               onClick={back}
             >
               Cancelar
             </Button>
             <Button
               disabled={isPending}
-              className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+              className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 font-semibold rounded-lg transition-colors duration-200 border hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
             >
               {isPending && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
