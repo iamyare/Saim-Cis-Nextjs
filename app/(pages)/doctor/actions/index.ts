@@ -44,8 +44,6 @@ export async function createDiagnostico ({ data }: { data: DiagnosticoInsert }) 
     .insert({ ...data })
     .select('*')
     .single()
-
-  console.log(diagnostico, errorDiagnostico)
   return { diagnostico, errorDiagnostico }
 }
 
