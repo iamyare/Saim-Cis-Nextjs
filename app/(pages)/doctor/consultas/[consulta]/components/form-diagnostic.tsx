@@ -175,6 +175,8 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
               Ingrese una enfermedad o varias enfermedades separadas por comas
             </p>
           </div>
+
+          <div>
           <div className="flex gap-1  border border-solid rounded-md items-center px-2">
             <ul
               className=' flex gap-1'
@@ -194,16 +196,21 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
 
               ))}
             </ul>
+
             <Input
               type="text"
               autoComplete="enfermedades"
               placeholder="enfermedades"
-              className='border-0 outline-none focus:!ring-0 focus:!border-0 focus:ring-offset-0  focus-visible:ring-offset-0 '
+              className='border-0 outline-none focus:!ring-0 focus:!border-0 focus:ring-offset-0  focus-visible:ring-offset-0'
               onKeyDown={handleKeyDown}
               onBlur={handleBlur}
               disabled={isPending}
             />
-
+          </div>
+          {errors.enfermedades && (
+                <p className="text-xs italic text-red-500 mt-0 my-0">
+                  {errors.enfermedades?.message}
+                </p>)}
           </div>
             <div className="grid gap-1">
               <Label className="" htmlFor="observaciones">
