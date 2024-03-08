@@ -6,7 +6,6 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { CheckBox } from '@/components/ui/checkbox'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -15,22 +14,20 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useTransition } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { createDiagnostico } from '../../../actions'
+import { CheckBox } from '@/components/ui/checkbox'
 
 const validationSchema = z.object({
-/*   enfermedades: z.string().min(1, { message: 'Las enfermedades son requeridas' }), */
-  observacion: z.string().min(1, { message: 'Las observaciones son requeridas' }),
   id_expediente: z.string(),
   id_consulta: z.string(),
   interno: z.boolean(),
   diferencial: z.boolean(),
-  fecha_diagnostico: z.string().min(1, { message: 'La fecha del diagnostico es requerida' }),
   enfermedades: z
-    .string()
-    .min(1, { message: 'Es obligatorio ingresar al menos una enfermedad' })
-    .regex(/^\s*[^.,;:\s]+(?:\s+[^.,;:\s]+)*\s*(?:,\s*[^.,;:\s]+(?:\s+[^.,;:\s]+)*\s*)*$/, {
-      message: 'Si ingresa mas de una enfermedad estas deben estar separadas únicamente por comas'
-    }),
-  observaciones: z
+    .string(),
+  // .min(1, { message: 'Es obligatorio ingresar al menos una enfermedad' })
+  // .regex(/^\s*[^.,;:\s]+(?:\s+[^.,;:\s]+)*\s*(?:,\s*[^.,;:\s]+(?:\s+[^.,;:\s]+)*\s*)*$/, {
+  //   message: 'Si ingresa mas de una enfermedad estas deben estar separadas únicamente por comas'
+  // }),
+  observacion: z
     .string()
     .min(1, { message: 'La observación es obligatoria' })
 })
@@ -101,31 +98,18 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      enfermedades: '',
+      enfermedades: tagsEnfermedades,
       observacion: '',
-      id_expediente: '',
-      id_consulta: '',
+      id_expediente: consulta.id_expediente,
+      id_consulta: consulta.id,
       interno: true,
-      diferencial: false,
-      fecha_diagnostico: ''
+      diferencial: false
     }
   })
 
   function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
-      // Añadir dato del expediente
-      data.id_expediente = consulta.id_expediente
-
-      // Añadir dato de la consulta
-      data.id_consulta = consulta.id
-
-      // Generar fecha del diagnostico
-      data.fecha_diagnostico = new Date().toISOString()
-
-      // Añadir enfermedades
-      data.enfermedades = tagsEnfermedades
       console.log(tagsEnfermedades)
-
       const { diagnostico, errorDiagnostico } = await createDiagnostico({
         data
       })
@@ -148,25 +132,6 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
     <div className="grid gap-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
-            {/* <div className="grid gap-1">
-              <Input
-                type="text"
-                autoComplete="enfermedades"
-                placeholder="enfermedad 1, enfermedad 2,..."
-                disabled={isPending}
-                className={
-                  errors.enfermedades
-                    ? 'border-red-500  !placeholder-red-500 text-red-500'
-                    : ''
-                }
-                {...register('enfermedades')}
-              />
-              {errors.enfermedades && (
-                <p className="text-xs italic text-red-500 mt-0">
-                  {errors.enfermedades?.message}
-                </p>
-              )}
-            </div> */}
           <div className="grid gap-1">
             <Label className="" htmlFor="enfermedades">
               Enfermedades
@@ -208,10 +173,11 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
             />
           </div>
           {errors.enfermedades && (
-                <p className="text-xs italic text-red-500 mt-0 my-0">
-                  {errors.enfermedades?.message}
-                </p>)}
+            <p className="text-xs italic text-red-500 mt-0 my-0">
+              {errors.enfermedades?.message}
+            </p>)}
           </div>
+
             <div className="grid gap-1">
               <Label className="" htmlFor="observaciones">
                 Observaciones
@@ -222,15 +188,15 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
                 placeholder="observaciones"
                 disabled={isPending}
                 className={
-                  errors.observaciones
+                  errors.observacion
                     ? 'border-red-500  !placeholder-red-500 text-red-500'
                     : ''
                 }
-                {...register('observaciones')}
+                {...register('observacion')}
               />
-              {errors.observaciones && (
+              {errors.observacion && (
                 <p className="text-xs italic text-red-500 mt-0">
-                  {errors.observaciones?.message}
+                  {errors.observacion?.message}
                 </p>
               )}
             </div>
@@ -239,8 +205,6 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
           <div className="flex items-center justify-center gap-1 my-5 ">
             <CheckBox
               type="checkbox"
-              autoComplete=""
-              placeholder=""
               disabled={isPending}
               className={
                 errors.diferencial
@@ -254,7 +218,7 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
                 {errors.diferencial?.message}
               </p>
             )}
-            <Label className="mx-1" htmlFor="address">
+            <Label className="mx-1" htmlFor="diferencial">
               Más de una enfermedad
             </Label>
           </div>

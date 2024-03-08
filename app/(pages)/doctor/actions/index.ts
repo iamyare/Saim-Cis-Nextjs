@@ -37,7 +37,7 @@ export async function getConsultasById ({ id_consulta }: { id_consulta: string }
   return { consulta, errorConsulta }
 }
 
-/*
+// Crear un nuevo diagnostico
 export async function createDiagnostico ({ data }: { data: DiagnosticoInsert }) {
   const { data: diagnostico, error: errorDiagnostico } = await supabase
     .from('diagnosticos')
@@ -45,6 +45,18 @@ export async function createDiagnostico ({ data }: { data: DiagnosticoInsert }) 
     .select('*')
     .single()
 
+  console.log(diagnostico, errorDiagnostico)
   return { diagnostico, errorDiagnostico }
 }
-*/
+
+// Actualizar una consulta
+export async function updateConsulta ({ data }: { data: ConsultasUpdate }) {
+  const { data: consultaUpdate, error: errorConsultaUpdate } = await supabase
+    .from('consultas')
+    .update({ ...data })
+    .eq('id', data.id ?? '')
+    .select('*')
+    .single()
+
+  return { consultaUpdate, errorConsultaUpdate }
+}

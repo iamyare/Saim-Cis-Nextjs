@@ -11,7 +11,8 @@ declare global {
   type Citas = DB['public']['Tables']['citas']['Row']
   type EstadoConsultas = DB['public']['Tables']['estado_consultas']['Row']
   type InfoConsultas = DB['public']['Functions']['get_consultas_by_estado_and_filter_pagination']['Returns']
-  //type DiagnosticoInsert = DB['public']['Tables']['diagnosticos']['Insert']
+  type DiagnosticoInsert = DB['public']['Tables']['diagnosticos']['Insert']
+  type ConsultasUpdate = DB['public']['Tables']['consultas']['Update']
 
   type UserType =
     | (Personas & { usuario: PersonasXUsuarios } & {
