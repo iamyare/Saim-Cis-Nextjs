@@ -12,26 +12,7 @@ import { type DropzoneState, useDropzone } from 'react-dropzone'
 import { uploadingImage } from '@/app/actions'
 import { Button } from './ui/button'
 import { Icons } from './icons'
-import { v2 as cloudinary } from 'cloudinary'
-import { useRouter } from 'next/router'
-
-cloudinary.config({
-  cloud_name: 'ddnxbx2t2',
-  api_key: '857483761792718',
-  api_secret: '***************************'
-})
-
-const subirImagen = async (file: File) => {
-  const uploadResult = await cloudinary.uploader.upload(file.name, {
-    width: 500,
-    height: 500,
-    crop: 'fill',
-    quality: 'auto',
-    fetch_format: 'auto'
-  })
-
-  return uploadResult
-}
+import { useRouter } from 'next/navigation'
 
 const validationSchema = z.object({
   direccion: z.string().min(1, { message: 'La dirección es obligatoria' }),
@@ -48,21 +29,16 @@ type ValidationSchema = z.infer<typeof validationSchema>
 
 export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   const [isPending, startTransition] = useTransition()
+  const router = useRouter()
 
   // Funcion que se ejecuta cuando se suelta el archivo en la dropzone
   const onDrop = async (acceptedFiles: File[]) => {
     // Verifica que se haya seleccionado al menos un archivo
-    if (acceptedFiles.length === 0) {
-      console.error('No se seleccionó ningún archivo')
-      return
-    }
+    console.log('Archivo seleccionado: ', acceptedFiles[0])
+  }
 
-    // Optimiza la imagen con Cloudinary
-    const file = acceptedFiles[0]
-    const uploadResult = await subirImagen(file)
-
-    // Muestra la URL segura de la imagen optimizada
-    console.log('URL segura de la imagen optimizada:', uploadResult.secure_url)
+  const back = () => {
+    router.back()
   }
 
   // Configuracion de la dropzone como manejar los eventos de arrastrar y soltar asi como la configuracion de los tipos de imagen que acepta
@@ -168,7 +144,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                 <div className="mt-2">
 
                   <Input
-                  placeholder='Escribe algunas frases sobre ti...'
+                    placeholder='Escribe algunas frases sobre ti...'
                     className={
                       errors.descripcion
                         ? 'border-red-500 !placeholder-red-500 text-red-500'
@@ -199,22 +175,22 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
                   className={`mt-4 flex dark:text-gray-400 text-gray-600 flex-col justify-center items-center rounded-lg border-2 border-dashed border-gray-900/25 dark:border-gray-100/25 px-6 py-10 transition-colors duration-500 ${getClassName()}`}
                 >
                   <input {...getInputProps()} />
-                    {
-                      acceptedFiles.length > 0 ? (
-                        <p>Imagen seleccionada: {acceptedFiles[0].name}</p>
-                      ) : (
-                        <>
-                          {isDragAccept && <p>Suelta la imagen</p>}
-                          {isDragReject && <p>Solo se permiten imagenes</p>}
-                          {!isDragActive && (
-                            <p>
-                              Arrastra y suelta una imagen aqui o haz click para
-                              seleccionar una imagen
-                            </p>
-                          )}
-                        </>
-                      )
-                    }
+                  {
+                    acceptedFiles.length > 0 ? (
+                      <p>Imagen seleccionada: {acceptedFiles[0].name}</p>
+                    ) : (
+                      <>
+                        {isDragAccept && <p>Suelta la imagen</p>}
+                        {isDragReject && <p>Solo se permiten imagenes</p>}
+                        {!isDragActive && (
+                          <p>
+                            Arrastra y suelta una imagen aqui o haz click para
+                            seleccionar una imagen
+                          </p>
+                        )}
+                      </>
+                    )
+                  }
 
                   {/* Muestra la vista previa de la imagen seleccionada */}
                   {acceptedFiles.length > 0 && (
@@ -416,10 +392,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
             <Button
               type="button"
               className="text-sm font-semibold leading-6 dark:text-white text-gray-900"
-              onClick={() => {
-                const router = useRouter()
-                router.back()
-              }}
+              onClick={back}
             >
               Cancelar
             </Button>
