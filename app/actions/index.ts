@@ -278,3 +278,67 @@ export async function getIDEstadoConsultaByEstado ({ estado }: { estado: Estados
 
   return { dataIDEstado, errorIDEstado }
 }
+
+export async function updatePersonasXUsuarios ({ id, avatarUrl, descripcion }: { id: string, avatarUrl: string, descripcion: string }) {
+  const { data: PersonasXUsuariosUpdate, error: errorPersonasXUsuariosUpdate } = await supabase
+    .from('personas_x_usuarios')
+    .update({ descripcion, avatar_url: avatarUrl })
+    .eq('id_persona', id)
+    .select('*')
+    .single()
+
+  return { PersonasXUsuariosUpdate, errorPersonasXUsuariosUpdate }
+}
+
+export async function updatePersona ({ data }: { data: PersonasUpdate & { descripcion: string, avatarUrl: string } }) {
+  const { id, descripcion, avatarUrl, ...rest } = data
+
+  const { data: personaUpdate, error: errorPersonaUpdate } = await supabase
+    .from('personas')
+    .update({ ...rest })
+    .eq('id', id ?? '')
+    .select('*')
+    .single()
+
+  // Actualizar la tabla personas_x_usuarios
+  // OJO: primero se verifica que no haya un error en la actualización de la tabla personas, si hay un error, no se actualiza la tabla personas_x_usuarios y se devuelve el error
+  if (personaUpdate) {
+    const { data: personaUpdate, error: errorPersonaUpdate } = await supabase
+      .from('personas_x_usuarios')
+      .update({ descripcion, avatar_url: avatarUrl })
+      .eq('id_persona', id ?? '')
+      .select('*')
+      .single()
+
+    return { personaUpdate, errorPersonaUpdate }
+  }
+
+  return { personaUpdate, errorPersonaUpdate }
+}
+
+export async function uploadAvatar ({ file }: { file: File }) {
+  console.log(file)
+  const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dxewyuyas/upload'
+
+  try {
+    const response = await fetch(cloudinaryUploadUrl, {
+      method: 'POST',
+      body: JSON.stringify({
+        file,
+        upload_preset: 'saim-cis'
+      })
+    })
+
+    const data = await response.json()
+    return { data, error: null }
+  } catch (error) {
+    return {
+      data: null,
+      error: {
+        message: `
+      Error al subir la imagen
+    `
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 // import { DetallesPage } from '../consultas/detalle/page'
 import { PencilSquareIcon } from '@heroicons/react/24/outline'
 
-export default function DataTableClient ({ consultas }: { consultas: InfoConsultas[] }) {
+export default function DataTableClient ({ consultas }: { consultas: InfoConsultas }) {
   const pathname = usePathname()
 
   return (
