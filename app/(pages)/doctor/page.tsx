@@ -6,7 +6,7 @@ import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Doctor',
-  description: 'Pagina de doctor'
+  description: 'Pagina de doctor.'
 }
 
 export default async function DoctorPage () {
