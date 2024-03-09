@@ -23,8 +23,8 @@ const config = {
     },
     extend: {
       colors: {
-        secundario: colors.blue[500],
-        secundariovariant: colors.blue,
+        sec: colors.sky[500],
+        'sec-var': colors.sky,
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

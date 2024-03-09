@@ -1,6 +1,24 @@
 import { readUserSession } from '@/lib/actions'
 import { supabase } from '@/lib/supabase'
 
+export function calcularEdad (fechaNacimiento: Date) {
+  const hoy = new Date()
+  const diferenciaEnMilisegundos = hoy.getTime() - fechaNacimiento.getTime()
+  const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 3600 * 24)
+  const diferenciaEnMeses = hoy.getMonth() - fechaNacimiento.getMonth() + (12 * (hoy.getFullYear() - fechaNacimiento.getFullYear()))
+  const diferenciaEnAños = hoy.getFullYear() - fechaNacimiento.getFullYear()
+
+  if (diferenciaEnDias < 30) {
+    return `${Math.floor(diferenciaEnDias)} días`
+  } else if (diferenciaEnAños < 1) {
+    return `${Math.floor(diferenciaEnMeses)} meses, ${Math.floor(diferenciaEnDias % 30)} días`
+  } else if (diferenciaEnAños >= 1 && diferenciaEnAños <= 5) {
+    return `${Math.floor(diferenciaEnAños)} años, ${Math.floor(diferenciaEnMeses % 12)} meses`
+  } else {
+    return `${Math.floor(diferenciaEnAños)} años`
+  }
+}
+
 export async function getUser ({ id }: { id: string }) {
   let usuarioModificado
   const { data: usuario, error: errorUsuario } = await supabase

@@ -7,11 +7,13 @@ import { forwardRef, useImperativeHandle, useState } from 'react'
 // al cambiar el estado del input se actualiza el estado del componente padre
 interface Props {
   onChange: (newState: string[]) => void
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement> // Añade esta línea
 }
 
 const InputTags = forwardRef<{ handleRemoveAllTags: () => void } | null, Props>(
-  function InputTags ({ onChange }: Props, ref) {
+  function InputTags ({ onChange, inputProps }: Props, ref) {
     const [tags, setTags] = useState<string[]>([])
+    const [isFocused, setIsFocused] = useState(false)
 
     // funcion para agregar un tag al array y pasar el array actualizado al componente padre
     const handleAddTag = (tag: string) => {
@@ -57,6 +59,7 @@ const InputTags = forwardRef<{ handleRemoveAllTags: () => void } | null, Props>(
         handleAddTag(tag)
         event.currentTarget.value = ''
       }
+      setIsFocused(false)
     }
 
     // funcion para remover un tag al hacer click en el icono de eliminar
@@ -66,15 +69,15 @@ const InputTags = forwardRef<{ handleRemoveAllTags: () => void } | null, Props>(
 
     return (
     <>
-      <div className='flex gap-1  border border-solid rounded-md items-center px-2'>
-        <ul className=' flex gap-1'>
+      <div className={`flex border border-solid rounded-md items-center ring-offset-background ring-ring ${isFocused ? '  ring-2 ring-offset-2' : ''} ${inputProps?.className ?? ''}`}>
+        <ul className=' flex'>
           {tags.map((tag, index) => (
             <li
               key={index}
-              className='text-white flex  group  bg-secundario rounded-lg  border-1 border-blue-400  px-2 py-1'>
+              className='ml-1 text-white flex  group  bg-sec rounded-lg  border-1 border-blue-400  px-2 py-1'>
               <p className=' capitalize text-sm truncate '>{tag}</p>
               <span
-                className='inline-flex justify-center items-center ml-2 rounded-full transition-colors hover:bg-secundariovariant-600 p-1 cursor-pointer'
+                className='inline-flex justify-center items-center ml-2 rounded-full transition-colors hover:bg-sec-var-600 p-1 cursor-pointer'
                 onClick={() => {
                   handleTagClick(index)
                 }}>
@@ -85,11 +88,13 @@ const InputTags = forwardRef<{ handleRemoveAllTags: () => void } | null, Props>(
         </ul>
 
         <Input
+          {...inputProps}
           className='border-0 outline-none focus:!ring-0 focus:!border-0 focus:ring-offset-0  focus-visible:ring-offset-0 '
           type='text'
-          placeholder='Ingresa una enfermedad'
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
+          onFocus={() => { setIsFocused(true) }}
+
         />
       </div>
     </>

@@ -13,7 +13,6 @@ import * as z from 'zod'
 import { ToastContainer, toast } from 'react-toastify'
 import { useTransition } from 'react'
 import { createDiagnostico } from '../../../actions'
-import { CheckBox } from '@/components/ui/checkbox'
 import InputTags from './input-tags'
 
 const validationSchema = z.object({
@@ -22,14 +21,12 @@ const validationSchema = z.object({
   interno: z.boolean(),
   diferencial: z.boolean(),
   enfermedades: z
-    .string(),
-  // .min(1, { message: 'Es obligatorio ingresar al menos una enfermedad' })
+    .string()
+    .min(1, { message: 'Es obligatorio ingresar al menos una enfermedad' }),
   // .regex(/^\s*[^.,;:\s]+(?:\s+[^.,;:\s]+)*\s*(?:,\s*[^.,;:\s]+(?:\s+[^.,;:\s]+)*\s*)*$/, {
   //   message: 'Si ingresa mas de una enfermedad estas deben estar separadas únicamente por comas'
   // }),
-  observacion: z
-    .string()
-    .min(1, { message: 'La observación es obligatoria' })
+  observacion: z.string().min(1, { message: 'La observación es obligatoria' })
 })
 
 type ValidationSchema = z.infer<typeof validationSchema>
@@ -40,11 +37,9 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
   const handleChildStateChange = (newTags: string[]) => {
     setTags(newTags)
   }
-  const inputTagsRef = React.useRef<{ handleRemoveAllTags: () => void } | null>(null)
-
-  const handleRemoveAllTags = () => {
-    inputTagsRef.current?.handleRemoveAllTags() // para eliminar todos los tags al recargo
-  }
+  const inputTagsRef = React.useRef<{ handleRemoveAllTags: () => void } | null>(
+    null
+  )
 
   const {
     register,
@@ -88,72 +83,70 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
     })
   }
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 max-w-lg mx-auto">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
           <div className="grid gap-1">
             <Label className="" htmlFor="enfermedades">
               Enfermedades
             </Label>
-            <p className="mt-1 leading-6 px-4 text-gray-600 dark:text-white">
-              Ingrese una enfermedad o varias enfermedades separadas por comas
-            </p>
-          </div>
-            <InputTags onChange={handleChildStateChange} ref={inputTagsRef}/>
-            <div className="grid gap-1">
-              <Label className="" htmlFor="observaciones">
-                Observaciones
-              </Label>
-              <Input
-                type="text"
-                autoComplete="observacion"
-                placeholder="observacion"
-                disabled={isPending}
-                className={
-                  errors.observacion
+            <div className="flex flex-col">
+              <InputTags
+                onChange={handleChildStateChange}
+                ref={inputTagsRef}
+                inputProps={{
+                  ...register('enfermedades'),
+                  placeholder: 'Ingresar enfermedades',
+                  disabled: isPending,
+                  className: errors.enfermedades
                     ? 'border-red-500  !placeholder-red-500 text-red-500'
                     : ''
-                }
-                {...register('observacion')}
+                }}
               />
-              {errors.observacion && (
-                <p className="text-xs italic text-red-500 mt-0">
-                  {errors.observacion?.message}
-                </p>
-              )}
+              <p className="ml-1 text-gray-600 dark:text-white text-sm">
+                Ingrese una enfermedad o varias enfermedades separadas por comas
+              </p>
             </div>
+            {errors.enfermedades && (
+              <p className="text-xs italic text-red-500 mt-0">
+                {errors.enfermedades?.message}
+              </p>
+            )}
           </div>
-
-          <div className="flex items-center justify-center gap-1 my-5 ">
-            <CheckBox
-              type="checkbox"
+          <div className="grid gap-1">
+            <Label className="" htmlFor="observaciones">
+              Observaciones
+            </Label>
+            <Input
+              type="text"
+              autoComplete="observacion"
+              placeholder="observacion"
               disabled={isPending}
               className={
-                errors.diferencial
+                errors.observacion
                   ? 'border-red-500  !placeholder-red-500 text-red-500'
                   : ''
               }
-              {...register('diferencial')}
+              {...register('observacion')}
             />
-            {errors.diferencial && (
+            {errors.observacion && (
               <p className="text-xs italic text-red-500 mt-0">
-                {errors.diferencial?.message}
+                {errors.observacion?.message}
               </p>
             )}
-            <Label className="mx-1" htmlFor="diferencial">
-              Más de una enfermedad
-            </Label>
           </div>
 
           <Button
-            disabled={isPending}
-            className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-          >
-            {isPending && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
-            )}
-            Agregar Diagnostico
-          </Button>
+          disabled={isPending}
+          className="py-3 px-4 max-w-sm mx-auto inline-flex bg-blue-500 text-white items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border   hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+        >
+          {isPending && (
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
+          )}
+          Agregar Diagnostico
+        </Button>
+        </div>
+
       </form>
 
       <ToastContainer
