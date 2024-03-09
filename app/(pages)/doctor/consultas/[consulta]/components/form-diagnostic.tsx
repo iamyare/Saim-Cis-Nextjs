@@ -40,6 +40,11 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
   const handleChildStateChange = (newTags: string[]) => {
     setTags(newTags)
   }
+  const inputTagsRef = React.useRef<{ handleRemoveAllTags: () => void } | null>(null)
+
+  const handleRemoveAllTags = () => {
+    inputTagsRef.current?.handleRemoveAllTags() // para eliminar todos los tags al recargo
+  }
 
   const {
     register,
@@ -72,6 +77,9 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
       } else {
         toast.success('Los Datos han sido guardados Exitosamente!')
         reset()
+
+        // Remover tags después de una inserción exitosa
+        inputTagsRef.current?.handleRemoveAllTags()
       }
 
       if (!diagnostico) {
@@ -91,7 +99,7 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
               Ingrese una enfermedad o varias enfermedades separadas por comas
             </p>
           </div>
-            <InputTags onChange={handleChildStateChange}/>
+            <InputTags onChange={handleChildStateChange} ref={inputTagsRef}/>
             <div className="grid gap-1">
               <Label className="" htmlFor="observaciones">
                 Observaciones
