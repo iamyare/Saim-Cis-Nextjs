@@ -6,7 +6,7 @@ import { useTransition } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import { updatePersona } from '@/app/(pages)/enfermero/actions'
+import { updatePersona, updatePersonasXUsuarios } from '@/app/(pages)/enfermero/actions'
 import { ToastContainer, toast } from 'react-toastify'
 import { type DropzoneState, useDropzone } from 'react-dropzone'
 // import { uploadingImage } from '@/app/actions'
@@ -92,6 +92,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
             // Manejar la respuesta de Cloudinary
             console.log('Respuesta de Cloudinary:', data)
             toast.success('Imagen subida correctamente')
+            actualizarPersonasUsuarios(data.secure_url)
           })
           .catch(error => {
             // Manejar errores
@@ -103,6 +104,24 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
         toast.error('Error: ID de usuario no disponible')
         return
       }
+
+      const actualizarPersonasUsuarios = async (avatarUrl: string) => {
+        const { PersonasXUsuariosUpdate, errorPersonasXUsuariosUpdate } = await updatePersonasXUsuarios({
+          id: usuario?.id,
+          avatarUrl,
+          descripcion: data.descripcion
+        })
+
+        if (errorPersonasXUsuariosUpdate) {
+          toast.error(errorPersonasXUsuariosUpdate.message)
+          return
+        }
+
+        if (!PersonasXUsuariosUpdate) {
+          toast.error('Error al actualizar la persona')
+        }
+      }
+
       const { personaUpdate, errorPersonaUpdate } = await updatePersona({
         id: usuario?.id,
         data

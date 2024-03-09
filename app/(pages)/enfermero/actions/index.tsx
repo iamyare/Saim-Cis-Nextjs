@@ -15,6 +15,17 @@ interface CreatePersona {
   genero: string
 }
 
+export async function updatePersonasXUsuarios ({ id, avatarUrl, descripcion }: { id: string, avatarUrl: string, descripcion: string }) {
+  const { data: PersonasXUsuariosUpdate, error: errorPersonasXUsuariosUpdate } = await supabase
+    .from('personas_x_usuarios')
+    .update({ descripcion, avatar_url: avatarUrl })
+    .eq('id_persona', id)
+    .select('*')
+    .single()
+
+  return { PersonasXUsuariosUpdate, errorPersonasXUsuariosUpdate }
+}
+
 export async function updatePersona ({ id, data }: { id: string, data: PersonasUpdate }) {
   const { data: personaUpdate, error: errorPersonaUpdate } = await supabase
     .from('personas')
