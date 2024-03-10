@@ -313,12 +313,13 @@ export async function uploadAvatar ({ file }: { file: File }) {
   const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dxewyuyas/upload'
 
   try {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('upload_preset', 'saim-cis')
+
     const response = await fetch(cloudinaryUploadUrl, {
       method: 'POST',
-      body: JSON.stringify({
-        file,
-        upload_preset: 'saim-cis'
-      })
+      body: formData
     })
 
     const data = await response.json()

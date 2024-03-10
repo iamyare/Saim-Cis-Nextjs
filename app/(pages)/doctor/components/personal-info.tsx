@@ -1,9 +1,17 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
+
 export default function PersonalInfo ({ usuario }: { usuario: UserType }) {
+  const router = useRouter()
   const currentDate = new Date()
   const createdAtDate = new Date(usuario?.usuario.created_at ?? currentDate)
   let antiguedad = 'N/A'
+
+  const actualizarPerfil = () => {
+    router.push('/perfil')
+  }
 
   if (usuario?.usuario.created_at) {
     const diffYears = currentDate.getFullYear() - createdAtDate.getFullYear()
@@ -80,6 +88,14 @@ export default function PersonalInfo ({ usuario }: { usuario: UserType }) {
           </span>
         </li>
       </ul>
+      <div>
+      <Button className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 font-semibold rounded-lg transition-colors duration-200 border hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+      onClick={actualizarPerfil}
+    >
+      Actualizar perfil
+    </Button>
+      </div>
     </div>
+
   )
 }

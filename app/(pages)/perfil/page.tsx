@@ -1,6 +1,5 @@
-// import NavbarPacienteClient from '../components/navbar-paciente-client'
 import { getInfoPersona } from '@/app/actions'
-import ActualizarPerfil from '@/app/components/actualizar-usuario'
+import ActualizarPerfil from '@/components/actualizar-info'
 
 export default async function PerfilPacientePage () {
   const { usuario, errorUsuario } = await getInfoPersona()
