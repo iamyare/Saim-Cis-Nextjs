@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { supabase } from '@/lib/supabase'
+import { getIDEstadoConsultaByEstado } from '@/app/actions'
 
 export async function getCitasByDoctor ({ id_doctor }: { id_doctor: string }) {
   const { data: citas, error: errorCitas } = await supabase
@@ -57,4 +58,18 @@ export async function updateConsulta ({ data }: { data: ConsultasUpdate }) {
     .single()
 
   return { consultaUpdate, errorConsultaUpdate }
+}
+
+export async function getEstadoConsultaAndChange ({ idConsulta, estado }: { idConsulta: string, estado: EstadosConsultas }) {
+  const { dataIDEstado, errorIDEstado } = await getIDEstadoConsultaByEstado({ estado })
+  if (dataIDEstado) {
+    const { data: dataUpdate, error: errorUpdate } = await supabase
+      .from('consultas')
+      .update({ id_estado_consulta: dataIDEstado.id })
+      .eq('id', idConsulta)
+      .select('*')
+      .single()
+    return { dataUpdate, errorUpdate }
+  }
+  return { dataIDEstado, errorIDEstado }
 }

@@ -12,8 +12,9 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { ToastContainer, toast } from 'react-toastify'
 import { useTransition } from 'react'
-import { createDiagnostico } from '../../../actions'
+import { createDiagnostico, getEstadoConsultaAndChange } from '../../../actions'
 import InputTags from './input-tags'
+import { useRouter } from 'next/router'
 
 const validationSchema = z.object({
   id_expediente: z.string(),
@@ -32,11 +33,17 @@ const validationSchema = z.object({
 type ValidationSchema = z.infer<typeof validationSchema>
 
 export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
+  const router = useRouter()
+
+  const handleRedirect = () => {
+    router.push('/doctor/consultas')
+  }
   const [isPending, startTransition] = useTransition()
   const [tags, setTags] = React.useState<string[]>([])
   const handleChildStateChange = (newTags: string[]) => {
     setTags(newTags)
   }
+
   const inputTagsRef = React.useRef<{ handleRemoveAllTags: () => void } | null>(
     null
   )
@@ -60,6 +67,9 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
 
   function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
+      if (tags.length > 1) {
+        data.diferencial = true
+      }
       // convirtiendo array de tags a string y agregando a la data que guardaremos
       data.enfermedades = tags.join(',')
       const { diagnostico, errorDiagnostico } = await createDiagnostico({
@@ -71,10 +81,12 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
         return
       } else {
         toast.success('Los Datos han sido guardados Exitosamente!')
+        getEstadoConsultaAndChange({ idConsulta: consulta.id, estado: 'completa' })
         reset()
 
         // Remover tags después de una inserción exitosa
         inputTagsRef.current?.handleRemoveAllTags()
+        handleRedirect()
       }
 
       if (!diagnostico) {
