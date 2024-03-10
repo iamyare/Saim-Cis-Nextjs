@@ -310,7 +310,7 @@ export async function updatePersona ({ data }: { data: PersonasUpdate & { descri
 
 export async function uploadAvatar ({ file }: { file: File }) {
   console.log(file)
-  const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dxewyuyas/upload'
+  const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dlfdaiz5u/upload'
 
   try {
     const formData = new FormData()

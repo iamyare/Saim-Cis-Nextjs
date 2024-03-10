@@ -68,7 +68,7 @@ export default function ActualizarPerfil ({ usuario }: { usuario: UserType }) {
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      descripcion: usuario?.usuario.descripcion ?? 'No hay descripcion',
+      descripcion: usuario?.usuario.descripcion ?? '',
       telefono: usuario?.telefono ?? 'No hay telefono',
       direccion: usuario?.direccion ?? 'No hay direccion'
     }

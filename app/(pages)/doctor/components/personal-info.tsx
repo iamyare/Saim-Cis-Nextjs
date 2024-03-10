@@ -88,8 +88,8 @@ export default function PersonalInfo ({ usuario }: { usuario: UserType }) {
           </span>
         </li>
       </ul>
-      <div>
-      <Button className="py-3 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 font-semibold rounded-lg transition-colors duration-200 border hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+      <div className='flex justify-center py-2'>
+      <Button className=" py-4 px-4 inline-flex bg-blue-500 text-white items-center gap-x-2 font-semibold rounded-lg transition-colors duration-200 border hover:bg-blue-600 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
       onClick={actualizarPerfil}
     >
       Actualizar perfil
