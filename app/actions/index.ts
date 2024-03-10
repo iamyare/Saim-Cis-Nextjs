@@ -268,14 +268,6 @@ export async function getIDEstadoConsultaByEstado ({ estado }: { estado: Estados
     .eq('estado', estado)
     .single()
 
-  if (errorIDEstado) {
-    return { data: null, error: errorIDEstado }
-  }
-
-  if (!dataIDEstado) {
-    return { data: null, error: 'No se encontro el estado' }
-  }
-
   return { dataIDEstado, errorIDEstado }
 }
 
@@ -336,8 +328,8 @@ export async function uploadAvatar ({ file }: { file: File }) {
       data: null,
       error: {
         message: `
-      Error al subir la imagen
-    `
+                  Error al subir la imagen
+                `
       }
     }
   }

@@ -14,7 +14,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useTransition } from 'react'
 import { createDiagnostico, getEstadoConsultaAndChange } from '../../../actions'
 import InputTags from './input-tags'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 const validationSchema = z.object({
   id_expediente: z.string(),
@@ -24,20 +24,25 @@ const validationSchema = z.object({
   enfermedades: z
     .string()
     .min(1, { message: 'Es obligatorio ingresar al menos una enfermedad' }),
-  // .regex(/^\s*[^.,;:\s]+(?:\s+[^.,;:\s]+)*\s*(?:,\s*[^.,;:\s]+(?:\s+[^.,;:\s]+)*\s*)*$/, {
-  //   message: 'Si ingresa mas de una enfermedad estas deben estar separadas únicamente por comas'
-  // }),
   observacion: z.string().min(1, { message: 'La observación es obligatoria' })
 })
 
 type ValidationSchema = z.infer<typeof validationSchema>
 
 export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
+  // Lo dejamos por defrecto porque aun no sabemos como implementarlo
+  if (consulta.id_estado_consulta === '5961389c-363d-4a9a-8c76-025b0421caff') {
+    getEstadoConsultaAndChange({ idConsulta: consulta.id, estado: 'diagnostico' })
+  }
+  // Redireccionar hacia consultas
   const router = useRouter()
 
+  // Funcion para redirijir hacia consultas y refrescar las consultas
   const handleRedirect = () => {
     router.push('/doctor/consultas')
+    router.refresh()
   }
+
   const [isPending, startTransition] = useTransition()
   const [tags, setTags] = React.useState<string[]>([])
   const handleChildStateChange = (newTags: string[]) => {
@@ -81,7 +86,7 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
         return
       } else {
         toast.success('Los Datos han sido guardados Exitosamente!')
-        getEstadoConsultaAndChange({ idConsulta: consulta.id, estado: 'completa' })
+        getEstadoConsultaAndChange({ idConsulta: consulta.id, estado: 'completada' })
         reset()
 
         // Remover tags después de una inserción exitosa
@@ -99,7 +104,7 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3">
           <div className="grid gap-1">
-            <Label className="" htmlFor="enfermedades">
+            <Label className="my-1.5" htmlFor="enfermedades">
               Enfermedades
             </Label>
             <div className="flex flex-col">
@@ -115,7 +120,7 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
                     : ''
                 }}
               />
-              <p className="ml-1 text-gray-600 dark:text-white text-sm">
+              <p className="ml-1 text-gray-600 dark:text-white text-sm my-1.5">
                 Ingrese una enfermedad o varias enfermedades separadas por comas
               </p>
             </div>
@@ -126,13 +131,13 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
             )}
           </div>
           <div className="grid gap-1">
-            <Label className="" htmlFor="observaciones">
+            <Label className="my-1.5" htmlFor="observaciones">
               Observaciones
             </Label>
             <Input
               type="text"
               autoComplete="observacion"
-              placeholder="observacion"
+              placeholder="Observaciones"
               disabled={isPending}
               className={
                 errors.observacion

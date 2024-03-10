@@ -71,5 +71,6 @@ export async function getEstadoConsultaAndChange ({ idConsulta, estado }: { idCo
       .single()
     return { dataUpdate, errorUpdate }
   }
+
   return { dataIDEstado, errorIDEstado }
 }

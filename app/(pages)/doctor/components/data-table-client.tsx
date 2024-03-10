@@ -16,10 +16,10 @@ export default function DataTableClient ({ consultas }: { consultas: InfoConsult
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead>
                     <tr>
-                    <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-600 dark:text-gray-400  uppercase">Paciente</th>
-                    <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">ID Consulta</th>
-                    <th scope="col" className="px-6 py-3 text-end text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Fecha Consulta</th>
-                    <th scope="col" className="px-6 py-3 text-end text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Estado</th>
+                    <th scope="col" className="px-3 py-3 text-start text-xs font-medium text-gray-600 dark:text-gray-400  uppercase">Paciente</th>
+                    <th scope="col" className="px-3 py-3 text-start text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">ID Consulta</th>
+                    <th scope="col" className="px-3 py-3 text-end text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Fecha Consulta</th>
+                    <th scope="col" className="px-3 py-3 text-end text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Estado</th>
                   </tr>
                   </thead>
                   <tbody >
@@ -43,7 +43,7 @@ export default function DataTableClient ({ consultas }: { consultas: InfoConsult
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-3 py-3">
-                          {consulta.dni}
+                          {consulta.id_consulta}
                         </td>
                         <td className="whitespace-nowrap px-3 py-3 text-end">
                           {consulta.fecha_consulta
@@ -51,8 +51,8 @@ export default function DataTableClient ({ consultas }: { consultas: InfoConsult
                               'es-ES',
                               {
                                 year: 'numeric',
-                                month: 'short',
-                                day: 'numeric'
+                                month: 'long',
+                                day: '2-digit'
                               }
                             )
                             : 'No disponible'}
@@ -65,7 +65,7 @@ export default function DataTableClient ({ consultas }: { consultas: InfoConsult
                                   ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-500'
                                   : consulta.estado_consulta === 'diagnostico'
                                   ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-500'
-                                  : consulta.estado_consulta === 'completada'
+                                  : consulta.estado_consulta === 'completa'
                                   ? 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-500'
                                   : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900/30 dark:text-neutral-500'
                               }

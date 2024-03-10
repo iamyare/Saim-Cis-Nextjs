@@ -20,7 +20,7 @@ export default async function ConsultasPage ({
 
   // obtenemos el total de paginas por el estado y el query
   const totalPages = await getTotalPagesByEstadoAndQuery({
-    estado: 'completa',
+    estado: 'completada',
     query
   })
 
@@ -38,7 +38,7 @@ export default async function ConsultasPage ({
         {/* <AgregarPaciente /> */}
       </div>
       <Suspense fallback={<span>Cargando...</span>}>
-        <DataTable query={query} currentPage={currentPage} estado="completa" />
+        <DataTable query={query} currentPage={currentPage} estado="completada" />
       </Suspense>
       <div className="my-2 flex w-full justify-center">
         <Pagination totalPages={totalPages} />

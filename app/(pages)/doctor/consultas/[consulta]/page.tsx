@@ -22,7 +22,7 @@ export default async function page ({
   return (
     <main className=" container">
 
-    <aside className='flex flex-col md:flex-row border-b my-5'>
+    <aside className='flex flex-col md:flex-row border-b py-4'>
     <div className='w-full text-center'>
       <h2 className="text-2xl font-medium my-2">Detalles del Paciente</h2>
       <div>
@@ -118,8 +118,8 @@ export default async function page ({
     </div>
     </aside>
 
-      <aside className=''>
-        <h2 className="text-2xl font-medium my-2 text-center">Diagnostico</h2>
+      <aside className="">
+        <h2 className="text-2xl font-medium my-3 text-center">Diagnostico</h2>
 
         <FormDiagnostic consulta={consulta} />
       </aside>
