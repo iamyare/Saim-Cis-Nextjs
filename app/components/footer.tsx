@@ -36,19 +36,19 @@ export default function Footer () {
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <a
                   href="#nosotros"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:underline hover:text-sky-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:underline hover:text-sec"
                 >
                   Nosotros
                 </a>
                 <a
                   href="#doctores"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:underline hover:text-sky-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:underline hover:text-sec"
                 >
                   Doctores
                 </a>
                 <a
                   href="#servicios"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:underline hover:text-sky-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:underline hover:text-sec"
                 >
                   Servicios
                 </a>
@@ -62,17 +62,17 @@ export default function Footer () {
 
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:text-sky-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:text-sec cursor-default"
                 >
                   Teléfono: +504-9999-9999
                 </p>
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:text-sky-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:text-sec cursor-default"
                 >
                   Correo: saimcishon@gmail.com
                 </p>
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sky-400 hover:text-sky-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:text-sec cursor-default"
                 >
                   Dirección: Boulevard Suyapa, UNAH
                 </p>
@@ -90,7 +90,7 @@ export default function Footer () {
             <div className="flex -mx-2">
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sky-500 dark:hover:text-sky-400"
+                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sec dark:hover:text-sec-var-400"
                 aria-label="Reddit"
               >
                 <svg
@@ -105,7 +105,7 @@ export default function Footer () {
 
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sky-500 dark:hover:text-sky-400"
+                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sec dark:hover:text-sec-var-400"
                 aria-label="Facebook"
               >
                 <svg
@@ -120,7 +120,7 @@ export default function Footer () {
 
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sky-500 dark:hover:text-sky-400"
+                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sec dark:hover:text-sec-var-400"
                 aria-label="Github"
               >
                 <svg

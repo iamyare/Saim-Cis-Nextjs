@@ -65,7 +65,7 @@ export default function DoctorsSection () {
                   <h3 className="text-base font-semibold leading-7 tracking-tight ">
                     {person.name}
                   </h3>
-                  <p className="text-sm font-semibold leading-6 text-sky-500 dark:text-sky-500">
+                  <p className="text-sm font-semibold leading-6 text-sec dark:text-sec">
                     {person.role}
                   </p>
                 </div>

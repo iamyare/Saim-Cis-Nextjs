@@ -174,7 +174,7 @@ export default function NavbarIndexClient ({ user }: { user: UserType }) {
                     </Transition>
                   </Menu>
                 ) : (
-                  <Link className="hover:text-sky-500" href="/login">Iniciar sesión</Link>
+                  <Link className="hover:text-sec" href="/login">Iniciar sesión</Link>
                 )}
               </div>
             </div>
