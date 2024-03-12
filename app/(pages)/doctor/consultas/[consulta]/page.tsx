@@ -1,6 +1,8 @@
 import { calcularEdad } from '@/app/actions'
 import { getConsultasById } from '../../actions'
 import FormDiagnostic from './components/form-diagnostic'
+import { PencilSquareIcon } from '@heroicons/react/24/outline'
+import { ModalEditarPreclinica } from '../../components/modal-editar-preclinica'
 
 export default async function page ({
   params
@@ -112,8 +114,18 @@ export default async function page ({
         <div>
           <span className='font-semibold'>Sintomas: </span>
           <span className='capitalize'>{consulta.sintomas}</span>
+          <div className='flex justify-center my-3'>
+            <button
+              data-hs-overlay="#hs-modal-editar-preclinica"
+              className="flex h-10 items-center w-full !mx-0 duration-700  md:w-auto md:mx-4 bg-sec rounded-lg hover:bg-sec-var-400 px-4 text-sm font-medium text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >
+              <span className="hidden md:block">Actualizar Signos V.</span>{' '}
+              <PencilSquareIcon className="h-5 md:ml-4" />
+            </button>
+          </div>
         </div>
       </div>
+
     </div>
     </div>
     </aside>
@@ -122,7 +134,12 @@ export default async function page ({
         <h2 className="text-2xl font-medium my-3 text-center">Diagnostico</h2>
 
         <FormDiagnostic consulta={consulta} />
+
       </aside>
+      <div>
+        <ModalEditarPreclinica consulta={consulta} />
+      </div>
+
     </main>
   )
 }
