@@ -11,9 +11,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import LogoSaimCis from '@/components/logo-saim-cis'
 
 const navigation = [
-  { name: 'Consultas', href: '/doctor/consultas', current: false },
   { name: 'Perfil', href: '/doctor', current: true },
-  { name: 'Inicio', href: '/', current: false }
+  { name: 'Consultas', href: '/doctor/consultas', current: false }
 ]
 
 function classNames (...classes: string[]) {
@@ -143,6 +142,19 @@ export default function NavbarDoctorClient ({ user }: { user: UserType }) {
                           </span>
                         </Menu.Item>
                         )}
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              href="/perfil"
+                              className={classNames(
+                                active ? 'bg-gray-100 dark:bg-gray-800' : '',
+                                'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
+                              )}
+                            >
+                              Editar perfil
+                            </Link>
+                          )}
+                        </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
                             <button

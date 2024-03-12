@@ -30,10 +30,6 @@ const validationSchema = z.object({
 type ValidationSchema = z.infer<typeof validationSchema>
 
 export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
-  // Lo dejamos por defrecto porque aun no sabemos como implementarlo
-  if (consulta.id_estado_consulta === '5961389c-363d-4a9a-8c76-025b0421caff') {
-    getEstadoConsultaAndChange({ idConsulta: consulta.id, estado: 'diagnostico' })
-  }
   // Redireccionar hacia consultas
   const router = useRouter()
 

@@ -308,8 +308,33 @@ export async function updatePersona ({ data }: { data: PersonasUpdate & { descri
   return { personaUpdate, errorPersonaUpdate }
 }
 
+interface UploadResponse {
+  avatarUrl: string
+  asset_id: string
+  public_id: string
+  version: number
+  version_id: string
+  signature: string
+  width: number
+  height: number
+  format: string
+  resource_type: string
+  created_at: string
+  tags: string[]
+  pages: number
+  bytes: number
+  type: string
+  etag: string
+  placeholder: boolean
+  url: string
+  secure_url: string
+  folder: string
+  access_mode: string
+  original_filename: string
+  original_extension: string
+}
+
 export async function uploadAvatar ({ file }: { file: File }) {
-  console.log(file)
   const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dlfdaiz5u/upload'
 
   try {
@@ -323,7 +348,7 @@ export async function uploadAvatar ({ file }: { file: File }) {
     })
 
     const data = await response.json()
-    return { data, error: null }
+    return { data: data as UploadResponse, error: null }
   } catch (error) {
     return {
       data: null,
