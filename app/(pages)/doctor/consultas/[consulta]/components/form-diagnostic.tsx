@@ -82,7 +82,7 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
         return
       } else {
         toast.success('Los Datos han sido guardados Exitosamente!')
-        getEstadoConsultaAndChange({ idConsulta: consulta.id, estado: 'completada' })
+        await getEstadoConsultaAndChange({ idConsulta: consulta.id, estado: 'completada' })
         reset()
 
         // Remover tags después de una inserción exitosa

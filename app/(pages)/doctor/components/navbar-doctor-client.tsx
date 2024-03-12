@@ -28,6 +28,11 @@ export default function NavbarDoctorClient ({ user }: { user: UserType }) {
     router.push('/')
   }
 
+  const handleRedirect = (href: string) => {
+    router.push(href)
+    router.refresh()
+  }
+
   return (
     <Disclosure className="bg-white dark:bg-gray-900 border-b border-slate-100 dark:border-gray-800" as="nav">
       {({ open }) => (
@@ -53,9 +58,9 @@ export default function NavbarDoctorClient ({ user }: { user: UserType }) {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <Link
+                      <button
                         key={item.name}
-                        href={item.href}
+                        onClick={() => { handleRedirect(item.href) }}
                         className={classNames(
                           pathname === item.href
                             ? 'bg-gray-100 dark:bg-gray-800 text-black dark:text-white'
@@ -67,7 +72,7 @@ export default function NavbarDoctorClient ({ user }: { user: UserType }) {
                         }
                       >
                         {item.name}
-                      </Link>
+                      </button>
                     ))}
                   </div>
                 </div>
