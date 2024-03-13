@@ -22,6 +22,11 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
   const pathname = usePathname()
   const router = useRouter()
 
+  const handleLogout = async () => {
+    await logoutUser()
+    router.push('/')
+  }
+
   return (
     <Disclosure className="bg-white dark:bg-gray-900 border-b border-slate-100 dark:border-gray-800" as="nav">
       {({ open }) => (
@@ -30,7 +35,7 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-900 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-900 hover:text-black dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 hover:text-black dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Abrir el menu</span>
                   {open ? (
@@ -41,9 +46,9 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
+                <Link className="flex flex-shrink-0 items-center" href='/'>
                   <LogoSaimCis />
-                </div>
+                </Link>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -53,7 +58,7 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                         className={classNames(
                           pathname === item.href
                             ? 'bg-gray-100 dark:bg-gray-800 text-black dark:text-white'
-                            : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-black dark:hover:text-white hover:transition-colors hover:duration-200',
+                            : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800  hover:text-black dark:hover:text-white hover:transition-colors hover:duration-200',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={
@@ -78,7 +83,7 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                         <span className="sr-only">Open user menu</span>
                         {user?.usuario.avatar_url ? (
                           <img
-                            className="h-8 w-8 rounded-full"
+                            className="h-8 w-8 rounded-full object-cover"
                             src={user?.usuario.avatar_url}
                             alt={`Foto de perfil de ${user?.nombre}`}
                           />
@@ -111,37 +116,48 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                           </div>
                         </Menu.Item>
                         <hr />
-                        {user.role.length > 1 ? (
-                          <Menu.Item>
-                            <div className="flex flex-col gap-1 pt-2 px-4">
-                              <span className="text-sm text-gray-900 dark:text-gray-100 font-semibold">
-                                Ver por:
-                              </span>
-                            </div>
-                          </Menu.Item>
-                        ) : null}
-                        {user.role.map((rol, index) => (
+                        {user.role.length > 0 ? (
+                          user.role.map((rol, index) => (
                           <Menu.Item key={index}>
-                            {({ active }) => (
+                            {
                               <Link
                                 href={`/${rol.rol.toLowerCase()}`}
                                 className={classNames(
-                                  active ? 'bg-gray-100 dark:bg-gray-800 pointer-events-none' : '',
-                                  'block px-4 py-2 text-gray-900 dark:text-gray-100 w-full text-start hover:bg-neutral-100 dark:hover:bg-gray-800'
+                                  rol.rol.toLowerCase() === pathname.split('/')[1] ? 'bg-gray-100 dark:bg-gray-800 pointer-events-none' : '',
+                                  'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start hover:bg-neutral-100 dark:hover:bg-gray-800'
                                 )}
+                                aria-current={rol.rol.toLowerCase() === pathname.split('/')[1] ? 'page' : undefined}
+
                               >
                                 Perfil de {rol.rol}
                               </Link>
-                            )}
+                            }
                           </Menu.Item>
-                        ))}
+                          ))
+                        ) : (
+                        <Menu.Item>
+                          <span className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start">
+                            No hay roles asignados
+                          </span>
+                        </Menu.Item>
+                        )}
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              href="/perfil"
+                              className={classNames(
+                                active ? 'bg-gray-100 dark:bg-gray-800' : '',
+                                'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
+                              )}
+                            >
+                              Editar perfil
+                            </Link>
+                          )}
+                        </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              onClick={async () => {
-                                await logoutUser()
-                                router.push('/')
-                              }}
+                              onClick={handleLogout}
                               className={classNames(
                                 active ? 'bg-gray-100 dark:bg-gray-800' : '',
                                 'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
@@ -155,7 +171,7 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                     </Transition>
                   </Menu>
                 ) : (
-                  <Link href="/login">Iniciar sesión</Link>
+                  <Link className="hover:text-blue-500" href="/login">Iniciar sesión</Link>
                 )}
               </div>
             </div>
@@ -169,12 +185,12 @@ export default function NavbarPacienteClient ({ user }: { user: UserType }) {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current
+                    pathname === item.href
                       ? 'bg-gray-100 dark:bg-slate-800  text-gray-900 dark:text-gray-100'
                       : 'text-gray-900 dark:text-gray-100  hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-slate-800',
                     'block rounded-md px-3 py-2 text-base font-medium'
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={pathname === item.href ? 'page' : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>

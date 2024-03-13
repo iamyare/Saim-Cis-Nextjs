@@ -89,7 +89,7 @@ export default function NavbarDoctorClient ({ user }: { user: UserType }) {
                         <span className="sr-only">Open user menu</span>
                         {user?.usuario.avatar_url ? (
                           <img
-                            className="h-8 w-8 rounded-full"
+                            className="h-8 w-8 rounded-full object-cover"
                             src={user?.usuario.avatar_url}
                             alt={`Foto de perfil de ${user?.nombre}`}
                           />

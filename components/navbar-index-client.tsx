@@ -144,12 +144,12 @@ export default function NavbarIndexClient ({ user }: { user: UserType }) {
                           </span>
                         </Menu.Item>
                         )}
-                                                <Menu.Item>
+<Menu.Item>
                           {({ active }) => (
                             <Link
                               href="/perfil"
                               className={classNames(
-                                pathname === '/perfil' ? 'bg-gray-100 dark:bg-gray-800' : '',
+                                active ? 'bg-gray-100 dark:bg-gray-800' : '',
                                 'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
                               )}
                             >
