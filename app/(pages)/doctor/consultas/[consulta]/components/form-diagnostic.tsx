@@ -158,7 +158,6 @@ export default function FormDiagnostic ({ consulta }: { consulta: Consultas }) {
           )}
           Agregar Diagnostico
         </Button>
-
         </div>
 
       </form>
