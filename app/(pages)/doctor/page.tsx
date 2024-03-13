@@ -1,8 +1,8 @@
 import { getInfoPersona } from '@/app/actions'
 import CitasInfo from './components/citas-info'
-import HeaderProfile from './components/header-profile'
 import PersonalInfo from './components/personal-info'
 import { type Metadata } from 'next'
+import HeaderProfile from '@/app/components/header-profile'
 
 export const metadata: Metadata = {
   title: 'Doctor',

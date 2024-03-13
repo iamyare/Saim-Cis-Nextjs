@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 // import { DetallesPage } from '../consultas/detalle/page'
+
 import { PencilSquareIcon } from '@heroicons/react/24/outline'
 
 export default function DataTableClient ({ consultas }: { consultas: InfoConsultas }) {

@@ -34,6 +34,7 @@ export default async function DataTable ({
       </div>
     )
   }
+
   return (
     <>
       <div>

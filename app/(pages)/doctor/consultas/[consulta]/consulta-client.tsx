@@ -1,30 +1,9 @@
+'use client'
 
 import { calcularEdad } from '@/app/actions'
-import { getConsultasById } from '../../actions'
 import FormDiagnostic from './components/form-diagnostic'
-import { PencilSquareIcon } from '@heroicons/react/24/outline'
-import { ModalEditarPreclinica } from '../../components/modal-editar-preclinica'
-import { getConsultasById, getEstadoConsultaAndChange } from '../../actions'
-import ConsultaClient from './consulta-client'
 
-
-export default async function page ({
-  params
-}: {
-  params: { consulta: string }
-}) {
-  const { consulta, errorConsulta } = await getConsultasById({
-    id_consulta: params.consulta
-  })
-
-  if (errorConsulta) {
-    return <h1>Error al cargar la consulta</h1>
-  }
-
-  if (!consulta) {
-    return <h1>Consulta no encontrada</h1>
-  }
-
+export default function ConsultaClient ({ consulta }: { consulta: Consultas & { expedientes: Expedientes & { personas: Personas } } & { estado: EstadoConsultas } }) {
   return (
     <main className=" container">
 
@@ -113,23 +92,15 @@ export default async function page ({
         </div>
         <div>
           <span className='font-semibold'>Estado: </span>
-          <span className='capitalize px-2 py-1 bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 rounded-md'>{consulta.estado?.estado}</span>
+          <span className='capitalize px-2 py-1 bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 rounded-md'>
+            {consulta.estado?.estado === 'preclinica' ? 'Diagnostico' : consulta.estado?.estado }
+            </span>
         </div>
         <div>
           <span className='font-semibold'>Sintomas: </span>
           <span className='capitalize'>{consulta.sintomas}</span>
-          <div className='flex justify-center my-3'>
-            <button
-              data-hs-overlay="#hs-modal-editar-preclinica"
-              className="flex h-10 items-center w-full !mx-0 duration-700  md:w-auto md:mx-4 bg-sec rounded-lg hover:bg-sec-var-400 px-4 text-sm font-medium text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            >
-              <span className="hidden md:block">Actualizar Signos V.</span>{' '}
-              <PencilSquareIcon className="h-5 md:ml-4" />
-            </button>
-          </div>
         </div>
       </div>
-
     </div>
     </div>
     </aside>
@@ -138,19 +109,7 @@ export default async function page ({
         <h2 className="text-2xl font-medium my-3 text-center">Diagnostico</h2>
 
         <FormDiagnostic consulta={consulta} />
-
       </aside>
-      <div>
-        <ModalEditarPreclinica consulta={consulta} />
-      </div>
-
     </main>
-
-  if (consulta.id_estado_consulta === '5961389c-363d-4a9a-8c76-025b0421caff') {
-    await getEstadoConsultaAndChange({ idConsulta: consulta.id, estado: 'diagnostico' })
-  }
-
-  return (
-    <ConsultaClient consulta={consulta} />
   )
 }

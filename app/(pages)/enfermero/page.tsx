@@ -1,6 +1,6 @@
 import { getInfoPersona } from '@/app/actions'
-import HeaderProfile from '../doctor/components/header-profile'
 import PersonalInfo from '../doctor/components/personal-info'
+import HeaderProfile from '@/app/components/header-profile'
 
 export default async function EnfermeroPage () {
   const { usuario, errorUsuario } = await getInfoPersona()

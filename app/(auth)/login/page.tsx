@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 }
 
 export default async function Login () {
-  // const { data } = await readUserSession()
   const { usuario } = await getInfoPersona()
 
   if (usuario) {
@@ -18,10 +17,6 @@ export default async function Login () {
       ? redirect('/resetpass')
       : redirect('/')
   }
-
-  // if (data.session) {
-  //   return redirect('/')
-  // }
 
   return <LoginAuth />
 }
