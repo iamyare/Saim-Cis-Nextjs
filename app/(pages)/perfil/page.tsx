@@ -1,7 +1,6 @@
 import { getInfoPersona } from '@/app/actions'
 import ActualizarPerfil from '@/app/components/actualizar-usuario'
 
-import NavbarIndex from '@/components/navbar-index'
 import NavbarDoctorClient from '../doctor/components/navbar-doctor-client'
 import NavbarEnfermeroClient from '../enfermero/components/navbar-enfermero-client'
 import NavbarPacienteClient from '../paciente/components/navbar-paciente-client'

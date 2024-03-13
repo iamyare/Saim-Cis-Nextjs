@@ -1,15 +1,54 @@
 'use client'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 // import { DetallesPage } from '../consultas/detalle/page'
 
 import { PencilSquareIcon } from '@heroicons/react/24/outline'
+import { getEstadoConsultaAndChange } from '../actions'
+import { useTransition } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+
+import LogoSaimCis from '@/components/logo-saim-cis'
+
+interface SendInfoConsultas {
+  estado_consulta: string
+  id_consulta: string
+}
 
 export default function DataTableClient ({ consultas }: { consultas: InfoConsultas }) {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const [isPending, startTransition] = useTransition()
+
+  const handleRedirect = (consulta: SendInfoConsultas) => {
+    startTransition(async () => {
+      if (consulta.estado_consulta === 'preclinica') {
+        const { dataIDEstado, errorIDEstado } = await getEstadoConsultaAndChange({ idConsulta: consulta.id_consulta, estado: 'diagnostico' })
+        if (errorIDEstado) {
+          toast.error('Error al cambiar el estado de la consulta')
+        }
+        if (!dataIDEstado) {
+          toast.error('Error al cambiar el estado de la consulta')
+        }
+      }
+    })
+    router.push(`${pathname}/${consulta.id_consulta}`)
+    router.refresh()
+  }
 
   return (
-
+<>
+        {
+          isPending && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50 dark:bg-black/50 ">
+              <div className="flex flex-col items-center gap-3 p-3">
+              <LogoSaimCis className="h-16 w-16 animate-bounce animate-infinite" />
+                <p className="text-lg text-gray-800 dark:text-gray-200">Cargando...</p>
+              </div>
+            </div>
+          )
+        }
         <div className="flex flex-col my-4">
           <div className="-m-1.5 overflow-x-auto">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -77,13 +116,17 @@ export default function DataTableClient ({ consultas }: { consultas: InfoConsult
                         </td>
                         <td>
                           <div className="flex justify-end">
-                            <Link className="py-2 px-3 my-1 mx-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border border-blue-600 text-blue-600 hover:bg-blue-500 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                href={`${pathname}/${consulta.id_consulta}`}
+                            <button className="py-2 px-3 my-1 mx-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border border-blue-600 text-blue-600 hover:bg-blue-500 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                              onClick={ () => {
+                                handleRedirect(
+                                  consulta
+                                )
+                              }}
                               >
                                   <span className="hidden md:block">Atender</span>{' '}
                                   <PencilSquareIcon className="h-5 md:ml-4" />
 
-                              </Link>
+                              </button>
                             {/* <div className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700" aria-labelledby="hs-dropdown-custom-icon-trigger">
                               <button data-hs-overlay="#hs-modal-preclinica" className="flex w-full items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" >
                                   Atender
@@ -98,7 +141,20 @@ export default function DataTableClient ({ consultas }: { consultas: InfoConsult
               </div>
             </div>
           </div>
+          <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
         </div>
+</>
 
   )
 }

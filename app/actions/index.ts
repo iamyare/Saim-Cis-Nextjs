@@ -210,7 +210,7 @@ export async function getUsersByRoleAndQuery ({
       rol_param: rol,
       filtro_param: query,
       offset_param: offset,
-      limit_param: currentPage * perPage - 1
+      limit_param: currentPage * perPage
     }
   )
 

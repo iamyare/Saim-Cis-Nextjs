@@ -62,15 +62,20 @@ export async function updateConsulta ({ data }: { data: ConsultasUpdate }) {
 
 export async function getEstadoConsultaAndChange ({ idConsulta, estado }: { idConsulta: string, estado: EstadosConsultas }) {
   const { dataIDEstado, errorIDEstado } = await getIDEstadoConsultaByEstado({ estado })
-  if (dataIDEstado) {
-    const { data: dataUpdate, error: errorUpdate } = await supabase
-      .from('consultas')
-      .update({ id_estado_consulta: dataIDEstado.id })
-      .eq('id', idConsulta)
-      .select('*')
-      .single()
-    return { dataUpdate, errorUpdate }
+
+  if (errorIDEstado) {
+    return { dataIDEstado, errorIDEstado }
   }
 
-  return { dataIDEstado, errorIDEstado }
+  if (!dataIDEstado) {
+    return { dataIDEstado, errorIDEstado }
+  }
+
+  const { data: dataUpdate, error: errorUpdate } = await supabase
+    .from('consultas')
+    .update({ id_estado_consulta: dataIDEstado.id })
+    .eq('id', idConsulta)
+    .select('*, estado:estado_consultas(*)')
+    .single()
+  return { dataIDEstado: dataUpdate, errorIDEstado: errorUpdate }
 }

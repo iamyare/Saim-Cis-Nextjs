@@ -2,10 +2,13 @@
 
 import { calcularEdad } from '@/app/actions'
 import FormDiagnostic from './components/form-diagnostic'
+import { ModalEditarPreclinica } from './components/modal-editar-preclinica'
+import { PencilSquareIcon } from '@heroicons/react/20/solid'
+import { Button } from '@/components/ui/button'
 
-export default function ConsultaClient ({ consulta }: { consulta: Consultas & { expedientes: Expedientes & { personas: Personas } } & { estado: EstadoConsultas } }) {
+export default function ConsultaClient ({ consulta }: { consulta: Consultas & { expedientes: Expedientes & { personas: Personas | null } | null } & { estado: EstadoConsultas | null } }) {
   return (
-    <main className=" container">
+    <main className="relative container">
 
     <aside className='flex flex-col md:flex-row border-b py-4'>
     <div className='w-full text-center'>
@@ -49,23 +52,23 @@ export default function ConsultaClient ({ consulta }: { consulta: Consultas & { 
       <div className="flex flex-col gap-2 my-2">
         <div>
           <span className='font-semibold'>Peso: </span>
-          <span className='capitalize'>{consulta.peso} kg/g</span>
+          <span className=''>{consulta.peso} kg/g</span>
         </div>
         <div>
           <span className='font-semibold'>Estatura: </span>
-          <span className='capitalize'>{consulta.estatura} m</span>
+          <span className=''>{consulta.estatura} metros</span>
         </div>
         <div>
           <span className='font-semibold'>Temperatura: </span>
-          <span className='capitalize'>{consulta.peso} c</span>
+          <span className=''>{consulta.peso} °C</span>
         </div>
         <div>
           <span className='font-semibold'>Presion Arterial: </span>
-          <span className='capitalize'>{consulta.presion_arterial}</span>
+          <span className=''>{consulta.presion_arterial} mm Hg</span>
         </div>
         <div>
           <span className='font-semibold'>Saturacion en Oxigeno: </span>
-          <span className='capitalize'>{consulta.saturacion_oxigeno}</span>
+          <span className=''>{consulta.saturacion_oxigeno}%</span>
         </div>
       </div>
     </div>
@@ -103,6 +106,24 @@ export default function ConsultaClient ({ consulta }: { consulta: Consultas & { 
       </div>
     </div>
     </div>
+
+    <div className="absolute end-5 top-5 col-start-1 text-end">
+    <div className="hs-tooltip inline-block [--placement:left]">
+
+    <Button type="button"
+              data-hs-overlay="#hs-modal-editar-preclinica"
+                size={'icon'}
+                variant={'ghost'}
+                className='  hs-tooltip-toggle'
+            >
+              <PencilSquareIcon className="h-5 " />
+              <span className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-sec-var-900/90 text-xs font-medium text-white rounded shadow-sm  " role="tooltip">
+                Actualizar signos vitales
+        </span>
+            </Button>
+    </div>
+  </div>
+
     </aside>
 
       <aside className="">
@@ -110,6 +131,9 @@ export default function ConsultaClient ({ consulta }: { consulta: Consultas & { 
 
         <FormDiagnostic consulta={consulta} />
       </aside>
+      <div>
+        <ModalEditarPreclinica consulta={consulta} />
+      </div>
     </main>
   )
 }
