@@ -11,7 +11,7 @@ import LogoSaimCis from '@/components/logo-saim-cis'
 
 const navigation = [
   { name: 'Perfil', href: '/enfermero', current: true },
-  { name: 'Pacientes', href: '/enfermero/pacientes', current: false }
+  { name: 'Pacientes', href: '/enfermero/pacientes?page=1', current: false }
 ]
 
 function classNames (...classes: string[]) {
