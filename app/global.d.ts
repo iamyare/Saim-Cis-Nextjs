@@ -3,6 +3,7 @@ import { type Database as DB } from '@/lib/database.types'
 declare global {
   type Database = DB
   type Personas = DB['public']['Tables']['personas']['Row']
+  type PersonasInsert = DB['public']['Tables']['personas']['Insert']
   type PersonasUpdate = DB['public']['Tables']['personas']['Update']
   type Expedientes = DB['public']['Tables']['expedientes']['Row']
   type Consultas = DB['public']['Tables']['consultas']['Row']

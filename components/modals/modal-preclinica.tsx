@@ -10,12 +10,14 @@ import {
 
 import { FormPreclinica } from './forms/form-preclinica'
 import { Button } from '../ui/button'
+import { PlusIcon } from '@heroicons/react/20/solid'
 
 export function ModalPreclinica ({ persona }: { persona: Personas | null }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'ghost'} className="justify-start">
+        <Button variant={'ghost'} className="justify-start font-normal ">
+        <PlusIcon className="h-4 w-4 mr-1" />
           Agregar consulta
         </Button>
       </DialogTrigger>

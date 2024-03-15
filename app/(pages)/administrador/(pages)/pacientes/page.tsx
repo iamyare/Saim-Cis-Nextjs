@@ -7,6 +7,7 @@ import Search from '@/components/search-query'
 import Pagination from '@/components/pagination'
 import TitlePage from '@/components/title-page'
 import DataTableSkeleton from '@/components/skeletons'
+import { ModalAgregarPaciente } from '../../components/modals/modal-agregar-paciente'
 
 export default async function PacientesAdministradorPagina ({
   searchParams
@@ -34,7 +35,7 @@ export default async function PacientesAdministradorPagina ({
       <TitlePage title="Pacientes" description="Listado de pacientes" />
           <div className="my-2 flex items-center  gap-2 md:mt-8">
             <Search placeholder="Buscar pacientes..." debounce={200} />
-            {/* <AgregarPaciente /> */}
+            <ModalAgregarPaciente />
           </div>
           <Suspense fallback={<DataTableSkeleton/>}>
             <DataTable query={query} currentPage={currentPage} rol="paciente" />
