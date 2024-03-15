@@ -194,9 +194,9 @@ export async function getTotalPagesByRoleAndQuery ({
 export async function getUsersByRoleAndQuery ({
   rol,
   query = '',
-  offset,
-  perPage,
-  currentPage
+  offset = 0,
+  perPage = 6,
+  currentPage = 1
 }: {
   rol: RolesPermissons
   query: string
@@ -204,6 +204,10 @@ export async function getUsersByRoleAndQuery ({
   perPage: number
   currentPage: number
 }) {
+  offset = isNaN(offset) ? 0 : offset
+  perPage = isNaN(perPage) ? 6 : perPage
+  currentPage = isNaN(currentPage) ? 1 : currentPage
+
   const { data: users, error } = await supabase.rpc(
     'get_personas_by_rol_and_filter_pagination',
     {
@@ -359,4 +363,28 @@ export async function uploadAvatar ({ file }: { file: File }) {
       }
     }
   }
+}
+
+// creando una consulta nueva (enfermero)
+export async function createConsulta ({
+  data
+}: {
+  data: ConsultasInsert
+}) {
+  const { data: consulta, error: errorConsulta } = await supabase
+    .from('consultas')
+    .insert({ ...data })
+    .select('*')
+    .single()
+  return { consulta, errorConsulta }
+}
+
+export async function getExpedienteByIDPaciente ({ id }: { id: string }) {
+  const { data: dataID, error: errorID } = await supabase
+    .from('expedientes')
+    .select('id')
+    .eq('id_persona', id)
+    .single()
+
+  return { dataID, errorID }
 }

@@ -10,15 +10,18 @@ import { useRouter, usePathname } from 'next/navigation'
 import LogoSaimCis from '@/components/logo-saim-cis'
 
 const navigation = [
-  { name: 'Perfil', href: '/enfermero', current: true },
-  { name: 'Pacientes', href: '/enfermero/pacientes', current: false }
+  { name: 'Perfil', href: '/administrador', current: true },
+  { name: 'Pacientes', href: '/administrador/pacientes', current: false },
+  { name: 'Doctores', href: '/administrador/doctores', current: false },
+  { name: 'Enfermeros', href: '/administrador/enfermeros', current: false },
+  { name: 'Administradores', href: '/administrador/administradores', current: false }
 ]
 
 function classNames (...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function NavbarEnfermeroClient ({ user }: { user: UserType }) {
+export default function NavbarAdministradorClient ({ user }: { user: UserType }) {
   const pathname = usePathname()
   const router = useRouter()
 

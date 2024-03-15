@@ -13,6 +13,7 @@ export default async function DataTable ({
   currentPage: number
   rol: RolesPermissons
 }) {
+  // await new Promise((resolve) => setTimeout(resolve, 5000))
   const offset = (currentPage - 1) * ITEMS_PER_PAGE
 
   const { users, error } = await getUsersByRoleAndQuery({

@@ -24,7 +24,7 @@ declare global {
     })
     | null
 
-    type RolesPermissons = 'doctor' | 'paciente' | 'admin' | 'enfermero'
+    type RolesPermissons = 'doctor' | 'paciente' | 'administrador' | 'enfermero'
     type EstadosConsultas = 'preclinica' | 'diagnostico' | 'completada'
     type PersonasAndUsuarios = Array<{
       id: string
