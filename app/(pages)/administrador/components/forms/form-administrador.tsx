@@ -52,7 +52,7 @@ const validationSchema = z.object({
 
 type ValidationSchema = z.infer<typeof validationSchema>
 
-export function AdministradorDoctorForm () {
+export function AdministradorAdministradorForm () {
   const [isPending, startTransition] = useTransition()
 
   const router = useRouter()
@@ -71,6 +71,7 @@ export function AdministradorDoctorForm () {
       fecha_nacimiento: '',
       direccion: '',
       telefono: ''
+
     }
   })
 
@@ -88,10 +89,7 @@ export function AdministradorDoctorForm () {
     }
 
     startTransition(async () => {
-      const { error } = await verifyUser({
-        correo: data.correo,
-        dni: data.dni
-      })
+      const { error } = await verifyUser({ correo: data.correo, dni: data.dni })
       if (error) {
         toast.error(error.message)
         return
@@ -110,7 +108,7 @@ export function AdministradorDoctorForm () {
 
       const { data: setRole, error: errorSetRole } = await setRoleUser({
         id: persona.id,
-        rol: 'doctor'
+        rol: 'administrador'
       })
 
       if (errorSetRole) {
@@ -119,7 +117,7 @@ export function AdministradorDoctorForm () {
       }
 
       if (!setRole) {
-        toast.error('Error al asignar el rol de doctor')
+        toast.error('Error al asignar el rol de administrador')
         return
       }
 
@@ -378,27 +376,29 @@ export function AdministradorDoctorForm () {
           <Button
             disabled={isPending}
             className="py-3 px-4 inline-flex bg-sec text-white items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border   hover:bg-sec-var-600  hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+
           >
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />
             )}
-            Registrar doctor
+            Registrar administrador
           </Button>
         </div>
       </form>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+                <ToastContainer
+                  position="top-right"
+                  autoClose={3000}
+                  hideProgressBar
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+
     </div>
   )
 }

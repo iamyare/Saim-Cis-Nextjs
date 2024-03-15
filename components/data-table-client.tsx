@@ -123,7 +123,7 @@ export default function DataTableClient ({
                         {usuario.fecha_nacimiento
                           ? new Date(
                             usuario.fecha_nacimiento
-                          ).toLocaleDateString('es-ES', {
+                          ).toLocaleDateString('es-Hn', {
                             year: 'numeric',
                             month: 'short',
                             day: 'numeric'
