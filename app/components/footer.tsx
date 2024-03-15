@@ -1,8 +1,9 @@
-"use client";
+'use client'
 
-import LogoSaimCis from "@/components/logo-saim-cis";
+import LogoSaimCis from '@/components/logo-saim-cis'
+import Link from 'next/link'
 
-export default function Footer() {
+export default function Footer () {
   return (
     <>
       <footer className="bg-slate-100 dark:bg-gray-900" id="contacto">
@@ -17,11 +18,11 @@ export default function Footer() {
                 <input
                   id="email"
                   type="text"
-                  className="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+                  className="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-sec-var-400 dark:focus:border-sec-var-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-sec-var-300"
                   placeholder="Email Address"
                 />
 
-                <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-700  md:w-auto md:mx-4 focus:outline-none bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+                <button className="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-700  md:w-auto md:mx-4 focus:outline-none bg-sec rounded-lg hover:bg-sec-var-600 dark:bg-sec focus:ring focus:ring-gray-300 focus:ring-opacity-80">
                   Suscribirse
                 </button>
               </div>
@@ -35,19 +36,19 @@ export default function Footer() {
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <a
                   href="#nosotros"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:underline hover:text-sec"
                 >
                   Nosotros
                 </a>
                 <a
                   href="#doctores"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:underline hover:text-sec"
                 >
                   Doctores
                 </a>
                 <a
                   href="#servicios"
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:underline hover:text-cyan-500"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:underline hover:text-sec"
                 >
                   Servicios
                 </a>
@@ -61,17 +62,17 @@ export default function Footer() {
 
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:text-sec cursor-default"
                 >
                   Teléfono: +504-9999-9999
                 </p>
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:text-sec cursor-default"
                 >
                   Correo: saimcishon@gmail.com
                 </p>
                 <p
-                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-cyan-400 hover:text-cyan-500 cursor-default"
+                  className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-sec-var-400 hover:text-sec cursor-default"
                 >
                   Dirección: Boulevard Suyapa, UNAH
                 </p>
@@ -82,12 +83,14 @@ export default function Footer() {
           <hr className="my-6 border-gray-200 md:my-8 dark:border-gray-700" />
 
           <div className="flex items-center justify-between">
-            <LogoSaimCis className="hover:fill-cyan-400 dark:hover:fill-cyan-600 cursor-pointer"/>
+            <Link href='/'>
+            <LogoSaimCis className=" cursor-pointer h-6 w-6"/>
+            </Link>
 
             <div className="flex -mx-2">
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sec dark:hover:text-sec-var-400"
                 aria-label="Reddit"
               >
                 <svg
@@ -102,7 +105,7 @@ export default function Footer() {
 
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sec dark:hover:text-sec-var-400"
                 aria-label="Facebook"
               >
                 <svg
@@ -117,7 +120,7 @@ export default function Footer() {
 
               <a
                 href="#"
-                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-sec dark:hover:text-sec-var-400"
                 aria-label="Github"
               >
                 <svg
@@ -134,5 +137,5 @@ export default function Footer() {
         </div>
       </footer>
     </>
-  );
+  )
 }

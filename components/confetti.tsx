@@ -1,20 +1,20 @@
-"use client";
-import { useState, useEffect } from "react";
-import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
-import { TConductorInstance } from "react-canvas-confetti/dist/types";
+'use client'
+import { useState, useEffect } from 'react'
+import Fireworks from 'react-canvas-confetti/dist/presets/fireworks'
+import { type TConductorInstance } from 'react-canvas-confetti/dist/types'
 
-export default function Confetti() {
-  const [conductor, setConductor] = useState<TConductorInstance>();
+export default function Confetti () {
+  const [conductor, setConductor] = useState<TConductorInstance>()
 
   useEffect(() => {
     if (conductor) {
-      conductor.shoot();
+      conductor.shoot()
     }
-  }, [conductor]);
+  }, [conductor])
 
   const onInit = ({ conductor }: { conductor: TConductorInstance }) => {
-    setConductor(conductor);
-  };
+    setConductor(conductor)
+  }
 
   return (
     <Fireworks
@@ -23,8 +23,8 @@ export default function Confetti() {
         ...options,
         spread: 360,
         ticks: 300,
-        gravity: 1,
+        gravity: 1
       })}
     />
-  );
+  )
 }

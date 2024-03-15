@@ -1,19 +1,19 @@
-import { readUserSession } from "@/lib/actions";
-import NavbarEnfermeroClient from "./navbar-enfermero-client";
-import { getUser } from "@/app/actions";
+import { readUserSession } from '@/lib/actions'
+import NavbarEnfermeroClient from './navbar-enfermero-client'
+import { getUser } from '@/app/actions'
 
-export default async function NavbarIndex() {
+export default async function NavbarIndex () {
   const {
-    data: { session },
-  } = await readUserSession();
+    data: { session }
+  } = await readUserSession()
   if (!session) {
-    return <NavbarEnfermeroClient user={null} />;
+    return <NavbarEnfermeroClient user={null} />
   }
 
-  const { usuario, errorUsuario } = await getUser({ id: session.user.id });
+  const { usuario, errorUsuario } = await getUser({ id: session.user.id })
   if (errorUsuario) {
-    console.error(errorUsuario);
+    console.error(errorUsuario)
   }
 
-  return <NavbarEnfermeroClient user={usuario ?? null} />;
+  return <NavbarEnfermeroClient user={usuario ?? null} />
 }

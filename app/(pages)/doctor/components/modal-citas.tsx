@@ -1,14 +1,14 @@
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { InfoCitas } from "./info-citas";
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { InfoCitas } from './info-citas'
 
-export function ModalCitas() {
+export function ModalCitas () {
   return (
     <>
       <button
         data-hs-overlay="#hs-modal-preclinica"
         className="flex h-10 items-center rounded-lg bg-cyan-600 px-4 text-sm font-medium text-white transition-colors hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
       >
-        <span className="hidden md:block">Abrir Modal</span>{" "}
+        <span className="hidden md:block">Abrir Modal</span>{' '}
         <PlusIcon className="h-5 md:ml-4" />
       </button>
       <div
@@ -34,5 +34,5 @@ export function ModalCitas() {
         </div>
       </div>
     </>
-  );
+  )
 }

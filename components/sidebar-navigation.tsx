@@ -1,8 +1,8 @@
-import LogoSaimCis from "@/components/logo-saim-cis";
-import React, { useState } from "react";
+import LogoSaimCis from '@/components/logo-saim-cis'
+import React, { useState } from 'react'
 
-export function SidebarNavigation() {
-  const [isHovered, setIsHovered] = useState(false);
+export function SidebarNavigation () {
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <>
@@ -15,16 +15,16 @@ export function SidebarNavigation() {
       </style>
       <div className="min-h-screen ">
         <div
-          className={`sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 bg-white dark:bg-slate-900 hover:shadow-lg`}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          className={'sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 bg-white dark:bg-slate-900 hover:shadow-lg'}
+          onMouseEnter={() => { setIsHovered(true) }}
+          onMouseLeave={() => { setIsHovered(false) }}
         >
           <div className="flex h-screen flex-col justify-between pt-2 pb-6">
             <div>
               <div className="w-max p-2.5">
                 <LogoSaimCis
                   className={`${
-                    isHovered ? "text-black dark:text-white" : " text-cyan-500"
+                    isHovered ? 'text-black dark:text-white' : ' text-sec'
                   } transition-colors duration-500`}
                 />
                 {/* <span className="-mr-1 font-medium text-white">Saim Sis</span> */}
@@ -34,7 +34,7 @@ export function SidebarNavigation() {
                   <a
                     href="#"
                     aria-label="dashboard"
-                    className="relative flex items-center space-x-4 bg-gradient-to-r from-sky-500 to-cyan-500 px-4 py-3 text-white"
+                    className="relative flex items-center space-x-4 bg-gradient-to-r from-sec to-sec px-4 py-3 text-white"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -43,13 +43,13 @@ export function SidebarNavigation() {
                       fill="currentColor"
                     >
                       <path
-                        className="fill-current text-gray-100 group-hover:text-cyan-300"
+                        className="fill-current text-gray-100 group-hover:text-sec-var-300"
                         fillRule="evenodd"
                         d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
                         clipRule="evenodd"
                       />
                       <path
-                        className="fill-current text-gray-300 group-hover:text-cyan-300"
+                        className="fill-current text-gray-300 group-hover:text-sec-var-300"
                         d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"
                       />
                     </svg>
@@ -70,18 +70,18 @@ export function SidebarNavigation() {
                     >
                       <path
                         d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                        className="fill-current text-cyan-400 dark:fill-slate-600"
+                        className="fill-current text-sec-var-400 dark:fill-slate-600"
                       ></path>
                       <path
                         d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
-                        className="fill-current text-cyan-200 group-hover:text-cyan-300"
+                        className="fill-current text-sec-var-200 group-hover:text-sec-var-300"
                       ></path>
                       <path
                         d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
-                        className="fill-current group-hover:text-sky-300"
+                        className="fill-current group-hover:text-sec-var-300"
                       ></path>
                     </svg>
-                    <span className="group-hover:text-cyan-300 text-gray-700 dark:text-gray-300">
+                    <span className="group-hover:text-sec-var-300 text-gray-700 dark:text-gray-300">
                       Citas
                     </span>
                   </a>
@@ -98,17 +98,17 @@ export function SidebarNavigation() {
                       fill="currentColor"
                     >
                       <path
-                        className="fill-current text-gray-300 group-hover:text-cyan-300"
+                        className="fill-current text-gray-300 group-hover:text-sec-var-300"
                         fillRule="evenodd"
                         d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
                         clipRule="evenodd"
                       />
                       <path
-                        className="fill-current text-gray-100 group-hover:text-cyan-300"
+                        className="fill-current text-gray-100 group-hover:text-sec-var-300"
                         d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"
                       />
                     </svg>
-                    <span className="group-hover:text-cyan-300 text-gray-700 dark:text-gray-300">
+                    <span className="group-hover:text-sec-var-300 text-gray-700 dark:text-gray-300">
                       Reports
                     </span>
                   </a>
@@ -125,15 +125,15 @@ export function SidebarNavigation() {
                       fill="currentColor"
                     >
                       <path
-                        className="fill-current text-gray-300 group-hover:text-cyan-300"
+                        className="fill-current text-gray-300 group-hover:text-sec-var-300"
                         d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"
                       />
                       <path
-                        className="fill-current text-gray-100 group-hover:text-cyan-300"
+                        className="fill-current text-gray-100 group-hover:text-sec-var-300"
                         d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
                       />
                     </svg>
-                    <span className="group-hover:text-cyan-300 text-gray-700 dark:text-gray-300">
+                    <span className="group-hover:text-sec-var-300 text-gray-700 dark:text-gray-300">
                       Other data
                     </span>
                   </a>
@@ -150,17 +150,17 @@ export function SidebarNavigation() {
                       fill="currentColor"
                     >
                       <path
-                        className="fill-current text-gray-100 group-hover:text-cyan-300"
+                        className="fill-current text-gray-100 group-hover:text-sec-var-300"
                         d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"
                       />
                       <path
-                        className="fill-current text-gray-300 group-hover:text-cyan-300"
+                        className="fill-current text-gray-300 group-hover:text-sec-var-300"
                         fillRule="evenodd"
                         d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="group-hover:text-cyan-300 text-gray-700 dark:text-gray-300">
+                    <span className="group-hover:text-sec-var-300 text-gray-700 dark:text-gray-300">
                       Finance
                     </span>
                   </a>
@@ -174,7 +174,7 @@ export function SidebarNavigation() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 group-hover:fill-cyan-300"
+                  className="h-5 w-5 group-hover:fill-sec-var-300"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -184,7 +184,7 @@ export function SidebarNavigation() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="group-hover:text-cyan-300 text-gray-700 dark:text-gray-300">
+                <span className="group-hover:text-sec-var-300 text-gray-700 dark:text-gray-300">
                   Settings
                 </span>
               </a>
@@ -193,5 +193,5 @@ export function SidebarNavigation() {
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import NavbarIndex from "@/components/navbar-index";
-//import NavbarIndexClient from "@/components/navbar-index-client";
-import React from "react";
+import NavbarIndex from '@/components/navbar-index'
+// import NavbarIndexClient from "@/components/navbar-index-client";
+import React from 'react'
 
-export default function Terminos() {
+export default function Terminos () {
   return (
     <>
       <NavbarIndex />
@@ -10,18 +10,18 @@ export default function Terminos() {
         <section className="flex flex-col px-12">
           <div className="my-2 md:mt-12 md:mb-6 text-center">
             <h1 className="block antialiased font-sans relative my-5 text-center text-4xl font-bold leading-tight tracking-normal text-black dark:text-white md:text-5xl">
-              {" "}
-              Terminos y Condiciones{" "}
+              {' '}
+              Terminos y Condiciones{' '}
             </h1>
           </div>
           <div className="grid grid-cols-12 ">
             <div className="col-span-12">
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit md:mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                GENERALIDADES{" "}
+                {' '}
+                GENERALIDADES{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 SAIM CIS gestiona este sitio web. En todo el sitio, los términos
                 nosotros, nos y nuestro se refieren en lo sucesivo a SAIM CIS.
                 SAIM CIS ofrece esta página web, incluida toda la información,
@@ -58,15 +58,15 @@ export default function Terminos() {
                 constituye la aceptación de dichos cambios. Nuestra tienda está
                 alojada en Shopify Inc. Nos proporcionan la plataforma de
                 comercio electrónico en línea que nos permite venderle nuestros
-                productos y servicios.{" "}
+                productos y servicios.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 1: TÉRMINOS DE LA TIENDA ONLINE{" "}
+                {' '}
+                SECCIÓN 1: TÉRMINOS DE LA TIENDA ONLINE{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 No puede utilizar nuestros productos para ningún fin ilegal o no
                 autorizado ni puede, al hacer uso del Servicio, infringir las
                 leyes de su jurisdicción (incluyendo de manera enunciativa más
@@ -74,16 +74,16 @@ export default function Terminos() {
                 ningún gusano o virus informáticos ni ningún código de
                 naturaleza destructiva. El incumplimiento o violación de
                 cualquiera de los Términos dará como resultado la rescisión
-                inmediata de sus Servicios.{" "}
+                inmediata de sus Servicios.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 2: CONDICIONES GENERALES{" "}
+                {' '}
+                SECCIÓN 2: CONDICIONES GENERALES{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Nos reservamos el derecho de rechazar el servicio a cualquier
                 persona, por cualquier motivo, en cualquier momento. Usted
                 comprende que su contenido (sin incluir la información de la
@@ -98,15 +98,15 @@ export default function Terminos() {
                 de la cual se presta el servicio, sin nuestro permiso expreso
                 por escrito. Los encabezados utilizados en este acuerdo se
                 incluyen solo para facilitar la lectura y no limitarán ni
-                afectarán los presentes Términos.{" "}
+                afectarán los presentes Términos.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 3: EXACTITUD, TOTALIDAD Y CRONOLOGÍA DE LA INFORMACIÓN{" "}
+                {' '}
+                SECCIÓN 3: EXACTITUD, TOTALIDAD Y CRONOLOGÍA DE LA INFORMACIÓN{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 No nos responsabilizamos si la información disponible en este
                 sitio no es precisa, completa o actualizada. El material
                 presentado en este sitio se proporciona solo para información
@@ -120,30 +120,30 @@ export default function Terminos() {
                 reservamos el derecho de modificar el contenido de este sitio en
                 cualquier momento, pero no tenemos la obligación de actualizar
                 ninguna información en nuestro sitio. Usted acepta que es su
-                responsabilidad controlar los cambios en nuestro sitio.{" "}
+                responsabilidad controlar los cambios en nuestro sitio.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 4: MODIFICACIONES AL SERVICIO Y PRECIOS{" "}
+                {' '}
+                SECCIÓN 4: MODIFICACIONES AL SERVICIO Y PRECIOS{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Los precios de nuestros productos están sujetos a cambios sin
                 previo aviso. Nos reservamos el derecho de modificar o
                 discontinuar el Servicio (o cualquier parte o contenido del
                 mismo) sin previo aviso en cualquier momento. No seremos
                 responsables ante usted ni ante ningún tercero por ninguna
                 modificación, cambio de precio, suspensión o interrupción del
-                Servicio.{" "}
+                Servicio.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 5: PRODUCTOS O SERVICIOS (si corresponde){" "}
+                {' '}
+                SECCIÓN 5: PRODUCTOS O SERVICIOS (si corresponde){' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Ciertos productos o servicios pueden estar disponibles
                 exclusivamente online a través del sitio web. Estos productos o
                 servicios pueden tener cantidades limitadas y están sujetos a
@@ -167,16 +167,16 @@ export default function Terminos() {
                 garantizamos que la calidad de cualquier producto, servicio,
                 información u otro material que usted haya comprado u obtenido
                 cumplirá con sus expectativas, o que cualquier error en el
-                Servicio se corregirá.{" "}
+                Servicio se corregirá.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
+                {' '}
                 SECCIÓN 6: EXACTITUD DE LA FACTURACIÓN Y DE LA INFORMACIÓN DE LA
-                CUENTA{" "}
+                CUENTA{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Nos reservamos el derecho de rechazar cualquier pedido que
                 realice en nuestra tienda. Podemos, a nuestro exclusivo
                 criterio, limitar o cancelar las cantidades compradas por
@@ -196,15 +196,15 @@ export default function Terminos() {
                 demás informaciones, entre ellas, su dirección de correo
                 electrónico, los números de tarjeta de crédito y las fechas de
                 vencimiento, para que podamos completar sus transacciones y
-                contactarlo según sea necesario.{" "}
+                contactarlo según sea necesario.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 7: HERRAMIENTAS OPCIONALES{" "}
+                {' '}
+                SECCIÓN 7: HERRAMIENTAS OPCIONALES{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Podemos proporcionarle acceso a herramientas de terceros que no
                 supervisamos, ni tenemos ningún control sobre ellas, ni tampoco
                 contribuimos. Usted reconoce y acepta que brindamos acceso a
@@ -221,15 +221,15 @@ export default function Terminos() {
                 servicios o funciones a través del sitio web (incluido el
                 lanzamiento de nuevas herramientas y recursos). Estas nuevas
                 funciones o servicios también estarán sujetos a los presentes
-                Términos de servicio.{" "}
+                Términos de servicio.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 8: ENLACES DE TERCEROS{" "}
+                {' '}
+                SECCIÓN 8: ENLACES DE TERCEROS{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Algunos contenidos, productos y servicios disponibles a través
                 de nuestro Servicio pueden incluir recursos de terceros. Los
                 enlaces de terceros en este sitio pueden dirigirlo a páginas web
@@ -245,16 +245,16 @@ export default function Terminos() {
                 terceros, y asegúrese de comprenderlas antes de participar en
                 cualquier transacción. Las quejas, reclamos, inquietudes o
                 preguntas referentes a productos de terceros deben dirigirse a
-                estos.{" "}
+                estos.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
+                {' '}
                 SECCIÓN 9: COMENTARIOS DE LOS USUARIOS, OPINIONES Y OTRAS
-                COMUNICACIONES{" "}
+                COMUNICACIONES{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Si, a petición nuestra, usted envía ciertas comunicaciones
                 específicas (por ejemplo, participaciones en un concurso) o, sin
                 una solicitud nuestra, envía ideas creativas, sugerencias,
@@ -286,26 +286,26 @@ export default function Terminos() {
                 el único responsable de los comentarios que realice y de su
                 exactitud. No asumimos ninguna responsabilidad ni ninguna
                 obligación por los comentarios publicados por usted o por un
-                tercero.{" "}
+                tercero.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 10: INFORMACIÓN PERSONAL{" "}
+                {' '}
+                SECCIÓN 10: INFORMACIÓN PERSONAL{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 El envío de la información personal que haga a través de la
                 tienda se rige por nuestra Política de privacidad. Para ver
-                nuestra Política de privacidad.{" "}
+                nuestra Política de privacidad.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 11: ERRORES, INEXACTITUDES Y OMISIONES{" "}
+                {' '}
+                SECCIÓN 11: ERRORES, INEXACTITUDES Y OMISIONES{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Puede haber información en nuestro sitio o en el Servicio que,
                 ocasionalmente, contenga errores tipográficos, inexactitudes u
                 omisiones que puedan relacionarse con descripciones de
@@ -323,15 +323,15 @@ export default function Terminos() {
                 actualización especificada o fecha de actualización aplicada en
                 el Servicio o en cualquier sitio web relacionado debe tomarse
                 para indicar que toda la información en el Servicio o en
-                cualquier sitio web relacionado se modificó o actualizó.{" "}
+                cualquier sitio web relacionado se modificó o actualizó.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 12: USOS PROHIBIDOS{" "}
+                {' '}
+                SECCIÓN 12: USOS PROHIBIDOS{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Además de las prohibiciones establecidas en los Términos del
                 servicio, se le prohíbe utilizar el sitio o su contenido (a)
                 para cualquier propósito ilegal; (b) para solicitar a otros que
@@ -354,16 +354,16 @@ export default function Terminos() {
                 seguridad del Servicio o de cualquier sitio web relacionado, o
                 de otros sitios web o de Internet. Nos reservamos el derecho de
                 dar por terminado su uso del Servicio o de cualquier sitio web
-                relacionado por infringir cualquiera de los usos prohibidos.{" "}
+                relacionado por infringir cualquiera de los usos prohibidos.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
+                {' '}
                 SECCIÓN 13: DESCARGO DE RESPONSABILIDAD DE GARANTÍAS; LIMITACIÓN
-                DE RESPONSABILIDAD{" "}
+                DE RESPONSABILIDAD{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 No garantizamos, representamos ni aseguramos que el uso que haga
                 de nuestro servicio será sin interrupciones, oportuno, seguro o
                 sin errores. No garantizamos que los resultados que se puedan
@@ -403,15 +403,15 @@ export default function Terminos() {
                 la limitación de la responsabilidad por daños consecuentes o
                 incidentales, en dichos estados o jurisdicciones, nuestra
                 responsabilidad se limitará a la extensión máxima de lo
-                permitido por la ley.{" "}
+                permitido por la ley.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 14: INDEMNIZACIÓN{" "}
+                {' '}
+                SECCIÓN 14: INDEMNIZACIÓN{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Usted acepta indemnizar, defender y mantener indemne a SAIM CIS
                 y a nuestra empresa matriz, subsidiarias, afiliadas, asociados,
                 funcionarios, directores, agentes, contratistas, licenciantes,
@@ -421,30 +421,30 @@ export default function Terminos() {
                 incurrido debido a su incumplimiento de los presentes Términos
                 del servicio o de los documentos que incorporan como referencia
                 o que surjan por su incumplimiento de los mismos, o por la
-                violación de cualquier ley o derechos de un tercero que haga.{" "}
+                violación de cualquier ley o derechos de un tercero que haga.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 15: DIVISIBILIDAD{" "}
+                {' '}
+                SECCIÓN 15: DIVISIBILIDAD{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 LoEn caso de que se determine que alguna disposición de los
                 presentes Términos del servicio sea ilegal, nula o inaplicable,
                 dicha disposición será, no obstante, ejecutable en la medida en
                 que lo permita la legislación aplicable, y la parte inaplicable
                 se considerará separada de los presentes Términos del servicio,
                 sin que dicha determinación afecte a la validez y aplicabilidad
-                de las demás disposiciones.{" "}
+                de las demás disposiciones.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 16: RESCISIÓN{" "}
+                {' '}
+                SECCIÓN 16: RESCISIÓN{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Las obligaciones y responsabilidades de las partes incurridas
                 antes de la fecha de rescisión seguirán vigentes después de la
                 rescisión de este contrato a todos los efectos. Estos Términos
@@ -458,15 +458,15 @@ export default function Terminos() {
                 en cualquier momento sin previo aviso y usted seguirá siendo
                 responsable de todos los importes adeudados, hasta la fecha de
                 rescisión inclusive; y/o en consecuencia podemos denegarle el
-                acceso a nuestros Servicios (o a parte de ellos).{" "}
+                acceso a nuestros Servicios (o a parte de ellos).{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 17: ACUERDO COMPLETO{" "}
+                {' '}
+                SECCIÓN 17: ACUERDO COMPLETO{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 El hecho de que no ejerzamos o hagamos valer algún derecho o
                 disposición de los presentes Términos del Servicio no
                 constituirá una renuncia a dicho derecho o disposición. Estos
@@ -480,27 +480,27 @@ export default function Terminos() {
                 las versiones anteriores de los Términos del servicio).
                 Cualquier ambigüedad en la interpretación de los presentes
                 Términos del servicio no se interpretará en contra de la parte
-                redactora.{" "}
+                redactora.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 18: LEY APLICABLE{" "}
+                {' '}
+                SECCIÓN 18: LEY APLICABLE{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Los presentes Términos del servicio y cualquier acuerdo por
                 separado por el cual le proporcionemos Servicios se regirán e
                 interpretarán de acuerdo con las leyes de Boulevard Suyapa,
-                UNAH, Tegucigalpa, Francisco Morazan, 11101, Honduras.{" "}
+                UNAH, Tegucigalpa, Francisco Morazan, 11101, Honduras.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 19: CAMBIOS EN LOS TÉRMINOS DEL SERVICIO{" "}
+                {' '}
+                SECCIÓN 19: CAMBIOS EN LOS TÉRMINOS DEL SERVICIO{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Puede revisar la versión más reciente de los Términos del
                 servicio en cualquier momento en esta página. Nos reservamos el
                 derecho, a nuestra entera discreción, de actualizar, cambiar o
@@ -511,17 +511,17 @@ export default function Terminos() {
                 página web o del Servicio o su acceso a cualquiera de estos de
                 forma continua después de la publicación de cualquier cambio en
                 los presentes Términos del servicio, constituye la aceptación de
-                dichos cambios.{" "}
+                dichos cambios.{' '}
               </div>
               <hr className="my-6 border-blue-gray-50" />
               <h5 className="block antialiased tracking-normal font-sans text-xl leading-snug text-inherit mt-6 mb-1 font-semibold text-black dark:text-white">
-                {" "}
-                SECCIÓN 20: INFORMACIÓN DE CONTACTO{" "}
+                {' '}
+                SECCIÓN 20: INFORMACIÓN DE CONTACTO{' '}
               </h5>
               <div className="block antialiased font-sans text-base leading-relaxed mb-4 font-normal text-gray-600 dark:text-gray-400">
-                {" "}
+                {' '}
                 Las preguntas sobre los Términos del servicio se deben enviar a
-                saim.cis.outlook.com.{" "}
+                saim.cis.outlook.com.{' '}
               </div>
             </div>
           </div>
@@ -531,5 +531,5 @@ export default function Terminos() {
         </section>
       </div>
     </>
-  );
+  )
 }

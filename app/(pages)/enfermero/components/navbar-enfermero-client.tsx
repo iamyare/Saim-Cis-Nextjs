@@ -1,37 +1,41 @@
-"use client";
-import { Fragment, useEffect } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { ModeToggle } from "@/components/theme-toggle";
-import { logoutUser } from "@/lib/actions";
-import { useRouter } from "next/navigation";
+'use client'
+import { Fragment } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
+import { ModeToggle } from '@/components/theme-toggle'
+import { logoutUser } from '@/lib/actions'
+import { useRouter, usePathname } from 'next/navigation'
 
-import { usePathname } from "next/navigation";
-import LogoSaimCis from "@/components/logo-saim-cis";
+import LogoSaimCis from '@/components/logo-saim-cis'
 
 const navigation = [
-  { name: "Perfil", href: "/enfermero", current: true },
-  { name: "Pacientes", href: "/enfermero/pacientes", current: false },
-];
+  { name: 'Perfil', href: '/enfermero', current: true },
+  { name: 'Pacientes', href: '/enfermero/pacientes?page=1', current: false }
+]
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
+function classNames (...classes: string[]) {
+  return classes.filter(Boolean).join(' ')
 }
 
-export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
-  const pathname = usePathname();
-  const router = useRouter();
+export default function NavbarEnfermeroClient ({ user }: { user: UserType }) {
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await logoutUser()
+    router.push('/')
+  }
 
   return (
-    <Disclosure as="nav">
+    <Disclosure className="bg-white dark:bg-gray-900 border-b border-slate-100 dark:border-gray-800" as="nav">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-900 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-900 hover:text-black dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                {/* Mobile menu button */}
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-900 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 hover:text-black dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Abrir el menu</span>
                   {open ? (
@@ -42,9 +46,9 @@ export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
+                <Link className="flex flex-shrink-0 items-center" href='/'>
                   <LogoSaimCis />
-                </div>
+                </Link>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -53,12 +57,12 @@ export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
                         href={item.href}
                         className={classNames(
                           pathname === item.href
-                            ? "bg-gray-100 dark:bg-gray-900 text-black dark:text-white"
-                            : "text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900  hover:text-black dark:hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                            ? 'bg-gray-100 dark:bg-gray-800 text-black dark:text-white'
+                            : 'text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800  hover:text-black dark:hover:text-white hover:transition-colors hover:duration-200',
+                          'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={
-                          pathname === item.href ? "page" : undefined
+                          pathname === item.href ? 'page' : undefined
                         }
                       >
                         {item.name}
@@ -79,7 +83,7 @@ export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
                         <span className="sr-only">Open user menu</span>
                         {user?.usuario.avatar_url ? (
                           <img
-                            className="h-8 w-8 rounded-full"
+                            className="h-8 w-8 rounded-full object-cover"
                             src={user?.usuario.avatar_url}
                             alt={`Foto de perfil de ${user?.nombre}`}
                           />
@@ -106,46 +110,57 @@ export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
                             <span className="text-sm text-gray-900 dark:text-gray-100 font-semibold">
                               Iniciaste con:
                             </span>
-                            <span className="text-sm text-gray-900 dark:text-gray-100">
+                            <span className="text-sm text-gray-900 dark:text-gray-100 truncate">
                               {user.usuario.correo}
                             </span>
                           </div>
                         </Menu.Item>
                         <hr />
-                        {user.role.length > 1 ? (
-                          <Menu.Item>
-                            <div className="flex flex-col gap-1 pt-2 px-4">
-                              <span className="text-sm text-gray-900 dark:text-gray-100 font-semibold">
-                                Ver por:
-                              </span>
-                            </div>
-                          </Menu.Item>
-                        ) : null}
-                        {user.role.map((rol, index) => (
+                        {user.role.length > 0 ? (
+                          user.role.map((rol, index) => (
                           <Menu.Item key={index}>
-                            {({ active }) => (
+                            {
                               <Link
                                 href={`/${rol.rol.toLowerCase()}`}
                                 className={classNames(
-                                  active ? "bg-gray-100 dark:bg-gray-800" : "",
-                                  "block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start"
+                                  rol.rol.toLowerCase() === pathname.split('/')[1] ? 'bg-gray-100 dark:bg-gray-800 pointer-events-none' : '',
+                                  'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start hover:bg-neutral-100 dark:hover:bg-gray-800'
                                 )}
+                                aria-current={rol.rol.toLowerCase() === pathname.split('/')[1] ? 'page' : undefined}
+
                               >
                                 Perfil de {rol.rol}
                               </Link>
-                            )}
+                            }
                           </Menu.Item>
-                        ))}
+                          ))
+                        ) : (
+                        <Menu.Item>
+                          <span className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start">
+                            No hay roles asignados
+                          </span>
+                        </Menu.Item>
+                        )}
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              href="/perfil"
+                              className={classNames(
+                                active ? 'bg-gray-100 dark:bg-gray-800' : '',
+                                'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
+                              )}
+                            >
+                              Editar perfil
+                            </Link>
+                          )}
+                        </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              onClick={async () => {
-                                await logoutUser();
-                                router.push("/");
-                              }}
+                              onClick={handleLogout}
                               className={classNames(
-                                active ? "bg-gray-100 dark:bg-gray-800" : "",
-                                "block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start"
+                                active ? 'bg-gray-100 dark:bg-gray-800' : '',
+                                'block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 w-full text-start'
                               )}
                             >
                               Cerrar sesión
@@ -156,13 +171,13 @@ export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
                     </Transition>
                   </Menu>
                 ) : (
-                  <Link href="/login">Iniciar sesión</Link>
+                  <Link className="hover:text-blue-500" href="/login">Iniciar sesión</Link>
                 )}
               </div>
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="sm:hidden bg-white dark:bg-gray-900">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Disclosure.Button
@@ -170,12 +185,12 @@ export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current
-                      ? "bg-gray-200 text-white"
-                      : "text-gray-300 hover:bg-gray-200 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
+                    pathname === item.href
+                      ? 'bg-gray-100 dark:bg-slate-800  text-gray-900 dark:text-gray-100'
+                      : 'text-gray-900 dark:text-gray-100  hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-slate-800',
+                    'block rounded-md px-3 py-2 text-base font-medium'
                   )}
-                  aria-current={item.current ? "page" : undefined}
+                  aria-current={pathname === item.href ? 'page' : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -185,5 +200,5 @@ export default function NavbarEnfermeroClient({ user }: { user: UserType }) {
         </>
       )}
     </Disclosure>
-  );
+  )
 }

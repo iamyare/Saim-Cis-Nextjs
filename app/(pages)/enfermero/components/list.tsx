@@ -1,11 +1,11 @@
-"use client";
-import { PlusIcon, EyeIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import { FormPreclinica } from "./form-preclinica";
+'use client'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { FormPreclinica } from './form-preclinica'
 
-export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
+export default function ListaPacientes ({ usuario }: { usuario: Personas[] }) {
   const [personaSeleccionada, setPersonaSeleccionada] =
-    useState<Personas | null>(null);
+    useState<Personas | null>(null)
 
   return (
     <>
@@ -30,12 +30,12 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
             <button
               data-hs-overlay="#hs-modal-preclinica"
               className="flex h-10 items-center w-full !mx-0 duration-700  md:w-auto md:mx-4 bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500 px-4 text-sm font-medium text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-              onClick={() => setPersonaSeleccionada(user)}
+              onClick={() => { setPersonaSeleccionada(user) }}
             >
-              <span className="hidden md:block">Nueva Consulta</span>{" "}
+              <span className="hidden md:block">Nueva Consulta</span>{' '}
               <PlusIcon className="h-5 md:ml-4" />
             </button>
-            {/* 
+            {/*
             <button
               data-hs-overlay="#hs-modal-show-preclinica"
               className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
@@ -80,9 +80,9 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
                   Agregar Signos Vitales del Paciente
                 </h2>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  Ingrese los datos del paciente{" "}
+                  Ingrese los datos del paciente{' '}
                   <strong>
-                    {personaSeleccionada?.nombre}{" "}
+                    {personaSeleccionada?.nombre}{' '}
                     {personaSeleccionada?.apellido}
                   </strong>
                 </p>
@@ -92,7 +92,7 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
                   id={
                     personaSeleccionada?.id != null
                       ? personaSeleccionada.id
-                      : ""
+                      : ''
                   }
                 />
               </div>
@@ -101,5 +101,5 @@ export default function ListaPacientes({ usuario }: { usuario: Personas[] }) {
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import Link from "next/link";
+import Link from 'next/link'
 
-export default function DoctorPageClient({ user }: { user: UserType }) {
+export default function DoctorPageClient ({ user }: { user: UserType }) {
   return (
     <div className="grid place-items-center h-screen">
       <div className="flex flex-col justify-center items-center gap-4">
@@ -18,5 +18,5 @@ export default function DoctorPageClient({ user }: { user: UserType }) {
         </Link>
       </div>
     </div>
-  );
+  )
 }

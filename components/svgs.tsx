@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-export default function CirclesSVG() {
+export default function CirclesSVG () {
   return (
     <svg
       width={134}
@@ -570,5 +570,5 @@ export default function CirclesSVG() {
         fill="#3056D3"
       />
     </svg>
-  );
+  )
 }

@@ -1,10 +1,9 @@
-"use client";
-import AboutPage from "./about-page";
+'use client'
 
-export default function Nosotros() {
+export default function Nosotros () {
   return (
     <>
-      <section className="container mx-auto py-6 text-justify" id="nosotros">
+      <section className="container mx-auto py-6 text-justify animate-scroll-fade-up" id="nosotros">
         <div className="mx-auto grid max-w-7xl gap-x-8 px-6 lg:px-8">
           <div className="max-w-2xl text-center md:text-left">
             <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">
@@ -31,8 +30,8 @@ export default function Nosotros() {
                     </p>
                   </div>
                 </div>
-                <div className="pl-16 relative before:block before:absolute before:h-1/6 before:w-4 before:bg-cyan-700/[.50] before:bottom-0 before:left-0 before:rounded-lg  before:transition-all group-hover:before:bg-cyan-300/[.50] overflow-hidden">
-                  <div className="absolute top-0 left-0 bg-cyan-500/[.50] w-4/6 px-12 py-14 flex flex-col justify-center rounded-xl group-hover:bg-cyan-600/[.50] transition-all ">
+                <div className="pl-16 relative before:block before:absolute before:h-1/6 before:w-4 before:bg-sec-var-700/[.50] before:bottom-0 before:left-0 before:rounded-lg  before:transition-all group-hover:before:bg-sec-var-300/[.50] overflow-hidden">
+                  <div className="absolute top-0 left-0 bg-sec/[.50] w-4/6 px-12 py-14 flex flex-col justify-center rounded-xl group-hover:bg-sec-var-600/[.50] transition-all ">
                     <h2 className="text-white font-bold text-3xl">Mision</h2>
                   </div>
                   <div className="rounded-xl overflow-hidden">
@@ -48,8 +47,8 @@ export default function Nosotros() {
           <div className="relative flex flex-col justify-center overflow-hidden dark:bg-transparent py-6 sm:py-12">
             <div className="w-full items-center mx-auto max-w-screen-lg">
               <div className="group grid w-full lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-                <div className="pl-16 relative flex items-end flex-col before:block before:absolute before:h-1/6 before:w-4 before:bg-cyan-700/[.50] before:bottom-0 before:left-0 before:rounded-lg  before:transition-all group-hover:before:bg-cyan-300 overflow-hidden">
-                  <div className="absolute top-0 left-0 bg-cyan-500/[.50] w-4/6 px-12 py-14 flex flex-col justify-center rounded-xl group-hover:bg-cyan-600/[.50] transition-all ">
+                <div className="pl-16 relative flex items-end flex-col before:block before:absolute before:h-1/6 before:w-4 before:bg-sec-var-700/[.50] before:bottom-0 before:left-0 before:rounded-lg  before:transition-all group-hover:before:bg-sec-var-300 overflow-hidden">
+                  <div className="absolute top-0 left-0 bg-sec/[.50] w-4/6 px-12 py-14 flex flex-col justify-center rounded-xl group-hover:bg-sec-var-600/[.50] transition-all ">
                     <h2 className="text-white font-bold text-3xl text-center">
                       Vision
                     </h2>
@@ -80,5 +79,5 @@ export default function Nosotros() {
         </div>
       </section>
     </>
-  );
+  )
 }

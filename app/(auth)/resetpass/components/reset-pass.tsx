@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { ResetPassForm } from "./reset-pass-form";
+import { ResetPassForm } from './reset-pass-form'
 
-export default function ResetPassClient() {
+export default function ResetPassClient () {
   return (
     <main className="grid place-items-center h-screen">
       <header className="flex flex-col justify-center items-center gap-2  max-w-sm w-full">
@@ -11,5 +11,5 @@ export default function ResetPassClient() {
         <ResetPassForm />
       </header>
     </main>
-  );
+  )
 }

@@ -1,15 +1,14 @@
 'use client'
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { UserAuthForm } from "../components/user-auth-form"
-import LogoSaimCis from "@/components/logo-saim-cis"
+import Link from 'next/link'
+import { UserAuthForm } from '../components/user-auth-form'
+import LogoSaimCis from '@/components/logo-saim-cis'
 
-export default function LoginAuth() {
+export default function LoginAuth () {
   return (
     <div className="container relative h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
     <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
-      <div className="absolute inset-0 bg-cyan-700" />
+    <img className='absolute inset-0 object-cover w-full h-full ' src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/login.webp" alt="" />
+      <div className='absolute inset-0 bg-gray-900 bg-opacity-50'></div>
       <Link className="relative z-20 flex items-center text-lg font-medium" href='/'>
       <LogoSaimCis/>
 
@@ -34,14 +33,14 @@ export default function LoginAuth() {
         </div>
         <UserAuthForm />
         <p className="px-8 text-center text-sm text-muted-foreground">
-          Al hacer clic en continuar, aceptas nuestros{" "}
+          Al hacer clic en continuar, aceptas nuestros{' '}
         <Link
             href="/terms"
             className="underline underline-offset-4 hover:text-primary"
         >
             Términos de servicio
-        </Link>{" "}
-        y{" "}
+        </Link>{' '}
+        y{' '}
         <Link
             href="/privacy"
             className="underline underline-offset-4 hover:text-primary"

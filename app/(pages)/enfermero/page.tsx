@@ -1,16 +1,16 @@
-import { getInfoPersona } from "@/app/actions";
-import HeaderProfile from "../doctor/components/header-profile";
-import PersonalInfo from "../doctor/components/personal-info";
+import { getInfoPersona } from '@/app/actions'
+import PersonalInfo from '../doctor/components/personal-info'
+import HeaderProfile from '@/app/components/header-profile'
 
-export default async function EnfermeroPage() {
-  const { usuario, errorUsuario, message } = await getInfoPersona();
+export default async function EnfermeroPage () {
+  const { usuario, errorUsuario } = await getInfoPersona()
 
   if (errorUsuario) {
     return (
       <div>
         <span>Error al obtener los datos del usuario</span>
       </div>
-    );
+    )
   }
 
   return (
@@ -23,7 +23,5 @@ export default async function EnfermeroPage() {
       </aside>
     </main>
 
-  );
+  )
 }
-
-

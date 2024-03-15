@@ -1,23 +1,31 @@
-import { Metadata } from "next";
-import { getInfoPersona } from "@/app/actions";
-import NavbarPacienteClient from "./components/navbar-paciente-client";
+import { type Metadata } from 'next'
+import NavbarPacienteClient from './components/navbar-paciente-client'
+import { getPermissionsAndUser } from '@/app/actions'
+import Permissions from '@/components/permissions'
 
-export const meta: Metadata = {
-  title: "Paciente",
-  description: "Pagina del paciente",
-};
+export const metadata: Metadata = {
+  title: 'Paciente',
+  description: 'Pagina principal del paciente'
+}
 
-export default async function PacienteLayout({
-  children,
+export default async function PacienteLayout ({
+  children
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const { usuario: paciente  } = await getInfoPersona();
+  const { permissions, message, errorCode, usuario } =
+  await getPermissionsAndUser({
+    rolNecesario: 'paciente'
+  })
+
+  if (!permissions) {
+    return <Permissions message={message} errorCode={errorCode} />
+  }
 
   return (
     <>
-      <NavbarPacienteClient user={paciente ?? null} />
+      <NavbarPacienteClient user={usuario ?? null} />
       {children}
     </>
-  );
+  )
 }

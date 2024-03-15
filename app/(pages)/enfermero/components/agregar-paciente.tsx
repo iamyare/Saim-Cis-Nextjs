@@ -1,14 +1,14 @@
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { EnfermeroPacienteForm } from "./form-paciente";
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { EnfermeroPacienteForm } from './form-paciente'
 
-export function AgregarPaciente() {
+export function AgregarPaciente () {
   return (
     <>
       <button
         data-hs-overlay="#hs-modal-agregar-paciente"
-        className="flex h-10 items-center duration-700  md:w-auto md:mx-4 bg-cyan-400 rounded-lg hover:bg-cyan-500 dark:bg-cyan-600 hover:dark:bg-cyan-500 px-4 text-sm font-medium text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+        className="h-10 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg transition-colors duration-200 border border-blue-600 text-blue-600 hover:bg-blue-500 hover:border-blue-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
       >
-        <span className="hidden md:block">Agregar Paciente</span>{" "}
+        <span className="hidden md:block">Agregar Paciente</span>{' '}
         <PlusIcon className="h-5 md:ml-4" />
       </button>
       <div
@@ -43,7 +43,7 @@ export function AgregarPaciente() {
                 <h2 className="block text-2xl font-bold text-gray-800 dark:text-gray-200">
                   Agregar Paciente
                 </h2>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <p className="mt-2 text-sm text-gray-500">
                   Ingrese los datos del paciente
                 </p>
               </div>
@@ -55,5 +55,5 @@ export function AgregarPaciente() {
         </div>
       </div>
     </>
-  );
+  )
 }

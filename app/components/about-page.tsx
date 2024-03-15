@@ -1,7 +1,7 @@
-"use client";
-import CirclesSVG from "@/components/svgs";
+'use client'
+import CirclesSVG from '@/components/svgs'
 
-export default function AboutPage() {
+export default function AboutPage () {
   return (
     <>
       <section className="overflow-hidden pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] bg-white dark:bg-dark text-justify">
@@ -68,5 +68,5 @@ export default function AboutPage() {
         </div>
       </section>
     </>
-  );
+  )
 }

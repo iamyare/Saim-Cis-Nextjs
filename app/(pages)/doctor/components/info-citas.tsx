@@ -1,21 +1,12 @@
-"use client";
+'use client'
 
-import * as React from "react";
+import * as React from 'react'
 
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { ToastContainer } from 'react-toastify'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { ToastContainer, toast } from "react-toastify";
-import { useTransition } from "react";
-
-
-
-export function InfoCitas() {
-
+export function InfoCitas () {
   return (
     <div className="flex flex-col">
       <form>
@@ -76,5 +67,5 @@ export function InfoCitas() {
         theme="light"
       />
     </div>
-  );
+  )
 }

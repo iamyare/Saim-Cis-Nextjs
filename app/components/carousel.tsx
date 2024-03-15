@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-export default function Carousel() {
+export default function Carousel () {
   return (
     <div className="container mx-auto mt-5">
       <div
@@ -86,11 +86,11 @@ export default function Carousel() {
         </button>
 
         <div className="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
-          <span className="hs-carousel-active:bg-cyan-500 hs-carousel-active:border-cyan-500 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
-          <span className="hs-carousel-active:bg-cyan-500 hs-carousel-active:border-cyan-500 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
-          <span className="hs-carousel-active:bg-cyan-500 hs-carousel-active:border-cyan-500 w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
+          <span className="hs-carousel-active:bg-sec hs-carousel-active:border-sec w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
+          <span className="hs-carousel-active:bg-sec hs-carousel-active:border-sec w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
+          <span className="hs-carousel-active:bg-sec hs-carousel-active:border-sec w-3 h-3 border border-gray-400 rounded-full cursor-pointer"></span>
         </div>
       </div>
     </div>
-  );
+  )
 }
