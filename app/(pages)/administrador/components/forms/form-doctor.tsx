@@ -1,11 +1,13 @@
 'use client'
 
 import * as React from 'react'
-
+import classNames from 'classnames'
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import AsyncSelect from 'react-select/async'
+import { type MultiValue } from 'react-select'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -17,7 +19,8 @@ import {
   createPersona,
   setRoleUser,
   createRandomCode,
-  signUpWithEmailAndTempPass
+  signUpWithEmailAndTempPass,
+  getEspecializacionesByRol
 } from '../actions'
 import { useRouter } from 'next/navigation'
 import { sendMailSingup } from '../actions/email'
@@ -52,8 +55,15 @@ const validationSchema = z.object({
 
 type ValidationSchema = z.infer<typeof validationSchema>
 
+const multiValue: className = '!bg-sec-var-200 dark:!bg-sec-var-900 !rounded-md !text-white'
+const multiValueLabel: className = '!text-sec-var-900 dark:!text-sec-var-100'
+const multiValueRemove: className = 'hover:!bg-sec-var-300 dark:hover:!bg-sec-var-700 duration-300 !text-sec-var-900 dark:!text-sec-var-100'
+const control: className = ' !rounded-md !border !border-input !bg-background  !ring-offset-background file:!border-0 file:!bg-transparent file:text-sm file:font-medium placeholder:!text-muted-foreground focus-visible:!outline-none focus-visible:!ring-2 focus-visible:!ring-ring focus-visible:!ring-offset-2 disabled:!cursor-not-allowed disabled:!opacity-50'
+const option: className = '!text-gray-900 dark:!text-gray-100 !bg-white dark:!bg-slate-800 hover:!bg-sec-var-200 dark:hover:!bg-sec-var-900 hover:!text-sec-var-900 dark:hover:!text-sec-var-100 cursor-pointer'
+
 export function AdministradorDoctorForm () {
   const [isPending, startTransition] = useTransition()
+  const [especializaciones, setEspecializaciones] = React.useState<Especializaciones[] | null>([])
 
   const router = useRouter()
 
@@ -154,6 +164,30 @@ export function AdministradorDoctorForm () {
         toast.error('Error al enviar el correo electrónico')
       }
     })
+  }
+
+  const promiseOptions = async () =>
+    await new Promise<Especializaciones[]>((resolve) => {
+      setTimeout(async () => {
+        const { data } = await getEspecializacionesByRol({ rol: 'doctor' })
+        const formattedData = data?.map(item => ({
+          ...item,
+          value: item.id,
+          label: item.nombre
+        })) ?? []
+        resolve(formattedData)
+      }, 1000)
+    })
+
+  const handleOnChange = (
+    newValue: MultiValue<Especializaciones>
+  ) => {
+    const convertedValue = newValue.map(item => ({
+      id: item.id,
+      id_rol: item.id_rol,
+      nombre: item.nombre
+    }))
+    setEspecializaciones(convertedValue)
   }
 
   return (
@@ -373,6 +407,34 @@ export function AdministradorDoctorForm () {
                 {errors.telefono?.message}
               </p>
             )}
+          </div>
+
+          <div className="grid gap-1">
+            <Label className="" htmlFor="genero">
+              Especialidades
+            </Label>
+            <AsyncSelect
+              isMulti
+              cacheOptions
+              defaultOptions
+              className='capitalize'
+              classNames={{
+                control: (base) =>
+                  classNames(base, control),
+                option: (base) =>
+                  classNames(base, option),
+                multiValue: (base) =>
+                  classNames(base, multiValue),
+                multiValueLabel: (base) =>
+                  classNames(base, multiValueLabel),
+                multiValueRemove: (base) =>
+                  classNames(base, multiValueRemove)
+              }}
+
+              placeholder='Seleccione las Especialidades'
+              onChange={handleOnChange}
+              loadOptions={promiseOptions}
+            />
           </div>
 
           <Button

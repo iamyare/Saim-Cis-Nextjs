@@ -35,7 +35,5 @@ export default async function DataTable ({
       </div>
     )
   }
-  return (
-    <DataTableClient users={users} />
-  )
+  return <DataTableClient users={users} />
 }

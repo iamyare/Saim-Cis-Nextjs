@@ -19,7 +19,13 @@ export async function getUserByCorreo ({ correo }: { correo: string }) {
   return { dataCorreo, errorCorreo }
 }
 
-export async function verifyUser ({ dni, correo }: { dni: string, correo: string }) {
+export async function verifyUser ({
+  dni,
+  correo
+}: {
+  dni: string
+  correo: string
+}) {
   const { dataDni, errorDni } = await getUserByDNI({ dni })
   const { dataCorreo, errorCorreo } = await getUserByCorreo({ correo })
 
@@ -65,7 +71,10 @@ export async function setRoleUser ({
     return { data: null, error: especializacionError }
   }
   if (!especializacion) {
-    return { data: null, error: { message: 'No se encontró la especialización' } }
+    return {
+      data: null,
+      error: { message: 'No se encontró la especialización' }
+    }
   }
 
   const { data, error } = await supabase
@@ -87,23 +96,48 @@ export async function signUpWithEmailAndTempPass ({
   idPersona: string
 }) {
   const { data: userCreate, error: errorUserCreate } =
-      await adminAuthClient.createUser({
-        email,
-        password: passwordTemp,
-        user_metadata: { id_persona: idPersona, passwordTemp },
-        email_confirm: true
-      })
+    await adminAuthClient.createUser({
+      email,
+      password: passwordTemp,
+      user_metadata: { id_persona: idPersona, passwordTemp },
+      email_confirm: true
+    })
 
   return { userCreate, errorUserCreate }
 }
 
-export function createRandomCode ({ min = 1, max = 6, letras = true }: { min: number, max: number, letras?: boolean }) {
-  const characters = letras ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' : '0123456789'
+export function createRandomCode ({
+  min = 1,
+  max = 6,
+  letras = true
+}: {
+  min: number
+  max: number
+  letras?: boolean
+}) {
+  const characters = letras
+    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    : '0123456789'
   const charactersLength = characters.length
   let randomCode = ''
   const length = Math.max(min, Math.min(max, charactersLength)) // Asegura que la longitud esté entre min y max
   for (let i = 0; i < length; i++) {
-    randomCode += characters.charAt(Math.floor(Math.random() * charactersLength))
+    randomCode += characters.charAt(
+      Math.floor(Math.random() * charactersLength)
+    )
   }
   return { randomCode }
+}
+
+export async function getEspecializacionesByRol ({
+  rol
+}: {
+  rol: RolesPermissons
+}) {
+  const { data, error } = await supabase
+    .from('especializaciones')
+    .select('*, roles!inner(*)')
+    .eq('roles.nombre', rol)
+
+  return { data, error }
 }
