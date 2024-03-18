@@ -55,15 +55,19 @@ const validationSchema = z.object({
 
 type ValidationSchema = z.infer<typeof validationSchema>
 
-const multiValue: className = '!bg-sec-var-200 dark:!bg-sec-var-900 !rounded-md !text-white'
-const multiValueLabel: className = '!text-sec-var-900 dark:!text-sec-var-100'
-const multiValueRemove: className = 'hover:!bg-sec-var-300 dark:hover:!bg-sec-var-700 duration-300 !text-sec-var-900 dark:!text-sec-var-100'
-const control: className = ' !rounded-md !border !border-input !bg-background  !ring-offset-background file:!border-0 file:!bg-transparent file:text-sm file:font-medium placeholder:!text-muted-foreground focus-visible:!outline-none focus-visible:!ring-2 focus-visible:!ring-ring focus-visible:!ring-offset-2 disabled:!cursor-not-allowed disabled:!opacity-50'
-const option: className = '!text-gray-900 dark:!text-gray-100 !bg-white dark:!bg-slate-800 hover:!bg-sec-var-200 dark:hover:!bg-sec-var-900 hover:!text-sec-var-900 dark:hover:!text-sec-var-100 cursor-pointer'
+const multiValue: string = '!bg-sec-var-200 dark:!bg-sec-var-900 !rounded-md !text-white'
+const multiValueLabel: string = '!text-sec-var-900 dark:!text-sec-var-100'
+const multiValueRemove: string = 'hover:!bg-sec-var-300 dark:hover:!bg-sec-var-700 duration-300 !text-sec-var-900 dark:!text-sec-var-100'
+const control: string = ' !rounded-md !border !border-input !bg-background  !ring-offset-background file:!border-0 file:!bg-transparent !text-sm file:text-sm file:font-medium placeholder:!text-muted-foreground focus-visible:!outline-none focus-visible:!ring-2 focus-visible:!ring-ring focus-visible:!ring-offset-2 disabled:!cursor-not-allowed disabled:!opacity-50'
+const option: string = '!text-gray-900 dark:!text-gray-100 !bg-white dark:!bg-slate-800 hover:!bg-sec-var-200 dark:hover:!bg-sec-var-900 hover:!text-sec-var-900 dark:hover:!text-sec-var-100 cursor-pointer'
+const menu: string = ' !rounded-md !bg-background dark:!bg-slate-800'
 
 export function AdministradorDoctorForm () {
   const [isPending, startTransition] = useTransition()
   const [especializaciones, setEspecializaciones] = React.useState<Especializaciones[] | null>([])
+  const [especializacionesError, setEspecializacionesError] = React.useState<
+  { message: string }
+  | null>(null)
 
   const router = useRouter()
 
@@ -95,6 +99,14 @@ export function AdministradorDoctorForm () {
         4,
         8
       )}-${data.dni.slice(8, 13)}`
+    }
+
+    // Verificar si se agrego especializaciones
+    if (especializaciones !== null && especializaciones.length === 0) {
+      setEspecializacionesError({ message: 'Debe seleccionar al menos una especialización' })
+      return
+    } else {
+      setEspecializacionesError(null)
     }
 
     startTransition(async () => {
@@ -188,6 +200,7 @@ export function AdministradorDoctorForm () {
       nombre: item.nombre
     }))
     setEspecializaciones(convertedValue)
+    // register('especializaciones', convertedValue)
   }
 
   return (
@@ -418,9 +431,10 @@ export function AdministradorDoctorForm () {
               cacheOptions
               defaultOptions
               className='capitalize'
+
               classNames={{
                 control: (base) =>
-                  classNames(base, control),
+                  classNames(base, control, especializacionesError ? '!border-red-500  !placeholder-red-500 !text-red-500' : ''),
                 option: (base) =>
                   classNames(base, option),
                 multiValue: (base) =>
@@ -428,13 +442,21 @@ export function AdministradorDoctorForm () {
                 multiValueLabel: (base) =>
                   classNames(base, multiValueLabel),
                 multiValueRemove: (base) =>
-                  classNames(base, multiValueRemove)
-              }}
+                  classNames(base, multiValueRemove),
+                menu: (base) =>
+                  classNames(base, menu)
 
+              }}
+              noOptionsMessage={() => 'No se encontraron especialidades'}
               placeholder='Seleccione las Especialidades'
               onChange={handleOnChange}
               loadOptions={promiseOptions}
             />
+            {especializacionesError && (
+              <p className="text-xs italic text-red-500 mt-0">
+                {especializacionesError?.message}
+              </p>
+            )}
           </div>
 
           <Button
