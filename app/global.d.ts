@@ -16,6 +16,7 @@ declare global {
   type DiagnosticoInsert = DB['public']['Tables']['diagnosticos']['Insert']
   type ConsultasUpdate = DB['public']['Tables']['consultas']['Update']
   type Especializaciones = DB['public']['Tables']['especializaciones']['Row']
+  type DataTableUsers = DB['public']['Functions']['get_personas_by_rol_and_filter_pagination']['Returns']
 
   type UserType =
     | (Personas & { usuario: PersonasXUsuarios } & {

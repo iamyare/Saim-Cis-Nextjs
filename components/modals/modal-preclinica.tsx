@@ -16,7 +16,7 @@ export function ModalPreclinica ({ persona }: { persona: Personas | null }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'ghost'} className="justify-start font-normal ">
+        <Button variant={'ghost'} className="justify-start font-normal  ">
         <PlusIcon className="h-4 w-4 mr-1" />
           Agregar consulta
         </Button>

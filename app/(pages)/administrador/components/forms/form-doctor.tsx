@@ -20,7 +20,8 @@ import {
   setRoleUser,
   createRandomCode,
   signUpWithEmailAndTempPass,
-  getEspecializacionesByRol
+  getEspecializacionesByRol,
+  setEspecializacionUser
 } from '../actions'
 import { useRouter } from 'next/navigation'
 import { sendMailSingup } from '../actions/email'
@@ -50,7 +51,10 @@ const validationSchema = z.object({
     .min(1, { message: 'El telefono es obligatorio' })
     .regex(/^\d{4}-?\d{4}$/, {
       message: 'El telefono debe tener el formato dddd-dddd'
-    })
+    }),
+  especializaciones: z.array(z.object({ id: z.string(), nombre: z.string(), id_rol: z.string() }))
+    .min(1, { message: 'Debe seleccionar al menos una especialización' })
+
 })
 
 type ValidationSchema = z.infer<typeof validationSchema>
@@ -64,16 +68,18 @@ const menu: string = ' !rounded-md !bg-background dark:!bg-slate-800'
 
 export function AdministradorDoctorForm () {
   const [isPending, startTransition] = useTransition()
-  const [especializaciones, setEspecializaciones] = React.useState<Especializaciones[] | null>([])
-  const [especializacionesError, setEspecializacionesError] = React.useState<
-  { message: string }
-  | null>(null)
+  // const [especializaciones, setEspecializaciones] = React.useState<Especializaciones[] | null>([])
+  // const [especializacionesError, setEspecializacionesError] = React.useState<
+  // { message: string }
+  // | null>(null)
 
   const router = useRouter()
 
   const {
     register,
     handleSubmit,
+    setValue,
+    trigger,
     formState: { errors }
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
@@ -84,7 +90,8 @@ export function AdministradorDoctorForm () {
       dni: '',
       fecha_nacimiento: '',
       direccion: '',
-      telefono: ''
+      telefono: '',
+      especializaciones: []
     }
   })
 
@@ -101,15 +108,22 @@ export function AdministradorDoctorForm () {
       )}-${data.dni.slice(8, 13)}`
     }
 
-    // Verificar si se agrego especializaciones
-    if (especializaciones !== null && especializaciones.length === 0) {
-      setEspecializacionesError({ message: 'Debe seleccionar al menos una especialización' })
-      return
-    } else {
-      setEspecializacionesError(null)
-    }
-
     startTransition(async () => {
+      const { errorEspecializaciones } = await setEspecializacionUser({
+        idPersona: 'dff16cdd-6afa-43f7-819c-1971bc050a02',
+        especializaciones: data.especializaciones
+      })
+
+      if (errorEspecializaciones) {
+        if (errorEspecializaciones.code === '23505') {
+          toast.error('La especialización ya está registrada')
+          return
+        }
+
+        console.log(errorEspecializaciones)
+        return
+      }
+
       const { error } = await verifyUser({
         correo: data.correo,
         dni: data.dni
@@ -199,8 +213,8 @@ export function AdministradorDoctorForm () {
       id_rol: item.id_rol,
       nombre: item.nombre
     }))
-    setEspecializaciones(convertedValue)
-    // register('especializaciones', convertedValue)
+    setValue('especializaciones', convertedValue)
+    trigger('especializaciones')
   }
 
   return (
@@ -336,6 +350,42 @@ export function AdministradorDoctorForm () {
           </div>
 
           <div className="grid gap-1">
+            <Label className="" htmlFor="genero">
+              Especialidades
+            </Label>
+            <AsyncSelect
+              isMulti
+              cacheOptions
+              defaultOptions
+              className='capitalize'
+
+              classNames={{
+                control: (base) =>
+                  classNames(base, control, errors.especializaciones ? '!border-red-500  !placeholder-red-500 !text-red-500' : ''),
+                option: (base) =>
+                  classNames(base, option),
+                multiValue: (base) =>
+                  classNames(base, multiValue),
+                multiValueLabel: (base) =>
+                  classNames(base, multiValueLabel),
+                multiValueRemove: (base) =>
+                  classNames(base, multiValueRemove),
+                menu: (base) =>
+                  classNames(base, menu)
+              }}
+              noOptionsMessage={() => 'No se encontraron especialidades'}
+              placeholder='Seleccione las Especialidades'
+              onChange={handleOnChange}
+              loadOptions={promiseOptions}
+            />
+            {errors.especializaciones && (
+              <p className="text-xs italic text-red-500 mt-0">
+                {errors.especializaciones?.message}
+              </p>
+            )}
+          </div>
+
+          <div className="grid gap-1">
             <Label className="" htmlFor="address">
               Direccion
             </Label>
@@ -418,43 +468,6 @@ export function AdministradorDoctorForm () {
             {errors.telefono && (
               <p className="text-xs italic text-red-500 mt-0">
                 {errors.telefono?.message}
-              </p>
-            )}
-          </div>
-
-          <div className="grid gap-1">
-            <Label className="" htmlFor="genero">
-              Especialidades
-            </Label>
-            <AsyncSelect
-              isMulti
-              cacheOptions
-              defaultOptions
-              className='capitalize'
-
-              classNames={{
-                control: (base) =>
-                  classNames(base, control, especializacionesError ? '!border-red-500  !placeholder-red-500 !text-red-500' : ''),
-                option: (base) =>
-                  classNames(base, option),
-                multiValue: (base) =>
-                  classNames(base, multiValue),
-                multiValueLabel: (base) =>
-                  classNames(base, multiValueLabel),
-                multiValueRemove: (base) =>
-                  classNames(base, multiValueRemove),
-                menu: (base) =>
-                  classNames(base, menu)
-
-              }}
-              noOptionsMessage={() => 'No se encontraron especialidades'}
-              placeholder='Seleccione las Especialidades'
-              onChange={handleOnChange}
-              loadOptions={promiseOptions}
-            />
-            {especializacionesError && (
-              <p className="text-xs italic text-red-500 mt-0">
-                {especializacionesError?.message}
               </p>
             )}
           </div>

@@ -54,7 +54,7 @@ export interface Database {
             isOneToOne: false
             referencedRelation: 'personas'
             referencedColumns: ['id']
-          }
+          },
         ]
       }
       consultas: {
@@ -118,7 +118,7 @@ export interface Database {
             isOneToOne: false
             referencedRelation: 'estado_consultas'
             referencedColumns: ['id']
-          }
+          },
         ]
       }
       diagnosticos: {
@@ -166,7 +166,7 @@ export interface Database {
             isOneToOne: false
             referencedRelation: 'expedientes'
             referencedColumns: ['id']
-          }
+          },
         ]
       }
       especializacion_x_personas: {
@@ -196,7 +196,7 @@ export interface Database {
             isOneToOne: false
             referencedRelation: 'personas'
             referencedColumns: ['id']
-          }
+          },
         ]
       }
       especializaciones: {
@@ -222,7 +222,7 @@ export interface Database {
             isOneToOne: false
             referencedRelation: 'roles'
             referencedColumns: ['id']
-          }
+          },
         ]
       }
       estado_consultas: {
@@ -263,7 +263,7 @@ export interface Database {
             isOneToOne: false
             referencedRelation: 'personas'
             referencedColumns: ['id']
-          }
+          },
         ]
       }
       personas: {
@@ -353,7 +353,7 @@ export interface Database {
             isOneToOne: false
             referencedRelation: 'users'
             referencedColumns: ['id']
-          }
+          },
         ]
       }
       roles: {
@@ -407,7 +407,7 @@ export interface Database {
           offset_param: number
           limit_param: number
         }
-        Returns: Array <{
+        Returns: Array<{
           id: string
           creado: string
           nombre: string
@@ -420,7 +420,8 @@ export interface Database {
           correo: string
           rol: string
           nombre_rol: string
-          usuario: Json
+          url_avatar: string
+          estado_usuario: string
         }>
       }
       get_personas_count_by_rol_and_filter: {
@@ -440,14 +441,16 @@ export interface Database {
   }
 }
 
+type PublicSchema = Database[Extract<keyof Database, 'public'>]
+
 export type Tables<
   PublicTableNameOrOptions extends
-  | keyof (Database['public']['Tables'] & Database['public']['Views'])
+  | keyof (PublicSchema['Tables'] & PublicSchema['Views'])
   | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
     Database[PublicTableNameOrOptions['schema']]['Views'])
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions['schema']]['Tables'] &
     Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
@@ -455,10 +458,10 @@ export type Tables<
     }
       ? R
       : never
-  : PublicTableNameOrOptions extends keyof (Database['public']['Tables'] &
-  Database['public']['Views'])
-    ? (Database['public']['Tables'] &
-      Database['public']['Views'])[PublicTableNameOrOptions] extends {
+  : PublicTableNameOrOptions extends keyof (PublicSchema['Tables'] &
+  PublicSchema['Views'])
+    ? (PublicSchema['Tables'] &
+      PublicSchema['Views'])[PublicTableNameOrOptions] extends {
         Row: infer R
       }
         ? R
@@ -467,19 +470,19 @@ export type Tables<
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
-  | keyof Database['public']['Tables']
+  | keyof PublicSchema['Tables']
   | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
     Insert: infer I
   }
     ? I
     : never
-  : PublicTableNameOrOptions extends keyof Database['public']['Tables']
-    ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
+  : PublicTableNameOrOptions extends keyof PublicSchema['Tables']
+    ? PublicSchema['Tables'][PublicTableNameOrOptions] extends {
       Insert: infer I
     }
       ? I
@@ -488,19 +491,19 @@ export type TablesInsert<
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
-  | keyof Database['public']['Tables']
+  | keyof PublicSchema['Tables']
   | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
     Update: infer U
   }
     ? U
     : never
-  : PublicTableNameOrOptions extends keyof Database['public']['Tables']
-    ? Database['public']['Tables'][PublicTableNameOrOptions] extends {
+  : PublicTableNameOrOptions extends keyof PublicSchema['Tables']
+    ? PublicSchema['Tables'][PublicTableNameOrOptions] extends {
       Update: infer U
     }
       ? U
@@ -509,13 +512,13 @@ export type TablesUpdate<
 
 export type Enums<
   PublicEnumNameOrOptions extends
-  | keyof Database['public']['Enums']
+  | keyof PublicSchema['Enums']
   | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
-    : never = never
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
-  : PublicEnumNameOrOptions extends keyof Database['public']['Enums']
-    ? Database['public']['Enums'][PublicEnumNameOrOptions]
+  : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
+    ? PublicSchema['Enums'][PublicEnumNameOrOptions]
     : never

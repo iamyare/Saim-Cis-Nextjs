@@ -19,7 +19,6 @@ export default function PrelineScript () {
         window.HSStaticMethods.autoInit()
       }
     })
-    console.log('PrelineScript', path)
   }, [path])
 
   return null

@@ -6,12 +6,13 @@ import { useState } from 'react'
 import ButtonMoreDataTable from './button-more-data-table'
 import { Button } from './ui/button'
 import { ModalPreclinica } from './modals/modal-preclinica'
-import { LinkIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { EllipsisVerticalIcon, LinkIcon } from '@heroicons/react/20/solid'
+import { AlertModalDeleteUser } from './modals/modal-eliminar'
 
 export default function DataTableClient ({
   users
 }: {
-  users: PersonasAndUsuarios
+  users: DataTableUsers
 }) {
   const [personaSeleccionada, setPersonaSeleccionada] =
     useState<Personas | null>(null)
@@ -99,7 +100,7 @@ export default function DataTableClient ({
                         <div className='flex items-center gap-3'>
                           <img
                             src={
-                              usuario.usuario?.avatar_url ??
+                              usuario.url_avatar ??
                               'https://leplanb.lesmontagne.net/wp-content/uploads/sites/5/2017/06/default_avatar.png'
                             }
                             className='rounded-full w-6 h-6 object-cover'
@@ -134,19 +135,19 @@ export default function DataTableClient ({
                         <span
                           className={`capitalize px-2 py-1 rounded-md
                           ${
-                            usuario.usuario?.estado === 'activo'
+                            usuario.estado_usuario === 'activo'
                               ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-500'
-                              : usuario.usuario?.estado === 'pendiente'
+                              : usuario.estado_usuario === 'pendiente'
                               ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-500'
-                              : usuario.usuario?.estado === 'no disponible'
+                              : usuario.estado_usuario === 'no disponible'
                               ? 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-500'
-                              : usuario.usuario?.estado === 'cancelado'
+                              : usuario.estado_usuario === 'cancelado'
                               ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-500'
                               : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900/30 dark:text-neutral-500'
                           }
                         `}
                         >
-                          {usuario.usuario?.estado ?? 'No disponible'}
+                          {usuario.estado_usuario ?? 'No disponible'}
                         </span>
                       </td>
                       <td>
@@ -160,19 +161,9 @@ export default function DataTableClient ({
                                 setPersonaSeleccionada(usuario)
                               }}
                             >
-                              <svg
-                                className='flex-none size-4 text-gray-600'
-                                xmlns='http://www.w3.org/2000/svg'
-                                width='24'
-                                height='24'
-                                viewBox='0 0 24 24'
-                                fill='none'
-                                stroke='currentColor'
-                              >
-                                <circle cx='12' cy='12' r='1' />
-                                <circle cx='12' cy='5' r='1' />
-                                <circle cx='12' cy='19' r='1' />
-                              </svg>
+
+                              <EllipsisVerticalIcon className="h-5 w-5 text-gray-500" />
+
                             </Button>
                           }
                         >
@@ -189,14 +180,7 @@ export default function DataTableClient ({
 
                           <ModalPreclinica persona={personaSeleccionada} />
 
-                          <Button
-                            variant={'ghost'}
-                            className='justify-start font-normal'
-                            disabled
-                          >
-                            <TrashIcon className='h-4 w-4 mr-1' />
-                            Eliminar
-                          </Button>
+                          <AlertModalDeleteUser persona={personaSeleccionada} />
                         </ButtonMoreDataTable>
                       </td>
                     </tr>

@@ -218,7 +218,7 @@ export async function getUsersByRoleAndQuery ({
     }
   )
 
-  return { users: users as PersonasAndUsuarios, error }
+  return { users, error }
 }
 
 export async function getTotalPagesByEstadoAndQuery ({

@@ -86,6 +86,14 @@ export async function setRoleUser ({
   return { data, error }
 }
 
+export async function setEspecializacionUser ({ idPersona, especializaciones }: { idPersona: string, especializaciones: Especializaciones[] }) {
+  const { error: errorEspecializaciones } = await supabase
+    .from('especializacion_x_personas')
+    .insert(especializaciones.map(especializacion => ({ id_persona: idPersona, id_especializacion: especializacion.id })))
+
+  return { errorEspecializaciones }
+}
+
 export async function signUpWithEmailAndTempPass ({
   email,
   passwordTemp,
