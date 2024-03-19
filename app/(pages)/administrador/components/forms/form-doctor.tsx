@@ -17,7 +17,6 @@ import { useTransition } from 'react'
 import {
   verifyUser,
   createPersona,
-  setRoleUser,
   createRandomCode,
   signUpWithEmailAndTempPass,
   getEspecializacionesByRol,
@@ -126,21 +125,6 @@ export function AdministradorDoctorForm () {
 
       if (!persona) {
         toast.error('Error al crear la persona')
-        return
-      }
-
-      const { data: setRole, error: errorSetRole } = await setRoleUser({
-        id: persona.id,
-        rol: 'doctor'
-      })
-
-      if (errorSetRole) {
-        toast.error(errorSetRole.message)
-        return
-      }
-
-      if (!setRole) {
-        toast.error('Error al asignar el rol de doctor')
         return
       }
 
