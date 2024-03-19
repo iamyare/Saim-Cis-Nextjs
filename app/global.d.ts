@@ -17,6 +17,7 @@ declare global {
   type ConsultasUpdate = DB['public']['Tables']['consultas']['Update']
   type Especializaciones = DB['public']['Tables']['especializaciones']['Row']
   type DataTableUsers = DB['public']['Functions']['get_personas_by_rol_and_filter_pagination']['Returns']
+  type Roles = DB['public']['Tables']['roles']['Row']
 
   type UserType =
     | (Personas & { usuario: PersonasXUsuarios } & {

@@ -109,21 +109,6 @@ export function AdministradorDoctorForm () {
     }
 
     startTransition(async () => {
-      const { errorEspecializaciones } = await setEspecializacionUser({
-        idPersona: 'dff16cdd-6afa-43f7-819c-1971bc050a02',
-        especializaciones: data.especializaciones
-      })
-
-      if (errorEspecializaciones) {
-        if (errorEspecializaciones.code === '23505') {
-          toast.error('La especialización ya está registrada')
-          return
-        }
-
-        console.log(errorEspecializaciones)
-        return
-      }
-
       const { error } = await verifyUser({
         correo: data.correo,
         dni: data.dni
@@ -156,6 +141,21 @@ export function AdministradorDoctorForm () {
 
       if (!setRole) {
         toast.error('Error al asignar el rol de doctor')
+        return
+      }
+
+      const { errorEspecializaciones } = await setEspecializacionUser({
+        idPersona: persona.id,
+        especializaciones: data.especializaciones
+      })
+
+      if (errorEspecializaciones) {
+        if (errorEspecializaciones.code === '23505') {
+          toast.error('La especialización ya está registrada')
+          return
+        }
+
+        toast.error(errorEspecializaciones.message)
         return
       }
 

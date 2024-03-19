@@ -388,3 +388,65 @@ export async function getExpedienteByIDPaciente ({ id }: { id: string }) {
 
   return { dataID, errorID }
 }
+
+export async function setRoleUser ({
+  id,
+  rol
+}: {
+  id: string
+  rol: string
+}) {
+  // Obtener el id de la especializacion por el nombre del rol
+  const { data: especializacion, error: especializacionError } = await supabase
+    .from('especializaciones')
+    .select('id')
+    .eq('nombre', rol)
+    .single()
+
+  if (especializacionError) {
+    return { data: null, error: especializacionError }
+  }
+  if (!especializacion) {
+    return {
+      data: null,
+      error: { code: '0', message: 'No se encontró la especialización' }
+    }
+  }
+
+  const { data, error } = await supabase
+    .from('especializacion_x_personas')
+    .insert({ id_persona: id, id_especializacion: especializacion.id })
+    .select('*')
+    .single()
+
+  return { data, error }
+}
+
+export async function getRoles () {
+  const { data, error } = await supabase
+    .from('roles')
+    .select('*')
+
+  return { data, error }
+}
+
+export async function getEspecializacionesByRol ({
+  rol
+}: {
+  rol: string
+}) {
+  const { data, error } = await supabase
+    .from('especializaciones')
+    .select('*, roles!inner(*)')
+    .eq('roles.nombre', rol)
+
+  return { data, error }
+}
+
+export async function setEspecializacionUser ({ idPersona, especializaciones }: { idPersona: string, especializaciones: Especializaciones[] }) {
+  const { error: errorEspecializaciones } = await supabase
+    .from('especializacion_x_personas')
+    .insert(especializaciones.map(especializacion => ({ id_persona: idPersona, id_especializacion: especializacion.id })))
+
+  return { errorEspecializaciones }
+}
