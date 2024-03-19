@@ -1,62 +1,59 @@
-"use client";
+'use client'
 
-import * as React from "react";
+import * as React from 'react'
+import { Icons } from '@/components/icons'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
-import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { ToastContainer, toast } from "react-toastify";
-import { useTransition } from "react";
-import { signInWithEmailAndPassword } from "../actions";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { ToastContainer, toast } from 'react-toastify'
+import { useTransition } from 'react'
+import { signInWithEmailAndPassword } from '../actions'
 
 const validationSchema = z.object({
   email: z
     .string()
-    .min(1, { message: "El correo electrónico es obligatorio" })
+    .min(1, { message: 'El correo electrónico es obligatorio' })
     .email({
-      message: "Debe ser un correo electrónico válido",
+      message: 'Debe ser un correo electrónico válido'
     }),
   password: z
     .string()
-    .min(6, { message: "La contraseña debe tener al menos 6 caracteres" }),
+    .min(6, { message: 'La contraseña debe tener al menos 6 caracteres' })
   // .regex(
   //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
   //   "La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y tener al menos 6 caracteres"
   // ),
-});
+})
 
-type ValidationSchema = z.infer<typeof validationSchema>;
+type ValidationSchema = z.infer<typeof validationSchema>
 
-
-export function UserAuthForm() {
-  const [isPending, startTransition] = useTransition();
+export function UserAuthForm () {
+  const [isPending, startTransition] = useTransition()
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<ValidationSchema>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+      email: '',
+      password: ''
+    }
+  })
 
-  function onSubmit(data: z.infer<typeof validationSchema>) {
+  function onSubmit (data: z.infer<typeof validationSchema>) {
     startTransition(async () => {
-      const result = await signInWithEmailAndPassword(data);
-      const { error } = JSON.parse(result);
+      const result = await signInWithEmailAndPassword(data)
+      const { error } = JSON.parse(result)
       if (error.message) {
-        toast.error(error.message);
+        toast.error(error.message)
       }
-    });
+    })
   }
 
   return (
@@ -75,7 +72,7 @@ export function UserAuthForm() {
               autoComplete="email"
               autoCorrect="off"
               disabled={isPending}
-              {...register("email")}
+              {...register('email')}
             />
             {errors.email && (
               <p className="text-xs italic text-red-500 mt-2">
@@ -94,7 +91,7 @@ export function UserAuthForm() {
               autoComplete="password"
               autoCorrect="off"
               disabled={isPending}
-              {...register("password")}
+              {...register('password')}
             />
             {errors.password && (
               <p className="text-xs italic text-red-500 mt-2">
@@ -102,7 +99,7 @@ export function UserAuthForm() {
               </p>
             )}
           </div>
-          <Button disabled={isPending}>
+          <Button className="bg-sec-var-600 hover:bg-sec-var-500 text-white transition-colors duration-700" disabled={isPending}>
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
@@ -110,7 +107,7 @@ export function UserAuthForm() {
           </Button>
         </div>
       </form>
-      <div className="relative">
+      {/* <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
@@ -127,7 +124,7 @@ export function UserAuthForm() {
           <Icons.gitHub className="mr-2 h-4 w-4" />
         )}{" "}
         GitHub
-      </Button>
+      </Button> */}
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -142,6 +139,5 @@ export function UserAuthForm() {
       />
     </div>
 
-
-  );
+  )
 }

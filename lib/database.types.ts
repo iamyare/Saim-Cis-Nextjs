@@ -9,53 +9,32 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      centro_medico: {
-        Row: {
-          creado: string
-          direccion: string | null
-          id: string
-          img: string | null
-          nombre: string
-          rtn: string
-        }
-        Insert: {
-          creado?: string
-          direccion?: string | null
-          id?: string
-          img?: string | null
-          nombre: string
-          rtn: string
-        }
-        Update: {
-          creado?: string
-          direccion?: string | null
-          id?: string
-          img?: string | null
-          nombre?: string
-          rtn?: string
-        }
-        Relationships: []
-      }
       citas: {
         Row: {
+          descripcion: string | null
           estado: string
           fecha_final: string
+          fecha_inicio: string
           fecha_registro: string
           id: string
           id_doctor: string
           id_paciente: string
         }
         Insert: {
+          descripcion?: string | null
           estado: string
           fecha_final: string
+          fecha_inicio: string
           fecha_registro?: string
           id?: string
           id_doctor: string
           id_paciente: string
         }
         Update: {
+          descripcion?: string | null
           estado?: string
           fecha_final?: string
+          fecha_inicio?: string
           fecha_registro?: string
           id?: string
           id_doctor?: string
@@ -63,206 +42,201 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "citas_id_doctor_fkey"
-            columns: ["id_doctor"]
+            foreignKeyName: 'citas_id_doctor_fkey'
+            columns: ['id_doctor']
             isOneToOne: false
-            referencedRelation: "personas"
-            referencedColumns: ["id"]
+            referencedRelation: 'personas'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "citas_id_paciente_fkey"
-            columns: ["id_paciente"]
+            foreignKeyName: 'citas_id_paciente_fkey'
+            columns: ['id_paciente']
             isOneToOne: false
-            referencedRelation: "personas"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'personas'
+            referencedColumns: ['id']
+          },
         ]
       }
       consultas: {
         Row: {
-          creado: string
           estatura: number | null
+          fecha_consulta: string
           id: string
-          id_cita: string
+          id_cita: string | null
+          id_estado_consulta: string
           id_expediente: string
           peso: number | null
           presion_arterial: string | null
           saturacion_oxigeno: string | null
-          sintomas: string
+          sintomas: string | null
           temperatura: number | null
         }
         Insert: {
-          creado?: string
           estatura?: number | null
+          fecha_consulta?: string
           id?: string
-          id_cita: string
+          id_cita?: string | null
+          id_estado_consulta: string
           id_expediente: string
           peso?: number | null
           presion_arterial?: string | null
           saturacion_oxigeno?: string | null
-          sintomas: string
+          sintomas?: string | null
           temperatura?: number | null
         }
         Update: {
-          creado?: string
           estatura?: number | null
+          fecha_consulta?: string
           id?: string
-          id_cita?: string
+          id_cita?: string | null
+          id_estado_consulta?: string
           id_expediente?: string
           peso?: number | null
           presion_arterial?: string | null
           saturacion_oxigeno?: string | null
-          sintomas?: string
+          sintomas?: string | null
           temperatura?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "consultas_id_cita_fkey"
-            columns: ["id_cita"]
+            foreignKeyName: 'consultas_id_cita_fkey'
+            columns: ['id_cita']
             isOneToOne: false
-            referencedRelation: "citas"
-            referencedColumns: ["id"]
+            referencedRelation: 'citas'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "consultas_id_expediente_fkey"
-            columns: ["id_expediente"]
+            foreignKeyName: 'consultas_id_expediente_fkey'
+            columns: ['id_expediente']
             isOneToOne: false
-            referencedRelation: "expedientes"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      contratos: {
-        Row: {
-          fecha_final: string | null
-          fecha_inicio: string | null
-          id: string
-          id_usuario: string | null
-          jornada: string | null
-          sueldo: number | null
-        }
-        Insert: {
-          fecha_final?: string | null
-          fecha_inicio?: string | null
-          id?: string
-          id_usuario?: string | null
-          jornada?: string | null
-          sueldo?: number | null
-        }
-        Update: {
-          fecha_final?: string | null
-          fecha_inicio?: string | null
-          id?: string
-          id_usuario?: string | null
-          jornada?: string | null
-          sueldo?: number | null
-        }
-        Relationships: [
+            referencedRelation: 'expedientes'
+            referencedColumns: ['id']
+          },
           {
-            foreignKeyName: "contratos_id_usuario_fkey"
-            columns: ["id_usuario"]
+            foreignKeyName: 'public_consultas_id_estado_consulta_fkey'
+            columns: ['id_estado_consulta']
             isOneToOne: false
-            referencedRelation: "personas"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'estado_consultas'
+            referencedColumns: ['id']
+          },
         ]
       }
       diagnosticos: {
         Row: {
-          estado: string | null
+          diferencial: boolean
+          enfermedades: string
           fecha_diagnostico: string
           id: string
           id_consulta: string | null
-          id_diagnosticador: string
+          id_expediente: string
+          interno: boolean
           observacion: string | null
         }
         Insert: {
-          estado?: string | null
+          diferencial: boolean
+          enfermedades: string
           fecha_diagnostico?: string
           id?: string
           id_consulta?: string | null
-          id_diagnosticador: string
+          id_expediente?: string
+          interno: boolean
           observacion?: string | null
         }
         Update: {
-          estado?: string | null
+          diferencial?: boolean
+          enfermedades?: string
           fecha_diagnostico?: string
           id?: string
           id_consulta?: string | null
-          id_diagnosticador?: string
+          id_expediente?: string
+          interno?: boolean
           observacion?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "diagnosticos_id_consulta_fkey"
-            columns: ["id_consulta"]
+            foreignKeyName: 'public_diagnosticos_id_consulta_fkey'
+            columns: ['id_consulta']
             isOneToOne: false
-            referencedRelation: "consultas"
-            referencedColumns: ["id"]
+            referencedRelation: 'consultas'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "diagnosticos_id_diagnosticador_fkey"
-            columns: ["id_diagnosticador"]
+            foreignKeyName: 'public_diagnosticos_id_expediente_fkey'
+            columns: ['id_expediente']
             isOneToOne: false
-            referencedRelation: "personas"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'expedientes'
+            referencedColumns: ['id']
+          },
         ]
       }
-      diagnosticos_x_enfermedades: {
+      especializacion_x_personas: {
         Row: {
-          fecha_diagnostico: string
-          id_diagnostico: string
-          id_enfermedades: string
-          observacion: string | null
+          id_especializacion: string
+          id_persona: string
         }
         Insert: {
-          fecha_diagnostico?: string
-          id_diagnostico: string
-          id_enfermedades: string
-          observacion?: string | null
+          id_especializacion: string
+          id_persona: string
         }
         Update: {
-          fecha_diagnostico?: string
-          id_diagnostico?: string
-          id_enfermedades?: string
-          observacion?: string | null
+          id_especializacion?: string
+          id_persona?: string
         }
         Relationships: [
           {
-            foreignKeyName: "diagnosticos_x_enfermedades_id_diagnostico_fkey"
-            columns: ["id_diagnostico"]
+            foreignKeyName: 'especializacion_x_personas_id_especializacion_fkey'
+            columns: ['id_especializacion']
             isOneToOne: false
-            referencedRelation: "diagnosticos"
-            referencedColumns: ["id"]
+            referencedRelation: 'especializaciones'
+            referencedColumns: ['id']
           },
           {
-            foreignKeyName: "diagnosticos_x_enfermedades_id_enfermedades_fkey"
-            columns: ["id_enfermedades"]
+            foreignKeyName: 'public_especializacion_x_personas_id_persona_fkey'
+            columns: ['id_persona']
             isOneToOne: false
-            referencedRelation: "enfermedades"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'personas'
+            referencedColumns: ['id']
+          },
         ]
       }
-      enfermedades: {
+      especializaciones: {
         Row: {
-          created_at: string
           id: string
+          id_rol: string
           nombre: string
-          observacion: string | null
         }
         Insert: {
-          created_at?: string
           id?: string
+          id_rol: string
           nombre: string
-          observacion?: string | null
         }
         Update: {
-          created_at?: string
           id?: string
+          id_rol?: string
           nombre?: string
-          observacion?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'especializaciones_id_rol_fkey'
+            columns: ['id_rol']
+            isOneToOne: false
+            referencedRelation: 'roles'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      estado_consultas: {
+        Row: {
+          estado: string
+          id: string
+        }
+        Insert: {
+          estado: string
+          id?: string
+        }
+        Update: {
+          estado?: string
+          id?: string
         }
         Relationships: []
       }
@@ -270,64 +244,31 @@ export interface Database {
         Row: {
           fecha_apertura: string
           id: string
+          id_persona: string
         }
         Insert: {
           fecha_apertura?: string
           id?: string
+          id_persona: string
         }
         Update: {
           fecha_apertura?: string
           id?: string
-        }
-        Relationships: []
-      }
-      jornadas: {
-        Row: {
-          hora_final: string | null
-          hora_inicial: string | null
-          id: string
-          nombre: string
-        }
-        Insert: {
-          hora_final?: string | null
-          hora_inicial?: string | null
-          id?: string
-          nombre: string
-        }
-        Update: {
-          hora_final?: string | null
-          hora_inicial?: string | null
-          id?: string
-          nombre?: string
-        }
-        Relationships: []
-      }
-      permisos_tipo_usuarios: {
-        Row: {
-          id: string
-          nombre: string
-        }
-        Insert: {
-          id: string
-          nombre: string
-        }
-        Update: {
-          id?: string
-          nombre?: string
+          id_persona?: string
         }
         Relationships: [
           {
-            foreignKeyName: "permisos_tipo_usuarios_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "tipo_usuarios"
-            referencedColumns: ["id"]
-          }
+            foreignKeyName: 'public_expedientes_id_persona_fkey'
+            columns: ['id_persona']
+            isOneToOne: false
+            referencedRelation: 'personas'
+            referencedColumns: ['id']
+          },
         ]
       }
       personas: {
         Row: {
-          avatar: string | null
+          apellido: string
           correo: string | null
           creado: string
           direccion: string | null
@@ -335,16 +276,12 @@ export interface Database {
           fecha_nacimiento: string
           genero: string
           id: string
-          id_expediente: string
-          primer_apellido: string
-          primer_nombre: string
-          segundo_apellido: string | null
-          segundo_nombre: string | null
+          nombre: string
+          rol: string | null
           telefono: string | null
-          tipo_usuario: string | null
         }
         Insert: {
-          avatar?: string | null
+          apellido: string
           correo?: string | null
           creado?: string
           direccion?: string | null
@@ -352,16 +289,12 @@ export interface Database {
           fecha_nacimiento: string
           genero: string
           id?: string
-          id_expediente: string
-          primer_apellido: string
-          primer_nombre: string
-          segundo_apellido?: string | null
-          segundo_nombre?: string | null
+          nombre: string
+          rol?: string | null
           telefono?: string | null
-          tipo_usuario?: string | null
         }
         Update: {
-          avatar?: string | null
+          apellido?: string
           correo?: string | null
           creado?: string
           direccion?: string | null
@@ -369,94 +302,70 @@ export interface Database {
           fecha_nacimiento?: string
           genero?: string
           id?: string
-          id_expediente?: string
-          primer_apellido?: string
-          primer_nombre?: string
-          segundo_apellido?: string | null
-          segundo_nombre?: string | null
+          nombre?: string
+          rol?: string | null
           telefono?: string | null
-          tipo_usuario?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "personas_id_expediente_fkey"
-            columns: ["id_expediente"]
-            isOneToOne: false
-            referencedRelation: "expedientes"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "personas_tipo_usuario_fkey"
-            columns: ["tipo_usuario"]
-            isOneToOne: false
-            referencedRelation: "tipo_usuarios"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      profiles: {
-        Row: {
-          created_at: string
-          email: string | null
-          full_name: string
-          id: string
-        }
-        Insert: {
-          created_at?: string
-          email?: string | null
-          full_name: string
-          id?: string
-        }
-        Update: {
-          created_at?: string
-          email?: string | null
-          full_name?: string
-          id?: string
         }
         Relationships: []
       }
-      telefonos_sucursales: {
+      personas_x_usuarios: {
         Row: {
-          centro_medico: string
-          creado: string
-          id: number
-          numero: string
+          avatar_url: string | null
+          correo: string
+          created_at: string
+          descripcion: string | null
+          estado: string | null
+          id_persona: string
+          id_usuario: string
+          pass_temp: string | null
         }
         Insert: {
-          centro_medico: string
-          creado?: string
-          id?: number
-          numero: string
+          avatar_url?: string | null
+          correo: string
+          created_at?: string
+          descripcion?: string | null
+          estado?: string | null
+          id_persona: string
+          id_usuario: string
+          pass_temp?: string | null
         }
         Update: {
-          centro_medico?: string
-          creado?: string
-          id?: number
-          numero?: string
+          avatar_url?: string | null
+          correo?: string
+          created_at?: string
+          descripcion?: string | null
+          estado?: string | null
+          id_persona?: string
+          id_usuario?: string
+          pass_temp?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "telefonos_sucursales_centro_medico_fkey"
-            columns: ["centro_medico"]
+            foreignKeyName: 'personas_x_usuarios_id_persona_fkey'
+            columns: ['id_persona']
             isOneToOne: false
-            referencedRelation: "centro_medico"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: 'personas'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'personas_x_usuarios_id_usuario_fkey'
+            columns: ['id_usuario']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
         ]
       }
-      tipo_usuarios: {
+      roles: {
         Row: {
-          created_at: string
           id: string
           nombre: string
         }
         Insert: {
-          created_at?: string
           id?: string
           nombre: string
         }
         Update: {
-          created_at?: string
           id?: string
           nombre?: string
         }
@@ -467,7 +376,61 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_consultas_by_estado_and_filter_pagination: {
+        Args: {
+          estado_param: string
+          filtro_param: string
+          offset_param: number
+          limit_param: number
+        }
+        Returns: Array<{
+          id_consulta: string
+          numero_expediente: string
+          nombre: string
+          apellido: string
+          dni: string
+          fecha_consulta: string
+          estado_consulta: string
+        }>
+      }
+      get_consultas_count_by_estado_and_filter: {
+        Args: {
+          estado_param: string
+          filtro_param: string
+        }
+        Returns: number
+      }
+      get_personas_by_rol_and_filter_pagination: {
+        Args: {
+          rol_param: string
+          filtro_param: string
+          offset_param: number
+          limit_param: number
+        }
+        Returns: Array<{
+          id: string
+          creado: string
+          nombre: string
+          apellido: string
+          fecha_nacimiento: string
+          dni: string
+          direccion: string
+          genero: string
+          telefono: string
+          correo: string
+          rol: string
+          nombre_rol: string
+          url_avatar: string
+          estado_usuario: string
+        }>
+      }
+      get_personas_count_by_rol_and_filter: {
+        Args: {
+          rol_param: string
+          filtro_param: string
+        }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never
@@ -478,82 +441,84 @@ export interface Database {
   }
 }
 
+type PublicSchema = Database[Extract<keyof Database, 'public'>]
+
 export type Tables<
   PublicTableNameOrOptions extends
-    | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
-    | { schema: keyof Database },
+  | keyof (PublicSchema['Tables'] & PublicSchema['Views'])
+  | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-        Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never
+    ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
+    Database[PublicTableNameOrOptions['schema']]['Views'])
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+  ? (Database[PublicTableNameOrOptions['schema']]['Tables'] &
+    Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
       Row: infer R
     }
-    ? R
+      ? R
+      : never
+  : PublicTableNameOrOptions extends keyof (PublicSchema['Tables'] &
+  PublicSchema['Views'])
+    ? (PublicSchema['Tables'] &
+      PublicSchema['Views'])[PublicTableNameOrOptions] extends {
+        Row: infer R
+      }
+        ? R
+        : never
     : never
-  : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-      Database["public"]["Views"])
-  ? (Database["public"]["Tables"] &
-      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-    ? R
-    : never
-  : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
-    | { schema: keyof Database },
+  | keyof PublicSchema['Tables']
+  | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
-    }
+  ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
+    Insert: infer I
+  }
     ? I
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+  : PublicTableNameOrOptions extends keyof PublicSchema['Tables']
+    ? PublicSchema['Tables'][PublicTableNameOrOptions] extends {
       Insert: infer I
     }
-    ? I
+      ? I
+      : never
     : never
-  : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
-    | { schema: keyof Database },
+  | keyof PublicSchema['Tables']
+  | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
-    }
+  ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
+    Update: infer U
+  }
     ? U
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+  : PublicTableNameOrOptions extends keyof PublicSchema['Tables']
+    ? PublicSchema['Tables'][PublicTableNameOrOptions] extends {
       Update: infer U
     }
-    ? U
+      ? U
+      : never
     : never
-  : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
-    | keyof Database["public"]["Enums"]
-    | { schema: keyof Database },
+  | keyof PublicSchema['Enums']
+  | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-    : never = never
+    ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
-  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
+  ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
+  : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
+    ? PublicSchema['Enums'][PublicEnumNameOrOptions]
+    : never
