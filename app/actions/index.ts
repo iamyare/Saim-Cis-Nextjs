@@ -19,6 +19,16 @@ export function calcularEdad (fechaNacimiento: Date) {
   }
 }
 
+export function formatFecha (fecha: Date, formato: 'es-HN' | 'en-US' = 'es-HN', options?: Intl.DateTimeFormatOptions, tipo: 'fecha' | 'hora' = 'fecha', separador: string = ' - ', fechaFinal?: Date, fechaInicio?: Date, fechaRegistro?: Date, typeFormatLong?: 'long' | 'short' | 'narrow' | 'numeric') {
+  if (tipo === 'fecha') {
+    return fecha.toLocaleDateString(formato, options)
+  } else if (tipo === 'hora') {
+    return fecha.toLocaleTimeString(formato, options)
+  } else {
+    return fecha.toLocaleDateString(formato, options) + separador + fechaFinal?.toLocaleDateString(formato, options)
+  }
+}
+
 export async function getUser ({ id }: { id: string }) {
   let usuarioModificado
   const { data: usuario, error: errorUsuario } = await supabase

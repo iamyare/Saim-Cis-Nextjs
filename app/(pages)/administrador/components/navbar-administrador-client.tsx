@@ -14,7 +14,8 @@ const navigation = [
   { name: 'Pacientes', href: '/administrador/pacientes', current: false },
   { name: 'Doctores', href: '/administrador/doctores', current: false },
   { name: 'Enfermeros', href: '/administrador/enfermeros', current: false },
-  { name: 'Administradores', href: '/administrador/administradores', current: false }
+  { name: 'Administradores', href: '/administrador/administradores', current: false },
+  { name: 'Calendario', href: '/administrador/calendario', current: false }
 ]
 
 function classNames (...classes: string[]) {

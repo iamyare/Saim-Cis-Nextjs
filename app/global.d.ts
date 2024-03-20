@@ -47,4 +47,13 @@ declare global {
       usuario?: PersonasXUsuarios
     }>
 
+    interface Events {
+      start: Date
+      end: Date
+      title: string
+      allDay?: boolean
+      id?: string
+      info?: Citas & { paciente: Personas | null }
+    }
+
 }
