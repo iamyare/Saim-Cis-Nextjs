@@ -9,11 +9,13 @@ export default function LoginAuth () {
     <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
     <img className='absolute inset-0 object-cover w-full h-full ' src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/login.webp" alt="" />
       <div className='absolute inset-0 bg-gray-900 bg-opacity-50'></div>
-      <Link className="relative z-20 flex items-center text-lg font-medium" href='/'>
+      <div>
+      <Link className="relative z-20 inline-flex gap-2 items-center text-lg font-medium max-w-1/4" href='/'>
       <LogoSaimCis/>
 
         Saim Cis
       </Link>
+      </div>
       <div className="relative z-20 mt-auto">
         <blockquote className="space-y-2">
 
