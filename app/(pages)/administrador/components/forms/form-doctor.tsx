@@ -117,10 +117,13 @@ export function AdministradorDoctorForm () {
         return
       }
 
-      // Crear persona
-      const { persona, errorPersona } = await createPersona({ data })
+      // Crear person
+      const personaData = { ...data, especializaciones: undefined }
+      delete personaData.especializaciones
+      const { persona, errorPersona } = await createPersona({ data: personaData })
       if (errorPersona) {
         toast.error(errorPersona.message)
+        return
       }
 
       if (!persona) {
