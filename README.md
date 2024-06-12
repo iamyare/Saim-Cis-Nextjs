@@ -1,36 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+![SaimCis-8](https://github.com/iamyare/Saim-Cis-Nextjs/assets/110873050/57b9fa5e-5a49-48ce-9875-4ca739ea19f1)
 
-First, run the development server:
+![SaimCis-5](https://github.com/iamyare/Saim-Cis-Nextjs/assets/110873050/45c23eb4-c33e-481e-b7a8-c08030d71771)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![SaimCis-4](https://github.com/iamyare/Saim-Cis-Nextjs/assets/110873050/c81e26be-90d0-4b7f-bec6-2fe9fe8704c5)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![SaimCis-3](https://github.com/iamyare/Saim-Cis-Nextjs/assets/110873050/6cd13f34-9a61-499b-a73f-485e041e6eaf)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![SaimCis-2](https://github.com/iamyare/Saim-Cis-Nextjs/assets/110873050/0a3297c9-1afd-4e77-88ce-db431985f701)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![SaimCis-7](https://github.com/iamyare/Saim-Cis-Nextjs/assets/110873050/daaa5e84-d379-4b54-8cf6-2aa97f6fb2d9)
