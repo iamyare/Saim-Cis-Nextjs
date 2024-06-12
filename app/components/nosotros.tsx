@@ -36,7 +36,7 @@ export default function Nosotros () {
                   </div>
                   <div className="rounded-xl overflow-hidden">
                     <img
-                      src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/mision%202.webp"
+                      src="4.jpg"
                       alt=""
                     />
                   </div>
@@ -55,7 +55,7 @@ export default function Nosotros () {
                   </div>
                   <div className="rounded-xl overflow-hidden">
                     <img
-                      src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/mision%204.webp"
+                      src="5.jpg"
                       alt=""
                     />
                   </div>

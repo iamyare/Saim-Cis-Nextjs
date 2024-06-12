@@ -17,7 +17,7 @@ export default function Carousel () {
                 <span className="self-center text-4xl transition duration-700">
                   <img
                     className="bg-cover bg-center bg-no-repeat w-full h-full"
-                    src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/landing%2012.webp"
+                    src="/1.jpg"
                     alt=""
                   />
                 </span>
@@ -27,7 +27,7 @@ export default function Carousel () {
               <div className="flex justify-center h-full">
                 <span className="self-center text-4xl transition duration-700">
                   <img
-                    src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/Doctores_2.webp"
+                    src="/2.webp"
                     alt=""
                   />
                 </span>
@@ -37,7 +37,7 @@ export default function Carousel () {
               <div className="flex justify-center h-full">
                 <span className="self-center text-4xl transition duration-700">
                   <img
-                    src="https://kvcvdthsaepnfxzhvtmy.supabase.co/storage/v1/object/public/imagenes/Landing/Doctores_1.webp"
+                    src="/3.jpg"
                     alt=""
                   />
                 </span>
