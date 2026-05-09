@@ -1,4 +1,21 @@
-import { createClient } from '@supabase/supabase-js'
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
-export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { getSupabaseAnonKey, getSupabaseUrl } from './env'
+
+let supabaseClient: SupabaseClient<Database> | null = null
+
+const getSupabaseClient = () => {
+  supabaseClient ??= createClient<Database>(
+    getSupabaseUrl(),
+    getSupabaseAnonKey()
+  )
+
+  return supabaseClient
+}
+
+const supabaseProxyTarget: SupabaseClient<Database> = Object.create(null)
+
+export const supabase = new Proxy(supabaseProxyTarget, {
+  get (_target, prop, receiver) {
+    return Reflect.get(getSupabaseClient(), prop, receiver)
+  }
+})

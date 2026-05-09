@@ -1,12 +1,28 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { getSupabaseServiceRoleKey, getSupabaseUrl } from './env'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
-const serviceRoleKey = process.env.NEXT_PUBLIC_SUPABASE_ROLE_KEY ?? ''
-const supabase = createClient<Database>(supabaseUrl, serviceRoleKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
+let supabaseClient: SupabaseClient<Database> | null = null
+
+const getSupabaseClient = () => {
+  supabaseClient ??= createClient<Database>(
+    getSupabaseUrl(),
+    getSupabaseServiceRoleKey(),
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    }
+  )
+
+  return supabaseClient
+}
+
+const adminAuthClientProxyTarget: SupabaseClient<Database>['auth']['admin'] =
+  Object.create(null)
+
+export const adminAuthClient = new Proxy(adminAuthClientProxyTarget, {
+  get (_target, prop, receiver) {
+    return Reflect.get(getSupabaseClient().auth.admin, prop, receiver)
   }
 })
-
-export const adminAuthClient = supabase.auth.admin

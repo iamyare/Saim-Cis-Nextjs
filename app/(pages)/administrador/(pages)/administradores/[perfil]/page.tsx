@@ -1,6 +1,8 @@
 import { getPerfil } from '@/app/actions'
 import ActualizarUsuarioPersona from '../../../components/actualizar-usuario-persona'
 
+export const dynamic = 'force-dynamic'
+
 export default async function PerfilAdministradorAdminPage ({
   params
 }: {

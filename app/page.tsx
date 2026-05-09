@@ -1,6 +1,4 @@
-import Link from 'next/link'
 import {
-  ArrowRight,
   CalendarCheck,
   CheckCircle2,
   ClipboardPlus,
@@ -80,18 +78,17 @@ export default function Home () {
               trato humano.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/login"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#0b6973] px-6 text-sm font-semibold text-white shadow-lg shadow-[#0b6973]/20 transition hover:bg-[#095761]"
-              >
-                Iniciar sesión
-                <ArrowRight className="h-4 w-4" />
-              </Link>
               <a
                 href="#agenda"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#0b6973] px-6 text-sm font-semibold text-white shadow-lg shadow-[#0b6973]/20 transition hover:bg-[#095761]"
+              >
+                Ver recorrido
+              </a>
+              <a
+                href="#contacto"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-[#bfd8d4] bg-white/70 px-6 text-sm font-semibold text-[#17474d] transition hover:bg-white"
               >
-                Ver cómo funciona
+                Contactar
               </a>
             </div>
 
@@ -323,19 +320,18 @@ export default function Home () {
       <section className="bg-[#f7fbfa] py-20">
         <div className="container mx-auto max-w-5xl px-6 text-center">
           <h2 className="text-4xl font-semibold leading-tight text-[#0b3a42] sm:text-5xl">
-            Ingresa al entorno de trabajo de SAIM CIS.
+            Conoce cómo SAIM CIS organiza el cuidado diario.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#5c7475]">
-            El acceso está reservado para el equipo autorizado del centro
-            médico.
+            La demo muestra el flujo esencial para expedientes, citas y equipos
+            clínicos en una experiencia clara.
           </p>
-          <Link
-            href="/login"
+          <a
+            href="#contacto"
             className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#0b6973] px-6 text-sm font-semibold text-white shadow-lg shadow-[#0b6973]/20 transition hover:bg-[#095761]"
           >
-            Ir al login
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+            Solicitar información
+          </a>
         </div>
       </section>
 
