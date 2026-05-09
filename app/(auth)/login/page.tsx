@@ -2,7 +2,6 @@ import { type Metadata } from 'next'
 import LoginAuth from './components/login'
 
 import { redirect } from 'next/navigation'
-import { getInfoPersona } from '@/app/actions'
 
 export const metadata: Metadata = {
   title: 'Iniciar sesión',
@@ -10,7 +9,15 @@ export const metadata: Metadata = {
 }
 
 export default async function Login () {
-  const { usuario } = await getInfoPersona()
+  let usuario: Awaited<ReturnType<typeof import('@/app/actions').getInfoPersona>>['usuario'] | undefined
+
+  try {
+    const { getInfoPersona } = await import('@/app/actions')
+    const response = await getInfoPersona()
+    usuario = response.usuario
+  } catch (error) {
+    console.error('No se pudo leer la sesión para login:', error)
+  }
 
   if (usuario) {
     usuario.usuario.estado === 'pendiente'

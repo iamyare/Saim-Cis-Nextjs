@@ -2,7 +2,7 @@
 
 export default function LogoSaimCis ({ className = 'mr-2 h-6 w-6' }: { className?: string }) {
   return (
-    <div className="w-8">
+    <div className={className}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 201" fill="none">
       <path d="M162.495 38.2742H37.6011V163.168H162.495V38.2742Z" fill="white"/>
       <mask id="mask0_1714_14" style={{ maskType: 'luminance' }} maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="201">

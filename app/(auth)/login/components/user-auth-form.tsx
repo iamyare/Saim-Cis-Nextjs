@@ -57,16 +57,16 @@ export function UserAuthForm () {
   }
 
   return (
-
-        <div className="grid gap-6">
+    <div className="grid gap-6">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-3">
-          <div className="grid gap-1">
-            <Label className="" htmlFor="email">
+        <div className="grid gap-5">
+          <div className="grid gap-2">
+            <Label className="text-sm font-semibold text-[#123032]" htmlFor="email">
               Correo electrónico
             </Label>
             <Input
-              placeholder="name@example.com"
+              className="h-12 rounded-2xl border-[#d6e7e3] bg-[#fbfefd] px-4 text-[#123032] placeholder:text-[#8aa09f] focus-visible:ring-[#8fcac1]"
+              placeholder="correo@centromedico.com"
               type="email"
               autoCapitalize="none"
               autoComplete="email"
@@ -75,16 +75,17 @@ export function UserAuthForm () {
               {...register('email')}
             />
             {errors.email && (
-              <p className="text-xs italic text-red-500 mt-2">
+              <p className="mt-1 text-xs font-medium text-red-500">
                 {errors.email?.message}
               </p>
             )}
           </div>
-          <div className="grid gap-1">
-            <Label className="" htmlFor="password">
+          <div className="grid gap-2">
+            <Label className="text-sm font-semibold text-[#123032]" htmlFor="password">
               Contraseña
             </Label>
             <Input
+              className="h-12 rounded-2xl border-[#d6e7e3] bg-[#fbfefd] px-4 text-[#123032] placeholder:text-[#8aa09f] focus-visible:ring-[#8fcac1]"
               placeholder="Contraseña"
               type="password"
               autoCapitalize="none"
@@ -94,16 +95,19 @@ export function UserAuthForm () {
               {...register('password')}
             />
             {errors.password && (
-              <p className="text-xs italic text-red-500 mt-2">
+              <p className="mt-1 text-xs font-medium text-red-500">
                 {errors.password?.message}
               </p>
             )}
           </div>
-          <Button className="hover:bg-sec-var-600 bg-sec text-white transition-colors duration-700" disabled={isPending}>
+          <Button
+            className="h-12 rounded-full bg-[#0b6973] text-white shadow-lg shadow-[#0b6973]/20 transition hover:bg-[#095761]"
+            disabled={isPending}
+          >
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Iniciar sesión
+            Entrar a SAIM CIS
           </Button>
         </div>
       </form>
@@ -138,6 +142,5 @@ export function UserAuthForm () {
         theme="light"
       />
     </div>
-
   )
 }
